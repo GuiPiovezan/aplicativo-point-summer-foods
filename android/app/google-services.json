@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "854628619304",
+    "project_id": "point-summer-foods",
+    "storage_bucket": "point-summer-foods.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854628619304:android:64ba36a58e287af376d11d",
+        "android_client_info": {
+          "package_name": "com.example.pointsf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854628619304-mpk0nd0d6pn00dvv2p03r05adifsstnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtFUUZG0ApXl6O0pe02fIKno5Jk6ZeQRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854628619304-mpk0nd0d6pn00dvv2p03r05adifsstnk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

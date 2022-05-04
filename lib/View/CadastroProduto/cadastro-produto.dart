@@ -11,10 +11,24 @@ class CadastroProduto extends StatelessWidget{
       appBar: AppBar(
         backgroundColor:const Color(0xFFBFFD941) , //Cor no App Bar
         title: Center(
-          child: Text("Point Summer Food's",
-            style: TextStyle(fontSize: 20),
+          child: Text("Cadastro de Produtos",
+          textAlign: TextAlign.end,
+            style: TextStyle(fontSize: 20,
+            color: Colors.purple,
+            ),
           ),
         ),
+        leading: Icon(
+          Icons.arrow_back_sharp,
+          size: 30,
+          color: Colors.purple,
+        ),
+        actions: [
+           Image.asset('images/logo-escrita.png',
+           width: 100,
+           height: 30,
+          ),
+        ],
       ),
       body: Center(
         child: Container(

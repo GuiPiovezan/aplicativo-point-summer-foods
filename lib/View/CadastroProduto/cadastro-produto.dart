@@ -7,9 +7,9 @@ class CadastroProduto extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFBFFD941), //Cor na tela Toda 
+      backgroundColor: const Color.fromARGB(255,254,220,86), //Cor na tela Toda 
       appBar: AppBar(
-        backgroundColor:const Color(0xFFBFFD941) , //Cor no App Bar
+        backgroundColor:const Color.fromARGB(255,254,220,86) , //Cor no App Bar
         title: Center(
           child: Text("Cadastro de Produtos",
           textAlign: TextAlign.end,
@@ -34,12 +34,15 @@ class CadastroProduto extends StatelessWidget{
         child: Container(
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 0)),
-              Image.asset('images/logo.png',
-                width: 180,
-                height: 180,
-                fit: BoxFit.fill,
+              Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+              Image.asset("images/logo.png",
+              width: 180,
+              height: 180,
               ),
+              TextField(decoration: InputDecoration(
+                //border: OutlinedBorder(side:),
+                hintText: "nome"),),
+              
             ],
           ),
         ),

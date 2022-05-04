@@ -34,15 +34,50 @@ class CadastroProduto extends StatelessWidget{
         child: Container(
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+              Padding(padding: EdgeInsets.fromLTRB(50, 15, 50, 15)),
               Image.asset("images/logo.png",
               width: 180,
               height: 180,
               ),
-              TextField(decoration: InputDecoration(
-                //border: OutlinedBorder(side:),
-                hintText: "nome"),),
-              
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Nome",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                    ),
+                  ),
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Tipo",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                    ),
+                  ),
+                ),
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Status",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10)
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

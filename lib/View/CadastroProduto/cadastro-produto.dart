@@ -79,7 +79,14 @@ class CadastroProduto extends StatelessWidget{
                 ),
               ),
               DropdownButton(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(0),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)
+                ),
                 isExpanded: true,
+                hint: Text("Selecione a categoria desejada"),
                 items: categories.map((String categories) {
                 return DropdownMenuItem(
                   value: categories,
@@ -88,8 +95,9 @@ class CadastroProduto extends StatelessWidget{
               }).toList(), onChanged: (String? value) {  },
               ),
               DropdownButton(
-                isExpanded: true,
-                //hint: ,
+                isExpanded: true, // Espandir o botão de escolha
+                hint: Text("Selecione a unidade de medida"), // deixar uma mensagem indicando o que o usurio deve fazer clicando no botão 
+                //hint: , // para exiir no botão a opção escolhida  
                 //focusColor: Colors.purple, // cor que o botão irá ficar quando for pressionado
                 //alignment: , // decidir se ficara ao meio ou aos lados
                 //elevation: , // decidir para qual lado irá ser elevado o menu quando for clicado 

@@ -1,8 +1,6 @@
 import 'dart:html';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:dropdownfield/dropdownfield.dart';
 
 class CadastroProduto extends StatelessWidget{
   @override
@@ -80,17 +78,27 @@ class CadastroProduto extends StatelessWidget{
                   ),
                 ),
               ),
-              DropDownField(
-                hintText: "Selecione uma Categoria",
-                controller: categorySelected,
-                items: categories,
-                enabled: true,
+              DropdownButton(
+                isExpanded: true,
+                items: categories.map((String categories) {
+                return DropdownMenuItem(
+                  value: categories,
+                  child: Text(categories),
+                );
+              }).toList(), onChanged: (String? value) {  },
               ),
-              DropDownField(
-                hintText: "Selecione a unidade de medida",
-                controller: measureSelected,
-                items: measure,
-                enabled: true,
+              DropdownButton(
+                isExpanded: true,
+                //hint: ,
+                //focusColor: Colors.purple, // cor que o botão irá ficar quando for pressionado
+                //alignment: , // decidir se ficara ao meio ou aos lados
+                //elevation: , // decidir para qual lado irá ser elevado o menu quando for clicado 
+                items: measure.map((String measure) {
+                return DropdownMenuItem(
+                  value: measure,
+                  child: Text(measure),
+                );
+              }).toList(), onChanged: (String? value) {  },
               ),
             ],
           ),

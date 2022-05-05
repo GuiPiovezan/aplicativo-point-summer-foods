@@ -1,6 +1,9 @@
 import 'dart:html';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:dropdownfield/dropdownfield.dart';
+
 class CadastroProduto extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -38,10 +41,6 @@ class CadastroProduto extends StatelessWidget{
               width: 180,
               height: 180,
               ),
-              TextField(decoration: InputDecoration(
-                //border: OutlinedBorder(side:),
-                hintText: "nome"),),
-
               TextFormField(
                 decoration: InputDecoration(
                   hintText: "Nome",
@@ -81,6 +80,18 @@ class CadastroProduto extends StatelessWidget{
                   ),
                 ),
               ),
+              DropDownField(
+                hintText: "Selecione uma Categoria",
+                controller: categorySelected,
+                items: categories,
+                enabled: true,
+              ),
+              DropDownField(
+                hintText: "Selecione a unidade de medida",
+                controller: measureSelected,
+                items: measure,
+                enabled: true,
+              ),
             ],
           ),
         ),
@@ -88,3 +99,20 @@ class CadastroProduto extends StatelessWidget{
     );
   }
 }
+
+final categorySelected = TextEditingController();
+
+List<String> categories = [
+  "Açai",
+  "Cupuaçu",
+  "Salgados",
+  "Porções",
+];
+
+final measureSelected = TextEditingController();
+
+List<String> measure = [
+  "Ml",
+  "Gramas",
+  "Unidade",
+];

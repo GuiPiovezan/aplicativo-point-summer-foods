@@ -1,8 +1,37 @@
-import 'dart:html';
-import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pointsf/model/cadastro-produto-model.dart';
+
 
 class CadastroProduto extends StatelessWidget{
+
+  final firestore = FirebaseFirestore.instance;
+  final 
+
+  //final CadastroProdutoModel _model;
+
+  String nome = '';
+  String tipoProdutoOuAdicional = '';
+  bool status = false;
+  String categoria = '';
+  String medida = '';
+  double preco = 0;
+
+  //CadastroProduto(this._model);
+
+  void salvarProduto(BuildContext context){
+
+    firestore.collection('usuarios').add({
+       "nome": nome,
+       "tipo": tipoProdutoOuAdicional,
+       "status": status,               // ESSA FUNÇÃO VAI SER MOVIDA FUTURAMENTE NÃO MEXER.
+       "categoria": categoria,
+       "medida": medida,
+       "preco": preco,
+      });
+             
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

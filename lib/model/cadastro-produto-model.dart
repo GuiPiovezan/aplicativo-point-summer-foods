@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,9 @@ class CadastroProdutoModel{
   bool? status;
   String? categoria;
   String? medida;
+  double? preco;
 
-  CadastroProdutoModel(this.nome, this.tipoProdutoOuAdicional, this.status, this.categoria, this.medida);
+  CadastroProdutoModel(this.nome, this.tipoProdutoOuAdicional, this.status, this.categoria, this.medida, this.preco);
 
   CadastroProdutoModel.fromMap(Map<String, dynamic> map){
     nome = map['nome'];
@@ -17,6 +19,7 @@ class CadastroProdutoModel{
     status = map['status'];
     categoria = map['categoria'];
     medida = map['medida'];
+    preco = map['preco'];
   }
 }
 

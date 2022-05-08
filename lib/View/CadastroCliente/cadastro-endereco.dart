@@ -10,7 +10,6 @@ class CadastroEndereco extends StatefulWidget {
 }
 
 class _CadastroEndereco extends State<CadastroEndereco> {
-
   String resultadoCEP = "";
   TextEditingController txtCEP = TextEditingController();
 
@@ -63,39 +62,66 @@ class _CadastroEndereco extends State<CadastroEndereco> {
         child: Container(
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(20, 15, 5, 10),
-                width: 150,
-                child: TextField(
-                  controller: txtCEP,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "CEP",
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: buscarCEP,
-                child: Text(
-                  "Buscar CEP",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.all(15),
-                  backgroundColor: Color.fromARGB(255, 83, 5, 64),
-                  side: BorderSide(
-                    color: Colors.white,
-                    width: 1,
-                    style: BorderStyle.solid,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 15, 15, 10),
+                    width: 150,
+                    child: TextField(
+                      controller: txtCEP,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: "CEP",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(255, 83, 5, 64),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Container(
+                    // width: 267,
+                    height: 51,
+                    child: TextButton(
+                      onPressed: buscarCEP,
+                      child: Text(
+                        "Buscar CEP",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.all(15),
+                        backgroundColor: Color.fromARGB(255, 83, 5, 64),
+                        side: BorderSide(
+                          color: Colors.white,
+                          width: 1,
+                          style: BorderStyle.solid,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(15.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Text(resultadoCEP),
             ],

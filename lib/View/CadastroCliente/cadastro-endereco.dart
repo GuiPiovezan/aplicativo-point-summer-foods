@@ -62,12 +62,16 @@ class _CadastroEndereco extends State<CadastroEndereco> {
         child: Container(
           child: Column(
             children: [
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   Container(
-                    margin: EdgeInsets.fromLTRB(20, 15, 15, 10),
+                    margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
                     width: 150,
+                    height: 52,
                     child: TextField(
                       controller: txtCEP,
                       keyboardType: TextInputType.number,
@@ -95,8 +99,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                     ),
                   ),
                   Container(
-                    // width: 267,
-                    height: 51,
+                    height: 52,
                     child: TextButton(
                       onPressed: buscarCEP,
                       child: Text(
@@ -110,7 +113,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                         backgroundColor: Color.fromARGB(255, 83, 5, 64),
                         side: BorderSide(
                           color: Colors.white,
-                          width: 1,
+                          width: 2,
                           style: BorderStyle.solid,
                         ),
                         shape: RoundedRectangleBorder(
@@ -122,6 +125,184 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                     ),
                   ),
                 ],
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                width: 298,
+                height: 52,
+                child: TextField(
+                  // controller: VAR,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Logradouro",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 83, 5, 64),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                width: 298,
+                height: 52,
+                child: TextField(
+                  // controller: VAR,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Numero",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 83, 5, 64),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                width: 298,
+                height: 52,
+                child: TextField(
+                  // controller: VAR,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Complemento",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 83, 5, 64),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                width: 298,
+                height: 52,
+                child: TextField(
+                  // controller: VAR,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Bairro",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 83, 5, 64),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                width: 298,
+                height: 52,
+                child: TextField(
+                  // controller: VAR,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: "Cidade",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(255, 83, 5, 64),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 52,
+                width: 267,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: TextButton(
+                  onPressed: buscarCEP,
+                  child: Text(
+                    "Cadastrar",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.all(15),
+                    backgroundColor: Color.fromARGB(255, 83, 5, 64),
+                    side: BorderSide(
+                      color: Colors.white,
+                      width: 2,
+                      style: BorderStyle.solid,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                ),
               ),
               Text(resultadoCEP),
             ],

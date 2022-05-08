@@ -1,6 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class CadastroEndereco extends StatelessWidget {
+class CadastroEndereco extends StatefulWidget {
+  const CadastroEndereco({Key? key}) : super(key: key);
+
+  @override
+  State<CadastroEndereco> createState() => _CadastroEndereco();
+}
+
+class _CadastroEndereco extends State<CadastroEndereco> {
+
+  String resultadoCEP = "";
+  TextEditingController txtCEP = TextEditingController();
+
+  Future<void> buscarCEP() async {
+    String cep = txtCEP.text;
+    var url = Uri.https('viacep.com.br', '/ws/$cep/json/', {'q': '{http}'});
+    http.Response response;
+
+    response = await http.get(url);
+
+    print('Resposta:' + response.body);
+
+    print('Resposta Servidor:' + response.statusCode.toString());
+    Map<String, dynamic> dados = json.decode(response.body);
+
+    String logradouro = dados["logradouro"];
+    String complemento = dados["complemento"];
+    String bairro = dados["bairro"];
+    String localidade = dados["localidade"];
+
+    String respostaCEP =
+        "Endereço\n$logradouro\nComplemento:\n$complemento\nBairro:\n$bairro\nCidade:\n$localidade";
+
+    setState(() {
+      resultadoCEP = respostaCEP;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +67,7 @@ class CadastroEndereco extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(20, 15, 5, 10),
                 width: 150,
                 child: TextField(
+                  controller: txtCEP,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     labelText: "CEP",
@@ -36,7 +75,7 @@ class CadastroEndereco extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => {},
+                onPressed: buscarCEP,
                 child: Text(
                   "Buscar CEP",
                   style: TextStyle(
@@ -57,7 +96,8 @@ class CadastroEndereco extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
+              Text(resultadoCEP),
             ],
           ),
         ),

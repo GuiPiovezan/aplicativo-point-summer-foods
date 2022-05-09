@@ -2,31 +2,22 @@ import 'package:flutter/material.dart';
 
 class ButtonPrimary extends StatelessWidget {
   final String textoBotao;
+  final VoidCallback funcao;
 
-  ButtonPrimary(this.textoBotao);
+  ButtonPrimary({
+    required this.textoBotao,
+    required this.funcao,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // return Padding(
-    //   padding: EdgeInsets.all(8.0),
-    //   child: ElevatedButton(
-    //     style: ButtonStyle(
-    //       fixedSize: MaterialStateProperty.all(const Size(100, 50)),
-    //       textStyle: MaterialStateProperty.all(
-    //         const TextStyle(fontSize: 24),
-    //       ),
-    //     ),
-    //     onPressed: () {},
-    //     child: Text(textoBotao),
-    //   ),
-    // );
     return Center(
       child: Container(
         height: 52,
-        width: 267,
+        width: 300,
         margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: TextButton(
-          onPressed: () {},
+          onPressed: funcao,
           child: Text(
             textoBotao,
             style: TextStyle(

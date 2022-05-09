@@ -70,7 +70,10 @@ class CadastroCliente extends StatelessWidget {
               descricaoCampo: 'Confirmar senha',
               placeholder: '*********',
             ),
-            ButtonPrimary('Cadastrar'),
+            ButtonPrimary(
+              textoBotao: "Cadastrar",
+              funcao: (){},
+            ),
           ],
         ),
       ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:pointsf/components/button-primary.dart';
+import 'package:pointsf/components/text-input-personalizado.dart';
+
 class CadastroEndereco extends StatefulWidget {
   const CadastroEndereco({Key? key}) : super(key: key);
 
@@ -37,6 +40,11 @@ class _CadastroEndereco extends State<CadastroEndereco> {
       resultadoCEP = respostaCEP;
     });
   }
+  final TextEditingController _controladorLogradouro = TextEditingController();
+  final TextEditingController _controladorNumero = TextEditingController();
+  final TextEditingController _controladorComplemento = TextEditingController();
+  final TextEditingController _controladorBairro = TextEditingController();
+  final TextEditingController _controladorCidade = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -126,156 +134,32 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                   ),
                 ],
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Logradouro",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
+              TextInputPersonalizado(
+                controlador: _controladorLogradouro,
+                descricaoCampo: 'Logradouro',
+                placeholder: 'Rua José Pereira',
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Numero",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
+              TextInputPersonalizado(
+                controlador: _controladorNumero,
+                descricaoCampo: 'Numero',
+                placeholder: '547',
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Complemento",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
+              TextInputPersonalizado(
+                controlador: _controladorComplemento,
+                descricaoCampo: 'Complemento',
+                placeholder: 'Apartamento 13',
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Bairro",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
+              TextInputPersonalizado(
+                controlador: _controladorBairro,
+                descricaoCampo: 'Bairro',
+                placeholder: 'Jardim das Flores',
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Cidade",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
+              TextInputPersonalizado(
+                controlador: _controladorCidade,
+                descricaoCampo: 'Cidade',
+                placeholder: 'São José do Rio Preto',
               ),
+
               Container(
                 height: 52,
                 width: 267,

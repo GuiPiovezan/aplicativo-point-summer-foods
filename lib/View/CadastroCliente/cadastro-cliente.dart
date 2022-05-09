@@ -16,6 +16,7 @@ class CadastroCliente extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 254, 220, 86),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 254, 220, 86),
         actions: [
@@ -25,6 +26,12 @@ class CadastroCliente extends StatelessWidget {
             height: 30,
           ),
         ],
+        title: Text(
+          "Usuario",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         leading: const Icon(
           Icons.arrow_back,
         ),

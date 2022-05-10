@@ -8,7 +8,8 @@ class CustomTextField extends StatelessWidget {
   final double? heigth;
   final TextInputType? inputType;
   final bool? enable;
-  final Function(String?)? onSaved;
+  FormFieldSetter<String>? onSaved;
+  FormFieldValidator<String>? validator;
 
   CustomTextField({
     this.controlador,
@@ -19,19 +20,21 @@ class CustomTextField extends StatelessWidget {
     this.inputType,
     this.enable = true,
     this.onSaved,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         height: heigth != null ? double?.parse(heigth.toString()) : 70,
         width: width != null ? double?.parse(width.toString()) : 320,
         child: TextFormField(
           controller: controlador,
           onSaved: onSaved,
-          keyboardType: inputType != null ? inputType : TextInputType.multiline,
+          validator: validator,
+          keyboardType: inputType ?? TextInputType.text,
           style: const TextStyle(
             fontSize: 24.0,
           ),
@@ -39,7 +42,7 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: descricaoCampo,
             hintText: placeholder,
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color.fromARGB(255, 83, 5, 64),
                 width: 2,
@@ -48,7 +51,7 @@ class CustomTextField extends StatelessWidget {
                 Radius.circular(15),
               ),
             ),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.black,
                 width: 2,

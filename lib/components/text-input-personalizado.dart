@@ -6,6 +6,7 @@ class TextInputPersonalizado extends StatelessWidget {
   final String? placeholder;
   final double? width;
   final double? heigth;
+  final TextInputType? inputType;
 
   TextInputPersonalizado({
     this.controlador,
@@ -13,6 +14,7 @@ class TextInputPersonalizado extends StatelessWidget {
     this.placeholder,
     this.width,
     this.heigth,
+    this.inputType,
   });
 
   @override
@@ -24,7 +26,7 @@ class TextInputPersonalizado extends StatelessWidget {
         width: width != null ? double?.parse(width.toString()) : 320,
         child: TextField(
           controller: controlador,
-          keyboardType: TextInputType.number,
+          keyboardType: inputType != null ? inputType : TextInputType.multiline,
           style: const TextStyle(
             fontSize: 24.0,
           ),

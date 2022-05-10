@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:pointsf/components/button-primary.dart';
-import 'package:pointsf/components/text-input-personalizado.dart';
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class CadastroEndereco extends StatefulWidget {
   const CadastroEndereco({Key? key}) : super(key: key);
@@ -70,7 +69,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                TextInputPersonalizado(
+                CustomTextField(
                   controlador: txtCEP,
                   descricaoCampo: "CEP",
                   placeholder: "Ex 15200000",
@@ -80,7 +79,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 SizedBox(
                   width: 15,
                 ),
-                ButtonPrimary(
+                CustomTextButton(
                   textoBotao: "Buscar",
                   onPressed: buscarCEP,
                   width: 100,
@@ -88,33 +87,33 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 ),
               ],
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorLogradouro,
               descricaoCampo: 'Logradouro',
               placeholder: 'Rua José Pereira',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorNumero,
               descricaoCampo: 'Numero',
               placeholder: '547',
               inputType: TextInputType.number,
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorComplemento,
               descricaoCampo: 'Complemento',
               placeholder: 'Apartamento 13',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorBairro,
               descricaoCampo: 'Bairro',
               placeholder: 'Jardim das Flores',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorCidade,
               descricaoCampo: 'Cidade',
               placeholder: 'São José do Rio Preto',
             ),
-            ButtonPrimary(
+            CustomTextButton(
               textoBotao: "Cadastrar",
               onPressed: () {},
             ),

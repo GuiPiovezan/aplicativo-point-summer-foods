@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextInputPersonalizado extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final TextEditingController? controlador;
   final String? descricaoCampo;
   final String? placeholder;
@@ -9,7 +9,7 @@ class TextInputPersonalizado extends StatelessWidget {
   final TextInputType? inputType;
   final bool? enable;
 
-  TextInputPersonalizado({
+  CustomTextField({
     this.controlador,
     this.descricaoCampo,
     this.placeholder,

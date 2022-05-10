@@ -13,7 +13,6 @@ class CadastroEndereco extends StatefulWidget {
 }
 
 class _CadastroEndereco extends State<CadastroEndereco> {
-
   TextEditingController txtCEP = TextEditingController();
   TextEditingController _controladorLogradouro = TextEditingController();
   TextEditingController _controladorNumero = TextEditingController();
@@ -35,7 +34,8 @@ class _CadastroEndereco extends State<CadastroEndereco> {
 
     setState(() {
       _controladorLogradouro = TextEditingController(text: dados["logradouro"]);
-      _controladorComplemento = TextEditingController(text: dados["complemento"]);
+      _controladorComplemento =
+          TextEditingController(text: dados["complemento"]);
       _controladorBairro = TextEditingController(text: dados["bairro"]);
       _controladorCidade = TextEditingController(text: dados["localidade"]);
     });
@@ -62,65 +62,63 @@ class _CadastroEndereco extends State<CadastroEndereco> {
         ),
       ),
       body: Center(
-        child: Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextInputPersonalizado(
-                    controlador: txtCEP,
-                    descricaoCampo: "CEP",
-                    placeholder: "Ex 15200000",
-                    width: 200,
-                    inputType: TextInputType.number,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  ButtonPrimary(
-                    textoBotao: "Buscar",
-                    onPressed: buscarCEP,
-                    width: 100,
-                    heigth: 70,
-                  ),
-                ],
-              ),
-              TextInputPersonalizado(
-                controlador: _controladorLogradouro,
-                descricaoCampo: 'Logradouro',
-                placeholder: 'Rua José Pereira',
-              ),
-              TextInputPersonalizado(
-                controlador: _controladorNumero,
-                descricaoCampo: 'Numero',
-                placeholder: '547',
-                inputType: TextInputType.number,
-              ),
-              TextInputPersonalizado(
-                controlador: _controladorComplemento,
-                descricaoCampo: 'Complemento',
-                placeholder: 'Apartamento 13',
-              ),
-              TextInputPersonalizado(
-                controlador: _controladorBairro,
-                descricaoCampo: 'Bairro',
-                placeholder: 'Jardim das Flores',
-              ),
-              TextInputPersonalizado(
-                controlador: _controladorCidade,
-                descricaoCampo: 'Cidade',
-                placeholder: 'São José do Rio Preto',
-              ),
-              ButtonPrimary(
-                textoBotao: "Cadastrar",
-                onPressed: () {},
-              ),
-            ],
-          ),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextInputPersonalizado(
+                  controlador: txtCEP,
+                  descricaoCampo: "CEP",
+                  placeholder: "Ex 15200000",
+                  width: 200,
+                  inputType: TextInputType.number,
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                ButtonPrimary(
+                  textoBotao: "Buscar",
+                  onPressed: buscarCEP,
+                  width: 100,
+                  heigth: 70,
+                ),
+              ],
+            ),
+            TextInputPersonalizado(
+              controlador: _controladorLogradouro,
+              descricaoCampo: 'Logradouro',
+              placeholder: 'Rua José Pereira',
+            ),
+            TextInputPersonalizado(
+              controlador: _controladorNumero,
+              descricaoCampo: 'Numero',
+              placeholder: '547',
+              inputType: TextInputType.number,
+            ),
+            TextInputPersonalizado(
+              controlador: _controladorComplemento,
+              descricaoCampo: 'Complemento',
+              placeholder: 'Apartamento 13',
+            ),
+            TextInputPersonalizado(
+              controlador: _controladorBairro,
+              descricaoCampo: 'Bairro',
+              placeholder: 'Jardim das Flores',
+            ),
+            TextInputPersonalizado(
+              controlador: _controladorCidade,
+              descricaoCampo: 'Cidade',
+              placeholder: 'São José do Rio Preto',
+            ),
+            ButtonPrimary(
+              textoBotao: "Cadastrar",
+              onPressed: () {},
+            ),
+          ],
         ),
       ),
     );

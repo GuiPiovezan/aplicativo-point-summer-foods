@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/components/button-primary.dart';
-import 'package:pointsf/components/text-input-personalizado.dart';
+import 'package:pointsf/View/CadastroCliente/cliente.dart';
+
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class CadastroCliente extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final tituloTela = 'Cadastro Usuário';
 
   final TextEditingController _controladorNome = TextEditingController();
   final TextEditingController _controladorEmail = TextEditingController();
@@ -16,6 +19,7 @@ class CadastroCliente extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 254, 220, 86),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 254, 220, 86),
         actions: [
@@ -25,6 +29,12 @@ class CadastroCliente extends StatelessWidget {
             height: 30,
           ),
         ],
+        title: Text(
+          tituloTela,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         leading: const Icon(
           Icons.arrow_back,
         ),
@@ -33,37 +43,48 @@ class CadastroCliente extends StatelessWidget {
         key: formKey,
         child: ListView(
           children: <Widget>[
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorNome,
               descricaoCampo: 'Nome',
               placeholder: 'Gustavo de Freitas',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorEmail,
               descricaoCampo: 'E-mail',
               placeholder: 'email@email.com',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorTelefone,
               descricaoCampo: 'Telefone',
               placeholder: '(17) 99999-9999',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorCpf,
               descricaoCampo: 'CPF',
               placeholder: '999.999.999-99',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorSenha,
               descricaoCampo: 'Senha',
               placeholder: '*********',
             ),
-            TextInputPersonalizado(
+            CustomTextField(
               controlador: _controladorConfirmarSenha,
               descricaoCampo: 'Confirmar senha',
               placeholder: '*********',
             ),
-            ButtonPrimary('Cadastrar'),
+            CustomTextButton(
+              textoBotao: 'Cadastrar',
+              onPressed: () {
+                Cliente().salvar(
+                  nome: _controladorNome,
+                  email: _controladorEmail,
+                  telefone: _controladorTelefone,
+                  cpf: _controladorCpf,
+                  senha: _controladorSenha,
+                );
+              },
+            ),
           ],
         ),
       ),

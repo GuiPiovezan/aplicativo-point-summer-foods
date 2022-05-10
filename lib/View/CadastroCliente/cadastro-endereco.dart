@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:pointsf/widgets/export-widgets.dart';
+
 class CadastroEndereco extends StatefulWidget {
   const CadastroEndereco({Key? key}) : super(key: key);
 
@@ -10,8 +12,12 @@ class CadastroEndereco extends StatefulWidget {
 }
 
 class _CadastroEndereco extends State<CadastroEndereco> {
-  String resultadoCEP = "";
   TextEditingController txtCEP = TextEditingController();
+  TextEditingController _controladorLogradouro = TextEditingController();
+  TextEditingController _controladorNumero = TextEditingController();
+  TextEditingController _controladorComplemento = TextEditingController();
+  TextEditingController _controladorBairro = TextEditingController();
+  TextEditingController _controladorCidade = TextEditingController();
 
   Future<void> buscarCEP() async {
     String cep = txtCEP.text;
@@ -25,16 +31,12 @@ class _CadastroEndereco extends State<CadastroEndereco> {
     print('Resposta Servidor:' + response.statusCode.toString());
     Map<String, dynamic> dados = json.decode(response.body);
 
-    String logradouro = dados["logradouro"];
-    String complemento = dados["complemento"];
-    String bairro = dados["bairro"];
-    String localidade = dados["localidade"];
-
-    String respostaCEP =
-        "Endereço\n$logradouro\nComplemento:\n$complemento\nBairro:\n$bairro\nCidade:\n$localidade";
-
     setState(() {
-      resultadoCEP = respostaCEP;
+      _controladorLogradouro = TextEditingController(text: dados["logradouro"]);
+      _controladorComplemento =
+          TextEditingController(text: dados["complemento"]);
+      _controladorBairro = TextEditingController(text: dados["bairro"]);
+      _controladorCidade = TextEditingController(text: dados["localidade"]);
     });
   }
 
@@ -59,254 +61,63 @@ class _CadastroEndereco extends State<CadastroEndereco> {
         ),
       ),
       body: Center(
-        child: Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
-                    width: 150,
-                    height: 52,
-                    child: TextField(
-                      controller: txtCEP,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: "CEP",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 83, 5, 64),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 52,
-                    child: TextButton(
-                      onPressed: buscarCEP,
-                      child: Text(
-                        "Buscar CEP",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.all(15),
-                        backgroundColor: Color.fromARGB(255, 83, 5, 64),
-                        side: BorderSide(
-                          color: Colors.white,
-                          width: 2,
-                          style: BorderStyle.solid,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Logradouro",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CustomTextField(
+                  controlador: txtCEP,
+                  descricaoCampo: "CEP",
+                  placeholder: "Ex 15200000",
+                  width: 200,
+                  inputType: TextInputType.number,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Numero",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
+                SizedBox(
+                  width: 15,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Complemento",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Bairro",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                width: 298,
-                height: 52,
-                child: TextField(
-                  // controller: VAR,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: "Cidade",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(255, 83, 5, 64),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                height: 52,
-                width: 267,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: TextButton(
+                CustomTextButton(
+                  textoBotao: "Buscar",
                   onPressed: buscarCEP,
-                  child: Text(
-                    "Cadastrar",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(15),
-                    backgroundColor: Color.fromARGB(255, 83, 5, 64),
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
-                      style: BorderStyle.solid,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(15.0),
-                      ),
-                    ),
-                  ),
+                  width: 100,
+                  heigth: 70,
                 ),
-              ),
-              Text(resultadoCEP),
-            ],
-          ),
+              ],
+            ),
+            CustomTextField(
+              controlador: _controladorLogradouro,
+              descricaoCampo: 'Logradouro',
+              placeholder: 'Rua José Pereira',
+            ),
+            CustomTextField(
+              controlador: _controladorNumero,
+              descricaoCampo: 'Numero',
+              placeholder: '547',
+              inputType: TextInputType.number,
+            ),
+            CustomTextField(
+              controlador: _controladorComplemento,
+              descricaoCampo: 'Complemento',
+              placeholder: 'Apartamento 13',
+            ),
+            CustomTextField(
+              controlador: _controladorBairro,
+              descricaoCampo: 'Bairro',
+              placeholder: 'Jardim das Flores',
+            ),
+            CustomTextField(
+              controlador: _controladorCidade,
+              descricaoCampo: 'Cidade',
+              placeholder: 'São José do Rio Preto',
+            ),
+            CustomTextButton(
+              textoBotao: "Cadastrar",
+              onPressed: () {},
+            ),
+          ],
         ),
       ),
     );

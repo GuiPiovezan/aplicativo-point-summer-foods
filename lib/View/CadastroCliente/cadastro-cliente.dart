@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/View/CadastroCliente/cliente.dart';
 
@@ -5,16 +7,39 @@ import 'package:pointsf/widgets/export-widgets.dart';
 
 class CadastroCliente extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
 
   final tituloTela = 'Cadastro Usuário';
 
-  final TextEditingController _controladorNome = TextEditingController();
-  final TextEditingController _controladorEmail = TextEditingController();
-  final TextEditingController _controladorTelefone = TextEditingController();
-  final TextEditingController _controladorCpf = TextEditingController();
-  final TextEditingController _controladorSenha = TextEditingController();
-  final TextEditingController _controladorConfirmarSenha =
-      TextEditingController();
+  String nome = '';
+  String telefone = '';
+  String email = '';
+  String senha = '';
+  String cpf = '';
+  String confirmarSenha = '';
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController telefoneController = TextEditingController();
+  TextEditingController cpfController = TextEditingController();
+
+  void save(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      var result = await auth.createUserWithEmailAndPassword(
+          email: emailController.text, password: senhaController.text);
+
+      var userId = result.user!.uid;
+
+      firestore.collection('usuarios').doc().set({
+        "nome": nomeController.text,
+        "uid": userId,
+        "telefone": telefoneController.text,
+        "cpf": cpfController.text,
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,45 +69,44 @@ class CadastroCliente extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             CustomTextField(
-              controlador: _controladorNome,
+              onSaved: (value) => nome = value!,
+              controlador: nomeController,
               descricaoCampo: 'Nome',
               placeholder: 'Gustavo de Freitas',
             ),
             CustomTextField(
-              controlador: _controladorEmail,
+              onSaved: (value) => email = value!,
+              controlador: emailController,
               descricaoCampo: 'E-mail',
               placeholder: 'email@email.com',
             ),
             CustomTextField(
-              controlador: _controladorTelefone,
+              onSaved: (value) => telefone = value!,
+              controlador: telefoneController,
               descricaoCampo: 'Telefone',
               placeholder: '(17) 99999-9999',
             ),
             CustomTextField(
-              controlador: _controladorCpf,
+              onSaved: (value) => cpf = value!,
+              controlador: cpfController,
               descricaoCampo: 'CPF',
               placeholder: '999.999.999-99',
             ),
             CustomTextField(
-              controlador: _controladorSenha,
+              onSaved: (value) => senha = value!,
+              controlador: senhaController,
               descricaoCampo: 'Senha',
               placeholder: '*********',
             ),
             CustomTextField(
-              controlador: _controladorConfirmarSenha,
+              onSaved: (value) => confirmarSenha = value!,
               descricaoCampo: 'Confirmar senha',
               placeholder: '*********',
             ),
             CustomTextButton(
               textoBotao: 'Cadastrar',
               onPressed: () {
-                Cliente().salvar(
-                  nome: _controladorNome,
-                  email: _controladorEmail,
-                  telefone: _controladorTelefone,
-                  cpf: _controladorCpf,
-                  senha: _controladorSenha,
-                );
+                save(context);
               },
             ),
           ],

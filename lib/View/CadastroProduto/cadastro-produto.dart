@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pointsf/components/text-input-personalizado.dart';
 import 'package:pointsf/model/cadastro-produto-model.dart';
 
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class CadastroProduto extends StatefulWidget {
   const CadastroProduto({ Key? key }) : super(key: key);
@@ -75,17 +75,17 @@ class _CadastroProdutoState extends State<CadastroProduto> {
         child: Container(
           child: Column(
             children: [
-              TextInputPersonalizado(
+              CustomTextField(
                 controlador: _controladorNomeProduto,
                 descricaoCampo: "Nome do Produto",
                 placeholder: "Digite",
               ),
-              TextInputPersonalizado(
+              CustomTextField(
                 controlador: _controladorTipoProduto,
                 descricaoCampo: "Tipo do Produto",
                 placeholder: "Digite",
               ),
-              TextInputPersonalizado(
+              CustomTextField(
                 controlador: _controladorStatusProduto,
                 descricaoCampo: "Status do Produto",
                 placeholder: "Digite",

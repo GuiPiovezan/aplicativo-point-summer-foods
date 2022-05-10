@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
-class TextInputPersonalizado extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final TextEditingController? controlador;
   final String? descricaoCampo;
   final String? placeholder;
   final double? width;
   final double? heigth;
   final TextInputType? inputType;
+  final bool? enable;
 
-  TextInputPersonalizado({
+  CustomTextField({
     this.controlador,
     this.descricaoCampo,
     this.placeholder,
     this.width,
     this.heigth,
     this.inputType,
+    this.enable = true,
   });
 
   @override
@@ -30,6 +32,7 @@ class TextInputPersonalizado extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24.0,
           ),
+          enabled: enable,
           decoration: InputDecoration(
             labelText: descricaoCampo,
             hintText: placeholder,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ButtonPrimary extends StatelessWidget {
+class CustomTextButton extends StatelessWidget {
   final String textoBotao;
   final VoidCallback onPressed;
   final double? width;
   final double? heigth;
 
-  const ButtonPrimary({
+  const CustomTextButton({
     required this.textoBotao,
     required this.onPressed,
     this.width,

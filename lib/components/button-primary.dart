@@ -4,18 +4,20 @@ class ButtonPrimary extends StatelessWidget {
   final String textoBotao;
   final VoidCallback funcao;
   final double? width;
+  final double? heigth;
 
   const ButtonPrimary({
     required this.textoBotao,
     required this.funcao,
     this.width,
+    this.heigth,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 52,
+        height: heigth != null ? double?.parse(heigth.toString()) : 52,
         width: width != null ? double?.parse(width.toString()) : 300,
         margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: TextButton(

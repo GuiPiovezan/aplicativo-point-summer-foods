@@ -2,35 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/model/cadastro-produto-model.dart';
 
+enum status  { ativo, inativo }
+
 
 class CadastroProduto extends StatelessWidget{
-
-  final firestore = FirebaseFirestore.instance;
-  final 
-
   //final CadastroProdutoModel _model;
+  final CadastroProdutoModel _model = CadastroProdutoModel();
+  
 
-  String nome = '';
-  String tipoProdutoOuAdicional = '';
-  bool status = false;
-  String categoria = '';
-  String medida = '';
-  double preco = 0;
-
-  //CadastroProduto(this._model);
-
-  void salvarProduto(BuildContext context){
-
-    firestore.collection('usuarios').add({
-       "nome": nome,
-       "tipo": tipoProdutoOuAdicional,
-       "status": status,               // ESSA FUNÇÃO VAI SER MOVIDA FUTURAMENTE NÃO MEXER.
-       "categoria": categoria,
-       "medida": medida,
-       "preco": preco,
-      });
-             
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +48,7 @@ class CadastroProduto extends StatelessWidget{
               height: 180,
               ),
               TextFormField(
+                onSaved: (value) => _model.nome = value,
                 decoration: InputDecoration(
                   hintText: "Nome",
                   enabledBorder: OutlineInputBorder(
@@ -82,6 +62,7 @@ class CadastroProduto extends StatelessWidget{
                 ),
               ),
               TextFormField(
+                onSaved: (value) => _model.tipoProdutoOuAdicional = value,
                 decoration: InputDecoration(
                   hintText: "Tipo",
                   enabledBorder: OutlineInputBorder(
@@ -95,6 +76,7 @@ class CadastroProduto extends StatelessWidget{
                 ),
               ),
               TextFormField(
+                onSaved: (value) => _model.status = value,
                 decoration: InputDecoration(
                   hintText: "Status",
                   enabledBorder: OutlineInputBorder(

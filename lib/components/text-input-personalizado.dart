@@ -7,6 +7,7 @@ class TextInputPersonalizado extends StatelessWidget {
   final double? width;
   final double? heigth;
   final TextInputType? inputType;
+  final bool? enable;
 
   TextInputPersonalizado({
     this.controlador,
@@ -15,6 +16,7 @@ class TextInputPersonalizado extends StatelessWidget {
     this.width,
     this.heigth,
     this.inputType,
+    this.enable = true,
   });
 
   @override
@@ -30,6 +32,7 @@ class TextInputPersonalizado extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24.0,
           ),
+          enabled: enable,
           decoration: InputDecoration(
             labelText: descricaoCampo,
             hintText: placeholder,

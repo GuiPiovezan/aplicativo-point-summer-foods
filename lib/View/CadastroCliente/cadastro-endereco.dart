@@ -77,61 +77,20 @@ class _CadastroEndereco extends State<CadastroEndereco> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
+                  TextInputPersonalizado(
+                    controlador: txtCEP,
+                    descricaoCampo: "CEP",
+                    placeholder: "Ex 15200000",
                     width: 150,
-                    height: 52,
-                    child: TextField(
-                      controller: txtCEP,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: "CEP",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 83, 5, 64),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
-                  Container(
-                    height: 52,
-                    child: TextButton(
-                      onPressed: buscarCEP,
-                      child: Text(
-                        "Buscar CEP",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.all(15),
-                        backgroundColor: Color.fromARGB(255, 83, 5, 64),
-                        side: BorderSide(
-                          color: Colors.white,
-                          width: 2,
-                          style: BorderStyle.solid,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  ButtonPrimary(
+                    textoBotao: "buscarCEP",
+                    funcao: buscarCEP,
+                    width: 150,
+                    heigth: 70,
                   ),
                 ],
               ),
@@ -164,7 +123,6 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 textoBotao: "Cadastrar",
                 funcao: () {},
               ),
-              
               Text(resultadoCEP),
             ],
           ),

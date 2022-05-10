@@ -57,8 +57,9 @@ class _CadastroProdutoState extends State<CadastroProduto> {
           ),
         ],
       ),
-      body: Center(
-        child: Container(
+      body: ListView(
+        children: [
+          Container(
           child: Column(
             children: [
               CustomTextField(
@@ -156,7 +157,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
             ],
           ),
         ),
-      ),
+        ],
+      )
     );
   }
 }

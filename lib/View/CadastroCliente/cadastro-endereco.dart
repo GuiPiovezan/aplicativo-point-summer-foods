@@ -81,15 +81,16 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                     controlador: txtCEP,
                     descricaoCampo: "CEP",
                     placeholder: "Ex 15200000",
-                    width: 150,
+                    width: 200,
+                    inputType: TextInputType.number,
                   ),
                   SizedBox(
                     width: 15,
                   ),
                   ButtonPrimary(
-                    textoBotao: "buscarCEP",
-                    funcao: buscarCEP,
-                    width: 150,
+                    textoBotao: "Buscar",
+                    onPressed: buscarCEP,
+                    width: 100,
                     heigth: 70,
                   ),
                 ],
@@ -103,6 +104,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 controlador: _controladorNumero,
                 descricaoCampo: 'Numero',
                 placeholder: '547',
+                inputType: TextInputType.number,
               ),
               TextInputPersonalizado(
                 controlador: _controladorComplemento,

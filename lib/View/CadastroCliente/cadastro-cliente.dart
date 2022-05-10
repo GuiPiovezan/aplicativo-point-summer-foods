@@ -19,24 +19,17 @@ class CadastroCliente extends StatelessWidget {
   String cpf = '';
   String confirmarSenha = '';
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
-  TextEditingController nomeController = TextEditingController();
-  TextEditingController telefoneController = TextEditingController();
-  TextEditingController cpfController = TextEditingController();
-
   void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
       var result = await auth.createUserWithEmailAndPassword(
-          email: emailController.text, password: senhaController.text);
+          email: email, password: senha);
 
-      var userId = result.user!.uid;
-
-      firestore.collection('usuarios').doc().set({
-        "nome": nomeController.text,
-        "uid": userId,
-        "telefone": telefoneController.text,
-        "cpf": cpfController.text,
+      firestore.collection('usuarios').doc(result.user!.uid).set({
+        "nome": nome,
+        "uid": result.user!.uid,
+        "telefone": telefone,
+        "cpf": cpf,
       });
     }
   }
@@ -70,31 +63,26 @@ class CadastroCliente extends StatelessWidget {
           children: <Widget>[
             CustomTextField(
               onSaved: (value) => nome = value!,
-              controlador: nomeController,
               descricaoCampo: 'Nome',
               placeholder: 'Gustavo de Freitas',
             ),
             CustomTextField(
               onSaved: (value) => email = value!,
-              controlador: emailController,
               descricaoCampo: 'E-mail',
               placeholder: 'email@email.com',
             ),
             CustomTextField(
               onSaved: (value) => telefone = value!,
-              controlador: telefoneController,
               descricaoCampo: 'Telefone',
               placeholder: '(17) 99999-9999',
             ),
             CustomTextField(
               onSaved: (value) => cpf = value!,
-              controlador: cpfController,
               descricaoCampo: 'CPF',
               placeholder: '999.999.999-99',
             ),
             CustomTextField(
               onSaved: (value) => senha = value!,
-              controlador: senhaController,
               descricaoCampo: 'Senha',
               placeholder: '*********',
             ),

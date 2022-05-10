@@ -14,6 +14,7 @@ class CadastroProduto extends StatefulWidget {
 class _CadastroProdutoState extends State<CadastroProduto> {
   String? dropDawnUnidadeMedida ;
   String? dropDawnTipo ;
+
   final firestore = FirebaseFirestore.instance;
   final 
 
@@ -75,28 +76,57 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 descricaoCampo: "Status do Produto",
                 placeholder: "Digite",
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10,0,10,0),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                width: 320,
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                  ),
+                ),
                 child: DropdownButton(
-                  value: dropDawnUnidadeMedida,
-                  isExpanded: false,
+                  borderRadius: BorderRadius.circular(20),
+                  value: dropDawnTipo,
+                  isExpanded: false, // Espandir o botão de escolha
+                  //disabledHint: Text("Selecione a unidade de medida"), // deixar uma mensagem indicando o que o usurio deve fazer clicando no botão 
+                  hint: Text("Selecione a unidade de medida"), // para exibir no botão a opção escolhida  
+                  //focusColor: Colors.purple, // cor que o botão irá ficar quando for pressionado
+                  //alignment: , // decidir se ficara ao meio ou aos lados
+                  elevation: 16, // decidir para qual lado irá ser elevado o menu quando for clicado 
                   underline: Container(
                     height: 2,
                     color: Colors.purpleAccent,
                   ),
-                  //disabledHint: Text("Selecione a categoria desejada"),
-                  hint: Text("Selecione a categoria desejada"), 
+                  onChanged: (String? categories) { setState(() {
+                   dropDawnTipo = categories!;
+                }); },
                   items: categories.map((String categories) {
                   return DropdownMenuItem(
                     value: categories,
                     child: Text(categories),
                   );
-                }).toList(), onChanged: (String? value) {  },
+                }).toList(), 
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10,0,10,0),
+              Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                width: 320,
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.black,
+                    style: BorderStyle.solid,
+                  ),
+                ),
                 child: DropdownButton(
+                  borderRadius: BorderRadius.circular(20),
                   value: dropDawnUnidadeMedida,
                   isExpanded: false, // Espandir o botão de escolha
                   //disabledHint: Text("Selecione a unidade de medida"), // deixar uma mensagem indicando o que o usurio deve fazer clicando no botão 
@@ -119,6 +149,10 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 }).toList(), 
                 ),
               ),
+              CustomTextButton(
+                textoBotao: "Cadastrar",
+                onPressed: () {}
+              ),
             ],
           ),
         ),
@@ -139,7 +173,7 @@ List<String> categories = [
 final measureSelected = TextEditingController();
 
 List<String> measure = [
-  "Ml",
+  "ML",
   "Gramas",
   "Unidade",
 ];

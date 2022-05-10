@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final double? heigth;
   final TextInputType? inputType;
   final bool? enable;
+  final Function(String?)? onSaved;
 
   CustomTextField({
     this.controlador,
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.heigth,
     this.inputType,
     this.enable = true,
+    this.onSaved,
   });
 
   @override
@@ -26,8 +28,9 @@ class CustomTextField extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
         height: heigth != null ? double?.parse(heigth.toString()) : 70,
         width: width != null ? double?.parse(width.toString()) : 320,
-        child: TextField(
+        child: TextFormField(
           controller: controlador,
+          onSaved: onSaved,
           keyboardType: inputType != null ? inputType : TextInputType.multiline,
           style: const TextStyle(
             fontSize: 24.0,

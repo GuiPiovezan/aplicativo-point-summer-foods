@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/View/CadastroCliente/cliente.dart';
 import 'package:pointsf/components/button-primary.dart';
 import 'package:pointsf/components/text-input-personalizado.dart';
 
 class CadastroCliente extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final tituloTela = 'Cadastro Usuário';
 
   final TextEditingController _controladorNome = TextEditingController();
   final TextEditingController _controladorEmail = TextEditingController();
@@ -27,7 +30,7 @@ class CadastroCliente extends StatelessWidget {
           ),
         ],
         title: Text(
-          "Usuario",
+          tituloTela,
           style: TextStyle(
             color: Colors.black,
           ),
@@ -70,7 +73,16 @@ class CadastroCliente extends StatelessWidget {
               descricaoCampo: 'Confirmar senha',
               placeholder: '*********',
             ),
-            ButtonPrimary('Cadastrar'),
+            ButtonPrimary(
+                textoBotao: 'Cadastrar',
+                onPressed: () {
+                  Cliente().salvar(
+                      nome: _controladorNome,
+                      email: _controladorEmail,
+                      telefone: _controladorTelefone,
+                      cpf: _controladorCpf,
+                      senha: _controladorSenha);
+                }),
           ],
         ),
       ),

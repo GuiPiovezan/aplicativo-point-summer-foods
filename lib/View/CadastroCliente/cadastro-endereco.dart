@@ -40,6 +40,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
       resultadoCEP = respostaCEP;
     });
   }
+
   final TextEditingController _controladorLogradouro = TextEditingController();
   final TextEditingController _controladorNumero = TextEditingController();
   final TextEditingController _controladorComplemento = TextEditingController();
@@ -159,34 +160,9 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 descricaoCampo: 'Cidade',
                 placeholder: 'São José do Rio Preto',
               ),
-
-              Container(
-                height: 52,
-                width: 267,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: TextButton(
-                  onPressed: buscarCEP,
-                  child: Text(
-                    "Cadastrar",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.all(15),
-                    backgroundColor: Color.fromARGB(255, 83, 5, 64),
-                    side: BorderSide(
-                      color: Colors.white,
-                      width: 2,
-                      style: BorderStyle.solid,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(15.0),
-                      ),
-                    ),
-                  ),
-                ),
+              ButtonPrimary(
+                textoBotao: "Cadastrar",
+                onPressed: () {},
               ),
               Text(resultadoCEP),
             ],

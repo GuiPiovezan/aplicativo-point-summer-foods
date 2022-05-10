@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class ButtonPrimary extends StatelessWidget {
   final String textoBotao;
-  final VoidCallback funcao;
+  final VoidCallback onPressed;
   final double? width;
   final double? heigth;
 
   const ButtonPrimary({
     required this.textoBotao,
-    required this.funcao,
+    required this.onPressed,
     this.width,
     this.heigth,
   });
@@ -21,7 +21,7 @@ class ButtonPrimary extends StatelessWidget {
         width: width != null ? double?.parse(width.toString()) : 300,
         margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: TextButton(
-          onPressed: funcao,
+          onPressed: onPressed,
           child: Text(
             textoBotao,
             style: TextStyle(

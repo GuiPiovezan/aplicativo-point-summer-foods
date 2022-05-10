@@ -19,7 +19,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
   TextEditingController _controladorBairro = TextEditingController();
   TextEditingController _controladorCidade = TextEditingController();
 
-  Future<void> buscarCEP() async {
+  Future<void> searchCEP() async {
     String cep = txtCEP.text;
     var url = Uri.https('viacep.com.br', '/ws/$cep/json/', {'q': '{http}'});
     http.Response response;
@@ -81,7 +81,7 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 ),
                 CustomTextButton(
                   textoBotao: "Buscar",
-                  onPressed: buscarCEP,
+                  onPressed: searchCEP,
                   width: 100,
                   heigth: 70,
                 ),

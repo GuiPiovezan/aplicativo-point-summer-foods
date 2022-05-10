@@ -73,14 +73,16 @@ class CadastroCliente extends StatelessWidget {
               descricaoCampo: 'Confirmar senha',
               placeholder: '*********',
             ),
-            ButtonPrimary('Cadastrar', onPressed: () {
-              Cliente().salvar(
-                  nome: _controladorNome,
-                  email: _controladorEmail,
-                  telefone: _controladorTelefone,
-                  cpf: _controladorCpf,
-                  senha: _controladorSenha);
-            }),
+            ButtonPrimary(
+                textoBotao: 'Cadastrar',
+                onPressed: () {
+                  Cliente().salvar(
+                      nome: _controladorNome,
+                      email: _controladorEmail,
+                      telefone: _controladorTelefone,
+                      cpf: _controladorCpf,
+                      senha: _controladorSenha);
+                }),
           ],
         ),
       ),

@@ -12,11 +12,8 @@ class CadastroProdutoModel {
   String? medida;
   double? preco;
 
-
-  void iniciarFirestore(){
-
+  void iniciarFirestore() {
     firestore = DBFirestore.get();
-
   }
 
   CadastroProdutoModel();

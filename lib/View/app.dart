@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/CadastroProduto/cadastro-produto.dart';
+import 'package:pointsf/View/Welcome/welcome.dart';
 
-import 'CadastroCliente/cadastro-cliente.dart';
-import 'CadastroCliente/cadastro-endereco.dart';
+import 'export-all-view.dart';
 
 class App extends StatelessWidget {
   @override

@@ -13,8 +13,13 @@ class CadastroEndereco extends StatefulWidget {
 }
 
 class _CadastroEndereco extends State<CadastroEndereco> {
-  String resultadoCEP = "";
+
   TextEditingController txtCEP = TextEditingController();
+  TextEditingController _controladorLogradouro = TextEditingController();
+  TextEditingController _controladorNumero = TextEditingController();
+  TextEditingController _controladorComplemento = TextEditingController();
+  TextEditingController _controladorBairro = TextEditingController();
+  TextEditingController _controladorCidade = TextEditingController();
 
   Future<void> buscarCEP() async {
     String cep = txtCEP.text;
@@ -28,24 +33,13 @@ class _CadastroEndereco extends State<CadastroEndereco> {
     print('Resposta Servidor:' + response.statusCode.toString());
     Map<String, dynamic> dados = json.decode(response.body);
 
-    String logradouro = dados["logradouro"];
-    String complemento = dados["complemento"];
-    String bairro = dados["bairro"];
-    String localidade = dados["localidade"];
-
-    String respostaCEP =
-        "Endereço\n$logradouro\nComplemento:\n$complemento\nBairro:\n$bairro\nCidade:\n$localidade";
-
     setState(() {
-      resultadoCEP = respostaCEP;
+      _controladorLogradouro = TextEditingController(text: dados["logradouro"]);
+      _controladorComplemento = TextEditingController(text: dados["complemento"]);
+      _controladorBairro = TextEditingController(text: dados["bairro"]);
+      _controladorCidade = TextEditingController(text: dados["localidade"]);
     });
   }
-
-  final TextEditingController _controladorLogradouro = TextEditingController();
-  final TextEditingController _controladorNumero = TextEditingController();
-  final TextEditingController _controladorComplemento = TextEditingController();
-  final TextEditingController _controladorBairro = TextEditingController();
-  final TextEditingController _controladorCidade = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +119,6 @@ class _CadastroEndereco extends State<CadastroEndereco> {
                 textoBotao: "Cadastrar",
                 onPressed: () {},
               ),
-              Text(resultadoCEP),
             ],
           ),
         ),

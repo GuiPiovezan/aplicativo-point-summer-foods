@@ -162,9 +162,8 @@ class _CadastroEndereco extends State<CadastroEndereco> {
               ),
               ButtonPrimary(
                 textoBotao: "Cadastrar",
-                funcao: () {},
+                onPressed: () {},
               ),
-              
               Text(resultadoCEP),
             ],
           ),

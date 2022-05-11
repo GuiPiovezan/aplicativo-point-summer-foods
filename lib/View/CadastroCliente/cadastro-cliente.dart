@@ -1,8 +1,9 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/CadastroCliente/cliente.dart';
-
+import 'package:flutter/services.dart';
+import 'package:pointsf/View/Validators/user_validator.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class CadastroCliente extends StatelessWidget {
@@ -49,7 +50,7 @@ class CadastroCliente extends StatelessWidget {
         ],
         title: Text(
           tituloTela,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),
@@ -64,32 +65,36 @@ class CadastroCliente extends StatelessWidget {
             CustomTextField(
               onSaved: (value) => nome = value!,
               descricaoCampo: 'Nome',
-              placeholder: 'Gustavo de Freitas',
+              validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
               onSaved: (value) => email = value!,
               descricaoCampo: 'E-mail',
-              placeholder: 'email@email.com',
+              validator: (value) => UserValidator.validarEmail(value!),
             ),
             CustomTextField(
               onSaved: (value) => telefone = value!,
               descricaoCampo: 'Telefone',
-              placeholder: '(17) 99999-9999',
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                TelefoneInputFormatter(),
+              ],
             ),
             CustomTextField(
               onSaved: (value) => cpf = value!,
               descricaoCampo: 'CPF',
-              placeholder: '999.999.999-99',
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                CpfInputFormatter()
+              ],
             ),
             CustomTextField(
               onSaved: (value) => senha = value!,
               descricaoCampo: 'Senha',
-              placeholder: '*********',
             ),
             CustomTextField(
               onSaved: (value) => confirmarSenha = value!,
               descricaoCampo: 'Confirmar senha',
-              placeholder: '*********',
             ),
             CustomTextButton(
               textoBotao: 'Cadastrar',

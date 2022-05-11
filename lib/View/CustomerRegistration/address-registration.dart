@@ -4,14 +4,14 @@ import 'dart:convert';
 
 import 'package:pointsf/widgets/export-widgets.dart';
 
-class CadastroEndereco extends StatefulWidget {
-  const CadastroEndereco({Key? key}) : super(key: key);
+class AddressRegistration extends StatefulWidget {
+  const AddressRegistration({Key? key}) : super(key: key);
 
   @override
-  State<CadastroEndereco> createState() => _CadastroEndereco();
+  State<AddressRegistration> createState() => _AddressRegistration();
 }
 
-class _CadastroEndereco extends State<CadastroEndereco> {
+class _AddressRegistration extends State<AddressRegistration> {
   TextEditingController txtCEP = TextEditingController();
   TextEditingController _controladorLogradouro = TextEditingController();
   TextEditingController _controladorNumero = TextEditingController();

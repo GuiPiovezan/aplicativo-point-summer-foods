@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
-class CadastroCliente extends StatelessWidget {
+class CustomerRegistration extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;

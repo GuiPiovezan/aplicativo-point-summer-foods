@@ -33,7 +33,7 @@ class _WelcomeState extends State<Welcome> {
                 );
               },
             ),
-            CustomTextButton(
+            CustomTextButtonYellow(
               textoBotao: "Entrar",
               onPressed: () {
                 Navigator.of(context).push(

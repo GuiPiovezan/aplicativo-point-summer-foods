@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pointsf/View/Validators/user_validator.dart';
+import 'package:pointsf/Services/Validators/user_validator.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
-class CadastroCliente extends StatelessWidget {
+class CustomerRegistration extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
@@ -53,9 +53,6 @@ class CadastroCliente extends StatelessWidget {
           style: const TextStyle(
             color: Colors.black,
           ),
-        ),
-        leading: const Icon(
-          Icons.arrow_back,
         ),
       ),
       body: Form(

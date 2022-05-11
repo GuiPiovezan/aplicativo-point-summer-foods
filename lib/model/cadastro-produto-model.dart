@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
+import 'package:pointsf/Database/DBFirestore.dart';
 
+class CadastroProdutoModel {
+  late FirebaseFirestore firestore;
 
-class CadastroProdutoModel{
   String? nome;
   String? tipoProdutoOuAdicional;
   bool? status;
@@ -11,9 +12,16 @@ class CadastroProdutoModel{
   String? medida;
   double? preco;
 
-  CadastroProdutoModel(this.nome, this.tipoProdutoOuAdicional, this.status, this.categoria, this.medida, this.preco);
 
-  CadastroProdutoModel.fromMap(Map<String, dynamic> map){
+  void iniciarFirestore(){
+
+    firestore = DBFirestore.get();
+
+  }
+
+  CadastroProdutoModel();
+
+  CadastroProdutoModel.fromMap(Map<String, dynamic> map) {
     nome = map['nome'];
     tipoProdutoOuAdicional = map['tipo'];
     status = map['status'];
@@ -21,14 +29,16 @@ class CadastroProdutoModel{
     medida = map['medida'];
     preco = map['preco'];
   }
+
+  void salvarProduto(BuildContext context) {
+    iniciarFirestore();
+    firestore.collection('usuarios').add({
+      "nome": nome,
+      "tipo": tipoProdutoOuAdicional,
+      "status": status,
+      "categoria": categoria,
+      "medida": medida,
+      "preco": preco,
+    });
+  }
 }
-
-
-
-
-
-
-
-
-
-

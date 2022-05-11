@@ -54,9 +54,6 @@ class CustomerRegistration extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        leading: const Icon(
-          Icons.arrow_back,
-        ),
       ),
       body: Form(
         key: formKey,

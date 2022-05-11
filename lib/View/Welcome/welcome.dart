@@ -17,31 +17,37 @@ class _WelcomeState extends State<Welcome> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 254, 220, 86),
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Image.asset(
-              'images/logo.png',
-            ),
-            CustomTextButton(
-              textoBotao: "Cadastrar",
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => CustomerRegistration()),
-                );
-              },
-            ),
-            CustomTextButtonYellow(
-              textoBotao: "Entrar",
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
-              },
-            ),
-          ],
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Image.asset(
+                'images/logo.png',
+              ),
+              Column(
+                children: [
+                  CustomTextButton(
+                    textoBotao: "Cadastrar",
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => CustomerRegistration()),
+                      );
+                    },
+                  ),
+                  CustomTextButtonYellow(
+                    textoBotao: "Entrar",
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Login()),
+                      );
+                    },
+                  ),
+
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

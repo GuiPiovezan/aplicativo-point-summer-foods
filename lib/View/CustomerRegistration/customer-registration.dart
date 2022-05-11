@@ -20,6 +20,8 @@ class CustomerRegistration extends StatelessWidget {
   String cpf = '';
   String confirmarSenha = '';
 
+  TextEditingController senhaController = TextEditingController();
+
   void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
@@ -72,6 +74,7 @@ class CustomerRegistration extends StatelessWidget {
             CustomTextField(
               onSaved: (value) => telefone = value!,
               descricaoCampo: 'Telefone',
+              validator: (value) => UserValidator.validarTelefone(value!),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 TelefoneInputFormatter(),
@@ -80,6 +83,7 @@ class CustomerRegistration extends StatelessWidget {
             CustomTextField(
               onSaved: (value) => cpf = value!,
               descricaoCampo: 'CPF',
+              validator: (value) => UserValidator.validarCPF(value!),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 CpfInputFormatter()
@@ -88,10 +92,14 @@ class CustomerRegistration extends StatelessWidget {
             CustomTextField(
               onSaved: (value) => senha = value!,
               descricaoCampo: 'Senha',
+              controlador: senhaController,
+              validator: (value) => UserValidator.validarSenha(value!),
             ),
             CustomTextField(
               onSaved: (value) => confirmarSenha = value!,
               descricaoCampo: 'Confirmar senha',
+              validator: (value) => UserValidator.validarConfirmarSenha(
+                  value!, senhaController.text),
             ),
             CustomTextButton(
               textoBotao: 'Cadastrar',

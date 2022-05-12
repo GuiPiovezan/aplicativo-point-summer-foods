@@ -15,15 +15,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: const Color.fromARGB(255, 254, 220, 86),
-      title: Text(
-        title ?? "",
-        style: TextStyle(
-          color: Colors.black,
+      title: Container(
+        margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+        child: Text(
+          title ?? "",
+          style: TextStyle(
+            color: Colors.black,
+          ),
         ),
       ),
       actions: [
         Container(
-          margin: EdgeInsets.fromLTRB(0, 7, 10, 0),
+          margin: EdgeInsets.fromLTRB(0, 10, 10, 0),
           child: Image.asset(
             'images/logo-escrita.png',
           ),
@@ -32,16 +35,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       leading: enableIconBack == true
           ? Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 83, 5, 64),
-              border: Border.all(
-                color: Colors.white,
-                width: 2
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 83, 5, 64),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
               margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
               child: IconButton(
                 icon: Icon(
@@ -57,7 +60,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : Container(),
       shadowColor: Color.fromARGB(0, 255, 255, 255),
-      centerTitle: true,
     );
   }
 

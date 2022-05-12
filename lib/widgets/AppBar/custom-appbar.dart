@@ -22,17 +22,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        Image.asset(
-          'images/logo-escrita.png',
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 7, 10, 0),
+          child: Image.asset(
+            'images/logo-escrita.png',
+          ),
         ),
       ],
       automaticallyImplyLeading: false,
       leading: iconBack == true
           ? Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 83, 5, 64),
+              border: Border.all(
+                color: Colors.white,
+                width: 2
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(10))
+            ),
+              margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
               child: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios_new_outlined,
-                  color: Colors.black,
+                  color: Colors.white,
+                  textDirection: TextDirection.rtl,
+                  size: 18,
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -47,5 +63,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSizeheight
-  Size get preferredSize => Size.fromHeight(100);
+  Size get preferredSize => Size.fromHeight(80);
 }

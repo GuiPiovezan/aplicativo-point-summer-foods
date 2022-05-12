@@ -41,21 +41,8 @@ class CustomerRegistration extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 254, 220, 86),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 254, 220, 86),
-        actions: [
-          Image.asset(
-            'images/logo-escrita.png',
-            width: 100,
-            height: 30,
-          ),
-        ],
-        title: Text(
-          tituloTela,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
-        ),
+      appBar: CustomAppBar(
+        title: "Customer Register",
       ),
       body: Form(
         key: formKey,

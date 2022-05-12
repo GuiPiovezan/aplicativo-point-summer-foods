@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  final bool? iconBack;
+  final bool? enableIconBack;
 
   const CustomAppBar({
     Key? key,
     this.title,
-    this.iconBack = true,
+    this.enableIconBack = true,
   }) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ],
       automaticallyImplyLeading: false,
-      leading: iconBack == true
+      leading: enableIconBack == true
           ? Container(
             height: 40,
             width: 40,

@@ -38,6 +38,7 @@ class CustomTextField extends StatelessWidget {
           onSaved: onSaved,
           validator: validator,
           inputFormatters: inputFormatters,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: inputType ?? TextInputType.text,
           style: const TextStyle(
             fontSize: 24.0,

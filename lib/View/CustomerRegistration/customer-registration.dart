@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
+import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class CustomerRegistration extends StatelessWidget {
@@ -61,6 +62,7 @@ class CustomerRegistration extends StatelessWidget {
             CustomTextField(
               onSaved: (value) => telefone = value!,
               descricaoCampo: 'Telefone',
+              inputType: TextInputType.number,
               validator: (value) => UserValidator.validarTelefone(value!),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
@@ -70,6 +72,7 @@ class CustomerRegistration extends StatelessWidget {
             CustomTextField(
               onSaved: (value) => cpf = value!,
               descricaoCampo: 'CPF',
+              inputType: TextInputType.number,
               validator: (value) => UserValidator.validarCPF(value!),
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
@@ -92,6 +95,16 @@ class CustomerRegistration extends StatelessWidget {
               textoBotao: 'Cadastrar',
               onPressed: () {
                 save(context);
+              },
+            ),
+            CustomTextButton(
+              textoBotao: 'Rota dev para endereço',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AddressRegistration(),
+                  ),
+                );
               },
             ),
           ],

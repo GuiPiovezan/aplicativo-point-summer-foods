@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:brasil_fields/brasil_fields.dart';
 
 import 'package:pointsf/widgets/export-widgets.dart';
 
@@ -18,14 +20,17 @@ class _AddressRegistration extends State<AddressRegistration> {
   TextEditingController _controladorComplemento = TextEditingController();
   TextEditingController _controladorBairro = TextEditingController();
   TextEditingController _controladorCidade = TextEditingController();
-  bool enableLogradouro = true;
-  bool enableNumero = true;
-  bool enableComplemento = true;
-  bool enableBairro = true;
-  bool enableCidade = true;
+  bool enableLogradouro = false;
+  bool enableNumero = false;
+  bool enableComplemento = false;
+  bool enableBairro = false;
+  bool enableCidade = false;
 
   Future<void> searchCEP() async {
     String cep = txtCEP.text;
+    cep = cep.replaceAll(".", "");
+    cep = cep.replaceAll("-", "");
+
     var url = Uri.https('viacep.com.br', '/ws/$cep/json/', {'q': '{http}'});
     http.Response response;
 
@@ -39,6 +44,7 @@ class _AddressRegistration extends State<AddressRegistration> {
       Map<String, dynamic> dados = json.decode(response.body);
 
       setState(() {
+        enableNumero = true;
         if (dados["logradouro"] != "") {
           _controladorLogradouro =
               TextEditingController(text: dados["logradouro"]);
@@ -109,6 +115,10 @@ class _AddressRegistration extends State<AddressRegistration> {
                   placeholder: "Ex 15200000",
                   width: 200,
                   inputType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CepInputFormatter(),
+                  ],
                 ),
                 SizedBox(
                   width: 15,

@@ -16,21 +16,36 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final FirebaseAuth auth = FirebaseAuth.instance;
-  var _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String? email, senha;
 
   Future _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
       try {
         await auth.signInWithEmailAndPassword(email: email!, password: senha!);
 
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (_) => Home()), (route) => false);
+            MaterialPageRoute(builder: (_) => const Home()), (route) => false);
       } on FirebaseAuthException catch (ex) {
-        print(ex.message);
+        if (ex.code == 'user-not-found') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'Email não encontrado. Cadastre-se.',
+              ),
+            ),
+          );
+        } else if (ex.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'Senha incorreta. Tente novamente',
+              ),
+            ),
+          );
+        }
       }
     }
   }
@@ -38,8 +53,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 254, 220, 86),
-      appBar: CustomAppBar(
+      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      appBar: const CustomAppBar(
         title: "Login",
       ),
       body: Form(
@@ -54,11 +69,12 @@ class _LoginState extends State<Login> {
                 validator: (value) => UserValidator.validarEmail(value!),
               ),
               CustomTextField(
-                  descricaoCampo: "Senha",
-                  placeholder: "********",
-                  obscureText: true,
-                  onSaved: (value) => senha = value,
-                  validator: (value) => UserValidator.validarSenha(value!)),
+                descricaoCampo: "Senha",
+                placeholder: "********",
+                obscureText: true,
+                onSaved: (value) => senha = value,
+                validator: (value) => UserValidator.validarSenha(value!),
+              ),
               CustomTextButton(
                 textoBotao: "Entrar",
                 onPressed: () => {

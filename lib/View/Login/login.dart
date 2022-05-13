@@ -5,6 +5,8 @@ import 'package:pointsf/View/export-all-view.dart';
 
 import 'package:pointsf/widgets/export-widgets.dart';
 
+import 'package:pointsf/Services/Validators/user_validator.dart';
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -49,22 +51,14 @@ class _LoginState extends State<Login> {
                 descricaoCampo: "Email",
                 placeholder: "Ex. funalo@gmail.com",
                 onSaved: (value) => email = value,
-                validator: (value){},
+                validator: (value) => UserValidator.validarEmail(value!),
               ),
               CustomTextField(
-                descricaoCampo: "Senha",
-                placeholder: "********",
-                obscureText: true,
-                onSaved: (value) => senha = value,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Informa sua senha!';
-                  } else if (value.length < 6) {
-                    return 'Sua senha deve ter no mínimo 6 caracteres';
-                  }
-                  return null;
-                },
-              ),
+                  descricaoCampo: "Senha",
+                  placeholder: "********",
+                  obscureText: true,
+                  onSaved: (value) => senha = value,
+                  validator: (value) => UserValidator.validarSenha(value!)),
               CustomTextButton(
                 textoBotao: "Entrar",
                 onPressed: () => {

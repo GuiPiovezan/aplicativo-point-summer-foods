@@ -7,3 +7,6 @@ export 'package:pointsf/View/CadastroProduto/cadastro-produto.dart';
 
 //Login
 export 'package:pointsf/View/Login/login.dart';
+
+//Pagina principal
+export 'package:pointsf/View/Home/home.dart';

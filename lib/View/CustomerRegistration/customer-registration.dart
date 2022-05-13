@@ -35,6 +35,11 @@ class CustomerRegistration extends StatelessWidget {
         "telefone": telefone,
         "cpf": cpf,
       });
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => AddressRegistration(),
+        ),
+      );
     }
   }
 

@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/model/cadastro-produto-model.dart';
@@ -30,6 +32,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
   final TextEditingController _controladorNomeProduto = TextEditingController();
   final TextEditingController _controladorTipoProduto = TextEditingController();
   final TextEditingController _controladorStatusProduto = TextEditingController();
+  final TextEditingController _controladorPrecoUnidade = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +68,20 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               CustomTextField(
                 controlador: _controladorNomeProduto,
                 descricaoCampo: "Nome do Produto",
-                placeholder: "Digite",
+                placeholder: "Nutella",
               ),
               CustomTextField(
                 controlador: _controladorTipoProduto,
                 descricaoCampo: "Tipo do Produto",
-                placeholder: "Digite",
+                placeholder: "Salgado",
               ),
               CustomTextField(
                 controlador: _controladorStatusProduto,
                 descricaoCampo: "Status do Produto",
-                placeholder: "Digite",
+                placeholder: "Ativo",
               ),
               Container(
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 width: 320,
                 height: 60,
@@ -94,7 +98,9 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   value: dropDawnTipo,
                   isExpanded: false, // Espandir o botão de escolha
                   //disabledHint: Text("Selecione a unidade de medida"), // deixar uma mensagem indicando o que o usurio deve fazer clicando no botão 
-                  hint: Text("Selecione a unidade de medida"), // para exibir no botão a opção escolhida  
+                  hint: Text("Selecione a unidade de medida",
+                  textAlign: TextAlign.center,
+                  ), // para exibir no botão a opção escolhida  
                   //focusColor: Colors.purple, // cor que o botão irá ficar quando for pressionado
                   //alignment: , // decidir se ficara ao meio ou aos lados
                   elevation: 16, // decidir para qual lado irá ser elevado o menu quando for clicado 
@@ -108,13 +114,15 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   items: categories.map((String categories) {
                   return DropdownMenuItem(
                     value: categories,
-                    child: Text(categories),
+                    child: Text(categories,
+                    textAlign: TextAlign.center,
+                    ),
                   );
                 }).toList(), 
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(10),
+                margin: EdgeInsets.fromLTRB(0,30,0,0),
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 width: 320,
                 height: 60,
@@ -150,9 +158,10 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 }).toList(), 
                 ),
               ),
-              CustomTextButton(
-                textoBotao: "Cadastrar",
-                onPressed: () {}
+              CustomTextField(
+                controlador: _controladorPrecoUnidade,
+                descricaoCampo: "Preço por Unidade",
+                placeholder: "R 10,00", // passar esse placehouder como String
               ),
             ],
           ),

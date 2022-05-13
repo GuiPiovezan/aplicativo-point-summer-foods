@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:pointsf/View/export-all-view.dart';
 
+import 'package:brasil_fields/brasil_fields.dart';
+
+import 'package:flutter/services.dart';
+import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class AddressRegistration extends StatefulWidget {
@@ -19,7 +22,7 @@ class AddressRegistration extends StatefulWidget {
 class _AddressRegistration extends State<AddressRegistration> {
   TextEditingController txtCEP = TextEditingController();
   TextEditingController _controladorLogradouro = TextEditingController();
-  TextEditingController _controladorNumero = TextEditingController();
+  final TextEditingController _controladorNumero = TextEditingController();
   TextEditingController _controladorComplemento = TextEditingController();
   TextEditingController _controladorBairro = TextEditingController();
   TextEditingController _controladorCidade = TextEditingController();
@@ -49,7 +52,7 @@ class _AddressRegistration extends State<AddressRegistration> {
 
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => const Home(),
         ),
       );
     }
@@ -127,15 +130,15 @@ class _AddressRegistration extends State<AddressRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 254, 220, 86),
-      appBar: CustomAppBar(
+      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      appBar: const CustomAppBar(
         title: "Endereço",
         enableIconBack: false,
       ),
       body: Center(
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -152,7 +155,7 @@ class _AddressRegistration extends State<AddressRegistration> {
                     CepInputFormatter(),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 CustomTextButton(

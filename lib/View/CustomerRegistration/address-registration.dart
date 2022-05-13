@@ -28,31 +28,36 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableComplemento = false;
   bool enableBairro = false;
   bool enableCidade = false;
+  String cepSearched = "";
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 
   void save(BuildContext context) async {
-    var result = await auth.currentUser!.uid;
+    if (cepSearched == txtCEP.text) {
+      var result = await auth.currentUser!.uid;
 
-    firestore.collection('usuarios').doc(result).collection("enderecos").add({
-      "cep": txtCEP.text,
-      "logradouro": _controladorLogradouro.text,
-      "numero": _controladorNumero.text,
-      "complemento": _controladorComplemento.text,
-      "bairro": _controladorBairro.text,
-      "cidade": _controladorCidade.text,
-    });
-    
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Home(),
-      ),
-    );
+      firestore.collection('usuarios').doc(result).collection("enderecos").add({
+        "cep": txtCEP.text,
+        "logradouro": _controladorLogradouro.text,
+        "numero": _controladorNumero.text,
+        "complemento": _controladorComplemento.text,
+        "bairro": _controladorBairro.text,
+        "cidade": _controladorCidade.text,
+      });
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ),
+      );
+    }
   }
 
   Future<void> searchCEP() async {
+    cepSearched = txtCEP.text;
+
     String cep = txtCEP.text;
     cep = cep.replaceAll(".", "");
     cep = cep.replaceAll("-", "");

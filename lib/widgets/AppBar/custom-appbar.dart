@@ -16,17 +16,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: const Color.fromARGB(255, 254, 220, 86),
       title: Container(
-        margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
         child: Text(
           title ?? "",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),
       ),
       actions: [
         Container(
-          margin: EdgeInsets.fromLTRB(0, 10, 10, 0),
+          margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
           child: Image.asset(
             'images/logo-escrita.png',
           ),
@@ -38,16 +38,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 83, 5, 64),
+                color: const Color.fromARGB(255, 83, 5, 64),
                 border: Border.all(
                   color: Colors.white,
                   width: 2,
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
-              margin: EdgeInsets.fromLTRB(15, 15, 0, 0),
+              margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios_new_outlined,
                   color: Colors.white,
                   textDirection: TextDirection.rtl,
@@ -59,11 +59,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
           : Container(),
-      shadowColor: Color.fromARGB(0, 255, 255, 255),
+      shadowColor: const Color.fromARGB(0, 255, 255, 255),
     );
   }
 
   @override
   // TODO: implement preferredSizeheight
-  Size get preferredSize => Size.fromHeight(80);
+  Size get preferredSize => const Size.fromHeight(80);
 }

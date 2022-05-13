@@ -49,16 +49,27 @@ class _LoginState extends State<Login> {
                 descricaoCampo: "Email",
                 placeholder: "Ex. funalo@gmail.com",
                 onSaved: (value) => email = value,
+                validator: (value){},
               ),
               CustomTextField(
                 descricaoCampo: "Senha",
                 placeholder: "********",
                 obscureText: true,
                 onSaved: (value) => senha = value,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Informa sua senha!';
+                  } else if (value.length < 6) {
+                    return 'Sua senha deve ter no mínimo 6 caracteres';
+                  }
+                  return null;
+                },
               ),
               CustomTextButton(
                 textoBotao: "Entrar",
-                onPressed: () => {_login(context)},
+                onPressed: () => {
+                  _login(context),
+                },
               ),
             ],
           ),

@@ -52,67 +52,69 @@ class CustomerRegistration extends StatelessWidget {
       ),
       body: Form(
         key: formKey,
-        child: ListView(
-          children: <Widget>[
-            CustomTextField(
-              onSaved: (value) => nome = value!,
-              descricaoCampo: 'Nome',
-              validator: (value) => UserValidator.validarNome(value!),
-            ),
-            CustomTextField(
-              onSaved: (value) => email = value!,
-              descricaoCampo: 'E-mail',
-              validator: (value) => UserValidator.validarEmail(value!),
-            ),
-            CustomTextField(
-              onSaved: (value) => telefone = value!,
-              descricaoCampo: 'Telefone',
-              inputType: TextInputType.number,
-              validator: (value) => UserValidator.validarTelefone(value!),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                TelefoneInputFormatter(),
-              ],
-            ),
-            CustomTextField(
-              onSaved: (value) => cpf = value!,
-              descricaoCampo: 'CPF',
-              inputType: TextInputType.number,
-              validator: (value) => UserValidator.validarCPF(value!),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                CpfInputFormatter()
-              ],
-            ),
-            CustomTextField(
-              onSaved: (value) => senha = value!,
-              descricaoCampo: 'Senha',
-              controlador: senhaController,
-              validator: (value) => UserValidator.validarSenha(value!),
-            ),
-            CustomTextField(
-              onSaved: (value) => confirmarSenha = value!,
-              descricaoCampo: 'Confirmar senha',
-              validator: (value) => UserValidator.validarConfirmarSenha(
-                  value!, senhaController.text),
-            ),
-            CustomTextButton(
-              textoBotao: 'Cadastrar',
-              onPressed: () {
-                save(context);
-              },
-            ),
-            CustomTextButton(
-              textoBotao: 'Rota dev para endereço',
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AddressRegistration(),
-                  ),
-                );
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              CustomTextField(
+                onSaved: (value) => nome = value!,
+                descricaoCampo: 'Nome',
+                validator: (value) => UserValidator.validarNome(value!),
+              ),
+              CustomTextField(
+                onSaved: (value) => email = value!,
+                descricaoCampo: 'E-mail',
+                validator: (value) => UserValidator.validarEmail(value!),
+              ),
+              CustomTextField(
+                onSaved: (value) => telefone = value!,
+                descricaoCampo: 'Telefone',
+                inputType: TextInputType.number,
+                validator: (value) => UserValidator.validarTelefone(value!),
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  TelefoneInputFormatter(),
+                ],
+              ),
+              CustomTextField(
+                onSaved: (value) => cpf = value!,
+                descricaoCampo: 'CPF',
+                inputType: TextInputType.number,
+                validator: (value) => UserValidator.validarCPF(value!),
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  CpfInputFormatter()
+                ],
+              ),
+              CustomTextField(
+                onSaved: (value) => senha = value!,
+                descricaoCampo: 'Senha',
+                controlador: senhaController,
+                validator: (value) => UserValidator.validarSenha(value!),
+              ),
+              CustomTextField(
+                onSaved: (value) => confirmarSenha = value!,
+                descricaoCampo: 'Confirmar senha',
+                validator: (value) => UserValidator.validarConfirmarSenha(
+                    value!, senhaController.text),
+              ),
+              CustomTextButton(
+                textoBotao: 'Cadastrar',
+                onPressed: () {
+                  save(context);
+                },
+              ),
+              CustomTextButton(
+                textoBotao: 'Rota dev para endereço',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AddressRegistration(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

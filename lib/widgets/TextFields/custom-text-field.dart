@@ -32,8 +32,16 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-        height: heigth != null ? double?.parse(heigth.toString()) : 70,
+        margin: validator != null
+            ? const EdgeInsets.fromLTRB(0, 5, 0, 0)
+            : const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        height: heigth != null
+            ? validator != null
+                ? double?.parse(heigth.toString()) + 30
+                : double?.parse(heigth.toString())
+            : validator != null
+                ? 90
+                : 70,
         width: width != null ? double?.parse(width.toString()) : 320,
         child: TextFormField(
           controller: controlador,
@@ -49,8 +57,11 @@ class CustomTextField extends StatelessWidget {
           enabled: enable,
           decoration: InputDecoration(
             labelText: descricaoCampo,
+            labelStyle: const TextStyle(
+              color: Color.fromARGB(255, 83, 5, 64),
+            ),
             hintText: placeholder ?? '',
-            focusedBorder: const OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Color.fromARGB(255, 83, 5, 64),
                 width: 2,
@@ -59,9 +70,16 @@ class CustomTextField extends StatelessWidget {
                 Radius.circular(15),
               ),
             ),
-            enabledBorder: const OutlineInputBorder(
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
               borderSide: BorderSide(
-                color: Colors.black,
+                color: Color.fromARGB(255, 83, 5, 64),
+                width: 2,
+              ),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 83, 5, 64),
                 width: 2,
               ),
               borderRadius: BorderRadius.all(

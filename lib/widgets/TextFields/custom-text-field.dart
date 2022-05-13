@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final double? heigth;
   final TextInputType? inputType;
   final bool? enable;
+  final bool obscureText;
   FormFieldSetter<String>? onSaved;
   FormFieldValidator<String>? validator;
   List<TextInputFormatter>? inputFormatters;
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.onSaved,
     this.validator,
     this.inputFormatters,
+    this.obscureText = false,
   });
 
   @override
@@ -37,6 +39,7 @@ class CustomTextField extends StatelessWidget {
           controller: controlador,
           onSaved: onSaved,
           validator: validator,
+          obscureText: obscureText,
           inputFormatters: inputFormatters,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: inputType ?? TextInputType.text,

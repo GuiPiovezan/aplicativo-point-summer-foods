@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.inputType,
     this.enable = true,
     this.onSaved,
-    this.validator,
+    this.validator = null,
     this.inputFormatters,
     this.obscureText = false,
   });
@@ -31,59 +31,59 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        margin: validator != null
-            ? const EdgeInsets.fromLTRB(0, 5, 0, 0)
-            : const EdgeInsets.fromLTRB(0, 20, 0, 0),
-        height: heigth != null
-            ? validator != null
-                ? double?.parse(heigth.toString()) + 30
-                : double?.parse(heigth.toString())
-            : validator != null
-                ? 90
-                : 70,
-        width: width != null ? double?.parse(width.toString()) : 320,
-        child: TextFormField(
-          controller: controlador,
-          onSaved: onSaved,
-          validator: validator,
-          obscureText: obscureText,
-          inputFormatters: inputFormatters,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          keyboardType: inputType ?? TextInputType.text,
-          style: const TextStyle(
-            fontSize: 24.0,
-          ),
-          enabled: enable,
-          decoration: InputDecoration(
-            labelText: descricaoCampo,
-            labelStyle: const TextStyle(
-              color: Color.fromARGB(255, 83, 5, 64),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
+        child: Container(
+          height: heigth != null
+              ? validator != null
+                  ? double?.parse(heigth.toString()) + 30
+                  : double?.parse(heigth.toString())
+              : validator != null
+                  ? 90
+                  : 70,
+          width: width != null ? double?.parse(width.toString()) : 350,
+          child: TextFormField(
+            controller: controlador,
+            onSaved: onSaved,
+            validator: validator,
+            obscureText: obscureText,
+            inputFormatters: inputFormatters,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: inputType ?? TextInputType.text,
+            style: const TextStyle(
+              fontSize: 24.0,
             ),
-            hintText: placeholder ?? '',
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
+            enabled: enable,
+            decoration: InputDecoration(
+              labelText: descricaoCampo,
+              labelStyle: const TextStyle(
                 color: Color.fromARGB(255, 83, 5, 64),
-                width: 2,
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
+              hintText: placeholder ?? '',
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 83, 5, 64),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
               ),
-            ),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 83, 5, 64),
-                width: 2,
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 83, 5, 64),
+                  width: 2,
+                ),
               ),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 83, 5, 64),
-                width: 2,
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(15),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 83, 5, 64),
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
               ),
             ),
           ),

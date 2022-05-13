@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
 import 'package:brasil_fields/brasil_fields.dart';
 
+import 'package:flutter/services.dart';
+import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class AddressRegistration extends StatefulWidget {
@@ -16,7 +22,7 @@ class AddressRegistration extends StatefulWidget {
 class _AddressRegistration extends State<AddressRegistration> {
   TextEditingController txtCEP = TextEditingController();
   TextEditingController _controladorLogradouro = TextEditingController();
-  TextEditingController _controladorNumero = TextEditingController();
+  final TextEditingController _controladorNumero = TextEditingController();
   TextEditingController _controladorComplemento = TextEditingController();
   TextEditingController _controladorBairro = TextEditingController();
   TextEditingController _controladorCidade = TextEditingController();
@@ -25,8 +31,36 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableComplemento = false;
   bool enableBairro = false;
   bool enableCidade = false;
+  String cepSearched = "";
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
+
+  void save(BuildContext context) async {
+    if (cepSearched == txtCEP.text) {
+      var result = await auth.currentUser!.uid;
+
+      firestore.collection('usuarios').doc(result).collection("enderecos").add({
+        "cep": txtCEP.text,
+        "logradouro": _controladorLogradouro.text,
+        "numero": _controladorNumero.text,
+        "complemento": _controladorComplemento.text,
+        "bairro": _controladorBairro.text,
+        "cidade": _controladorCidade.text,
+      });
+
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const Home(),
+        ),
+      );
+    }
+  }
 
   Future<void> searchCEP() async {
+    cepSearched = txtCEP.text;
+
     String cep = txtCEP.text;
     cep = cep.replaceAll(".", "");
     cep = cep.replaceAll("-", "");
@@ -96,14 +130,15 @@ class _AddressRegistration extends State<AddressRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 254, 220, 86),
-      appBar: CustomAppBar(
+      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      appBar: const CustomAppBar(
         title: "Endereço",
+        enableIconBack: false,
       ),
       body: Center(
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -120,7 +155,7 @@ class _AddressRegistration extends State<AddressRegistration> {
                     CepInputFormatter(),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 CustomTextButton(
@@ -164,7 +199,9 @@ class _AddressRegistration extends State<AddressRegistration> {
             ),
             CustomTextButton(
               textoBotao: "Cadastrar",
-              onPressed: () {},
+              onPressed: () {
+                save(context);
+              },
             ),
           ],
         ),

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -25,6 +27,23 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableComplemento = false;
   bool enableBairro = false;
   bool enableCidade = false;
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
+
+  void save(BuildContext context) async {
+    var result = await auth.currentUser!.uid;
+
+    firestore.collection('usuarios').doc(result).collection("enderecos").add({
+      "cep": txtCEP.text,
+      "logradouro": _controladorLogradouro.text,
+      "numero": _controladorNumero.text,
+      "complemento": _controladorComplemento.text,
+      "bairro": _controladorBairro.text,
+      "cidade": _controladorCidade.text,
+    });
+  }
 
   Future<void> searchCEP() async {
     String cep = txtCEP.text;
@@ -164,7 +183,9 @@ class _AddressRegistration extends State<AddressRegistration> {
             ),
             CustomTextButton(
               textoBotao: "Cadastrar",
-              onPressed: () {},
+              onPressed: () {
+                save(context);
+              },
             ),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:pointsf/View/export-all-view.dart';
 
 import 'package:pointsf/widgets/export-widgets.dart';
 
@@ -43,6 +44,12 @@ class _AddressRegistration extends State<AddressRegistration> {
       "bairro": _controladorBairro.text,
       "cidade": _controladorCidade.text,
     });
+    
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Home(),
+      ),
+    );
   }
 
   Future<void> searchCEP() async {
@@ -118,6 +125,7 @@ class _AddressRegistration extends State<AddressRegistration> {
       backgroundColor: Color.fromARGB(255, 254, 220, 86),
       appBar: CustomAppBar(
         title: "Endereço",
+        enableIconBack: false,
       ),
       body: Center(
         child: ListView(

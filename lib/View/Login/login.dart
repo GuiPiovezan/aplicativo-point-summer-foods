@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
         await auth.signInWithEmailAndPassword(email: email!, password: senha!);
 
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (_) => const Home()), (route) => false);
+            MaterialPageRoute(builder: (_) => Home()), (route) => false);
       } on FirebaseAuthException catch (ex) {
         if (ex.code == 'user-not-found') {
           ScaffoldMessenger.of(context).showSnackBar(

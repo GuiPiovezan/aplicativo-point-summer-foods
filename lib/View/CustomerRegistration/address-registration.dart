@@ -54,7 +54,7 @@ class _AddressRegistration extends State<AddressRegistration> {
 
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const Home(),
+          builder: (context) => Home(),
         ),
       );
     }

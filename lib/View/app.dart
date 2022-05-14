@@ -7,7 +7,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Welcome(),
+      home: CadastroProduto(),
       debugShowCheckedModeBanner: false,
     );
   }

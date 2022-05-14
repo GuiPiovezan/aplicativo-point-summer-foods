@@ -12,6 +12,8 @@ import 'package:flutter/services.dart';
 import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
+import '../Home/home.dart';
+
 class AddressRegistration extends StatefulWidget {
   const AddressRegistration({Key? key}) : super(key: key);
 

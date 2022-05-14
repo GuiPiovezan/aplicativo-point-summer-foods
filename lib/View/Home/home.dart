@@ -12,16 +12,33 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(backgroundColor: Colors.blueGrey),
-      appBar: CustomAppBarHome(
-        icon: Icon(Icons.abc),
-        title: "home",
+      drawer: const Drawer(
+        backgroundColor: Color.fromARGB(255, 254, 220, 86),
+      ),
+      appBar: const CustomAppBarHome(
+        icon: Icon(Icons.man_sharp),
+        title: "Rua João Silva, SP",
       ),
       body: PageView(
         children: [
-          Container(color: Colors.red,),
-          Container(color: Colors.green,),
-          Container(color: Colors.blue,),
+          Container(
+            child: Center(
+              child: Text("Tela1"),
+            ),
+            color: Color.fromARGB(255, 254, 220, 86),
+          ),
+          Container(
+            child: Center(
+              child: Text("Tela2"),
+            ),
+            color: Color.fromARGB(255, 254, 220, 86),
+          ),
+          Container(
+            child: Center(
+              child: Text("Tela3"),
+            ),
+            color: Color.fromARGB(255, 254, 220, 86),
+          ),
         ],
       ),
     );

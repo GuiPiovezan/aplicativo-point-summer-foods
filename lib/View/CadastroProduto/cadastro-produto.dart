@@ -12,8 +12,11 @@ class CadastroProduto extends StatefulWidget {
 }
 
 class _CadastroProdutoState extends State<CadastroProduto> {
+
+  int _value = 0;
   String? dropDawnUnidadeMedida ;
   String? dropDawnTipo ;
+  String? dropDawnStatus ; 
 
   final firestore = FirebaseFirestore.instance;
   final 
@@ -22,7 +25,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
 
   String nome = '';
   String tipoProdutoOuAdicional = '';
-  bool status = false;
+  //bool status = false;
   String categoria = '';
   String medida = '';
   double preco = 0;
@@ -58,10 +61,13 @@ class _CadastroProdutoState extends State<CadastroProduto> {
           ),
         ],
       ),
-      body: ListView(
+      body:     
+       ListView(
         children: [
           Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTextField(
                 controlador: _controladorNomeProduto,
@@ -73,11 +79,67 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 descricaoCampo: "Tipo do Produto",
                 placeholder: "Salgado",
               ),
-              CustomTextField(
-                controlador: _controladorStatusProduto,
-                descricaoCampo: "Status do Produto",
-                placeholder: "Ativo",
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                width: 350,
+                height: 60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  border: Border.all(
+                    width: 2,
+                    color: Color.fromARGB(255, 83, 5, 64),
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton(
+                  borderRadius: BorderRadius.circular(20),
+                  value: dropDawnStatus,
+                  hint: Text("Selecione o Status do Produto"),
+                  isExpanded: false,
+                  elevation: 16, // decidir para qual lado irá ser elevado o menu quando for clicado 
+                  underline: Container(
+                    height: 2,
+                    color: Colors.purpleAccent,
+                  ),
+                  items: status.map((String status) {
+                  return DropdownMenuItem(
+                    value: status,
+                    child: Text(status),
+                  );
+                }).toList(),
+                  onChanged: (String? status) { setState(() {
+                   dropDawnStatus = status!;
+                   }
+                  );
+                },
+                )
               ),
+              /*Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Radio(value: 1, groupValue: _value, onChanged: (value){
+                    setState(() {
+                      //_value = value;
+                    });
+                  }),
+                  SizedBox(width: 10.0,),
+                  Text("Ativo")
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Radio(value: 2, groupValue: _value, onChanged: (value){
+                    setState(() {
+                     // _value = value;
+                    });
+                  }),
+                  SizedBox(width: 10.0,),
+                  Text("Desativado")
+                ]
+              ),*/
               Container(
                 margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -96,7 +158,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   value: dropDawnTipo,
                   isExpanded: false, // Espandir o botão de escolha
                   //disabledHint: Text("Selecione a unidade de medida"), // deixar uma mensagem indicando o que o usurio deve fazer clicando no botão 
-                  hint: Text("Selecione a unidade de medida",
+                  hint: Text("Selecione o tipo de produto",
                   textAlign: TextAlign.center,
                   ), // para exibir no botão a opção escolhida  
                   //focusColor: Colors.purple, // cor que o botão irá ficar quando for pressionado
@@ -159,7 +221,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               CustomTextField(
                 controlador: _controladorPrecoUnidade,
                 descricaoCampo: "Preço por Unidade",
-                placeholder: "R 10,00", // passar esse placehouder como String
+                placeholder: "10,00", // passar esse placehouder como String
               ),
               CustomTextButton(
                 textoBotao: "Cadastrar",
@@ -190,4 +252,11 @@ List<String> measure = [
   "ML",
   "Gramas",
   "Unidade",
+];
+
+final statusSelected = TextEditingController();
+
+List<String> status = [
+  "Ativo",
+  "Desativo",
 ];

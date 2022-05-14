@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/model/cadastro-produto-model.dart';
@@ -81,15 +79,15 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 placeholder: "Ativo",
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                width: 320,
+                width: 350,
                 height: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   border: Border.all(
                     width: 2,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 83, 5, 64),
                     style: BorderStyle.solid,
                   ),
                 ),
@@ -122,15 +120,15 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0,30,0,0),
+                margin: EdgeInsets.fromLTRB(0,20,0,5),
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                width: 320,
+                width: 350,
                 height: 60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   border: Border.all(
                     width: 2,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 83, 5, 64),
                     style: BorderStyle.solid,
                   ),
                 ),
@@ -162,6 +160,11 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                 controlador: _controladorPrecoUnidade,
                 descricaoCampo: "Preço por Unidade",
                 placeholder: "R 10,00", // passar esse placehouder como String
+              ),
+              CustomTextButton(
+                textoBotao: "Cadastrar",
+                onPressed: () {},
+                
               ),
             ],
           ),

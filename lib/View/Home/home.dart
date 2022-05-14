@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/widgets/AppBar/custom-appbar-home.dart';
 
@@ -11,6 +11,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
+  String? _email;
+
+  @override
+  void initState() {
+    super.initState();
+    _email = auth.currentUser!.email;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +39,8 @@ class _HomeState extends State<Home> {
               currentAccountPicture: CircleAvatar(
                 child: Text("V"),
               ),
-              accountName: Text("Vitor"),
-              accountEmail: Text("email@email.com"),
+              accountName: Text("Usuario"),
+              accountEmail: Text(_email ?? ""),
             ),
             const SizedBox(
               height: 15,

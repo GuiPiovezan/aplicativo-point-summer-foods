@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pointsf/widgets/AppBar/custom-appbar-home.dart';
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -35,49 +35,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: const Color.fromARGB(255, 254, 220, 86),
-        child: ListView(
-          children: <Widget>[
-            const SizedBox(
-              height: 20,
-            ),
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 83, 5, 64),
-              ),
-              currentAccountPicture: CircleAvatar(
-                child: Text("V"),
-              ),
-              accountName: Text(_user ?? ""),
-              accountEmail: Text(_email ?? ""),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            ListTile(
-              title: Text("Conta"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                print("Conta");
-              },
-            ),
-            ListTile(
-              title: Text("Home"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                print("Home");
-              },
-            ),
-            ListTile(
-              title: Text("Pedidos"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                print("Pedidos");
-              },
-            ),
-          ],
-        ),
+      drawer: CustomDrawer(
+        email: _email,
+        user: _user,
       ),
       appBar: const CustomAppBarHome(
         icon: Icon(Icons.man_sharp),
@@ -107,7 +67,8 @@ class _HomeState extends State<Home> {
                             margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
                             padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Color.fromARGB(50, 10, 10, 10),

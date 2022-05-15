@@ -20,8 +20,6 @@ class _CadastroProdutoState extends State<CadastroProduto> {
   String? dropDawnStatus;
   String nome = '';
   String tipoProdutoOuAdicional = '';
-  String categoria = '';
-  String medida = '';
   String preco = '';
 
   final TextEditingController _controladorNomeProduto = TextEditingController();
@@ -301,5 +299,5 @@ final statusSelected = TextEditingController();
 
 List<String> status = [
   "Ativo",
-  "Desativo",
+  "Inativo",
 ];

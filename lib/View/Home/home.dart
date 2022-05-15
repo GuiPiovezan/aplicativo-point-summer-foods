@@ -14,12 +14,22 @@ class _HomeState extends State<Home> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
-  String? _email;
+  var _email;
+  var _user;
 
   @override
   void initState() {
     super.initState();
     _email = auth.currentUser!.email;
+    firestore
+        .collection("usuarios")
+        .where("uid", isEqualTo: auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      setState(() {
+        _user = event.docs[0]["nome"];
+      });
+    });
   }
 
   @override
@@ -39,7 +49,7 @@ class _HomeState extends State<Home> {
               currentAccountPicture: CircleAvatar(
                 child: Text("V"),
               ),
-              accountName: Text("Usuario"),
+              accountName: Text(_user ?? ""),
               accountEmail: Text(_email ?? ""),
             ),
             const SizedBox(

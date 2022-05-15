@@ -65,6 +65,7 @@ class _LoginState extends State<Login> {
               CustomTextField(
                 descricaoCampo: "Email",
                 placeholder: "Ex. funalo@gmail.com",
+                inputType: TextInputType.emailAddress,
                 onSaved: (value) => email = value,
                 validator: (value) => UserValidator.validarEmail(value!),
               ),

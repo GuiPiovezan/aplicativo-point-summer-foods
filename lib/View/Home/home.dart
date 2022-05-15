@@ -56,24 +56,24 @@ class _HomeState extends State<Home> {
               height: 15,
             ),
             ListTile(
-              title: Text("Opção 1"),
+              title: Text("Conta"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                print("Opção 1");
+                print("Conta");
               },
             ),
             ListTile(
-              title: Text("Opção 2"),
+              title: Text("Home"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                print("Opção 2");
+                print("Home");
               },
             ),
             ListTile(
-              title: Text("Opção 3"),
+              title: Text("Pedidos"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                print("Opção 3");
+                print("Pedidos");
               },
             ),
           ],
@@ -86,8 +86,50 @@ class _HomeState extends State<Home> {
       body: PageView(
         children: [
           Container(
-            child: Center(
-              child: Text("Tela1"),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    stream: firestore
+                        .collection('produtos')
+                        .where("categoria", isEqualTo: "Açai")
+                        .snapshots(),
+                    builder: (_, snapshot) {
+                      if (!snapshot.hasData)
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      return ListView.builder(
+                        itemCount: snapshot.data?.docs.length,
+                        itemBuilder: (_, index) {
+                          return Container(
+                            margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
+                            padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(50, 10, 10, 10),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              color: Color.fromARGB(255, 255, 217, 65),
+                            ),
+                            child: Text(
+                              snapshot.data!.docs[index]["nome"],
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
             color: Color.fromARGB(255, 254, 220, 86),
           ),

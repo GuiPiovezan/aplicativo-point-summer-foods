@@ -135,7 +135,6 @@ class _AddressRegistration extends State<AddressRegistration> {
       backgroundColor: const Color.fromARGB(255, 254, 220, 86),
       appBar: const CustomAppBar(
         title: "Endereço",
-        enableIconBack: false,
       ),
       body: Center(
         child: ListView(

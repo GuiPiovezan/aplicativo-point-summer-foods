@@ -48,17 +48,11 @@ class _HomeState extends State<Home> {
           ProductPage(
             categoria: "Açai",
           ),
-          Container(
-            child: Center(
-              child: Text("Tela2"),
-            ),
-            color: Color.fromARGB(255, 254, 220, 86),
+          ProductPage(
+            categoria: "Salgados",
           ),
-          Container(
-            child: Center(
-              child: Text("Tela3"),
-            ),
-            color: Color.fromARGB(255, 254, 220, 86),
+          ProductPage(
+            categoria: "Bebidas",
           ),
         ],
       ),

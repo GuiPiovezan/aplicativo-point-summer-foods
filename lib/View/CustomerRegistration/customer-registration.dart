@@ -102,16 +102,6 @@ class CustomerRegistration extends StatelessWidget {
                 save(context);
               },
             ),
-            CustomTextButton(
-              textoBotao: 'Rota dev para endereço',
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AddressRegistration(),
-                  ),
-                );
-              },
-            ),
           ],
         ),
       ),

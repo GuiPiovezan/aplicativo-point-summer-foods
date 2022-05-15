@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/View/CustomerRegistration/address-registration.dart';
+import 'package:pointsf/View/CustomerRegistration/list_address.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String? user;
@@ -50,6 +52,14 @@ class CustomDrawer extends StatelessWidget {
             trailing: Icon(Icons.arrow_forward),
             onTap: () {
               print("Pedidos");
+            },
+          ),
+          ListTile(
+            title: Text("Meus endereços"),
+            trailing: Icon(Icons.house),
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ListAddress()));
             },
           ),
         ],

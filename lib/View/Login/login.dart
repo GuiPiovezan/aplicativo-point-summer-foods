@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text(
-                'Email não encontrado. Cadastre-se.',
+                'Usuário não encontrado. Cadastre-se.',
               ),
             ),
           );

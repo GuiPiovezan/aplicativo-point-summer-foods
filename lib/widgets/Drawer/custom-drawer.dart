@@ -11,6 +11,14 @@ class CustomDrawer extends StatelessWidget {
     this.email,
   });
 
+  getFirtsLastLetterFullName(String nome) {
+    var firstLetter = nome.split("").first;
+    var lastName = nome.split(" ").last;
+    var firstLetterLastName = lastName.split("").first;
+
+    return firstLetter + firstLetterLastName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,8 +32,8 @@ class CustomDrawer extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 83, 5, 64),
             ),
-            currentAccountPicture: const CircleAvatar(
-              child: Text("V"),
+            currentAccountPicture: CircleAvatar(
+              child: Text("${getFirtsLastLetterFullName(user!)}"),
             ),
             accountName: Text(user ?? ""),
             accountEmail: Text(email ?? ""),

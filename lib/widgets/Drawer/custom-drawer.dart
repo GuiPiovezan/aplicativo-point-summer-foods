@@ -12,11 +12,11 @@ class CustomDrawer extends StatelessWidget {
   });
 
   getFirtsLastLetterFullName(String nome) {
-    var firstLetter = nome.split("").first;
+    var firstLetterFirstName = nome.split("").first;
     var lastName = nome.split(" ").last;
     var firstLetterLastName = lastName.split("").first;
 
-    return firstLetter + firstLetterLastName;
+    return firstLetterFirstName + firstLetterLastName;
   }
 
   @override

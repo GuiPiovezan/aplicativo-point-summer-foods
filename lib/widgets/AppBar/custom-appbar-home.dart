@@ -8,12 +8,14 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
 
   const CustomAppBarHome({
     Key? key,
-    this.title, this.icon,
+    this.title,
+    this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 0,
       backgroundColor: const Color.fromARGB(255, 254, 220, 86),
       leading: Builder(
         builder: (BuildContext context) {

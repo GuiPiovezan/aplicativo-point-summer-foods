@@ -24,6 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
+      elevation: 0,
       actions: [
         Container(
           margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),

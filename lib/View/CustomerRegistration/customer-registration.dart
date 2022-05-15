@@ -37,7 +37,7 @@ class CustomerRegistration extends StatelessWidget {
       });
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => AddressRegistration(),
+          builder: (context) => Login(),
         ),
       );
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pointsf/View/CustomerRegistration/address-registration.dart';
-import 'package:pointsf/View/CustomerRegistration/list_address.dart';
+import 'package:pointsf/View/Address/list_address.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String? user;
@@ -21,10 +21,10 @@ class CustomDrawer extends StatelessWidget {
             height: 20,
           ),
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color.fromARGB(255, 83, 5, 64),
             ),
-            currentAccountPicture: CircleAvatar(
+            currentAccountPicture: const CircleAvatar(
               child: Text("V"),
             ),
             accountName: Text(user ?? ""),
@@ -34,29 +34,29 @@ class CustomDrawer extends StatelessWidget {
             height: 15,
           ),
           ListTile(
-            title: Text("Conta"),
-            trailing: Icon(Icons.arrow_forward),
+            title: const Text("Conta"),
+            trailing: const Icon(Icons.arrow_forward),
             onTap: () {
               print("Conta");
             },
           ),
           ListTile(
-            title: Text("Home"),
-            trailing: Icon(Icons.arrow_forward),
+            title: const Text("Home"),
+            trailing: const Icon(Icons.arrow_forward),
             onTap: () {
               print("Home");
             },
           ),
           ListTile(
-            title: Text("Pedidos"),
-            trailing: Icon(Icons.arrow_forward),
+            title: const Text("Pedidos"),
+            trailing: const Icon(Icons.arrow_forward),
             onTap: () {
               print("Pedidos");
             },
           ),
           ListTile(
-            title: Text("Meus endereços"),
-            trailing: Icon(Icons.house),
+            title: const Text("Meus endereços"),
+            trailing: const Icon(Icons.house),
             onTap: () {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => ListAddress()));

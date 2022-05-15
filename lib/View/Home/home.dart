@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
             categoria: "Salgados",
           ),
           ProductPage(
-            categoria: "Bebidas",
+            categoria: "Porções",
           ),
         ],
       ),

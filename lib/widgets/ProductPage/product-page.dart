@@ -34,7 +34,7 @@ class ProductPage extends StatelessWidget {
                   itemBuilder: (_, index) {
                     return Container(
                       margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
-                      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      height: 57,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         boxShadow: [
@@ -47,9 +47,11 @@ class ProductPage extends StatelessWidget {
                         ],
                         color: Color.fromARGB(255, 255, 217, 65),
                       ),
-                      child: Text(
-                        snapshot.data!.docs[index]["nome"],
-                        textAlign: TextAlign.center,
+                      child: Center(
+                        child: Text(
+                          snapshot.data!.docs[index]["nome"],
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     );
                   },

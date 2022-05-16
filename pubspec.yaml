@@ -40,7 +40,7 @@ dependencies:
   cloud_firestore: ^3.1.14
   firebase_core: ^1.16.0
   brasil_fields: 1.4.3
-  uuid: ^3.0.6
+  uuid: 3.0.6
   
 
 dev_dependencies:

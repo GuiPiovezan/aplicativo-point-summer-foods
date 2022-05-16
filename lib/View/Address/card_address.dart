@@ -23,12 +23,16 @@ class CardAddress extends StatelessWidget {
               title: Text(
                 "${model.logradouro}, ${model.numero}",
                 style: const TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               subtitle: Text(
                 "${model.bairro} - ${model.cidade}",
                 style: const TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.bold),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],

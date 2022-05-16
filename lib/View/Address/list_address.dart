@@ -32,19 +32,27 @@ class _ListAddressState extends State<ListAddress> {
           if (!snapshot.hasData) return const CircularProgressIndicator();
 
           return ListView.builder(
-              itemCount: snapshot.data?.docs.length,
-              itemBuilder: (_, index) {
-                return CardAddress(
-                    AddressModel.fromMap(snapshot.data!.docs[index].data()));
-              });
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (_, index) {
+              return CardAddress(
+                AddressModel.fromMap(
+                  snapshot.data!.docs[index].data(),
+                ),
+              );
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => const AddressRegistration())));
-          }),
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: ((context) => const AddressRegistration()),
+            ),
+          );
+        },
+      ),
     );
   }
 }

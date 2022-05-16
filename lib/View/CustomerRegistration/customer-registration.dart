@@ -27,7 +27,9 @@ class CustomerRegistration extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       var result = await auth.createUserWithEmailAndPassword(
-          email: email, password: senha);
+        email: email,
+        password: senha,
+      );
 
       firestore.collection('usuarios').doc(result.user!.uid).set({
         "nome": nome,
@@ -35,9 +37,10 @@ class CustomerRegistration extends StatelessWidget {
         "telefone": telefone,
         "cpf": cpf,
       });
+
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Login(),
+          builder: (context) => const Login(),
         ),
       );
     }
@@ -46,7 +49,7 @@ class CustomerRegistration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
       appBar: const CustomAppBar(
         title: "Customer Register",
       ),
@@ -98,9 +101,7 @@ class CustomerRegistration extends StatelessWidget {
             ),
             CustomTextButton(
               textoBotao: 'Cadastrar',
-              onPressed: () {
-                save(context);
-              },
+              onPressed: () => save(context),
             ),
           ],
         ),

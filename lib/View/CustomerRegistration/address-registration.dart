@@ -204,9 +204,7 @@ class _AddressRegistration extends State<AddressRegistration> {
             ),
             CustomTextButton(
               textoBotao: "Cadastrar",
-              onPressed: () {
-                save(context);
-              },
+              onPressed: () => save(context),
             ),
           ],
         ),

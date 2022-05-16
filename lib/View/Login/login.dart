@@ -78,9 +78,7 @@ class _LoginState extends State<Login> {
               ),
               CustomTextButton(
                 textoBotao: "Entrar",
-                onPressed: () => {
-                  _login(context),
-                },
+                onPressed: () => _login(context),
               ),
             ],
           ),

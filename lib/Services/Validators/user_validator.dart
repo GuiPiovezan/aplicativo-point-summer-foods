@@ -9,7 +9,9 @@ class UserValidator {
   static String? validarEmail(String email) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    
     RegExp regex = RegExp(pattern.toString());
+
     if (email.isEmpty) return 'E-mail é obrigatório';
     if (!regex.hasMatch(email)) return 'E-mail inválido';
 
@@ -26,6 +28,7 @@ class UserValidator {
   static String? validarCPF(String cpf) {
     Pattern pattern =
         '([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})';
+    
     RegExp regex = RegExp(pattern.toString());
 
     if (cpf.isEmpty) return 'CPF obrigatório';

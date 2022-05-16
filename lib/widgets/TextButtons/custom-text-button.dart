@@ -7,11 +7,12 @@ class CustomTextButton extends StatelessWidget {
   final double? heigth;
 
   const CustomTextButton({
+    Key? key,
     required this.textoBotao,
     required this.onPressed,
     this.width,
     this.heigth,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

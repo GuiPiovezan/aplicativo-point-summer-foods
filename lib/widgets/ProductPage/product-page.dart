@@ -35,7 +35,7 @@ class ProductPage extends StatelessWidget {
                     return Container(
                       margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
                       height: 57,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         boxShadow: [
                           BoxShadow(
@@ -47,11 +47,14 @@ class ProductPage extends StatelessWidget {
                         ],
                         color: Color.fromARGB(255, 255, 217, 65),
                       ),
-                      child: Center(
+                      child: TextButton(
                         child: Text(
                           snapshot.data!.docs[index]["nome"],
                           textAlign: TextAlign.center,
                         ),
+                        onPressed: () {
+                          print(snapshot.data!.docs[index]["nome"]);
+                        },
                       ),
                     );
                   },
@@ -61,7 +64,7 @@ class ProductPage extends StatelessWidget {
           ),
         ],
       ),
-      color: Color.fromARGB(255, 254, 220, 86),
+      color: const Color.fromARGB(255, 254, 220, 86),
     );
   }
 }

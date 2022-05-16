@@ -11,6 +11,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/services.dart';
 import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:uuid/uuid.dart';
 
 import '../Home/home.dart';
 
@@ -43,13 +44,16 @@ class _AddressRegistration extends State<AddressRegistration> {
     if (cepSearched == txtCEP.text) {
       var result = await auth.currentUser!.uid;
 
-      firestore.collection('usuarios').doc(result).collection("enderecos").add({
+      var uuid = Uuid();
+      var uid = uuid.v1();
+      firestore.collection('usuarios').doc(result).collection("enderecos").doc(uid).set({
         "cep": txtCEP.text,
         "logradouro": _controladorLogradouro.text,
         "numero": _controladorNumero.text,
         "complemento": _controladorComplemento.text,
         "bairro": _controladorBairro.text,
         "cidade": _controladorCidade.text,
+        "uid": uid,
       });
 
       Navigator.of(context).push(

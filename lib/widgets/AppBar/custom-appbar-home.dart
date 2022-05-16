@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pointsf/View/Welcome/welcome.dart';
 
 class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
@@ -40,7 +39,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: icon != null ? icon : Container(),
+              child: icon ?? Container(),
             ),
             Text(
               title ?? "",

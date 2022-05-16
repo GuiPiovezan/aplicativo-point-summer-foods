@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class ProductPage extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -9,8 +10,9 @@ class ProductPage extends StatelessWidget {
   final String? categoria;
 
   ProductPage({
+    Key? key,
     required this.categoria,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +27,14 @@ class ProductPage extends StatelessWidget {
                   .where("categoria", isEqualTo: categoria)
                   .snapshots(),
               builder: (_, snapshot) {
-                if (!snapshot.hasData)
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
+                if (!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (_, index) {
                     return Container(
-                      margin: EdgeInsets.fromLTRB(15, 15, 15, 10),
+                      margin: const EdgeInsets.fromLTRB(15, 15, 15, 10),
                       height: 57,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         boxShadow: [
                           BoxShadow(
@@ -47,11 +46,14 @@ class ProductPage extends StatelessWidget {
                         ],
                         color: Color.fromARGB(255, 255, 217, 65),
                       ),
-                      child: Center(
+                      child: TextButton(
                         child: Text(
                           snapshot.data!.docs[index]["nome"],
                           textAlign: TextAlign.center,
                         ),
+                        onPressed: () {
+                          print(snapshot.data!.docs[index]["uid"]);
+                        },
                       ),
                     );
                   },
@@ -61,7 +63,7 @@ class ProductPage extends StatelessWidget {
           ),
         ],
       ),
-      color: Color.fromARGB(255, 254, 220, 86),
+      color: const Color.fromARGB(255, 254, 220, 86),
     );
   }
 }

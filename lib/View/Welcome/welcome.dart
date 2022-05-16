@@ -31,7 +31,8 @@ class _WelcomeState extends State<Welcome> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => CustomerRegistration()),
+                          builder: (context) => CustomerRegistration(),
+                        ),
                       );
                     },
                   ),
@@ -43,7 +44,6 @@ class _WelcomeState extends State<Welcome> {
                       );
                     },
                   ),
-
                 ],
               ),
             ],

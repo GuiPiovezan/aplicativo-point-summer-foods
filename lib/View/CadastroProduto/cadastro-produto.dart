@@ -17,31 +17,32 @@ class _CadastroProdutoState extends State<CadastroProduto> {
 
   int _value = 0;
   String? dropDawnUnidadeMedida;
-  String? dropDawnTipo;
+  String? dropDawnCategoria;
   String? dropDawnStatus;
+  String? dropDawnType;
+
   String nome = '';
   String tipoProdutoOuAdicional = '';
   String preco = '';
 
   final TextEditingController _controladorNomeProduto = TextEditingController();
-  final TextEditingController _controladorTipoProduto = TextEditingController();
-  final TextEditingController _controladorStatusProduto =
-      TextEditingController();
   final TextEditingController _controladorPrecoUnidade =
       TextEditingController();
 
   void save(BuildContext context) {
     var uuid = const Uuid();
     var uid = uuid.v1();
+    print(dropDawnType);
     firestore.collection('produtos').doc(uid).set({
       "nome": _controladorNomeProduto.text,
-      "tipo": _controladorTipoProduto.text,
+      "tipo": dropDawnType,
       "status": dropDawnStatus,
-      "categoria": dropDawnTipo,
+      "categoria": dropDawnCategoria,
       "medida": dropDawnUnidadeMedida,
       "preco": _controladorPrecoUnidade.text,
       "uid": uid,
     });
+    print("dfgvfeg");
   }
 
   @override
@@ -49,31 +50,8 @@ class _CadastroProdutoState extends State<CadastroProduto> {
     return Scaffold(
       backgroundColor:
           const Color.fromARGB(255, 254, 220, 86), //Cor na tela Toda
-      appBar: AppBar(
-        backgroundColor:
-            const Color.fromARGB(255, 254, 220, 86), //Cor no App Bar
-        title: const Center(
-          child: Text(
-            "Cadastro de Produtos",
-            textAlign: TextAlign.end,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.purple,
-            ),
-          ),
-        ),
-        leading: const Icon(
-          Icons.arrow_back_sharp,
-          size: 30,
-          color: Colors.purple,
-        ),
-        actions: [
-          Image.asset(
-            'images/logo-escrita.png',
-            width: 100,
-            height: 30,
-          ),
-        ],
+      appBar: CustomAppBar(
+        title: "Cadastro de Produtos",
       ),
       body: Form(
         key: formKey,
@@ -95,16 +73,47 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   descricaoCampo: "Nome do Produto",
                   placeholder: "Nutella",
                 ),
-                CustomTextField(
-                  onSaved: (value) => tipoProdutoOuAdicional = value!,
-                  validator: (value) {
-                    if (value!.isEmpty)
-                      return "Campo tipo do produto é obrigatorio!";
-                    return null;
-                  },
-                  controlador: _controladorTipoProduto,
-                  descricaoCampo: "Tipo do Produto",
-                  placeholder: "Salgado",
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  width: 350,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    border: Border.all(
+                      width: 2,
+                      color: const Color.fromARGB(255, 83, 5, 64),
+                      style: BorderStyle.solid,
+                    ),
+                  ),
+                  child: DropdownButton(
+                    borderRadius: BorderRadius.circular(20),
+                    value: dropDawnType,
+                    isExpanded: false,
+                    hint: const Text(
+                      "Selecione o tipo de produto",
+                      textAlign: TextAlign.center,
+                    ),
+                    elevation: 16,
+                    underline: Container(
+                      height: 2,
+                      color: Colors.purpleAccent,
+                    ),
+                    onChanged: (String? typeProduct) {
+                      setState(() {
+                        dropDawnType = typeProduct!;
+                      });
+                    },
+                    items: typeProduct.map((String categories) {
+                      return DropdownMenuItem(
+                        value: categories,
+                        child: Text(
+                          categories,
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -158,10 +167,10 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                   child: DropdownButton(
                     borderRadius: BorderRadius.circular(20),
-                    value: dropDawnTipo,
+                    value: dropDawnCategoria,
                     isExpanded: false,
                     hint: const Text(
-                      "Selecione o tipo de produto",
+                      "Selecione a categoria do produto",
                       textAlign: TextAlign.center,
                     ),
                     elevation: 16,
@@ -171,7 +180,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     ),
                     onChanged: (String? categories) {
                       setState(() {
-                        dropDawnTipo = categories!;
+                        dropDawnCategoria = categories!;
                       });
                     },
                     items: categories.map((String categories) {
@@ -266,4 +275,12 @@ final statusSelected = TextEditingController();
 List<String> status = [
   "Ativo",
   "Inativo",
+];
+
+// dropDawnTipo
+final typeSelected = TextEditingController();
+
+List<String> typeProduct = [
+  "Primario",
+  "Adicional",
 ];

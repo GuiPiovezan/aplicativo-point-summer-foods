@@ -53,7 +53,7 @@ class ProductPage extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         onPressed: () {
-                          print(snapshot.data!.docs[index]["nome"]);
+                          print(snapshot.data!.docs[index]["uid"]);
                         },
                       ),
                     );

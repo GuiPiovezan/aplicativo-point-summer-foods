@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:uuid/uuid.dart';
 
 class CadastroProduto extends StatefulWidget {
   const CadastroProduto({Key? key}) : super(key: key);
@@ -24,17 +25,22 @@ class _CadastroProdutoState extends State<CadastroProduto> {
 
   final TextEditingController _controladorNomeProduto = TextEditingController();
   final TextEditingController _controladorTipoProduto = TextEditingController();
-  final TextEditingController _controladorStatusProduto = TextEditingController();
-  final TextEditingController _controladorPrecoUnidade = TextEditingController();
+  final TextEditingController _controladorStatusProduto =
+      TextEditingController();
+  final TextEditingController _controladorPrecoUnidade =
+      TextEditingController();
 
   void save(BuildContext context) {
-    firestore.collection('produtos').add({
+    var uuid = Uuid();
+    var uid = uuid.v1();
+    firestore.collection('produtos').doc(uid).set({
       "nome": _controladorNomeProduto.text,
       "tipo": _controladorTipoProduto.text,
       "status": dropDawnStatus,
       "categoria": dropDawnTipo,
       "medida": dropDawnUnidadeMedida,
-      "preco": _controladorPrecoUnidade.text
+      "preco": _controladorPrecoUnidade.text,
+      "uid": uid,
     });
   }
 

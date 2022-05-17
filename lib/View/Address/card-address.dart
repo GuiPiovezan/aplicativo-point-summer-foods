@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/models/address_model.dart';
-import 'package:pointsf/models/customer_model.dart';
+import 'package:pointsf/models/address-model.dart';
 
 class CardAddress extends StatelessWidget {
   final AddressModel model;
@@ -23,12 +22,16 @@ class CardAddress extends StatelessWidget {
               title: Text(
                 "${model.logradouro}, ${model.numero}",
                 style: const TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               subtitle: Text(
                 "${model.bairro} - ${model.cidade}",
                 style: const TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.bold),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],

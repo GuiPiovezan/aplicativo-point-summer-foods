@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController? controlador;
-  final String? descricaoCampo;
+  final TextEditingController? controller;
+  final String? labelText;
   final String? placeholder;
   final double? width;
   final double? heigth;
@@ -15,8 +16,8 @@ class CustomTextField extends StatelessWidget {
   List<TextInputFormatter>? inputFormatters;
 
   CustomTextField({
-    this.controlador,
-    this.descricaoCampo,
+    this.controller,
+    this.labelText,
     this.placeholder,
     this.width,
     this.heigth,
@@ -43,7 +44,7 @@ class CustomTextField extends StatelessWidget {
                   : 70,
           width: width != null ? double?.parse(width.toString()) : 350,
           child: TextFormField(
-            controller: controlador,
+            controller: controller,
             onSaved: onSaved,
             validator: validator,
             obscureText: obscureText,
@@ -55,7 +56,7 @@ class CustomTextField extends StatelessWidget {
             ),
             enabled: enable,
             decoration: InputDecoration(
-              labelText: descricaoCampo,
+              labelText: labelText,
               labelStyle: const TextStyle(
                 color: Color.fromARGB(255, 83, 5, 64),
               ),

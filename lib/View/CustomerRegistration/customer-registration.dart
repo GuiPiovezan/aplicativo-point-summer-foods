@@ -1,16 +1,16 @@
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
+
+import 'package:pointsf/Services/AuthService/auth-service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-import 'package:pointsf/View/export-all-view.dart';
+import 'package:pointsf/models/customer-model.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
 
 class CustomerRegistration extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
 
   final tituloTela = 'Cadastro Usuário';
 
@@ -23,30 +23,25 @@ class CustomerRegistration extends StatelessWidget {
 
   TextEditingController senhaController = TextEditingController();
 
-  void save(BuildContext context) async {
+  void save(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      var result = await auth.createUserWithEmailAndPassword(
-          email: email, password: senha);
 
-      firestore.collection('usuarios').doc(result.user!.uid).set({
-        "nome": nome,
-        "uid": result.user!.uid,
-        "telefone": telefone,
-        "cpf": cpf,
-      });
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => Login(),
-        ),
+      CustomerModel model = CustomerModel(
+        nome: nome,
+        uid: null,
+        telefone: telefone,
+        cpf: cpf,
       );
+
+      AuthService().register(email, senha, model, context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
       appBar: const CustomAppBar(
         title: "Customer Register",
       ),
@@ -56,17 +51,17 @@ class CustomerRegistration extends StatelessWidget {
           children: <Widget>[
             CustomTextField(
               onSaved: (value) => nome = value!,
-              descricaoCampo: 'Nome',
+              labelText: 'Nome',
               validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
               onSaved: (value) => email = value!,
-              descricaoCampo: 'E-mail',
+              labelText: 'E-mail',
               validator: (value) => UserValidator.validarEmail(value!),
             ),
             CustomTextField(
               onSaved: (value) => telefone = value!,
-              descricaoCampo: 'Telefone',
+              labelText: 'Telefone',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarTelefone(value!),
               inputFormatters: [
@@ -76,7 +71,7 @@ class CustomerRegistration extends StatelessWidget {
             ),
             CustomTextField(
               onSaved: (value) => cpf = value!,
-              descricaoCampo: 'CPF',
+              labelText: 'CPF',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarCPF(value!),
               inputFormatters: [
@@ -86,21 +81,19 @@ class CustomerRegistration extends StatelessWidget {
             ),
             CustomTextField(
               onSaved: (value) => senha = value!,
-              descricaoCampo: 'Senha',
-              controlador: senhaController,
+              labelText: 'Senha',
+              controller: senhaController,
               validator: (value) => UserValidator.validarSenha(value!),
             ),
             CustomTextField(
               onSaved: (value) => confirmarSenha = value!,
-              descricaoCampo: 'Confirmar senha',
+              labelText: 'Confirmar senha',
               validator: (value) => UserValidator.validarConfirmarSenha(
                   value!, senhaController.text),
             ),
             CustomTextButton(
-              textoBotao: 'Cadastrar',
-              onPressed: () {
-                save(context);
-              },
+              buttonText: 'Cadastrar',
+              onPressed: () => save(context),
             ),
           ],
         ),

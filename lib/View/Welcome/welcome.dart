@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/Login/login.dart';
 import 'package:pointsf/View/export-all-view.dart';
 
 import 'package:pointsf/widgets/export-widgets.dart';
@@ -27,23 +26,23 @@ class _WelcomeState extends State<Welcome> {
               Column(
                 children: [
                   CustomTextButton(
-                    textoBotao: "Cadastrar",
+                    buttonText: "Cadastrar",
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => CustomerRegistration()),
+                          builder: (context) => CustomerRegistration(),
+                        ),
                       );
                     },
                   ),
                   CustomTextButtonYellow(
-                    textoBotao: "Entrar",
+                    buttonText: "Entrar",
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => const Login()),
                       );
                     },
                   ),
-
                 ],
               ),
             ],

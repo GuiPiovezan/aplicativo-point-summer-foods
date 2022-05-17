@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class Home extends StatefulWidget {
@@ -46,13 +48,13 @@ class _HomeState extends State<Home> {
       body: PageView(
         children: [
           ProductPage(
-            categoria: "Açai",
+            category: "Açai",
           ),
           ProductPage(
-            categoria: "Salgados",
+            category: "Salgados",
           ),
           ProductPage(
-            categoria: "Porções",
+            category: "Porções",
           ),
         ],
       ),

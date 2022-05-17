@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/CustomerRegistration/address-registration.dart';
-import 'package:pointsf/View/Address/list_address.dart';
+
+import 'package:pointsf/View/export-all-view.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String? user;
   final String? email;
 
-  CustomDrawer({
+  const CustomDrawer({
+    Key? key,
     this.user,
     this.email,
-  });
+  }) : super(key: key);
 
   getFirtsLastLetterFullName(String nome) {
     var firstLetterFirstName = nome.split("").first;
@@ -33,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 83, 5, 64),
             ),
             currentAccountPicture: CircleAvatar(
-              child: Text("${getFirtsLastLetterFullName(user!)}"),
+              child: Text(getFirtsLastLetterFullName(user!) ?? ""),
             ),
             accountName: Text(user ?? ""),
             accountEmail: Text(email ?? ""),
@@ -66,8 +67,18 @@ class CustomDrawer extends StatelessWidget {
             title: const Text("Meus endereços"),
             trailing: const Icon(Icons.house),
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ListAddress()));
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const ListAddress()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text("Cadastro de produtos"),
+            trailing: const Icon(Icons.house),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const ProductRegistration()),
+              );
             },
           ),
         ],

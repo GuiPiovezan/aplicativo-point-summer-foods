@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:pointsf/View/export-all-view.dart';
-
 import 'package:pointsf/widgets/export-widgets.dart';
 
+import 'package:pointsf/Services/AuthService/auth-service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
 
 class Login extends StatefulWidget {
@@ -15,38 +13,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? email, senha;
+  String? email = "", senha = "";
 
-  Future _login(BuildContext context) async {
+  _login(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      try {
-        await auth.signInWithEmailAndPassword(email: email!, password: senha!);
-
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (_) => Home()), (route) => false);
-      } on FirebaseAuthException catch (ex) {
-        if (ex.code == 'user-not-found') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'Usuário não encontrado. Cadastre-se.',
-              ),
-            ),
-          );
-        } else if (ex.code == 'wrong-password') {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'Senha incorreta. Tente novamente',
-              ),
-            ),
-          );
-        }
-      }
+      AuthService().login(email!, senha!, context);
     }
   }
 

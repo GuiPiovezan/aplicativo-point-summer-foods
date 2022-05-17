@@ -1,16 +1,17 @@
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
+
+import 'package:pointsf/Services/AuthService/auth-service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-import 'package:pointsf/View/export-all-view.dart';
+
+import 'package:pointsf/models/customer-model.dart';
+
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class CustomerRegistration extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
 
   final tituloTela = 'Cadastro Usuário';
 
@@ -23,26 +24,18 @@ class CustomerRegistration extends StatelessWidget {
 
   TextEditingController senhaController = TextEditingController();
 
-  void save(BuildContext context) async {
+  void save(BuildContext context) {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
-      var result = await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: senha,
+
+      CustomerModel model = CustomerModel(
+        nome: nome,
+        uid: null,
+        telefone: telefone,
+        cpf: cpf,
       );
 
-      firestore.collection('usuarios').doc(result.user!.uid).set({
-        "nome": nome,
-        "uid": result.user!.uid,
-        "telefone": telefone,
-        "cpf": cpf,
-      });
-
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const Login(),
-        ),
-      );
+      AuthService().register(email, senha, model, context);
     }
   }
 

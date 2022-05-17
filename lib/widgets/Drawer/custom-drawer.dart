@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 83, 5, 64),
             ),
             currentAccountPicture: CircleAvatar(
-              child: Text("${getFirtsLastLetterFullName(user!)}"),
+              child: Text(getFirtsLastLetterFullName(user!) ?? ""),
             ),
             accountName: Text(user ?? ""),
             accountEmail: Text(email ?? ""),
@@ -73,7 +73,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text("Meus endereços"),
+            title: const Text("Cadastro de produtos"),
             trailing: const Icon(Icons.house),
             onTap: () {
               Navigator.of(context).push(

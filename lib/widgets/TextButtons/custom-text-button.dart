@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
-  final String textoBotao;
+  final String buttonText;
   final VoidCallback onPressed;
   final double? width;
   final double? heigth;
 
   const CustomTextButton({
     Key? key,
-    required this.textoBotao,
+    required this.buttonText,
     required this.onPressed,
     this.width,
     this.heigth,
@@ -24,7 +24,7 @@ class CustomTextButton extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           child: Text(
-            textoBotao,
+            buttonText,
             style: const TextStyle(
               color: Colors.white,
             ),

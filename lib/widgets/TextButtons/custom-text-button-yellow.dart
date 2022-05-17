@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomTextButtonYellow extends StatelessWidget {
-  final String textoBotao;
+  final String buttonText;
   final VoidCallback onPressed;
   final double? width;
   final double? heigth;
 
   const CustomTextButtonYellow({
     Key? key,
-    required this.textoBotao,
+    required this.buttonText,
     required this.onPressed,
     this.width,
     this.heigth,
@@ -24,7 +24,7 @@ class CustomTextButtonYellow extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           child: Text(
-            textoBotao,
+            buttonText,
             style: const TextStyle(
               color: Color.fromARGB(255, 83, 5, 64),
             ),

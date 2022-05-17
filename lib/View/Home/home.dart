@@ -46,13 +46,13 @@ class _HomeState extends State<Home> {
       body: PageView(
         children: [
           ProductPage(
-            categoria: "Açai",
+            category: "Açai",
           ),
           ProductPage(
-            categoria: "Salgados",
+            category: "Salgados",
           ),
           ProductPage(
-            categoria: "Porções",
+            category: "Porções",
           ),
         ],
       ),

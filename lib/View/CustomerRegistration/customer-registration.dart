@@ -59,17 +59,17 @@ class CustomerRegistration extends StatelessWidget {
           children: <Widget>[
             CustomTextField(
               onSaved: (value) => nome = value!,
-              descricaoCampo: 'Nome',
+              labelText: 'Nome',
               validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
               onSaved: (value) => email = value!,
-              descricaoCampo: 'E-mail',
+              labelText: 'E-mail',
               validator: (value) => UserValidator.validarEmail(value!),
             ),
             CustomTextField(
               onSaved: (value) => telefone = value!,
-              descricaoCampo: 'Telefone',
+              labelText: 'Telefone',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarTelefone(value!),
               inputFormatters: [
@@ -79,7 +79,7 @@ class CustomerRegistration extends StatelessWidget {
             ),
             CustomTextField(
               onSaved: (value) => cpf = value!,
-              descricaoCampo: 'CPF',
+              labelText: 'CPF',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarCPF(value!),
               inputFormatters: [
@@ -89,18 +89,18 @@ class CustomerRegistration extends StatelessWidget {
             ),
             CustomTextField(
               onSaved: (value) => senha = value!,
-              descricaoCampo: 'Senha',
-              controlador: senhaController,
+              labelText: 'Senha',
+              controller: senhaController,
               validator: (value) => UserValidator.validarSenha(value!),
             ),
             CustomTextField(
               onSaved: (value) => confirmarSenha = value!,
-              descricaoCampo: 'Confirmar senha',
+              labelText: 'Confirmar senha',
               validator: (value) => UserValidator.validarConfirmarSenha(
                   value!, senhaController.text),
             ),
             CustomTextButton(
-              textoBotao: 'Cadastrar',
+              buttonText: 'Cadastrar',
               onPressed: () => save(context),
             ),
           ],

@@ -4,45 +4,42 @@ import 'package:flutter/material.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 import 'package:uuid/uuid.dart';
 
-class CadastroProduto extends StatefulWidget {
-  const CadastroProduto({Key? key}) : super(key: key);
+class ProductRegistration extends StatefulWidget {
+  const ProductRegistration({Key? key}) : super(key: key);
 
   @override
-  State<CadastroProduto> createState() => _CadastroProdutoState();
+  State<ProductRegistration> createState() => _ProductRegistrationState();
 }
 
-class _CadastroProdutoState extends State<CadastroProduto> {
+class _ProductRegistrationState extends State<ProductRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final firestore = FirebaseFirestore.instance;
 
-  int _value = 0;
-  String? dropDawnUnidadeMedida;
-  String? dropDawnCategoria;
-  String? dropDawnStatus;
-  String? dropDawnType;
+  String? dropDownUnitOfMeasurement;
+  String? dropDownCategory;
+  String? dropDownStatus;
+  String? dropDownType;
 
-  String nome = '';
-  String tipoProdutoOuAdicional = '';
-  String preco = '';
+  String productName = '';
+  String productPrice = '';
 
-  final TextEditingController _controladorNomeProduto = TextEditingController();
-  final TextEditingController _controladorPrecoUnidade =
+  final TextEditingController _controllerProductName = TextEditingController();
+  final TextEditingController _controllerProductPrice =
       TextEditingController();
 
   void save(BuildContext context) {
     var uuid = const Uuid();
     var uid = uuid.v1();
-    print(dropDawnType);
+
     firestore.collection('produtos').doc(uid).set({
-      "nome": _controladorNomeProduto.text,
-      "tipo": dropDawnType,
-      "status": dropDawnStatus,
-      "categoria": dropDawnCategoria,
-      "medida": dropDawnUnidadeMedida,
-      "preco": _controladorPrecoUnidade.text,
+      "categoria": dropDownCategory,
+      "medida": dropDownUnitOfMeasurement,
+      "nome": _controllerProductName.text,
+      "preco": _controllerProductPrice.text,
+      "status": dropDownStatus,
+      "tipo": dropDownType,
       "uid": uid,
     });
-    print("dfgvfeg");
   }
 
   @override
@@ -50,7 +47,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
     return Scaffold(
       backgroundColor:
           const Color.fromARGB(255, 254, 220, 86), //Cor na tela Toda
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: "Cadastro de Produtos",
       ),
       body: Form(
@@ -62,15 +59,15 @@ class _CadastroProdutoState extends State<CadastroProduto> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextField(
-                  onSaved: (value) => nome = value!,
+                  onSaved: (value) => productName = value!,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Campo nome é obrigatorio!";
                     }
                     return null;
                   },
-                  controlador: _controladorNomeProduto,
-                  descricaoCampo: "Nome do Produto",
+                  controller: _controllerProductName,
+                  labelText: "Nome do Produto",
                   placeholder: "Nutella",
                 ),
                 Container(
@@ -88,7 +85,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                   child: DropdownButton(
                     borderRadius: BorderRadius.circular(20),
-                    value: dropDawnType,
+                    value: dropDownType,
                     isExpanded: false,
                     hint: const Text(
                       "Selecione o tipo de produto",
@@ -101,7 +98,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     ),
                     onChanged: (String? typeProduct) {
                       setState(() {
-                        dropDawnType = typeProduct!;
+                        dropDownType = typeProduct!;
                       });
                     },
                     items: typeProduct.map((String categories) {
@@ -130,7 +127,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                   child: DropdownButton(
                     borderRadius: BorderRadius.circular(20),
-                    value: dropDawnStatus,
+                    value: dropDownStatus,
                     hint: const Text("Selecione o Status do Produto"),
                     isExpanded: false,
                     elevation:
@@ -147,7 +144,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     }).toList(),
                     onChanged: (String? status) {
                       setState(() {
-                        dropDawnStatus = status!;
+                        dropDownStatus = status!;
                       });
                     },
                   ),
@@ -167,7 +164,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                   child: DropdownButton(
                     borderRadius: BorderRadius.circular(20),
-                    value: dropDawnCategoria,
+                    value: dropDownCategory,
                     isExpanded: false,
                     hint: const Text(
                       "Selecione a categoria do produto",
@@ -180,7 +177,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     ),
                     onChanged: (String? categories) {
                       setState(() {
-                        dropDawnCategoria = categories!;
+                        dropDownCategory = categories!;
                       });
                     },
                     items: categories.map((String categories) {
@@ -209,7 +206,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                   child: DropdownButton(
                     borderRadius: BorderRadius.circular(20),
-                    value: dropDawnUnidadeMedida,
+                    value: dropDownUnitOfMeasurement,
                     isExpanded: false,
                     hint: const Text("Selecione a unidade de medida"),
                     elevation: 16,
@@ -219,7 +216,7 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                     ),
                     onChanged: (String? measure) {
                       setState(() {
-                        dropDawnUnidadeMedida = measure!;
+                        dropDownUnitOfMeasurement = measure!;
                       });
                     },
                     items: measure.map((String measure) {
@@ -231,17 +228,17 @@ class _CadastroProdutoState extends State<CadastroProduto> {
                   ),
                 ),
                 CustomTextField(
-                  onSaved: (value) => preco = value!,
+                  onSaved: (value) => productPrice = value!,
                   validator: (value) {
                     if (value!.isEmpty) return "Campo preço é obrigatorio!";
                     return null;
                   },
-                  controlador: _controladorPrecoUnidade,
-                  descricaoCampo: "Preço por Unidade",
+                  controller: _controllerProductPrice,
+                  labelText: "Preço por Unidade",
                   placeholder: "10,00",
                 ),
                 CustomTextButton(
-                  textoBotao: "Cadastrar",
+                  buttonText: "Cadastrar",
                   onPressed: () => save(context),
                 ),
               ],

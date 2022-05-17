@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/Welcome/welcome.dart';
+import 'package:pointsf/Services/AuthService/auth-service.dart';
 
 class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -10,6 +10,10 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.icon,
   }) : super(key: key);
+
+  void _logOut(context) {
+    AuthService().logout(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +66,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
                 fontSize: 20,
               ),
             ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const Welcome(),
-                ),
-              );
-            },
+            onPressed: () => _logOut(context),
           ),
         ),
       ],

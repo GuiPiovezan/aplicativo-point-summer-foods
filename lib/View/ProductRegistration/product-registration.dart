@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'package:pointsf/Services/ProductService/product-service.dart';
+import 'package:pointsf/models/product-model.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
-import 'package:uuid/uuid.dart';
 
 class ProductRegistration extends StatefulWidget {
   const ProductRegistration({Key? key}) : super(key: key);
@@ -13,7 +13,6 @@ class ProductRegistration extends StatefulWidget {
 
 class _ProductRegistrationState extends State<ProductRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final firestore = FirebaseFirestore.instance;
 
   String? dropDownUnitOfMeasurement;
   String? dropDownCategory;
@@ -24,22 +23,21 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   String productPrice = '';
 
   final TextEditingController _controllerProductName = TextEditingController();
-  final TextEditingController _controllerProductPrice =
-      TextEditingController();
+  final TextEditingController _controllerProductPrice = TextEditingController();
 
   void save(BuildContext context) {
-    var uuid = const Uuid();
-    var uid = uuid.v1();
 
-    firestore.collection('produtos').doc(uid).set({
-      "categoria": dropDownCategory,
-      "medida": dropDownUnitOfMeasurement,
-      "nome": _controllerProductName.text,
-      "preco": _controllerProductPrice.text,
-      "status": dropDownStatus,
-      "tipo": dropDownType,
-      "uid": uid,
-    });
+    ProductModel model = ProductModel(
+      categoria: dropDownCategory,
+      medida: dropDownUnitOfMeasurement,
+      nome: _controllerProductName.text,
+      preco: _controllerProductPrice.text,
+      status: dropDownStatus,
+      tipo: dropDownType,
+      uid: null,
+    );
+
+    ProductService().registration(model, context);
   }
 
   @override

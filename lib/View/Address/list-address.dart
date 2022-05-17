@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/View/export-all-view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:pointsf/Services/AddressService/address-service.dart';
 import 'package:pointsf/models/address-model.dart';
-
+import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/AppBar/custom-appbar.dart';
+
 
 class ListAddress extends StatefulWidget {
   const ListAddress({Key? key}) : super(key: key);
@@ -16,19 +16,12 @@ class ListAddress extends StatefulWidget {
 }
 
 class _ListAddressState extends State<ListAddress> {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final FirebaseAuth auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: 'Meus endereços'),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: firestore
-            .collection("usuarios")
-            .doc(auth.currentUser!.uid)
-            .collection("enderecos")
-            .snapshots(),
+        stream: AddressService().getAddress(),
         builder: (_, snapshot) {
           if (snapshot.hasError) return const Text('Erro ao carregar dados');
           if (!snapshot.hasData) return const CircularProgressIndicator();
@@ -46,7 +39,7 @@ class _ListAddressState extends State<ListAddress> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add_location_alt_outlined),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

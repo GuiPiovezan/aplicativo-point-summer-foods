@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:pointsf/Services/ProductService/product-service.dart';
 
 class ProductPage extends StatelessWidget {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
-
   final String? category;
 
-  ProductPage({
+  const ProductPage({
     Key? key,
     required this.category,
   }) : super(key: key);
@@ -22,10 +20,7 @@ class ProductPage extends StatelessWidget {
         children: [
           Flexible(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: firestore
-                  .collection('produtos')
-                  .where("categoria", isEqualTo: category)
-                  .snapshots(),
+              stream: ProductService().getActiveProductsByCategory(category),
               builder: (_, snapshot) {
                 if (!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
@@ -41,7 +36,7 @@ class ProductPage extends StatelessWidget {
                             color: Color.fromARGB(50, 10, 10, 10),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
+                            offset: Offset(0, 3),
                           ),
                         ],
                         color: Color.fromARGB(255, 255, 217, 65),

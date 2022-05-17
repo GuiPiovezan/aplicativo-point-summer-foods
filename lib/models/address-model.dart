@@ -1,17 +1,29 @@
 class AddressModel {
-  String? cep;
-  String? logradouro;
   String? bairro;
-  String? complemento;
-  String? numero;
+  String? cep;
   String? cidade;
+  String? complemento;
+  String? logradouro;
+  String? numero;
+  String? uid;
+
+  AddressModel({
+    required this.bairro,
+    required this.cep,
+    required this.cidade,
+    required this.complemento,
+    required this.logradouro,
+    required this.numero,
+    required this.uid,
+  });
 
   AddressModel.fromMap(Map<String, dynamic> map) {
-    cep = map['cep'];
-    logradouro = map['logradouro'];
     bairro = map['bairro'];
-    complemento = map['complemento'];
-    numero = map['numero'];
+    cep = map['cep'];
     cidade = map['cidade'];
+    complemento = map['complemento'];
+    logradouro = map['logradouro'];
+    numero = map['numero'];
+    uid = map['uid'];
   }
 }

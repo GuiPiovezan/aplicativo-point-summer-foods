@@ -33,6 +33,10 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
+  getUid() {
+    return _auth.currentUser!.uid;
+  }
+
   register(String email, String senha, CustomerModel model,
       BuildContext context) async {
     try {

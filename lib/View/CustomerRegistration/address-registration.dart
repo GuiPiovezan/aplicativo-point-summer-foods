@@ -23,6 +23,7 @@ class AddressRegistration extends StatefulWidget {
 }
 
 class _AddressRegistration extends State<AddressRegistration> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController _controllerCEP = TextEditingController();
   TextEditingController _controllerStreet = TextEditingController();
   final TextEditingController _controllerNumber = TextEditingController();
@@ -36,7 +37,6 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableCidade = false;
   String cepSearched = "";
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 

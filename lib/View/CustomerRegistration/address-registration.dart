@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-import 'package:brasil_fields/brasil_fields.dart';
-
 import 'package:flutter/services.dart';
+
 import 'package:pointsf/Services/AddressService/address-service.dart';
 import 'package:pointsf/models/address-model.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AddressRegistration extends StatefulWidget {
   const AddressRegistration({Key? key}) : super(key: key);

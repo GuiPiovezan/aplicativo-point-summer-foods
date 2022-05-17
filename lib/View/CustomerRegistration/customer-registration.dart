@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import 'package:brasil_fields/brasil_fields.dart';
+import 'package:flutter/services.dart';
 
 import 'package:pointsf/Services/AuthService/auth-service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-
 import 'package:pointsf/models/customer-model.dart';
-
 import 'package:pointsf/widgets/export-widgets.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
 
 class CustomerRegistration extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

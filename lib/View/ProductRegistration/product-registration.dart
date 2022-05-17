@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:pointsf/Services/ProductService/product-service.dart';
 import 'package:pointsf/models/product-model.dart';
-
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class ProductRegistration extends StatefulWidget {

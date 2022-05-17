@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/widgets/export-widgets.dart';
-
 import 'package:pointsf/Services/AuthService/auth-service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

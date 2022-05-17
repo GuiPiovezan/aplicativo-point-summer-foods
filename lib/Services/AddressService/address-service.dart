@@ -42,4 +42,12 @@ class AddressService extends ChangeNotifier {
       ),
     );
   }
+
+  getAddress() {
+    return firestore
+        .collection("usuarios")
+        .doc(AuthService().getUid())
+        .collection("enderecos")
+        .snapshots();
+  }
 }

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:brasil_fields/brasil_fields.dart';
 
 import 'package:flutter/services.dart';
-import 'package:pointsf/View/export-all-view.dart';
+import 'package:pointsf/Services/AddressService/address-service.dart';
+import 'package:pointsf/models/address-model.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
-import 'package:uuid/uuid.dart';
-
-import '../Home/home.dart';
 
 class AddressRegistration extends StatefulWidget {
   const AddressRegistration({Key? key}) : super(key: key);
@@ -24,12 +19,14 @@ class AddressRegistration extends StatefulWidget {
 
 class _AddressRegistration extends State<AddressRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   final TextEditingController _controllerCEP = TextEditingController();
   TextEditingController _controllerStreet = TextEditingController();
   final TextEditingController _controllerNumber = TextEditingController();
   TextEditingController _controllerComplement = TextEditingController();
   TextEditingController _controllerDistrict = TextEditingController();
   TextEditingController _controllerCity = TextEditingController();
+  
   bool enableLogradouro = false;
   bool enableNumero = false;
   bool enableComplemento = false;
@@ -37,30 +34,19 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableCidade = false;
   String cepSearched = "";
 
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
-
   void save(BuildContext context) async {
     if (cepSearched == _controllerCEP.text) {
-      var result = await auth.currentUser!.uid;
-
-      var uuid = Uuid();
-      var uid = uuid.v1();
-      firestore.collection('usuarios').doc(result).collection("enderecos").doc(uid).set({
-        "cep": _controllerCEP.text,
-        "logradouro": _controllerStreet.text,
-        "numero": _controllerNumber.text,
-        "complemento": _controllerComplement.text,
-        "bairro": _controllerDistrict.text,
-        "cidade": _controllerCity.text,
-        "uid": uid,
-      });
-
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => Home(),
-        ),
+      AddressModel model = AddressModel(
+        bairro: _controllerCEP.text,
+        cep: _controllerStreet.text,
+        cidade: _controllerNumber.text,
+        complemento: _controllerComplement.text,
+        logradouro: _controllerDistrict.text,
+        numero: _controllerCity.text,
+        uid: null,
       );
+
+      AddressService().registration(model, context);
     }
   }
 
@@ -104,7 +90,8 @@ class _AddressRegistration extends State<AddressRegistration> {
         }
 
         if (resultingData["bairro"] != "") {
-          _controllerDistrict = TextEditingController(text: resultingData["bairro"]);
+          _controllerDistrict =
+              TextEditingController(text: resultingData["bairro"]);
           enableBairro = false;
         } else {
           _controllerDistrict = TextEditingController(text: "");
@@ -112,7 +99,8 @@ class _AddressRegistration extends State<AddressRegistration> {
         }
 
         if (resultingData["localidade"] != "") {
-          _controllerCity = TextEditingController(text: resultingData["localidade"]);
+          _controllerCity =
+              TextEditingController(text: resultingData["localidade"]);
           enableCidade = false;
         } else {
           _controllerCity = TextEditingController(text: "");

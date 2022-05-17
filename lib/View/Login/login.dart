@@ -63,21 +63,21 @@ class _LoginState extends State<Login> {
           child: ListView(
             children: [
               CustomTextField(
-                descricaoCampo: "Email",
+                labelText: "Email",
                 placeholder: "Ex. funalo@gmail.com",
                 inputType: TextInputType.emailAddress,
                 onSaved: (value) => email = value,
                 validator: (value) => UserValidator.validarEmail(value!),
               ),
               CustomTextField(
-                descricaoCampo: "Senha",
+                labelText: "Senha",
                 placeholder: "********",
                 obscureText: true,
                 onSaved: (value) => senha = value,
                 validator: (value) => UserValidator.validarSenha(value!),
               ),
               CustomTextButton(
-                textoBotao: "Entrar",
+                buttonText: "Entrar",
                 onPressed: () => _login(context),
               ),
             ],

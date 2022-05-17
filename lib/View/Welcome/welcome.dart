@@ -27,7 +27,7 @@ class _WelcomeState extends State<Welcome> {
               Column(
                 children: [
                   CustomTextButton(
-                    textoBotao: "Cadastrar",
+                    buttonText: "Cadastrar",
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -37,7 +37,7 @@ class _WelcomeState extends State<Welcome> {
                     },
                   ),
                   CustomTextButtonYellow(
-                    textoBotao: "Entrar",
+                    buttonText: "Entrar",
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => const Login()),

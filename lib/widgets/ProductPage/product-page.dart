@@ -7,11 +7,11 @@ class ProductPage extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
 
-  final String? categoria;
+  final String? category;
 
   ProductPage({
     Key? key,
-    required this.categoria,
+    required this.category,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class ProductPage extends StatelessWidget {
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: firestore
                   .collection('produtos')
-                  .where("categoria", isEqualTo: categoria)
+                  .where("categoria", isEqualTo: category)
                   .snapshots(),
               builder: (_, snapshot) {
                 if (!snapshot.hasData) return const CircularProgressIndicator();

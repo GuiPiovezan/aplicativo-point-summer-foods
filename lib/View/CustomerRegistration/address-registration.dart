@@ -23,12 +23,12 @@ class AddressRegistration extends StatefulWidget {
 }
 
 class _AddressRegistration extends State<AddressRegistration> {
-  TextEditingController txtCEP = TextEditingController();
-  TextEditingController _controladorLogradouro = TextEditingController();
-  final TextEditingController _controladorNumero = TextEditingController();
-  TextEditingController _controladorComplemento = TextEditingController();
-  TextEditingController _controladorBairro = TextEditingController();
-  TextEditingController _controladorCidade = TextEditingController();
+  final TextEditingController _controllerCEP = TextEditingController();
+  TextEditingController _controllerStreet = TextEditingController();
+  final TextEditingController _controllerNumber = TextEditingController();
+  TextEditingController _controllerComplement = TextEditingController();
+  TextEditingController _controllerDistrict = TextEditingController();
+  TextEditingController _controllerCity = TextEditingController();
   bool enableLogradouro = false;
   bool enableNumero = false;
   bool enableComplemento = false;
@@ -41,18 +41,18 @@ class _AddressRegistration extends State<AddressRegistration> {
   final firestore = FirebaseFirestore.instance;
 
   void save(BuildContext context) async {
-    if (cepSearched == txtCEP.text) {
+    if (cepSearched == _controllerCEP.text) {
       var result = await auth.currentUser!.uid;
 
       var uuid = Uuid();
       var uid = uuid.v1();
       firestore.collection('usuarios').doc(result).collection("enderecos").doc(uid).set({
-        "cep": txtCEP.text,
-        "logradouro": _controladorLogradouro.text,
-        "numero": _controladorNumero.text,
-        "complemento": _controladorComplemento.text,
-        "bairro": _controladorBairro.text,
-        "cidade": _controladorCidade.text,
+        "cep": _controllerCEP.text,
+        "logradouro": _controllerStreet.text,
+        "numero": _controllerNumber.text,
+        "complemento": _controllerComplement.text,
+        "bairro": _controllerDistrict.text,
+        "cidade": _controllerCity.text,
         "uid": uid,
       });
 
@@ -65,9 +65,9 @@ class _AddressRegistration extends State<AddressRegistration> {
   }
 
   Future<void> searchCEP() async {
-    cepSearched = txtCEP.text;
+    cepSearched = _controllerCEP.text;
 
-    String cep = txtCEP.text;
+    String cep = _controllerCEP.text;
     cep = cep.replaceAll(".", "");
     cep = cep.replaceAll("-", "");
 
@@ -81,53 +81,53 @@ class _AddressRegistration extends State<AddressRegistration> {
     print('Resposta Servidor:' + response.statusCode.toString());
 
     if (response.statusCode.toString() == "200") {
-      Map<String, dynamic> dados = json.decode(response.body);
+      Map<String, dynamic> resultingData = json.decode(response.body);
 
       setState(() {
         enableNumero = true;
-        if (dados["logradouro"] != "") {
-          _controladorLogradouro =
-              TextEditingController(text: dados["logradouro"]);
+        if (resultingData["logradouro"] != "") {
+          _controllerStreet =
+              TextEditingController(text: resultingData["logradouro"]);
           enableLogradouro = false;
         } else {
-          _controladorLogradouro = TextEditingController(text: "");
+          _controllerStreet = TextEditingController(text: "");
           enableLogradouro = true;
         }
 
-        if (dados["complemento"] != "") {
-          _controladorComplemento =
-              TextEditingController(text: dados["complemento"]);
+        if (resultingData["complemento"] != "") {
+          _controllerComplement =
+              TextEditingController(text: resultingData["complemento"]);
           enableComplemento = false;
         } else {
-          _controladorComplemento = TextEditingController(text: "");
+          _controllerComplement = TextEditingController(text: "");
           enableComplemento = true;
         }
 
-        if (dados["bairro"] != "") {
-          _controladorBairro = TextEditingController(text: dados["bairro"]);
+        if (resultingData["bairro"] != "") {
+          _controllerDistrict = TextEditingController(text: resultingData["bairro"]);
           enableBairro = false;
         } else {
-          _controladorBairro = TextEditingController(text: "");
+          _controllerDistrict = TextEditingController(text: "");
           enableBairro = true;
         }
 
-        if (dados["localidade"] != "") {
-          _controladorCidade = TextEditingController(text: dados["localidade"]);
+        if (resultingData["localidade"] != "") {
+          _controllerCity = TextEditingController(text: resultingData["localidade"]);
           enableCidade = false;
         } else {
-          _controladorCidade = TextEditingController(text: "");
+          _controllerCity = TextEditingController(text: "");
           enableCidade = true;
         }
       });
     } else {
       setState(() {
-        _controladorLogradouro = TextEditingController(text: "");
+        _controllerStreet = TextEditingController(text: "");
         enableLogradouro = true;
-        _controladorComplemento = TextEditingController(text: "");
+        _controllerComplement = TextEditingController(text: "");
         enableComplemento = true;
-        _controladorBairro = TextEditingController(text: "");
+        _controllerDistrict = TextEditingController(text: "");
         enableBairro = true;
-        _controladorCidade = TextEditingController(text: "");
+        _controllerCity = TextEditingController(text: "");
         enableCidade = true;
       });
     }
@@ -150,8 +150,8 @@ class _AddressRegistration extends State<AddressRegistration> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CustomTextField(
-                  controlador: txtCEP,
-                  descricaoCampo: "CEP",
+                  controller: _controllerCEP,
+                  labelText: "CEP",
                   placeholder: "Ex 15200000",
                   width: 200,
                   inputType: TextInputType.number,
@@ -164,7 +164,7 @@ class _AddressRegistration extends State<AddressRegistration> {
                   width: 15,
                 ),
                 CustomTextButton(
-                  textoBotao: "Buscar",
+                  buttonText: "Buscar",
                   onPressed: searchCEP,
                   width: 100,
                   heigth: 70,
@@ -172,38 +172,38 @@ class _AddressRegistration extends State<AddressRegistration> {
               ],
             ),
             CustomTextField(
-              controlador: _controladorLogradouro,
-              descricaoCampo: 'Logradouro',
+              controller: _controllerStreet,
+              labelText: 'Logradouro',
               placeholder: 'Rua José Pereira',
               enable: enableLogradouro,
             ),
             CustomTextField(
-              controlador: _controladorNumero,
-              descricaoCampo: 'Numero',
+              controller: _controllerNumber,
+              labelText: 'Numero',
               placeholder: '547',
               inputType: TextInputType.number,
               enable: enableNumero,
             ),
             CustomTextField(
-              controlador: _controladorComplemento,
-              descricaoCampo: 'Complemento',
+              controller: _controllerComplement,
+              labelText: 'Complemento',
               placeholder: 'Apartamento 13',
               enable: enableComplemento,
             ),
             CustomTextField(
-              controlador: _controladorBairro,
-              descricaoCampo: 'Bairro',
+              controller: _controllerDistrict,
+              labelText: 'Bairro',
               placeholder: 'Jardim das Flores',
               enable: enableBairro,
             ),
             CustomTextField(
-              controlador: _controladorCidade,
-              descricaoCampo: 'Cidade',
+              controller: _controllerCity,
+              labelText: 'Cidade',
               placeholder: 'São José do Rio Preto',
               enable: enableCidade,
             ),
             CustomTextButton(
-              textoBotao: "Cadastrar",
+              buttonText: "Cadastrar",
               onPressed: () => save(context),
             ),
           ],

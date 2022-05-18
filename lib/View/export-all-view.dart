@@ -10,6 +10,7 @@ export 'package:pointsf/View/Login/login.dart';
 
 //Pagina principal
 export 'package:pointsf/View/Home/home.dart';
+export 'package:pointsf/View/Home/admin-home.dart';
 
 //Listagem de endereço
 export 'Address/card-address.dart';

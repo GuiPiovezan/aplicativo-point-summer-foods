@@ -89,7 +89,7 @@ class AuthService extends ChangeNotifier {
   login(String email, String senha, BuildContext context) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      _getUser();
+      await _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw AuthException('Email não encontrado. Cadastre-se.');
@@ -97,10 +97,29 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => Home()),
-      (route) => false,
-    );
+    
+    bool admin = false;
+    await firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      admin = event['admin'] != null ? event['admin'] : false;
+    });
+
+    if (admin) {
+      print("Admin: ");
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => AdminHome()),
+        (route) => false,
+      );
+    } else {
+      print("não Admin: ");
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => Home()),
+        (route) => false,
+      );
+    }
   }
 
   logout(BuildContext context) async {

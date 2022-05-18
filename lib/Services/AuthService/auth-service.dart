@@ -5,7 +5,6 @@ import 'package:pointsf/models/customer-model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pointsf/View/export-all-view.dart';
 
-
 class AuthException implements Exception {
   String message;
   AuthException(this.message);
@@ -85,7 +84,7 @@ class AuthService extends ChangeNotifier {
     _getUser();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const Welcome(),
+        builder: (context) => const Login(),
       ),
     );
   }

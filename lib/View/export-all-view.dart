@@ -14,6 +14,3 @@ export 'package:pointsf/View/Home/home.dart';
 //Listagem de endereço
 export 'Address/card-address.dart';
 export 'Address/list-address.dart';
-
-//Pagina de Bem-Vindo
-export 'package:pointsf/View/Welcome/welcome.dart';

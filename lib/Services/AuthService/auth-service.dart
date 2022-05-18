@@ -109,13 +109,11 @@ class AuthService extends ChangeNotifier {
     });
 
     if (admin) {
-      print("Admin: ");
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => AdminHome()),
         (route) => false,
       );
     } else {
-      print("não Admin: ");
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => Home()),
         (route) => false,

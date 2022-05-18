@@ -25,21 +25,21 @@ class _AddressRegistration extends State<AddressRegistration> {
 
   AddressControllerService controller = AddressControllerService();
 
-  bool enableLogradouro = false;
-  bool enableNumero = false;
-  bool enableComplemento = false;
-  bool enableBairro = false;
-  bool enableCidade = false;
+  bool enableStreet = false;
+  bool enableNumber = false;
+  bool enableComplement = false;
+  bool enableDistrict = false;
+  bool enableCity = false;
   String cepSearched = "";
 
   void save(BuildContext context) async {
     if (cepSearched == controller.cep!.text) {
       AddressModel model = AddressModel(
-        bairro: controller.cep!.text,
-        cep: controller.street!.text,
+        bairro: controller.district!.text,
+        cep: controller.cep!.text,
         cidade: controller.city!.text,
         complemento: controller.complement!.text,
-        logradouro: controller.district!.text,
+        logradouro: controller.street!.text, 
         numero: controller.number!.text,
         uid: null,
       );
@@ -62,17 +62,17 @@ class _AddressRegistration extends State<AddressRegistration> {
 
     setState(() {
       controller.city ?? "";
-      enableNumero = true;
-      controller.city!.text != "" ? enableCidade = false : enableCidade = true;
+      enableNumber = true;
+      controller.city!.text != "" ? enableCity = false : enableCity = true;
       controller.complement!.text != ""
-          ? enableComplemento = false
-          : enableComplemento = true;
+          ? enableComplement = false
+          : enableComplement = true;
       controller.district!.text != ""
-          ? enableBairro = false
-          : enableBairro = true;
+          ? enableDistrict = false
+          : enableDistrict = true;
       controller.street!.text != ""
-          ? enableLogradouro = false
-          : enableLogradouro = true;
+          ? enableStreet = false
+          : enableStreet = true;
     });
   }
 
@@ -118,32 +118,32 @@ class _AddressRegistration extends State<AddressRegistration> {
               controller: controller.street,
               labelText: 'Logradouro',
               placeholder: 'Rua José Pereira',
-              enable: enableLogradouro,
+              enable: enableStreet,
             ),
             CustomTextField(
               controller: controller.number,
               labelText: 'Numero',
               placeholder: '547',
               inputType: TextInputType.number,
-              enable: enableNumero,
+              enable: enableNumber,
             ),
             CustomTextField(
               controller: controller.complement,
               labelText: 'Complemento',
               placeholder: 'Apartamento 13',
-              enable: enableComplemento,
+              enable: enableComplement,
             ),
             CustomTextField(
               controller: controller.district,
               labelText: 'Bairro',
               placeholder: 'Jardim das Flores',
-              enable: enableBairro,
+              enable: enableDistrict,
             ),
             CustomTextField(
               controller: controller.city,
               labelText: 'Cidade',
               placeholder: 'São José do Rio Preto',
-              enable: enableCidade,
+              enable: enableCity,
             ),
             CustomTextButton(
               buttonText: "Cadastrar",

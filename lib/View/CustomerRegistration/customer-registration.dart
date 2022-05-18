@@ -32,6 +32,7 @@ class CustomerRegistration extends StatelessWidget {
         uid: null,
         telefone: telefone,
         cpf: cpf,
+        admin: false,
       );
 
       AuthService().register(email, senha, model, context);

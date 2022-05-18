@@ -78,6 +78,7 @@ class AuthService extends ChangeNotifier {
       "uid": user!.uid,
       "telefone": model.telefone,
       "cpf": model.cpf,
+      "admin": model.admin,
     });
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -104,7 +105,7 @@ class AuthService extends ChangeNotifier {
         .doc(_auth.currentUser!.uid)
         .get()
         .then((event) {
-      admin = event['admin'] != null ? event['admin'] : false;
+      admin = event['admin'] ?? false;
     });
 
     if (admin) {

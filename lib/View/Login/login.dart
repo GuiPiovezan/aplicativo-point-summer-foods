@@ -74,7 +74,9 @@ class _LoginState extends State<Login> {
                         );
                       },
                       child: const Text('Cadastra-se',
-                          style: TextStyle(fontSize: 16.0)))
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: Color.fromARGB(255, 83, 5, 64))))
                 ],
               )
             ],

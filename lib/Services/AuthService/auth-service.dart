@@ -68,13 +68,13 @@ class AuthService extends ChangeNotifier {
       _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        throw AuthException('Email não encontrado. Cadastre-se.');
+        throw AuthException('Usuário não encontrado. Cadastre-se.');
       } else if (e.code == 'wrong-password') {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => Home()),
+      MaterialPageRoute(builder: (_) => const Home()),
       (route) => false,
     );
   }

@@ -62,7 +62,10 @@ class _LoginState extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Ainda não tem cadastro?'),
+                  const Text(
+                    'Ainda não tem cadastro?',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
                   TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
@@ -70,7 +73,8 @@ class _LoginState extends State<Login> {
                               builder: (context) => CustomerRegistration()),
                         );
                       },
-                      child: const Text('Cadastra-se'))
+                      child: const Text('Cadastra-se',
+                          style: TextStyle(fontSize: 16.0)))
                 ],
               )
             ],

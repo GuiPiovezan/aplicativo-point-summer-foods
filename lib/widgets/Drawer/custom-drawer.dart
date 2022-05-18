@@ -1,20 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/Services/AuthService/auth-service.dart';
 
 import 'package:pointsf/View/export-all-view.dart';
 
-class CustomDrawer extends StatelessWidget {
-  final String? user;
-  final String? email;
+class CustomDrawer extends StatefulWidget {
+  const CustomDrawer({Key? key}) : super(key: key);
 
-  const CustomDrawer({
-    Key? key,
-    this.user,
-    this.email,
-  }) : super(key: key);
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
 
-  getFirtsLastLetterFullName(String nome) {
-    var firstLetterFirstName = nome.split("").first;
-    var lastName = nome.split(" ").last;
+class _CustomDrawerState extends State<CustomDrawer> {
+  final AuthService auth = AuthService();
+  String? user = "Loading";
+  String? email = "Loading";
+
+  @override
+  void initState() {
+    super.initState();
+    auth;
+    user = auth.userName;
+    email = auth.getUserEmail();
+  }
+
+  setNome() async {
+    await auth.setUserName();
+    setState(() {
+      user = auth.getUserName();
+    });
+  }
+
+  getFirtsLastLetterFullName() {
+    setNome();
+    var firstLetterFirstName = user!.split("").first;
+    var lastName = user!.split(" ").last;
     var firstLetterLastName = lastName.split("").first;
 
     return firstLetterFirstName + firstLetterLastName;
@@ -34,10 +53,10 @@ class CustomDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 83, 5, 64),
             ),
             currentAccountPicture: CircleAvatar(
-              child: Text(getFirtsLastLetterFullName(user!) ?? ""),
+              child: Text(getFirtsLastLetterFullName()),
             ),
-            accountName: Text(user ?? ""),
-            accountEmail: Text(email ?? ""),
+            accountName: Text(auth.userName!),
+            accountEmail: Text(email.toString()),
           ),
           const SizedBox(
             height: 15,
@@ -77,7 +96,8 @@ class CustomDrawer extends StatelessWidget {
             trailing: const Icon(Icons.house),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ProductRegistration()),
+                MaterialPageRoute(
+                    builder: (context) => const ProductRegistration()),
               );
             },
           ),

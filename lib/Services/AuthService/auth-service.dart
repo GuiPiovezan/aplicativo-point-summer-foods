@@ -5,7 +5,6 @@ import 'package:pointsf/models/customer-model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pointsf/View/export-all-view.dart';
 
-
 class AuthException implements Exception {
   String message;
   AuthException(this.message);
@@ -16,6 +15,7 @@ class AuthService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
   User? user;
   bool isLoading = true;
+  String? userName = "Loading";
 
   AuthService() {
     _authCheck();
@@ -34,8 +34,31 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
+  setUserName() {
+    if (userName != "Loading") return null;
+    firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      userName = event['nome'] != null ? event['nome'].toString() : "erro";
+    });
+  }
+
   getUid() {
     return _auth.currentUser!.uid;
+  }
+
+  getUser() {
+    return _auth.currentUser;
+  }
+
+  getUserEmail() {
+    return _auth.currentUser!.email;
+  }
+
+  getUserName() {
+    return userName;
   }
 
   register(String email, String senha, CustomerModel model,

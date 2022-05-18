@@ -44,7 +44,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          const Color.fromARGB(255, 254, 220, 86), //Cor na tela Toda
+          const Color.fromARGB(255, 224, 227, 231), //Cor na tela Toda
       appBar: const CustomAppBar(
         title: "Cadastro de Produtos",
       ),

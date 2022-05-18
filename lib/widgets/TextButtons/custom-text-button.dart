@@ -31,9 +31,9 @@ class CustomTextButton extends StatelessWidget {
           ),
           style: TextButton.styleFrom(
             padding: const EdgeInsets.all(15),
-            backgroundColor: const Color.fromARGB(255, 83, 5, 64),
+            backgroundColor: const Color.fromARGB(255, 102, 19, 131),
             side: const BorderSide(
-              color: Colors.white,
+              color: Colors.black,
               width: 2,
               style: BorderStyle.solid,
             ),

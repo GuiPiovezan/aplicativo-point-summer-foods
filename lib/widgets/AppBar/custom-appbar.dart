@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 102, 19, 131),
       title: Container(
         margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
         child: Text(
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               height: 40,
               width: 40,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 83, 5, 64),
+                color: const Color.fromARGB(255, 102, 19, 131),
                 border: Border.all(
                   color: Colors.white,
                   width: 2,

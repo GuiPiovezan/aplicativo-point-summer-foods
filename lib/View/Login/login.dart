@@ -16,10 +16,15 @@ class _LoginState extends State<Login> {
 
   String? email = "", senha = "";
 
-  _login(BuildContext context) {
+  _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      AuthService().login(email!, senha!, context);
+      try {
+        await AuthService().login(email!, senha!, context);
+      } on AuthException catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.message)));
+      }
     }
   }
 

@@ -41,7 +41,7 @@ class ProductPage extends StatelessWidget {
                             offset: Offset(0, 3),
                           ),
                         ],
-                        color: Color.fromARGB(255, 255, 217, 65),
+                        color: Color.fromARGB(255, 240, 240, 240),
                       ),
                       child: TextButton(
                         child: Text(
@@ -65,7 +65,7 @@ class ProductPage extends StatelessWidget {
           ),
         ],
       ),
-      color: const Color.fromARGB(255, 254, 220, 86),
+      color: const Color.fromARGB(255, 240, 240, 240),
     );
   }
 }

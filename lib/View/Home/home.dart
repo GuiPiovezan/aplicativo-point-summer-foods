@@ -15,9 +15,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 240, 240, 240),
       drawer: CustomDrawer(),
-      appBar: const CustomAppBarHome(
-        icon: Icon(Icons.man_sharp),
+      appBar: CustomAppBarHome(
+        icon: Icon(
+          Icons.man_sharp,
+          color: Color.fromARGB(255, 240, 240, 240),
+        ),
         title: "Rua João Silva, SP",
       ),
       body: PageView(

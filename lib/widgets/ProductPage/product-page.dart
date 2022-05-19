@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pointsf/Services/ProductService/product-service.dart';
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class ProductPage extends StatelessWidget {
-  final String? category;
+  final String category;
 
   const ProductPage({
     Key? key,
@@ -47,7 +49,12 @@ class ProductPage extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                         onPressed: () {
-                          print(snapshot.data!.docs[index]["uid"]);
+                          showBarModalBottomSheet(
+                            context: context,
+                            builder: (context) => ProductAdditionalModal(
+                              productPrimary: snapshot.data!.docs[index],
+                            ),
+                          );
                         },
                       ),
                     );

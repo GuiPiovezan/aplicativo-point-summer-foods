@@ -91,17 +91,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
               );
             },
           ),
-          ListTile(
-            title: const Text("Cadastro de produtos"),
-            trailing: const Icon(Icons.house),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const ProductRegistration(),
-                ),
-              );
-            },
-          ),
         ],
       ),
     );

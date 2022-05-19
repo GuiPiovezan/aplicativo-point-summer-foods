@@ -3,8 +3,10 @@ export 'AppBar/custom-appbar-home.dart';
 export 'AppBar/custom-appbar.dart';
 
 // Widget personalizados baseado no Draewr
+export 'Drawer/custom-drawer-admin.dart';
 export 'Drawer/custom-drawer.dart';
 
+// Widget pesonalizado para listagem de adicionais
 export 'ProductAdditionalModal/product-additional-modal.dart';
 
 // Widgets personalizados baseados no TextButtom

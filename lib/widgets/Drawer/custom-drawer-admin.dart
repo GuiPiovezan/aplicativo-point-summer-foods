@@ -3,14 +3,14 @@ import 'package:pointsf/Services/AuthService/auth-service.dart';
 
 import 'package:pointsf/View/export-all-view.dart';
 
-class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+class CustomDrawerAdmin extends StatefulWidget {
+  const CustomDrawerAdmin({Key? key}) : super(key: key);
 
   @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
+  State<CustomDrawerAdmin> createState() => _CustomDrawerAdminState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> {
+class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
   final AuthService auth = AuthService();
   String? user = "Loading";
   String? email = "Loading";
@@ -62,33 +62,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
             height: 15,
           ),
           ListTile(
-            title: const Text("Conta"),
+            title: const Text("Novos pedidos"),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () {
-              print("Conta");
+              print("Novos pedidos");
             },
           ),
           ListTile(
-            title: const Text("Home"),
+            title: const Text("Pedidos aceitos"),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () {
-              print("Home");
+              print("Pedidos aceitos");
             },
           ),
           ListTile(
-            title: const Text("Pedidos"),
+            title: const Text("Pedidos encerrados"),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () {
-              print("Pedidos");
-            },
-          ),
-          ListTile(
-            title: const Text("Meus endereços"),
-            trailing: const Icon(Icons.house),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ListAddress()),
-              );
+              print("Pedidos encerrados");
             },
           ),
           ListTile(

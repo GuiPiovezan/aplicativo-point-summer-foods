@@ -5,6 +5,8 @@ export 'AppBar/custom-appbar.dart';
 // Widget personalizados baseado no Draewr
 export 'Drawer/custom-drawer.dart';
 
+export 'ProductAdditionalModal/product-additional-modal.dart';
+
 // Widgets personalizados baseados no TextButtom
 export 'TextButtons/custom-text-button-yellow.dart';
 export 'TextButtons/custom-text-button.dart';

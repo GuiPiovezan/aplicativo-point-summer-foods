@@ -14,6 +14,7 @@ class ProductException implements Exception {
 
 class ProductService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
+  Map<int, Map<String, dynamic>> itens = Map();
 
   registration(ProductModel model, BuildContext context) {
     var uuid = const Uuid();
@@ -48,12 +49,18 @@ class ProductService extends ChangeNotifier {
         .snapshots();
   }
 
-  getAdditionalByCategory(category) {
-    return firestore
+  getAdditionalByCategory(category) async {
+    await firestore
         .collection('produtos')
         .where("categoria", isEqualTo: category)
         .where("status", isEqualTo: "Ativo")
         .where("tipo", isEqualTo: "Adicional")
-        .snapshots();
+        .get()
+        .then((value) {
+      for (var i = 0; i < value.docs.length; i++) {
+        itens[i] = value.docs[i].data();
+        itens[i]!["check"] = false;
+      }
+    });
   }
 }

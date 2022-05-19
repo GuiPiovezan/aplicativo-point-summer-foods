@@ -93,7 +93,7 @@ class AuthService extends ChangeNotifier {
       await _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        throw AuthException('Email não encontrado. Cadastre-se.');
+        throw AuthException('Usuário não encontrado. Cadastre-se.');
       } else if (e.code == 'wrong-password') {
         throw AuthException('Senha incorreta. Tente novamente');
       }
@@ -126,7 +126,7 @@ class AuthService extends ChangeNotifier {
     _getUser();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const Welcome(),
+        builder: (context) => const Login(),
       ),
     );
   }

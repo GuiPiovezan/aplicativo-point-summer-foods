@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:pointsf/Services/ProductService/product-service.dart';
 
 class ProductAdditionalModal extends StatefulWidget {
   final productPrimary;
-  const ProductAdditionalModal({
+  var itens;
+  ProductAdditionalModal({
     key,
     required this.productPrimary,
+    this.itens,
   }) : super(key: key);
 
   @override
@@ -16,51 +16,51 @@ class ProductAdditionalModal extends StatefulWidget {
 }
 
 class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
+  final ProductService productSertvice = ProductService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setItens();
+  }
+
+  setItens() async {
+    await productSertvice
+        .getAdditionalByCategory(widget.productPrimary["categoria"]);
+    setState(() {
+      widget.itens = productSertvice.itens;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.itens == null) return CircularProgressIndicator();
     return Container(
       child: Column(
         children: [
-          Container(
-            child: Text(widget.productPrimary["nome"]),
-          ),
-          Flexible(
-            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: ProductService()
-                  .getAdditionalByCategory(widget.productPrimary["categoria"]),
-              builder: (_, snapshot) {
-                if (!snapshot.hasData) return const CircularProgressIndicator();
-                return ListView.builder(
-                  itemCount: snapshot.data?.docs.length,
-                  itemBuilder: (_, index) {
-                    return Container(
-                      margin: const EdgeInsets.fromLTRB(15, 15, 15, 10),
-                      height: 57,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color.fromARGB(50, 10, 10, 10),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                        color: Color.fromARGB(255, 255, 217, 65),
-                      ),
-                      child: TextButton(
-                        child: Text(
-                          snapshot.data!.docs[index]["nome"],
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: () {
-                          print(snapshot.data!.docs[index]["nome"]);
-                        },
-                      ),
-                    );
-                  },
-                );
-              },
+          Text(widget.productPrimary["nome"]),
+          Expanded(
+            child: SizedBox(
+              child: ListView.builder(
+                itemCount: widget.itens.length,
+                itemBuilder: (ctx, index) {
+                  return CheckboxListTile(
+                    title: Text(widget.itens[index]["nome"]),
+                    subtitle: Text(
+                      "Este item ${widget.itens[index]['check'] ? '' : 'não '}está selecionado",
+                    ),
+                    value: widget.itens[index]["check"],
+                    onChanged: (newValue) {
+                      setState(() {
+                        widget.itens[index]["check"] = newValue;
+                      });
+                      print(
+                        "Mudou check da palavra ${widget.itens[index]["nome"]}para: $newValue",
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           ),
         ],

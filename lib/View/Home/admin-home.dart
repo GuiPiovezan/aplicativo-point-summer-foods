@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class AdminHome extends StatefulWidget {
@@ -18,6 +15,7 @@ class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawerAdmin(),
       appBar: const CustomAppBarHome(
         title: "Administrativo",
       ),

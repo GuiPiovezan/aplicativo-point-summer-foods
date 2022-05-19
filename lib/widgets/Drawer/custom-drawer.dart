@@ -42,7 +42,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       child: ListView(
         children: <Widget>[
           const SizedBox(
@@ -50,10 +50,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           UserAccountsDrawerHeader(
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 83, 5, 64),
+              color: Color.fromARGB(255, 89, 53, 99),
             ),
             currentAccountPicture: CircleAvatar(
-              child: Text(getFirtsLastLetterFullName()),
+              child: Text(
+                getFirtsLastLetterFullName(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold, 
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 240, 240, 240),
             ),
             accountName: Text(auth.userName!),
             accountEmail: Text(email.toString()),
@@ -62,29 +69,61 @@ class _CustomDrawerState extends State<CustomDrawer> {
             height: 15,
           ),
           ListTile(
-            title: const Text("Conta"),
-            trailing: const Icon(Icons.arrow_forward),
+            title: const Text(
+              "Conta",
+              style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
             onTap: () {
               print("Conta");
             },
           ),
           ListTile(
-            title: const Text("Home"),
-            trailing: const Icon(Icons.arrow_forward),
+            title: const Text(
+              "Home",
+              style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
             onTap: () {
               print("Home");
             },
           ),
           ListTile(
-            title: const Text("Pedidos"),
-            trailing: const Icon(Icons.arrow_forward),
+            title: const Text(
+              "Pedidos",
+              style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
             onTap: () {
               print("Pedidos");
             },
           ),
           ListTile(
-            title: const Text("Meus endereços"),
-            trailing: const Icon(Icons.house),
+            title: const Text(
+              "Meus endereços",
+              style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
+            ),
+            trailing: const Icon(
+              Icons.house,
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const ListAddress()),

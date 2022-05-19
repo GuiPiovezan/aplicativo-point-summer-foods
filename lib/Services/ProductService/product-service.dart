@@ -44,6 +44,16 @@ class ProductService extends ChangeNotifier {
         .collection('produtos')
         .where("categoria", isEqualTo: category)
         .where("status", isEqualTo: "Ativo")
+        .where("tipo", isEqualTo: "Primario")
+        .snapshots();
+  }
+
+  getAdditionalByCategory(category) {
+    return firestore
+        .collection('produtos')
+        .where("categoria", isEqualTo: category)
+        .where("status", isEqualTo: "Ativo")
+        .where("tipo", isEqualTo: "Adicional")
         .snapshots();
   }
 }

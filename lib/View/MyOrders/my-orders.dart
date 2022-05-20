@@ -10,19 +10,35 @@ class MyOrders extends StatelessWidget{
         actions: [Image.asset('images/logo-escrita.png')],
         leading: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_rounded)),
       ),
-      body: Container(
-        child: TextButton(
-          onPressed: (){},
-          child: Container(
-            child: Column(
-              children: [
-                Row(),
-                Row(),
-                Row()
-              ],
+      body: Column(
+        children: [
+          Center(
+            child: Container(
+              
+              width: 345,
+              height: 100,
+              color: Color.fromARGB(255, 102, 19, 131),
+              child: TextButton(
+                onPressed: (){},
+                child: Container(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text("30/Abr"),
+                          Text("id - 1321546861532")
+                          ],
+                      ),
+                      Row(),
+                      Row()
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          Container()
+        ],
       ),
     );
   }

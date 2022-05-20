@@ -77,7 +77,7 @@ class _AddressRegistration extends State<AddressRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Endereço",
       ),

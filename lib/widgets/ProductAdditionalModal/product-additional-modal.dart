@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/ProductService/product-service.dart';
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class ProductAdditionalModal extends StatefulWidget {
   final productPrimary;
@@ -34,7 +35,21 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.itens == null) return CircularProgressIndicator();
+    while (widget.itens == null) {
+      setItens();
+      return ListView(
+        children: [
+          Column(
+            children: [
+              SizedBox(
+                height: 300,
+              ),
+              CircularProgressIndicator(),
+            ],
+          ),
+        ],
+      );
+    }
     return Container(
       color: Color.fromARGB(255, 74, 44, 82),
       child: Column(
@@ -87,6 +102,12 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
             color: Color.fromARGB(255, 240, 240, 240),
             margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
             height: 150,
+            child: CustomTextButton(
+              buttonText: "teste",
+              onPressed: () {
+                print("teste");
+              },
+            ),
           )
         ],
       ),

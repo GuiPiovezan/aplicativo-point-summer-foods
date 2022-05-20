@@ -26,7 +26,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   final TextEditingController _controllerProductPrice = TextEditingController();
 
   void save(BuildContext context) {
-
     ProductModel model = ProductModel(
       categoria: dropDownCategory,
       medida: dropDownUnitOfMeasurement,
@@ -43,8 +42,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          const Color.fromARGB(255, 254, 220, 86), //Cor na tela Toda
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Cadastro de Produtos",
       ),
@@ -69,19 +67,23 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   placeholder: "Nutella",
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   width: 350,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
                       width: 2,
-                      color: const Color.fromARGB(255, 83, 5, 64),
+                      color: const Color.fromARGB(255, 74, 44, 82),
                       style: BorderStyle.solid,
                     ),
                   ),
                   child: DropdownButton(
+                    itemHeight: 70,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 74, 44, 82),
+                    ),
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownType,
                     isExpanded: false,
@@ -90,10 +92,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       textAlign: TextAlign.center,
                     ),
                     elevation: 16,
-                    underline: Container(
-                      height: 2,
-                      color: Colors.purpleAccent,
-                    ),
+                    underline: Container(),
                     onChanged: (String? typeProduct) {
                       setState(() {
                         dropDownType = typeProduct!;
@@ -111,29 +110,30 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   width: 350,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
                       width: 2,
-                      color: const Color.fromARGB(255, 83, 5, 64),
+                      color: const Color.fromARGB(255, 74, 44, 82),
                       style: BorderStyle.solid,
                     ),
                   ),
                   child: DropdownButton(
+                    itemHeight: 70,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 74, 44, 82),
+                    ),
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownStatus,
                     hint: const Text("Selecione o Status do Produto"),
                     isExpanded: false,
                     elevation:
                         16, // decidir para qual lado irá ser elevado o menu quando for clicado
-                    underline: Container(
-                      height: 2,
-                      color: Colors.purpleAccent,
-                    ),
+                    underline: Container(),
                     items: status.map((String status) {
                       return DropdownMenuItem(
                         value: status,
@@ -148,19 +148,23 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   width: 350,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
                       width: 2,
-                      color: const Color.fromARGB(255, 83, 5, 64),
+                      color: const Color.fromARGB(255, 74, 44, 82),
                       style: BorderStyle.solid,
                     ),
                   ),
                   child: DropdownButton(
+                    itemHeight: 70,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 74, 44, 82),
+                    ),
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownCategory,
                     isExpanded: false,
@@ -169,10 +173,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       textAlign: TextAlign.center,
                     ),
                     elevation: 16,
-                    underline: Container(
-                      height: 2,
-                      color: Colors.purpleAccent,
-                    ),
+                    underline: Container(),
                     onChanged: (String? categories) {
                       setState(() {
                         dropDownCategory = categories!;
@@ -193,25 +194,26 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   width: 350,
-                  height: 60,
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     border: Border.all(
                       width: 2,
-                      color: const Color.fromARGB(255, 83, 5, 64),
+                      color: const Color.fromARGB(255, 74, 44, 82),
                       style: BorderStyle.solid,
                     ),
                   ),
                   child: DropdownButton(
+                    itemHeight: 70,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 74, 44, 82),
+                    ),
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownUnitOfMeasurement,
                     isExpanded: false,
                     hint: const Text("Selecione a unidade de medida"),
                     elevation: 16,
-                    underline: Container(
-                      height: 2,
-                      color: Colors.purpleAccent,
-                    ),
+                    underline: Container(),
                     onChanged: (String? measure) {
                       setState(() {
                         dropDownUnitOfMeasurement = measure!;

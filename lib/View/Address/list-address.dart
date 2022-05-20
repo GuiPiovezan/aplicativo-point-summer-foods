@@ -7,7 +7,6 @@ import 'package:pointsf/models/address-model.dart';
 import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/AppBar/custom-appbar.dart';
 
-
 class ListAddress extends StatefulWidget {
   const ListAddress({Key? key}) : super(key: key);
 
@@ -19,6 +18,7 @@ class _ListAddressState extends State<ListAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(title: 'Meus endereços'),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: AddressService().getAddress(),
@@ -39,7 +39,11 @@ class _ListAddressState extends State<ListAddress> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add_location_alt_outlined),
+        backgroundColor: const Color.fromARGB(255, 74, 44, 82),
+        child: const Icon(
+          Icons.add_location_alt_outlined,
+          color: Color.fromARGB(255, 240, 240, 240),
+        ),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(

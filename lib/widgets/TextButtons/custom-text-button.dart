@@ -31,12 +31,7 @@ class CustomTextButton extends StatelessWidget {
           ),
           style: TextButton.styleFrom(
             padding: const EdgeInsets.all(15),
-            backgroundColor: const Color.fromARGB(255, 83, 5, 64),
-            side: const BorderSide(
-              color: Colors.white,
-              width: 2,
-              style: BorderStyle.solid,
-            ),
+            backgroundColor: const Color.fromARGB(255, 74, 44, 82),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(15.0),

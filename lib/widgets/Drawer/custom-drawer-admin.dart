@@ -3,14 +3,14 @@ import 'package:pointsf/Services/AuthService/auth-service.dart';
 
 import 'package:pointsf/View/export-all-view.dart';
 
-class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+class CustomDrawerAdmin extends StatefulWidget {
+  const CustomDrawerAdmin({Key? key}) : super(key: key);
 
   @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
+  State<CustomDrawerAdmin> createState() => _CustomDrawerAdminState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> {
+class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
   final AuthService auth = AuthService();
   String? user = "Loading";
   String? email = "Loading";
@@ -57,10 +57,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 getFirtsLastLetterFullName(),
                 style: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.bold, 
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 240, 240, 240),
             ),
             accountName: Text(auth.userName!),
             accountEmail: Text(email.toString()),
@@ -70,63 +69,69 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           ListTile(
             title: const Text(
-              "Conta",
+              "Novos pedidos",
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
             trailing: const Icon(
               Icons.arrow_forward,
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
             ),
             onTap: () {
-              print("Conta");
+              print("Novos pedidos");
             },
           ),
           ListTile(
             title: const Text(
-              "Home",
+              "Pedidos aceitos",
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
             trailing: const Icon(
               Icons.arrow_forward,
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
             ),
             onTap: () {
-              print("Home");
+              print("Pedidos aceitos");
             },
           ),
           ListTile(
             title: const Text(
-              "Pedidos",
+              "Pedidos encerrados",
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
             trailing: const Icon(
               Icons.arrow_forward,
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
             ),
             onTap: () {
-              print("Pedidos");
+              print("Pedidos encerrados");
             },
           ),
           ListTile(
             title: const Text(
-              "Meus endereços",
+              "Cadastro de produtos",
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
             trailing: const Icon(
               Icons.house,
-              color: Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
             ),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const ListAddress()),
+                MaterialPageRoute(
+                  builder: (context) => const ProductRegistration(),
+                ),
               );
             },
           ),

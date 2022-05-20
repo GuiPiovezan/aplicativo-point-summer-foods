@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class Home extends StatefulWidget {
@@ -14,35 +11,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
-  var _email;
-  var _user;
-
-  @override
-  void initState() {
-    super.initState();
-    _email = auth.currentUser!.email;
-    firestore
-        .collection("usuarios")
-        .where("uid", isEqualTo: auth.currentUser!.uid)
-        .get()
-        .then((event) {
-      setState(() {
-        _user = event.docs[0]["nome"];
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(
-        email: _email,
-        user: _user,
-      ),
-      appBar: const CustomAppBarHome(
-        icon: Icon(Icons.man_sharp),
+      backgroundColor: Color.fromARGB(255, 240, 240, 240),
+      drawer: CustomDrawer(),
+      appBar: CustomAppBarHome(
+        icon: Icon(
+          Icons.man_sharp,
+          color: Color.fromARGB(255, 240, 240, 240),
+        ),
         title: "Rua João Silva, SP",
       ),
       body: PageView(

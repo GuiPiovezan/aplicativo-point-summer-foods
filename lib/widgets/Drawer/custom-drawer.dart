@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:pointsf/Services/AuthService/auth-service.dart';
 
 import 'package:pointsf/View/export-all-view.dart';
@@ -57,7 +58,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 getFirtsLastLetterFullName(),
                 style: TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.bold, 
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               backgroundColor: Color.fromARGB(255, 240, 240, 240),
@@ -95,7 +96,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
-              print("Home");
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const Home()),
+              );
             },
           ),
           ListTile(
@@ -110,7 +113,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
-              print("Pedidos");
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MyOrders()),
+              );
             },
           ),
           ListTile(

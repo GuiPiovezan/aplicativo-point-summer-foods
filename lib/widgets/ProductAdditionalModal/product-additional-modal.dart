@@ -36,12 +36,32 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
   Widget build(BuildContext context) {
     if (widget.itens == null) return CircularProgressIndicator();
     return Container(
+      color: Color.fromARGB(255, 74, 44, 82),
       child: Column(
         children: [
-          Text(widget.productPrimary["nome"]),
+          Container(
+            padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
+            child: Text(
+              widget.productPrimary["nome"],
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+                color: Color.fromARGB(255, 240, 240, 240),
+              ),
+            ),
+          ),
           Expanded(
-            child: SizedBox(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(10, 5, 10, 0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 240, 240, 240),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
               child: ListView.builder(
+                shrinkWrap: true,
                 itemCount: widget.itens.length,
                 itemBuilder: (ctx, index) {
                   return CheckboxListTile(
@@ -63,6 +83,11 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
               ),
             ),
           ),
+          Container(
+            color: Color.fromARGB(255, 240, 240, 240),
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            height: 150,
+          )
         ],
       ),
     );

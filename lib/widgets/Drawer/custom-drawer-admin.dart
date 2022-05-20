@@ -42,7 +42,7 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       child: ListView(
         children: <Widget>[
           const SizedBox(
@@ -50,10 +50,16 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
           ),
           UserAccountsDrawerHeader(
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 83, 5, 64),
+              color: Color.fromARGB(255, 89, 53, 99),
             ),
             currentAccountPicture: CircleAvatar(
-              child: Text(getFirtsLastLetterFullName()),
+              child: Text(
+                getFirtsLastLetterFullName(),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             accountName: Text(auth.userName!),
             accountEmail: Text(email.toString()),
@@ -62,29 +68,65 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
             height: 15,
           ),
           ListTile(
-            title: const Text("Novos pedidos"),
-            trailing: const Icon(Icons.arrow_forward),
+            title: const Text(
+              "Novos pedidos",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Colors.black,
+            ),
             onTap: () {
               print("Novos pedidos");
             },
           ),
           ListTile(
-            title: const Text("Pedidos aceitos"),
-            trailing: const Icon(Icons.arrow_forward),
+            title: const Text(
+              "Pedidos aceitos",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Colors.black,
+            ),
             onTap: () {
               print("Pedidos aceitos");
             },
           ),
           ListTile(
-            title: const Text("Pedidos encerrados"),
-            trailing: const Icon(Icons.arrow_forward),
+            title: const Text(
+              "Pedidos encerrados",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Colors.black,
+            ),
             onTap: () {
               print("Pedidos encerrados");
             },
           ),
           ListTile(
-            title: const Text("Cadastro de produtos"),
-            trailing: const Icon(Icons.house),
+            title: const Text(
+              "Cadastro de produtos",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: const Icon(
+              Icons.house,
+              color: Colors.black,
+            ),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(

@@ -4,11 +4,9 @@ import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/address-model.dart';
 import 'package:pointsf/models/cep-model.dart';
-
 import 'package:pointsf/Services/AddressService/address-service.dart';
 import 'package:pointsf/Services/AddressService/cep-service.dart';
 import 'package:pointsf/Services/ControlerService/address-controler-service.dart';
-
 import 'package:pointsf/widgets/export-widgets.dart';
 
 import 'package:brasil_fields/brasil_fields.dart';

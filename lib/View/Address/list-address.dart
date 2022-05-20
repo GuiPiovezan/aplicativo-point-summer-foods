@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:pointsf/Services/AddressService/address-service.dart';
 import 'package:pointsf/models/address-model.dart';
+import 'package:pointsf/Services/AddressService/address-service.dart';
 import 'package:pointsf/View/export-all-view.dart';
 import 'package:pointsf/widgets/AppBar/custom-appbar.dart';
 

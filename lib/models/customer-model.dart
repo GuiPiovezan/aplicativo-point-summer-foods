@@ -5,12 +5,13 @@ class CustomerModel {
   String? uid;
   bool? admin;
 
-  CustomerModel(
-      {required this.nome,
-      required this.telefone,
-      required this.cpf,
-      required this.uid,
-      required this.admin});
+  CustomerModel({
+    required this.nome,
+    required this.telefone,
+    required this.cpf,
+    required this.uid,
+    required this.admin,
+  });
 
   CustomerModel.fromMap(Map<String, dynamic> map) {
     nome = map['nome'];

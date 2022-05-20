@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:pointsf/models/cep-model.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import 'package:pointsf/models/cep-model.dart';
 
 class CepException implements Exception {
   String message;

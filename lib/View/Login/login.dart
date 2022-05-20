@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 
 import 'package:pointsf/Services/AuthService/auth-service.dart';
@@ -24,8 +25,9 @@ class _LoginState extends State<Login> {
       try {
         await AuthService().login(email!, senha!, context);
       } on AuthException catch (e) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(e.message)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)),
+        );
       }
     }
   }
@@ -39,8 +41,7 @@ class _LoginState extends State<Login> {
           elevation: 0,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Color.fromARGB(255, 74, 44, 82),
-            statusBarIconBrightness:
-                Brightness.light,
+            statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
           ),
         ),

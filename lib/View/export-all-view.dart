@@ -2,6 +2,9 @@
 export 'package:pointsf/View/CustomerRegistration/customer-registration.dart';
 export 'package:pointsf/View/CustomerRegistration/address-registration.dart';
 
+//Carrinho de compras
+export 'package:pointsf/View/Cart/cart.dart';
+
 //Cadastro de Produto
 export 'package:pointsf/View/ProductRegistration/product-registration.dart';
 

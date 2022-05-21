@@ -2,6 +2,9 @@
 export 'AppBar/custom-appbar-home.dart';
 export 'AppBar/custom-appbar.dart';
 
+// Widget da pagina de rendenização do carrinho
+export 'CartRenderPage/cart-render-page.dart';
+
 // Widget personalizados baseado no Draewr
 export 'Drawer/custom-drawer-admin.dart';
 export 'Drawer/custom-drawer.dart';

@@ -20,7 +20,7 @@ class CustomTextButton extends StatelessWidget {
       child: Container(
         height: heigth != null ? double?.parse(heigth.toString()) : 52,
         width: width != null ? double?.parse(width.toString()) : 300,
-        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: TextButton(
           onPressed: onPressed,
           child: Text(

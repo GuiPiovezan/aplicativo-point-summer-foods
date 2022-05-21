@@ -14,6 +14,9 @@ class CartException implements Exception {
 
 class CartService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
+  final AuthService auth = AuthService();
+
+  Map<int, Map<String, dynamic>> cartItens = Map();
 
   _addItemInCard(CartItem item) async {
     var uuid = const Uuid();
@@ -21,13 +24,14 @@ class CartService extends ChangeNotifier {
 
     await firestore
         .collection('usuarios')
-        .doc(AuthService().getUid())
+        .doc(auth.getUid())
         .collection("carrinho")
         .doc(uidProduct)
         .set({
       "produto": item.name,
       "preco": item.price,
       "quantidade": item.amount,
+      "uid": uidProduct,
     });
 
     if (item.additional!.isNotEmpty) {
@@ -36,7 +40,7 @@ class CartService extends ChangeNotifier {
 
         await firestore
             .collection("usuarios")
-            .doc(AuthService().getUid())
+            .doc(auth.getUid())
             .collection("carrinho")
             .doc(uidProduct)
             .collection("adicionais")
@@ -44,6 +48,7 @@ class CartService extends ChangeNotifier {
             .set({
           "adicional": item.additional![i]["nome"],
           "preco": item.additional![i]["preco"],
+          "uid": uidAdditional,
         });
       }
     }
@@ -76,5 +81,50 @@ class CartService extends ChangeNotifier {
       price: price,
     );
     _addItemInCard(item);
+  }
+
+  setCart() async {
+    await firestore
+        .collection("usuarios")
+        .doc(auth.getUid())
+        .collection("carrinho")
+        .get()
+        .then((value) {
+      for (var i = 0; i < value.docs.length; i++) {
+        cartItens[i] = value.docs[i].data();
+      }
+    });
+
+    for (var i = 0; i < cartItens.length; i++) {
+      // cartItens[i] = value.docs[i].data();
+      Map<int, Map<String, dynamic>> additionalItem = Map();
+
+      await firestore
+          .collection("usuarios")
+          .doc(auth.getUid())
+          .collection("carrinho")
+          .doc(cartItens[i]!["uid"])
+          .collection("adicionais")
+          .get()
+          .then((value) {
+        for (var x = 0; x < value.docs.length; x++) {
+          additionalItem[x] = value.docs[x].data();
+        }
+        cartItens[i]!["adicionais"] = additionalItem;
+      });
+    }
+  }
+
+  getCart() {
+    return this.cartItens;
+  }
+
+  removeItemFromCard(itemUid) {
+    firestore
+        .collection("usuarios")
+        .doc(auth.getUid())
+        .collection("carrinho")
+        .doc(itemUid)
+        .delete();
   }
 }

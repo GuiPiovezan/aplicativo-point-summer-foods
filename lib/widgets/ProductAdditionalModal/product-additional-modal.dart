@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/Services/CartService/cart-service.dart';
 
 import 'package:pointsf/Services/ProductService/product-service.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
@@ -103,9 +104,14 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
             margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
             height: 150,
             child: CustomTextButton(
-              buttonText: "teste",
+              buttonText: "Adicionar",
               onPressed: () {
-                print("teste");
+                CartService().setCartItem(
+                  widget.productPrimary["nome"],
+                  widget.itens,
+                  1,
+                  widget.productPrimary["preco"],
+                );
               },
             ),
           )

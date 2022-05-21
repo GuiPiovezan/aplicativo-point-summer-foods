@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:pointsf/View/Cart/cart.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class Home extends StatefulWidget {
@@ -19,10 +20,10 @@ class _HomeState extends State<Home> {
       drawer: CustomDrawer(),
       appBar: CustomAppBarHome(
         icon: Icon(
-          Icons.man_sharp,
+          Icons.screen_search_desktop_sharp,
           color: Color.fromARGB(255, 240, 240, 240),
         ),
-        title: "Rua João Silva, SP",
+        title: " Cardapio",
       ),
       body: PageView(
         children: [
@@ -36,6 +37,20 @@ class _HomeState extends State<Home> {
             category: "Porções",
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 74, 44, 82),
+        child: const Icon(
+          Icons.shopping_cart,
+          color: Color.fromARGB(255, 240, 240, 240),
+        ),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: ((context) => Cart()),
+            ),
+          );
+        },
       ),
     );
   }

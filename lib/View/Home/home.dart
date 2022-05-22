@@ -27,6 +27,16 @@ class _HomeState extends State<Home> {
         title: " Cardapio",
       ),
       body: PageView(
+        onPageChanged: (int page) {
+          setState(() {
+            indexNavigatorBar = page;
+          });
+          _pageController.animateToPage(
+            page,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
+        },
         controller: _pageController,
         children: const <Widget>[
           ProductPage(

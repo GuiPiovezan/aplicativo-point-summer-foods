@@ -46,7 +46,11 @@ class ProductPage extends StatelessWidget {
                       child: TextButton(
                         child: Text(
                           snapshot.data!.docs[index]["nome"],
-                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                         onPressed: () {
                           showBarModalBottomSheet(

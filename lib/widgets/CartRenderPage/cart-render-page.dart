@@ -83,9 +83,12 @@ class _CartPageState extends State<CartPage> {
                         itemBuilder: (ctx, index) {
                           return Container(
                             // color: Colors.amber,
-                            color: Color.fromARGB(255, 230, 230, 230),
                             margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
                             padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 225, 225, 225),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
                             child: Row(
                               children: [
                                 Expanded(

@@ -12,7 +12,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  final PageController _pageController = PageController();
+  int indexNavigatorBar = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
         title: " Cardapio",
       ),
       body: PageView(
+        controller: _pageController,
         children: [
           ProductPage(
             category: "Açai",
@@ -51,6 +53,49 @@ class _HomeState extends State<Home> {
             ),
           );
         },
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 74, 44, 82),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.elliptical(500, 50),
+            topRight: Radius.elliptical(500, 50),
+          ),
+        ),
+        child: BottomNavigationBar(
+          onTap: (int page) {
+            setState(() {
+              indexNavigatorBar = page;
+            });
+            _pageController.animateToPage(
+              page,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeIn,
+            );
+          },
+          currentIndex: indexNavigatorBar,
+          elevation: 0,
+          backgroundColor: Color.fromARGB(0, 0, 0, 0),
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          fixedColor: Colors.green,
+          unselectedItemColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.icecream_outlined),
+              label: "Açaí",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.fastfood_outlined),
+              label: "Salgado",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.local_drink_rounded),
+              label: "Porçoes",
+            ),
+          ],
+        ),
       ),
     );
   }

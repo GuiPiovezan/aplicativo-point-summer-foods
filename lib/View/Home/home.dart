@@ -17,9 +17,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 240, 240),
-      drawer: CustomDrawer(),
-      appBar: CustomAppBarHome(
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+      drawer: const CustomDrawer(),
+      appBar: const CustomAppBarHome(
         icon: Icon(
           Icons.screen_search_desktop_sharp,
           color: Color.fromARGB(255, 240, 240, 240),
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
       ),
       body: PageView(
         controller: _pageController,
-        children: [
+        children: const <Widget>[
           ProductPage(
             category: "Açai",
           ),
@@ -49,14 +49,14 @@ class _HomeState extends State<Home> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: ((context) => Cart()),
+              builder: ((context) => const Cart()),
             ),
           );
         },
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+        decoration: const BoxDecoration(
           color: Color.fromARGB(255, 74, 44, 82),
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(500, 50),
@@ -70,18 +70,18 @@ class _HomeState extends State<Home> {
             });
             _pageController.animateToPage(
               page,
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.easeIn,
             );
           },
           currentIndex: indexNavigatorBar,
           elevation: 0,
-          backgroundColor: Color.fromARGB(0, 0, 0, 0),
+          backgroundColor: const Color.fromARGB(0, 0, 0, 0),
           showSelectedLabels: true,
           showUnselectedLabels: false,
           fixedColor: Colors.green,
           unselectedItemColor: Colors.white,
-          items: [
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.icecream_outlined),
               label: "Açaí",

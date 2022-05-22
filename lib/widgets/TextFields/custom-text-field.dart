@@ -16,25 +16,26 @@ class CustomTextField extends StatelessWidget {
   List<TextInputFormatter>? inputFormatters;
 
   CustomTextField({
+    Key? key,
     this.controller,
     this.labelText,
     this.placeholder,
     this.width,
-    this.heigth,
+    this.heigth = 70,
     this.inputType,
     this.enable = true,
     this.onSaved,
     this.validator,
     this.inputFormatters,
     this.obscureText = false,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-        child: Container(
+        child: SizedBox(
           height: heigth != null
               ? validator != null
                   ? double?.parse(heigth.toString()) + 30

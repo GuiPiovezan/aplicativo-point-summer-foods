@@ -37,7 +37,7 @@ class _AddressRegistration extends State<AddressRegistration> {
         cep: controller.cep!.text,
         cidade: controller.city!.text,
         complemento: controller.complement!.text,
-        logradouro: controller.street!.text, 
+        logradouro: controller.street!.text,
         numero: controller.number!.text,
         uid: null,
       );
@@ -104,11 +104,14 @@ class _AddressRegistration extends State<AddressRegistration> {
                 const SizedBox(
                   width: 15,
                 ),
-                CustomTextButton(
-                  buttonText: "Buscar",
-                  onPressed: searchCEP,
-                  width: 100,
-                  heigth: 70,
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
+                  child: CustomTextButton(
+                    buttonText: "Buscar",
+                    onPressed: searchCEP,
+                    width: 100,
+                    heigth: 70,
+                  ),
                 ),
               ],
             ),
@@ -143,9 +146,12 @@ class _AddressRegistration extends State<AddressRegistration> {
               placeholder: 'São José do Rio Preto',
               enable: enableCity,
             ),
-            CustomTextButton(
-              buttonText: "Cadastrar",
-              onPressed: () => save(context),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: CustomTextButton(
+                buttonText: "Cadastrar",
+                onPressed: () => save(context),
+              ),
             ),
           ],
         ),

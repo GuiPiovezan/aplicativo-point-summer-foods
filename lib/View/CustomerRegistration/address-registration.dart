@@ -28,6 +28,7 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableComplement = false;
   bool enableDistrict = false;
   bool enableCity = false;
+  bool enableName = false;
   String cepSearched = "";
 
   void save(BuildContext context) async {
@@ -38,6 +39,7 @@ class _AddressRegistration extends State<AddressRegistration> {
         cidade: controller.city!.text,
         complemento: controller.complement!.text,
         logradouro: controller.street!.text,
+        nome: controller.name!.text,
         numero: controller.number!.text,
         uid: null,
       );
@@ -54,13 +56,17 @@ class _AddressRegistration extends State<AddressRegistration> {
       CepModel result = cepService.getCEP();
       controller.setValue(result);
     } on CepException catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message),
+        ),
+      );
     }
 
     setState(() {
       controller.city ?? "";
       enableNumber = true;
+      enableName = true;
       controller.city!.text != "" ? enableCity = false : enableCity = true;
       controller.complement!.text != ""
           ? enableComplement = false
@@ -114,6 +120,12 @@ class _AddressRegistration extends State<AddressRegistration> {
                   ),
                 ),
               ],
+            ),
+            CustomTextField(
+              controller: controller.name,
+              labelText: 'Nome do endereço',
+              placeholder: 'Ex. Trabalho',
+              enable: enableName,
             ),
             CustomTextField(
               controller: controller.street,

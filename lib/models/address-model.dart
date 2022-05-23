@@ -4,6 +4,7 @@ class AddressModel {
   String? cidade;
   String? complemento;
   String? logradouro;
+  String? nome;
   String? numero;
   String? uid;
 
@@ -13,6 +14,7 @@ class AddressModel {
     required this.cidade,
     required this.complemento,
     required this.logradouro,
+    required this.nome,
     required this.numero,
     required this.uid,
   });
@@ -23,6 +25,7 @@ class AddressModel {
     cidade = map['cidade'];
     complemento = map['complemento'];
     logradouro = map['logradouro'];
+    nome = map["nome"];
     numero = map['numero'];
     uid = map['uid'];
   }

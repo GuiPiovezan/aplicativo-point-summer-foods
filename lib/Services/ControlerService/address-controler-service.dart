@@ -8,11 +8,12 @@ class ControllerException implements Exception {
 class AddressControllerService extends TextEditingController {
   String? page;
   TextEditingController? cep;
-  TextEditingController? street;
-  TextEditingController? number;
+  TextEditingController? city;
   TextEditingController? complement;
   TextEditingController? district;
-  TextEditingController? city;
+  TextEditingController? name;
+  TextEditingController? number;
+  TextEditingController? street;
 
   AddressControllerService() {
     _addressControllerService();
@@ -20,11 +21,12 @@ class AddressControllerService extends TextEditingController {
 
   _addressControllerService() {
     cep = TextEditingController();
-    street = TextEditingController();
-    number = TextEditingController();
+    city = TextEditingController();
     complement = TextEditingController();
     district = TextEditingController();
-    city = TextEditingController();
+    name = TextEditingController();
+    number = TextEditingController();
+    street = TextEditingController();
   }
 
   setValue(result) {

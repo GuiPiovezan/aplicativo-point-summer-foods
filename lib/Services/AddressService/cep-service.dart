@@ -38,6 +38,9 @@ class CepService extends ChangeNotifier {
       print('Resposta:' + response.body);
 
       Map<String, dynamic> resultingData = await json.decode(response.body);
+      
+      if (!resultingData.containsKey('erro'))
+        return throw "Cep não existe";
 
       model!.bairro = resultingData["bairro"];
       model!.cep = resultingData["cep"];

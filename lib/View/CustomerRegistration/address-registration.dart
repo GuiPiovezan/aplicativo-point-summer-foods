@@ -126,12 +126,24 @@ class _AddressRegistration extends State<AddressRegistration> {
               labelText: 'Nome do endereço',
               placeholder: 'Ex. Trabalho',
               enable: enableName,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Campo nome é obrigatorio!";
+                }
+                return null;
+              },
             ),
             CustomTextField(
               controller: controller.street,
               labelText: 'Logradouro',
               placeholder: 'Rua José Pereira',
               enable: enableStreet,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Campo nome é obrigatorio!";
+                }
+                return null;
+              },
             ),
             CustomTextField(
               controller: controller.number,
@@ -139,24 +151,48 @@ class _AddressRegistration extends State<AddressRegistration> {
               placeholder: '547',
               inputType: TextInputType.number,
               enable: enableNumber,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Campo nome é obrigatorio!";
+                }
+                return null;
+              },
             ),
             CustomTextField(
               controller: controller.complement,
               labelText: 'Complemento',
               placeholder: 'Apartamento 13',
               enable: enableComplement,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Campo nome é obrigatorio!";
+                }
+                return null;
+              },
             ),
             CustomTextField(
               controller: controller.district,
               labelText: 'Bairro',
               placeholder: 'Jardim das Flores',
               enable: enableDistrict,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Campo nome é obrigatorio!";
+                }
+                return null;
+              },
             ),
             CustomTextField(
               controller: controller.city,
               labelText: 'Cidade',
               placeholder: 'São José do Rio Preto',
               enable: enableCity,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "Campo nome é obrigatorio!";
+                }
+                return null;
+              },
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),

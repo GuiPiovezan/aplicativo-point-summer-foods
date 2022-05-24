@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 
+import 'package:pointsf/models/customer-model.dart';
 import 'package:pointsf/Services/AuthService/auth-service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-import 'package:pointsf/models/customer-model.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 import 'package:brasil_fields/brasil_fields.dart';
@@ -32,6 +32,7 @@ class CustomerRegistration extends StatelessWidget {
         uid: null,
         telefone: telefone,
         cpf: cpf,
+        admin: false,
       );
 
       AuthService().register(email, senha, model, context);
@@ -41,7 +42,7 @@ class CustomerRegistration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Customer Register",
       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pointsf/View/Cart/cart.dart';
 import 'package:pointsf/widgets/export-widgets.dart';
 
 class Home extends StatefulWidget {
@@ -14,39 +12,33 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final firestore = FirebaseFirestore.instance;
-  var _email;
-  var _user;
-
-  @override
-  void initState() {
-    super.initState();
-    _email = auth.currentUser!.email;
-    firestore
-        .collection("usuarios")
-        .where("uid", isEqualTo: auth.currentUser!.uid)
-        .get()
-        .then((event) {
-      setState(() {
-        _user = event.docs[0]["nome"];
-      });
-    });
-  }
-
+  final PageController _pageController = PageController();
+  int indexNavigatorBar = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(
-        email: _email,
-        user: _user,
-      ),
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+      drawer: const CustomDrawer(),
       appBar: const CustomAppBarHome(
-        icon: Icon(Icons.man_sharp),
-        title: "Rua João Silva, SP",
+        icon: Icon(
+          Icons.screen_search_desktop_sharp,
+          color: Color.fromARGB(255, 240, 240, 240),
+        ),
+        title: " Cardapio",
       ),
       body: PageView(
-        children: [
+        onPageChanged: (int page) {
+          setState(() {
+            indexNavigatorBar = page;
+          });
+          _pageController.animateToPage(
+            page,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
+        },
+        controller: _pageController,
+        children: const <Widget>[
           ProductPage(
             category: "Açai",
           ),
@@ -57,6 +49,63 @@ class _HomeState extends State<Home> {
             category: "Porções",
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromARGB(255, 74, 44, 82),
+        child: const Icon(
+          Icons.shopping_cart,
+          color: Color.fromARGB(255, 240, 240, 240),
+        ),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: ((context) => const Cart()),
+            ),
+          );
+        },
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 74, 44, 82),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.elliptical(500, 50),
+            topRight: Radius.elliptical(500, 50),
+          ),
+        ),
+        child: BottomNavigationBar(
+          onTap: (int page) {
+            setState(() {
+              indexNavigatorBar = page;
+            });
+            _pageController.animateToPage(
+              page,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeIn,
+            );
+          },
+          currentIndex: indexNavigatorBar,
+          elevation: 0,
+          backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          fixedColor: Colors.green,
+          unselectedItemColor: Colors.white,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.icecream_outlined),
+              label: "Açaí",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.fastfood_outlined),
+              label: "Salgado",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.local_drink_rounded),
+              label: "Porçoes",
+            ),
+          ],
+        ),
       ),
     );
   }

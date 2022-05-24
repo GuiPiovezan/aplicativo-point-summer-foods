@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:pointsf/models/customer-model.dart';
@@ -15,6 +16,7 @@ class AuthService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
   User? user;
   bool isLoading = true;
+  String? userName = "Loading";
 
   AuthService() {
     _authCheck();
@@ -33,8 +35,31 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
+  setUserName() {
+    if (userName != "Loading") return null;
+    firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      userName = event['nome'] != null ? event['nome'].toString() : "erro";
+    });
+  }
+
   getUid() {
     return _auth.currentUser!.uid;
+  }
+
+  getUser() {
+    return _auth.currentUser;
+  }
+
+  getUserEmail() {
+    return _auth.currentUser!.email;
+  }
+
+  getUserName() {
+    return userName;
   }
 
   register(String email, String senha, CustomerModel model,
@@ -54,6 +79,7 @@ class AuthService extends ChangeNotifier {
       "uid": user!.uid,
       "telefone": model.telefone,
       "cpf": model.cpf,
+      "admin": model.admin,
     });
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -65,7 +91,7 @@ class AuthService extends ChangeNotifier {
   login(String email, String senha, BuildContext context) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: senha);
-      _getUser();
+      await _getUser();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw AuthException('Usuário não encontrado. Cadastre-se.');
@@ -73,10 +99,27 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const Home()),
-      (route) => false,
-    );
+    
+    bool admin = false;
+    await firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      admin = event['admin'] ?? false;
+    });
+
+    if (admin) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => AdminHome()),
+        (route) => false,
+      );
+    } else {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => Home()),
+        (route) => false,
+      );
+    }
   }
 
   logout(BuildContext context) async {

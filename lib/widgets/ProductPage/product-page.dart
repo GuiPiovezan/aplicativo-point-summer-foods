@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:pointsf/Services/ProductService/product-service.dart';
+import 'package:pointsf/widgets/export-widgets.dart';
 
 class ProductPage extends StatelessWidget {
-  final String? category;
+  final String category;
 
   const ProductPage({
     Key? key,
@@ -39,15 +41,24 @@ class ProductPage extends StatelessWidget {
                             offset: Offset(0, 3),
                           ),
                         ],
-                        color: Color.fromARGB(255, 255, 217, 65),
+                        color: Color.fromARGB(255, 240, 240, 240),
                       ),
                       child: TextButton(
                         child: Text(
                           snapshot.data!.docs[index]["nome"],
-                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                         onPressed: () {
-                          print(snapshot.data!.docs[index]["uid"]);
+                          showBarModalBottomSheet(
+                            context: context,
+                            builder: (context) => ProductAdditionalModal(
+                              productPrimary: snapshot.data!.docs[index],
+                            ),
+                          );
                         },
                       ),
                     );
@@ -58,7 +69,7 @@ class ProductPage extends StatelessWidget {
           ),
         ],
       ),
-      color: const Color.fromARGB(255, 254, 220, 86),
+      color: const Color.fromARGB(255, 240, 240, 240),
     );
   }
 }

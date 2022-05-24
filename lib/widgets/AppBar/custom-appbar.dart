@@ -36,7 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Container(
               margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
               child: Image.asset(
-                'images/logo-escrita.png',
+                'assets/images/logo-escrita.png',
               ),
             ),
           ],

@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 child: Image.asset(
-                  'images/logo-sem-fundo.png',
+                  'assets/images/logo-sem-fundo.png',
                   height: 250,
                 ),
               ),

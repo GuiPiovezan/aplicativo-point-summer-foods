@@ -7,7 +7,7 @@ class MyOrders extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 102, 19, 131),
         title: Text("Meus Pedidos"),
-        actions: [Image.asset('images/logo-escrita.png')],
+        actions: [Image.asset('assets/images/logo-escrita.png')],
         leading: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_rounded)),
       ),
       body: Column(

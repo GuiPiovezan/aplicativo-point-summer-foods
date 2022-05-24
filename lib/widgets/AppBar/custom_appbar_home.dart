@@ -92,7 +92,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      preferredSize: Size.fromHeight(80),
+      preferredSize: const Size.fromHeight(80),
     );
   }
 

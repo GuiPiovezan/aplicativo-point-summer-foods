@@ -46,7 +46,7 @@ class ProductPage extends StatelessWidget {
                       child: TextButton(
                         child: Text(
                           snapshot.data!.docs[index]["nome"],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,

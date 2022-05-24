@@ -55,7 +55,7 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
             currentAccountPicture: CircleAvatar(
               child: Text(
                 getFirtsLastLetterFullName(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),

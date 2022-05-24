@@ -56,12 +56,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
             currentAccountPicture: CircleAvatar(
               child: Text(
                 getFirtsLastLetterFullName(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              backgroundColor: Color.fromARGB(255, 240, 240, 240),
+              backgroundColor: const Color.fromARGB(255, 240, 240, 240),
             ),
             accountName: Text(auth.userName!),
             accountEmail: Text(email.toString()),

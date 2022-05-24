@@ -54,7 +54,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
       return ListView(
         children: [
           Column(
-            children: [
+            children: const <Widget>[
               SizedBox(
                 height: 300,
               ),
@@ -65,15 +65,15 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
       );
     }
     return Container(
-      color: Color.fromARGB(255, 74, 44, 82),
+      color: const Color.fromARGB(255, 74, 44, 82),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
+            padding: const EdgeInsets.fromLTRB(15, 20, 15, 20),
             child: Text(
               widget.productPrimary["nome"],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
                 color: Color.fromARGB(255, 240, 240, 240),
@@ -82,8 +82,8 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.fromLTRB(10, 5, 10, 0),
-              decoration: BoxDecoration(
+              margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 240, 240, 240),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
@@ -115,23 +115,23 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
             ),
           ),
           Container(
-            color: Color.fromARGB(255, 240, 240, 240),
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+            color: const Color.fromARGB(255, 240, 240, 240),
+            margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 200, 200, 200),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(15),
                           bottomLeft: Radius.circular(15),
                         ),
                       ),
-                      padding: EdgeInsets.fromLTRB(7, 7, 0, 7),
+                      padding: const EdgeInsets.fromLTRB(7, 7, 0, 7),
                       child: CustomTextButton(
                         buttonText: "-",
                         onPressed: _decrementItemAmount,
@@ -140,28 +140,28 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
                       ),
                     ),
                     Container(
-                      color: Color.fromARGB(255, 200, 200, 200),
-                      padding: EdgeInsets.fromLTRB(0, 7, 0, 7),
+                      color: const Color.fromARGB(255, 200, 200, 200),
+                      padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
                       height: 66,
                       width: 52,
                       child: Center(
                         child: Text(
                           _itemAmount.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                           ),
                         ),
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color.fromARGB(255, 200, 200, 200),
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(15),
                           bottomRight: Radius.circular(15),
                         ),
                       ),
-                      padding: EdgeInsets.fromLTRB(0, 7, 7, 7),
+                      padding: const EdgeInsets.fromLTRB(0, 7, 7, 7),
                       child: CustomTextButton(
                         buttonText: "+",
                         onPressed: _incrementItemAmount,
@@ -172,7 +172,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   child: CustomTextButton(
                     buttonText: "Adicionar",
                     onPressed: () {
@@ -186,7 +186,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
                     },
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 )
               ],

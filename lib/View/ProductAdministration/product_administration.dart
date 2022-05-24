@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:pointsf/widgets/export_widgets.dart';
 
-class ProductAdministrationPage extends StatefulWidget {
-  const ProductAdministrationPage({Key? key}) : super(key: key);
+class ProductAdministration extends StatefulWidget {
+  const ProductAdministration({Key? key}) : super(key: key);
 
   @override
-  State<ProductAdministrationPage> createState() => _ProductAdministrationPageState();
+  State<ProductAdministration> createState() => _ProductAdministrationState();
 }
 
-class _ProductAdministrationPageState extends State<ProductAdministrationPage> {
+class _ProductAdministrationState extends State<ProductAdministration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final PageController _pageController = PageController();
   int indexNavigatorBar = 0;
@@ -33,13 +33,13 @@ class _ProductAdministrationPageState extends State<ProductAdministrationPage> {
         },
         controller: _pageController,
         children: const <Widget>[
-          ProductPage(
+          ProductAdministrationPage(
             category: "Açai",
           ),
-          ProductPage(
+          ProductAdministrationPage(
             category: "Salgados",
           ),
-          ProductPage(
+          ProductAdministrationPage(
             category: "Porções",
           ),
         ],

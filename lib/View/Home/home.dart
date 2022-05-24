@@ -14,6 +14,7 @@ class _HomeState extends State<Home> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final PageController _pageController = PageController();
   int indexNavigatorBar = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +32,6 @@ class _HomeState extends State<Home> {
           setState(() {
             indexNavigatorBar = page;
           });
-          _pageController.animateToPage(
-            page,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeIn,
-          );
         },
         controller: _pageController,
         children: const <Widget>[
@@ -74,14 +70,12 @@ class _HomeState extends State<Home> {
           ),
         ),
         child: BottomNavigationBar(
-          onTap: (int page) {
+          onTap: (int index) {
             setState(() {
-              indexNavigatorBar = page;
+              indexNavigatorBar = index;
             });
-            _pageController.animateToPage(
-              page,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeIn,
+            _pageController.jumpToPage(
+              index,
             );
           },
           currentIndex: indexNavigatorBar,

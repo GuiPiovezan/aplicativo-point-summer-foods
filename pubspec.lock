@@ -219,7 +219,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-<<<<<<< HEAD
   lint:
     dependency: transitive
     description:
@@ -227,8 +226,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
-=======
->>>>>>> homeapp
   lints:
     dependency: transitive
     description:
@@ -271,7 +268,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
-<<<<<<< HEAD
   petitparser:
     dependency: transitive
     description:
@@ -279,8 +275,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.0"
-=======
->>>>>>> homeapp
   plugin_platform_interface:
     dependency: transitive
     description:

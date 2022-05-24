@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/models/product-model.dart';
-import 'package:pointsf/Services/ProductService/product-service.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/models/product_model.dart';
+import 'package:pointsf/Services/ProductService/product_service.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class ProductRegistration extends StatefulWidget {
   const ProductRegistration({Key? key}) : super(key: key);
@@ -81,7 +81,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   ),
                   child: DropdownButton(
                     itemHeight: 70,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -124,7 +124,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   ),
                   child: DropdownButton(
                     itemHeight: 70,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
                     ),
                     borderRadius: BorderRadius.circular(20),

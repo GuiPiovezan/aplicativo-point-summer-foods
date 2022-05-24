@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/models/address-model.dart';
+import 'package:pointsf/models/address_model.dart';
 
 class CardAddress extends StatelessWidget {
-  final AddressModel model;
+  final AddressModel? model;
 
-  CardAddress(
-    this.model,
-  );
+  const CardAddress({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CardAddress extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+        margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -35,14 +36,14 @@ class CardAddress extends StatelessWidget {
                 size: 32.0,
               ),
               title: Text(
-                "${model.logradouro}, ${model.numero}",
+                "${model!.logradouro}, ${model!.numero}",
                 style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: Text(
-                "${model.bairro} - ${model.cidade}",
+                "${model!.bairro} - ${model!.cidade}",
                 style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,

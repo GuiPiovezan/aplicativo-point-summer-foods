@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/View/Cart/cart.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/models/cep-model.dart';
+import 'package:pointsf/models/cep_model.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';

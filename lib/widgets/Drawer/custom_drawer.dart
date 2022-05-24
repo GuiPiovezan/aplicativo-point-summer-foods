@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/Services/AuthService/auth-service.dart';
 
-import 'package:pointsf/View/export-all-view.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 
-class CustomDrawerAdmin extends StatefulWidget {
-  const CustomDrawerAdmin({Key? key}) : super(key: key);
+import 'package:pointsf/View/export_all_view.dart';
+
+class CustomDrawer extends StatefulWidget {
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
-  State<CustomDrawerAdmin> createState() => _CustomDrawerAdminState();
+  State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
-class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
+class _CustomDrawerState extends State<CustomDrawer> {
   final AuthService auth = AuthService();
   String? user = "Loading";
   String? email = "Loading";
@@ -60,6 +61,7 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              backgroundColor: Color.fromARGB(255, 240, 240, 240),
             ),
             accountName: Text(auth.userName!),
             accountEmail: Text(email.toString()),
@@ -69,69 +71,67 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
           ),
           ListTile(
             title: const Text(
-              "Novos pedidos",
+              "Conta",
               style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             trailing: const Icon(
               Icons.arrow_forward,
-              color: Colors.black,
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
-              print("Novos pedidos");
+              print("Conta");
             },
           ),
           ListTile(
             title: const Text(
-              "Pedidos aceitos",
+              "Home",
               style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             trailing: const Icon(
               Icons.arrow_forward,
-              color: Colors.black,
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
-              print("Pedidos aceitos");
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const Home()),
+              );
             },
           ),
           ListTile(
             title: const Text(
-              "Pedidos encerrados",
+              "Pedidos",
               style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             trailing: const Icon(
               Icons.arrow_forward,
-              color: Colors.black,
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
-              print("Pedidos encerrados");
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MyOrders()),
+              );
             },
           ),
           ListTile(
             title: const Text(
-              "Cadastro de produtos",
+              "Meus endereços",
               style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             trailing: const Icon(
               Icons.house,
-              color: Colors.black,
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const ProductRegistration(),
-                ),
+                MaterialPageRoute(builder: (context) => const ListAddress()),
               );
             },
           ),

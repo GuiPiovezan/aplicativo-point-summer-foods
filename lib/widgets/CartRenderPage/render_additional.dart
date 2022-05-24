@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/Services/CartService/cart-service.dart';
+import 'package:pointsf/Services/CartService/cart_service.dart';
 
 class RenderAdditional extends StatelessWidget {
   var cartItensAdditional;

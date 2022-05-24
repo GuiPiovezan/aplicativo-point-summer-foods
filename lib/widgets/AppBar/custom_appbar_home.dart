@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:pointsf/Services/AuthService/auth-service.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 
 class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final String? title;

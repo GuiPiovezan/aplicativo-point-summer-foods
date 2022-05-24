@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/Services/CartService/cart-service.dart';
-import 'package:pointsf/Services/ProductService/product-service.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/Services/CartService/cart_service.dart';
+import 'package:pointsf/Services/ProductService/product_service.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class ProductAdditionalModal extends StatefulWidget {
   final productPrimary;

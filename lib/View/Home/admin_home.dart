@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);

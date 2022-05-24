@@ -2,23 +2,35 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 
-import 'package:pointsf/models/customer-model.dart';
-import 'package:pointsf/Services/AuthService/auth-service.dart';
+import 'package:pointsf/models/customer_model.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 import 'package:brasil_fields/brasil_fields.dart';
 
-class CustomerRegistration extends StatelessWidget {
+class CustomerRegistration extends StatefulWidget {
+  const CustomerRegistration({Key? key}) : super(key: key);
+
+  @override
+  State<CustomerRegistration> createState() => _CustomerRegistrationState();
+}
+
+class _CustomerRegistrationState extends State<CustomerRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final tituloTela = 'Cadastro Usuário';
 
   String nome = '';
+
   String telefone = '';
+
   String email = '';
+
   String senha = '';
+
   String cpf = '';
+
   String confirmarSenha = '';
 
   TextEditingController senhaController = TextEditingController();

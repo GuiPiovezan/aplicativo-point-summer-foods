@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/Services/CartService/cart-service.dart';
+import 'package:pointsf/Services/CartService/cart_service.dart';
 import 'package:pointsf/View/Cart/cart.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartItemCard extends StatelessWidget {
   var cartItens;

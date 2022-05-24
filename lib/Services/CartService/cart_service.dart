@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:pointsf/models/cart-model.dart';
-import 'package:pointsf/Services/AuthService/auth-service.dart';
+import 'package:pointsf/models/cart_model.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 
 import 'package:uuid/uuid.dart';
 

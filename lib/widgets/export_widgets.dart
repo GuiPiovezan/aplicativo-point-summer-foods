@@ -15,12 +15,15 @@ export 'Drawer/custom_drawer.dart';
 // Widget pesonalizado para listagem de adicionais
 export 'ProductAdditionalModal/product_additional_modal.dart';
 
+// Widgets personalizado para a listagem de produtos na administração
+export 'ProductAdministrarionPage/product_administratrion_page.dart';
+
+// Widgets personalizado para a listagem de produtos
+export 'ProductPage/product_page.dart';
+
 // Widgets personalizados baseados no TextButtom
 export 'TextButtons/custom_text_button_yellow.dart';
 export 'TextButtons/custom_text_button.dart';
 
 // Widget personalizados baseado no TextField
 export 'TextFields/custom_text_field.dart';
-
-// Widgets personalizado para a listagem de produtos
-export 'ProductPage/product_page.dart';

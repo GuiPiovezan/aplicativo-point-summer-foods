@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/View/export-all-view.dart';
+import 'package:pointsf/View/export_all_view.dart';
 
 class App extends StatelessWidget {
   @override

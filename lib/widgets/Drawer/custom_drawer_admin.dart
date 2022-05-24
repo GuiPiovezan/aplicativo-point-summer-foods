@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/View/ProductAdministration/product_administration.dart';
 
 import 'package:pointsf/View/export_all_view.dart';
 
@@ -113,6 +114,26 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
             ),
             onTap: () {
               print("Pedidos encerrados");
+            },
+          ),
+          ListTile(
+            title: const Text(
+              "Cadastro de produtos",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: const Icon(
+              Icons.arrow_forward,
+              color: Colors.black,
+            ),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ProductAdministration(),
+                ),
+              );
             },
           ),
           ListTile(

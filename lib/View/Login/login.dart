@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 
-import 'package:pointsf/Services/AuthService/auth-service.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-import 'package:pointsf/View/CustomerRegistration/customer-registration.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/View/CustomerRegistration/customer_registration.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -39,13 +39,13 @@ class _LoginState extends State<Login> {
       appBar: PreferredSize(
         child: AppBar(
           elevation: 0,
-          systemOverlayStyle: SystemUiOverlayStyle(
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Color.fromARGB(255, 74, 44, 82),
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
           ),
         ),
-        preferredSize: Size.fromHeight(0),
+        preferredSize: const Size.fromHeight(0),
       ),
       body: Form(
         key: _formKey,
@@ -53,8 +53,8 @@ class _LoginState extends State<Login> {
           child: ListView(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 80),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.fromLTRB(0, 30, 0, 80),
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 74, 44, 82),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.elliptical(500, 70),
@@ -62,11 +62,11 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 child: Image.asset(
-                  'images/logo-sem-fundo.png',
+                  'assets/images/logo-sem-fundo.png',
                   height: 250,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               CustomTextField(

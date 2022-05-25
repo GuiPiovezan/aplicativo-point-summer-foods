@@ -9,12 +9,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyOrders(),
-      routes: {
+      /* routes: {
         '/': (context) => const Login(),
         '/home': (context) => const Home(),
       },
       initialRoute: auth.currentUser == null ? '/' : '/home',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,*/
     );
   }
 }

@@ -14,11 +14,19 @@ class MyOrders extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 102, 19, 131),
+                  boxShadow: [
+                    BoxShadow(
+                      //  Colocar sombreamento em volta do card bottom
+                      color: Colors.grey, // cor do sombreamento
+                      spreadRadius: 3, // espeçura do circulo em volta do bottom
+                      blurRadius: 7, // a intensidade da sombra
+                    ),
+                  ],
+                  color: Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(15.0),
                   border: Border.all(
                     width: 3,
-                    color: Color.fromARGB(0, 74, 44, 82),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     style: BorderStyle.solid,
                   )),
               width: 345,

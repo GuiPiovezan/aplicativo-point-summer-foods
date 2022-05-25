@@ -1,4 +1,6 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
@@ -236,6 +238,11 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   controller: _controllerProductPrice,
                   labelText: "Preço por Unidade",
                   placeholder: "10,00",
+                  inputType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    // UtilBrasilFields.obterReal()
+                  ],
                 ),
                 CustomTextButton(
                   buttonText: "Cadastrar",

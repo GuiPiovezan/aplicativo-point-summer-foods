@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pointsf/widgets/AppBar/custom_appbar.dart';
 
-class MyOrders extends StatelessWidget{
+class MyOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,18 +14,17 @@ class MyOrders extends StatelessWidget{
             child: Container(
               margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 102, 19, 131),
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      width: 3,
-                      color: Color.fromARGB(0, 74, 44, 82),
-                      style: BorderStyle.solid,
-                    )
-                  ),
+                  color: Color.fromARGB(255, 102, 19, 131),
+                  borderRadius: BorderRadius.circular(15.0),
+                  border: Border.all(
+                    width: 3,
+                    color: Color.fromARGB(0, 74, 44, 82),
+                    style: BorderStyle.solid,
+                  )),
               width: 345,
               height: 100,
               child: TextButton(
-                onPressed: (){},
+                onPressed: () {},
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +37,7 @@ class MyOrders extends StatelessWidget{
                             Text("30/Abr"),
                             Text("id - 1321546861532"),
                             Text("R 30,00"),
-                            ],
+                          ],
                         ),
                       ),
                       Row(

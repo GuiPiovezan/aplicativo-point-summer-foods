@@ -70,7 +70,7 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
               margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
               child: TextButton(
                 child: const Text(
-                  "sair",
+                  "Sair",
                   style: TextStyle(
                     color: Color.fromARGB(255, 240, 240, 240),
                     fontSize: 20,

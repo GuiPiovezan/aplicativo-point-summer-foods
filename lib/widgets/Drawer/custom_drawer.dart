@@ -49,22 +49,53 @@ class _CustomDrawerState extends State<CustomDrawer> {
           const SizedBox(
             height: 20,
           ),
-          UserAccountsDrawerHeader(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 89, 53, 99),
-            ),
-            currentAccountPicture: CircleAvatar(
-              child: Text(
-                getFirtsLastLetterFullName(),
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+          Container(
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  maxRadius: 40,
+                  minRadius: 35,
+                  child: Text(
+                    getFirtsLastLetterFullName(),
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 240, 240, 240),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  backgroundColor: const Color.fromARGB(255, 74, 44, 82),
                 ),
-              ),
-              backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          auth.userName!,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          email.toString(),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromARGB(255, 123, 123, 123),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            accountName: Text(auth.userName!),
-            accountEmail: Text(email.toString()),
+          ),
+          const Divider(
+            indent: 10,
+            endIndent: 10,
           ),
           const SizedBox(
             height: 15,
@@ -77,27 +108,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
             trailing: const Icon(
-              Icons.arrow_forward,
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            onTap: () {
-              print("Conta");
-            },
-          ),
-          ListTile(
-            title: const Text(
-              "Home",
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward,
+              Icons.person_outline_rounded,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const Home()),
+                MaterialPageRoute(builder: (context) => const UserAccount()),
               );
             },
           ),
@@ -109,7 +125,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
             trailing: const Icon(
-              Icons.arrow_forward,
+              Icons.ballot_outlined,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
@@ -126,7 +142,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
             trailing: const Icon(
-              Icons.house,
+              Icons.house_outlined,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {

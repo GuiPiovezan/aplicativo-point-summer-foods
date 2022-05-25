@@ -63,4 +63,11 @@ class ProductService extends ChangeNotifier {
       }
     });
   }
+
+  getAllProductsByCategory(category) {
+    return firestore
+        .collection('produtos')
+        .where("categoria", isEqualTo: category)
+        .snapshots();
+  }
 }

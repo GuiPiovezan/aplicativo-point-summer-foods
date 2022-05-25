@@ -5,14 +5,15 @@ import 'package:pointsf/models/address_model.dart';
 
 import '../../widgets/AppBar/custom_appbar.dart';
 
-class ConfirmationAddress extends StatefulWidget {
-  const ConfirmationAddress({Key? key}) : super(key: key);
+class ConfirmationInformation extends StatefulWidget {
+  const ConfirmationInformation({Key? key}) : super(key: key);
 
   @override
-  State<ConfirmationAddress> createState() => _ConfirmationAddressState();
+  State<ConfirmationInformation> createState() =>
+      _ConfirmationInformationState();
 }
 
-class _ConfirmationAddressState extends State<ConfirmationAddress> {
+class _ConfirmationInformationState extends State<ConfirmationInformation> {
   AddressModel? addressSelected;
   List<AddressModel> addressList = [];
 

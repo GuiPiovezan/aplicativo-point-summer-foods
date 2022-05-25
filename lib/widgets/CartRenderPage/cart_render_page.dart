@@ -86,7 +86,7 @@ class _CartPageState extends State<CartPage> {
                 buttonText: "Finalizar",
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ConfirmationAddress()));
+                      builder: (context) => ConfirmationInformation()));
                 },
               ),
               const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/CartService/cart_service.dart';
+import 'package:pointsf/View/Orders/confirmation_information.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartPage extends StatefulWidget {
@@ -83,7 +84,10 @@ class _CartPageState extends State<CartPage> {
             children: [
               CustomTextButton(
                 buttonText: "Finalizar",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ConfirmationAddress()));
+                },
               ),
               const SizedBox(
                 height: 20,

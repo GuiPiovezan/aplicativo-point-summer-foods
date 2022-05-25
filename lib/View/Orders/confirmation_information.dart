@@ -54,7 +54,11 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   elevation: 16,
-                  onChanged: (AddressModel? value) {},
+                  onChanged: (AddressModel? value) {
+                    setState(() {
+                      addressSelected = value!;
+                    });
+                  },
                   items: addressList.map((AddressModel item) {
                     return DropdownMenuItem(
                       value: item,

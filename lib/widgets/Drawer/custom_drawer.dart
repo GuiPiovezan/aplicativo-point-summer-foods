@@ -77,11 +77,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
             trailing: const Icon(
-              Icons.arrow_forward,
+              Icons.person_outline_rounded,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
-              print("Conta");
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const UserAccount()),
+              );
             },
           ),
           ListTile(

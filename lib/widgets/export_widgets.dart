@@ -8,7 +8,7 @@ export 'CartRenderPage/cart_list.dart';
 export 'CartRenderPage/cart_render_page.dart';
 export 'CartRenderPage/render_additional.dart';
 
-// Widget personalizados baseado no Draewr
+// Widget personalizados baseado no Drawer
 export 'Drawer/custom_drawer_admin.dart';
 export 'Drawer/custom_drawer.dart';
 

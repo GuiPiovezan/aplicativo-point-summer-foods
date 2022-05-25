@@ -63,12 +63,12 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
         child: ListView(
           children: <Widget>[
             CustomTextField(
-              onSaved: (value) => nome = value!,
+              onSaved: (value) => nome = value!.trim(),
               labelText: 'Nome',
               validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
-              onSaved: (value) => email = value!,
+              onSaved: (value) => email = value!.trim(),
               labelText: 'E-mail',
               validator: (value) => UserValidator.validarEmail(value!),
             ),

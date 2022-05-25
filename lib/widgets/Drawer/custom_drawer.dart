@@ -81,9 +81,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         Text(
                           email.toString(),
                           style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 123, 123, 123)),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromARGB(255, 123, 123, 123),
+                          ),
                         ),
                       ],
                     ),
@@ -118,30 +119,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           ListTile(
             title: const Text(
-              "Home",
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward,
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const Home()),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text(
               "Pedidos",
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             trailing: const Icon(
-              Icons.arrow_forward,
+              Icons.ballot_outlined,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {
@@ -158,7 +142,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
             ),
             trailing: const Icon(
-              Icons.house,
+              Icons.house_outlined,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             onTap: () {

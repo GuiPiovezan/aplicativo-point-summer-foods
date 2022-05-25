@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/Services/AuthService/auth-service.dart';
+import 'package:flutter/services.dart';
+
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
-import 'package:pointsf/View/CustomerRegistration/customer-registration.dart';
-import 'package:pointsf/widgets/export-widgets.dart';
+import 'package:pointsf/View/CustomerRegistration/customer_registration.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,29 +19,55 @@ class _LoginState extends State<Login> {
 
   String? email = "", senha = "";
 
-  _login(BuildContext context) {
+  _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      AuthService().login(email!, senha!, context);
+      try {
+        await AuthService().login(email!, senha!, context);
+      } on AuthException catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 254, 220, 86),
-      appBar: const CustomAppBar(
-        title: "Login",
-        enableIconBack: false,
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+      appBar: PreferredSize(
+        child: AppBar(
+          elevation: 0,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 74, 44, 82),
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.light,
+          ),
+        ),
+        preferredSize: const Size.fromHeight(0),
       ),
       body: Form(
         key: _formKey,
         child: Center(
           child: ListView(
             children: [
-              Image.asset(
-                'images/logo.png',
-                height: 200.0,
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 30, 0, 80),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 74, 44, 82),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.elliptical(500, 70),
+                    bottomRight: Radius.elliptical(500, 70),
+                  ),
+                ),
+                child: Image.asset(
+                  'assets/images/logo-sem-fundo.png',
+                  height: 250,
+                ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               CustomTextField(
                 labelText: "Email",
@@ -67,14 +95,18 @@ class _LoginState extends State<Login> {
                     style: TextStyle(fontSize: 16.0),
                   ),
                   TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => CustomerRegistration()),
-                        );
-                      },
-                      child: const Text('Cadastra-se',
-                          style: TextStyle(fontSize: 16.0)))
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CustomerRegistration(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Cadastra-se',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  )
                 ],
               )
             ],

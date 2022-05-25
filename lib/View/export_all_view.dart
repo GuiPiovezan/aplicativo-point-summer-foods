@@ -21,3 +21,6 @@ export 'package:pointsf/View/Home/admin_home.dart';
 //Listagem de endereço
 export 'Address/card_address.dart';
 export 'Address/list_address.dart';
+
+//Conta do usuario
+export 'UserAccount/user_account.dart';

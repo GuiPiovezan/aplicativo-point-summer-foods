@@ -135,15 +135,20 @@ class AuthService extends ChangeNotifier {
   }
 
   setRoute() async {
-    bool admin = false;
-    await firestore
-        .collection("usuarios")
-        .doc(_auth.currentUser!.uid)
-        .get()
-        .then((event) {
-      admin = event['admin'] ?? false;
-    });
-    admin != true ? userRoute = '/home' : userRoute = '/adminHome';
+    await _getUser();
+    if (user == null) {
+      userRoute = "/";
+    } else {
+      bool admin = false;
+      await firestore
+          .collection("usuarios")
+          .doc(_auth.currentUser!.uid)
+          .get()
+          .then((event) {
+        admin = event['admin'] ?? false;
+      });
+      admin != true ? userRoute = '/home' : userRoute = '/adminHome';
+    }
   }
 
   getRoute() {

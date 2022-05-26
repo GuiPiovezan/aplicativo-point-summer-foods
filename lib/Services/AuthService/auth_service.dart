@@ -15,7 +15,6 @@ class AuthService extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   User? user;
-  bool isLoading = true;
   String? userName = "Loading";
 
   AuthService() {
@@ -25,7 +24,6 @@ class AuthService extends ChangeNotifier {
   _authCheck() {
     _auth.authStateChanges().listen((User? user) {
       this.user = (user == null) ? null : user;
-      isLoading = false;
       notifyListeners();
     });
   }
@@ -48,10 +46,6 @@ class AuthService extends ChangeNotifier {
 
   getUid() {
     return _auth.currentUser!.uid;
-  }
-
-  getUser() {
-    return _auth.currentUser;
   }
 
   getUserEmail() {
@@ -99,7 +93,7 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
-    
+
     bool admin = false;
     await firestore
         .collection("usuarios")
@@ -111,12 +105,12 @@ class AuthService extends ChangeNotifier {
 
     if (admin) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => AdminHome()),
+        MaterialPageRoute(builder: (_) => const AdminHome()),
         (route) => false,
       );
     } else {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => Home()),
+        MaterialPageRoute(builder: (_) => const Home()),
         (route) => false,
       );
     }

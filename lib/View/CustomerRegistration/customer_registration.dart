@@ -19,7 +19,7 @@ class CustomerRegistration extends StatefulWidget {
 class _CustomerRegistrationState extends State<CustomerRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final tituloTela = 'Cadastro Usuário';
+  bool isLoading = false;
 
   String nome = '';
 
@@ -37,6 +37,8 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
 
   void save(BuildContext context) {
     if (formKey.currentState!.validate()) {
+      setState(() => isLoading = true);
+
       formKey.currentState!.save();
 
       CustomerModel model = CustomerModel(
@@ -56,7 +58,7 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
-        title: "Customer Register",
+        title: "Cadastro",
       ),
       body: Form(
         key: formKey,
@@ -104,10 +106,16 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
               validator: (value) => UserValidator.validarConfirmarSenha(
                   value!, senhaController.text),
             ),
-            CustomTextButton(
-              buttonText: 'Cadastrar',
-              onPressed: () => save(context),
-            ),
+            (isLoading)
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 74, 44, 82),
+                    ),
+                  )
+                : CustomTextButton(
+                    buttonText: 'Cadastrar',
+                    onPressed: () => save(context),
+                  ),
           ],
         ),
       ),

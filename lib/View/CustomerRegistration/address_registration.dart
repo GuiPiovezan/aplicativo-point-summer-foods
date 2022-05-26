@@ -74,7 +74,6 @@ class _AddressRegistration extends State<AddressRegistration> {
             : enableStreet = true;
         isLoading = false;
       });
-      
     } on CepException catch (e) {
       setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -211,6 +210,9 @@ class _AddressRegistration extends State<AddressRegistration> {
                 buttonText: "Cadastrar",
                 onPressed: () => save(context),
               ),
+            ),
+            SizedBox(
+              height: 30,
             ),
           ],
         ),

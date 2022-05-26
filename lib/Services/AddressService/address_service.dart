@@ -31,6 +31,7 @@ class AddressService extends ChangeNotifier {
         "numero": model.numero,
         "complemento": model.complemento,
         "bairro": model.bairro,
+        "nome": model.nome,
         "cidade": model.cidade,
         "uid": uid,
       });

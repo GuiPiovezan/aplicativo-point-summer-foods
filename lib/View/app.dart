@@ -1,19 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/View/export_all_view.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/View/Routes/routes.dart';
 
 class App extends StatelessWidget {
-  final auth = FirebaseAuth.instance;
+  final auth = AuthService();
+  App({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyOrders(),
-      routes: {
-        '/': (context) => const Login(),
-        '/home': (context) => const Home(),
-      },
-      initialRoute: auth.currentUser == null ? '/' : '/home',
+    return const MaterialApp(
+      home: RouteApp(),
       debugShowCheckedModeBanner: false,
     );
   }

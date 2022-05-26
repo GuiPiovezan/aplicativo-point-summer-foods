@@ -150,14 +150,14 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
           ),
           ListTile(
             title: const Text(
-              "Cadastro de produtos",
+              "Lista de produtos",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
             trailing: const Icon(
-              Icons.arrow_forward,
+              Icons.icecream_outlined,
               color: Colors.black,
             ),
             onTap: () {
@@ -177,7 +177,7 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
               ),
             ),
             trailing: const Icon(
-              Icons.house,
+              Icons.new_label_outlined,
               color: Colors.black,
             ),
             onTap: () {

@@ -17,6 +17,7 @@ class AuthService extends ChangeNotifier {
   User? user;
   String? userName = "Loading";
   String? userPhone = "Loading";
+  String? userRoute = "";
 
   AuthService() {
     _authCheck();
@@ -131,6 +132,22 @@ class AuthService extends ChangeNotifier {
         (route) => false,
       );
     }
+  }
+
+  setRoute() async {
+    bool admin = false;
+    await firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      admin = event['admin'] ?? false;
+    });
+    admin != true ? userRoute = '/home' : userRoute = '/adminHome';
+  }
+
+  getRoute() {
+    return userRoute;
   }
 
   logout(BuildContext context) async {

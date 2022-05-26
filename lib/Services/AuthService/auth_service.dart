@@ -125,4 +125,6 @@ class AuthService extends ChangeNotifier {
       ),
     );
   }
+
+  updateUser(CustomerModel model, BuildContext context){}
 }

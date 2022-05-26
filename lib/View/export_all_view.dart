@@ -5,6 +5,9 @@ export 'package:pointsf/View/CustomerRegistration/address_registration.dart';
 //Carrinho de compras
 export 'package:pointsf/View/Cart/cart.dart';
 
+//Editar dados do usuário
+export 'package:pointsf/View/CustomerDataEditing/customer_data_editing.dart';
+
 //Cadastro de Produto
 export 'package:pointsf/View/ProductRegistration/product_registration.dart';
 

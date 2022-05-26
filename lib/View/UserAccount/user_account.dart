@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/View/export_all_view.dart';
 import 'package:pointsf/widgets/AppBar/custom_appbar.dart';
 
@@ -10,6 +11,43 @@ class UserAccount extends StatefulWidget {
 }
 
 class _UserAccountState extends State<UserAccount> {
+  final AuthService auth = AuthService();
+  String? user = "Loading";
+  String? email = "Loading";
+  String? phone = "Loading";
+
+  @override
+  void initState() {
+    super.initState();
+    auth;
+    user = auth.userName;
+    email = auth.getUserEmail();
+  }
+
+  setNome() async {
+    await auth.setUserName();
+    setState(() {
+      user = auth.getUserName();
+    });
+  }
+
+  setPhone() async {
+    await auth.setUserPhone();
+    setState(() {
+      phone = auth.getUserPhone();
+    });
+  }
+
+  getFirtsLastLetterFullName() {
+    setNome();
+    setPhone();
+    var firstLetterFirstName = user!.split("").first;
+    var lastName = user!.split(" ").last;
+    var firstLetterLastName = lastName.split("").first;
+
+    return firstLetterFirstName + firstLetterLastName;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +70,13 @@ class _UserAccountState extends State<UserAccount> {
                 // BorderSide(
                 borderRadius: const BorderRadius.all(Radius.circular(500)),
               ),
-              child: const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 74, 44, 82),
+              child: CircleAvatar(
+                backgroundColor: const Color.fromARGB(255, 74, 44, 82),
                 minRadius: 20,
                 maxRadius: 40,
                 child: Text(
-                  "UU",
-                  style: TextStyle(
+                  getFirtsLastLetterFullName(),
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 240, 240, 240),
                     fontWeight: FontWeight.w600,
                   ),
@@ -48,9 +86,9 @@ class _UserAccountState extends State<UserAccount> {
             const SizedBox(
               height: 15,
             ),
-            const Text(
-              "user user",
-              style: TextStyle(
+            Text(
+              user!,
+              style: const TextStyle(
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
@@ -58,9 +96,9 @@ class _UserAccountState extends State<UserAccount> {
             const SizedBox(
               height: 7,
             ),
-            const Text(
-              "user@email.com",
-              style: TextStyle(
+            Text(
+              email!,
+              style: const TextStyle(
                 color: Color.fromARGB(255, 30, 30, 30),
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
@@ -78,8 +116,8 @@ class _UserAccountState extends State<UserAccount> {
             Container(
               margin: const EdgeInsets.fromLTRB(50, 15, 50, 0),
               child: Row(
-                children: const <Widget>[
-                  Text(
+                children: <Widget>[
+                  const Text(
                     "Nome: ",
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -88,8 +126,8 @@ class _UserAccountState extends State<UserAccount> {
                     ),
                   ),
                   Text(
-                    "user user",
-                    style: TextStyle(
+                    user!,
+                    style: const TextStyle(
                         color: Color.fromARGB(255, 23, 23, 23),
                         fontWeight: FontWeight.w500),
                   ),
@@ -99,8 +137,8 @@ class _UserAccountState extends State<UserAccount> {
             Container(
               margin: const EdgeInsets.fromLTRB(50, 15, 50, 0),
               child: Row(
-                children: const <Widget>[
-                  Text(
+                children: <Widget>[
+                  const Text(
                     "Email: ",
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -109,8 +147,8 @@ class _UserAccountState extends State<UserAccount> {
                     ),
                   ),
                   Text(
-                    "user@email.com",
-                    style: TextStyle(
+                    email!,
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 23, 23, 23),
                       fontWeight: FontWeight.w500,
                     ),
@@ -121,8 +159,8 @@ class _UserAccountState extends State<UserAccount> {
             Container(
               margin: const EdgeInsets.fromLTRB(50, 15, 50, 0),
               child: Row(
-                children: const <Widget>[
-                  Text(
+                children: <Widget>[
+                  const Text(
                     "Telefone: ",
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -131,8 +169,8 @@ class _UserAccountState extends State<UserAccount> {
                     ),
                   ),
                   Text(
-                    "(17) 99777-7997",
-                    style: TextStyle(
+                    phone!,
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 23, 23, 23),
                       fontWeight: FontWeight.w500,
                     ),
@@ -148,7 +186,8 @@ class _UserAccountState extends State<UserAccount> {
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const CustomerDataEditing()),
+                        MaterialPageRoute(
+                            builder: (context) => const CustomerDataEditing()),
                       );
                     },
                     child: const Text(

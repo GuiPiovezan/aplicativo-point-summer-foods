@@ -16,6 +16,7 @@ class AuthService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
   User? user;
   String? userName = "Loading";
+  String? userPhone = "Loading";
 
   AuthService() {
     _authCheck();
@@ -44,6 +45,18 @@ class AuthService extends ChangeNotifier {
     });
   }
 
+  setUserPhone() {
+    if (userPhone != "Loading") return null;
+    firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      userPhone =
+          event['telefone'] != null ? event['telefone'].toString() : "erro";
+    });
+  }
+
   getUid() {
     return _auth.currentUser!.uid;
   }
@@ -54,6 +67,10 @@ class AuthService extends ChangeNotifier {
 
   getUserName() {
     return userName;
+  }
+
+  getUserPhone() {
+    return userPhone;
   }
 
   register(String email, String senha, CustomerModel model,
@@ -126,5 +143,5 @@ class AuthService extends ChangeNotifier {
     );
   }
 
-  updateUser(CustomerModel model, BuildContext context){}
+  updateUser(CustomerModel model, BuildContext context) {}
 }

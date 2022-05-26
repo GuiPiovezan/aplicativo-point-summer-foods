@@ -46,7 +46,7 @@ class _RouteAppState extends State<RouteApp> {
         '/home': (context) => const Home(),
         '/adminHome': (context) => const AdminHome(),
       },
-      initialRoute: auth.user == null ? '/' : route,
+      initialRoute: route,
       debugShowCheckedModeBanner: false,
     );
   }

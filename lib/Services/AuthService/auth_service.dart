@@ -99,7 +99,7 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
-    
+
     bool admin = false;
     await firestore
         .collection("usuarios")
@@ -124,11 +124,7 @@ class AuthService extends ChangeNotifier {
 
   logout(BuildContext context) async {
     await _auth.signOut();
-    _getUser();
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const Login(),
-      ),
-    );
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 }

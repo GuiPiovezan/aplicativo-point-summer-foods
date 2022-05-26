@@ -15,8 +15,9 @@ class AuthService extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
   User? user;
-  bool isLoading = true;
   String? userName = "Loading";
+  String? userPhone = "Loading";
+  String? userRoute = "";
 
   AuthService() {
     _authCheck();
@@ -25,7 +26,6 @@ class AuthService extends ChangeNotifier {
   _authCheck() {
     _auth.authStateChanges().listen((User? user) {
       this.user = (user == null) ? null : user;
-      isLoading = false;
       notifyListeners();
     });
   }
@@ -46,12 +46,20 @@ class AuthService extends ChangeNotifier {
     });
   }
 
-  getUid() {
-    return _auth.currentUser!.uid;
+  setUserPhone() {
+    if (userPhone != "Loading") return null;
+    firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      userPhone =
+          event['telefone'] != null ? event['telefone'].toString() : "erro";
+    });
   }
 
-  getUser() {
-    return _auth.currentUser;
+  getUid() {
+    return _auth.currentUser!.uid;
   }
 
   getUserEmail() {
@@ -60,6 +68,10 @@ class AuthService extends ChangeNotifier {
 
   getUserName() {
     return userName;
+  }
+
+  getUserPhone() {
+    return userPhone;
   }
 
   register(String email, String senha, CustomerModel model,
@@ -99,7 +111,7 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
-    
+
     bool admin = false;
     await firestore
         .collection("usuarios")
@@ -111,15 +123,31 @@ class AuthService extends ChangeNotifier {
 
     if (admin) {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => AdminHome()),
+        MaterialPageRoute(builder: (_) => const AdminHome()),
         (route) => false,
       );
     } else {
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => Home()),
+        MaterialPageRoute(builder: (_) => const Home()),
         (route) => false,
       );
     }
+  }
+
+  setRoute() async {
+    bool admin = false;
+    await firestore
+        .collection("usuarios")
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((event) {
+      admin = event['admin'] ?? false;
+    });
+    admin != true ? userRoute = '/home' : userRoute = '/adminHome';
+  }
+
+  getRoute() {
+    return userRoute;
   }
 
   logout(BuildContext context) async {
@@ -131,4 +159,6 @@ class AuthService extends ChangeNotifier {
       ),
     );
   }
+
+  updateUser(CustomerModel model, BuildContext context) {}
 }

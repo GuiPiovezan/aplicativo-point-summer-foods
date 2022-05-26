@@ -16,15 +16,19 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  AuthService auth = AuthService();
+  bool loading = false;
 
   String? email = "", senha = "";
 
   _login(BuildContext context) async {
+    setState(() => loading = true);
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       try {
-        await AuthService().login(email!, senha!, context);
+        await auth.login(email!, senha!, context);
       } on AuthException catch (e) {
+        setState(() => loading = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(e.message)),
         );
@@ -83,10 +87,16 @@ class _LoginState extends State<Login> {
                 onSaved: (value) => senha = value,
                 validator: (value) => UserValidator.validarSenha(value!),
               ),
-              CustomTextButton(
-                buttonText: "Entrar",
-                onPressed: () => _login(context),
-              ),
+              (loading)
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                    )
+                  : CustomTextButton(
+                      buttonText: "Entrar",
+                      onPressed: () => _login(context),
+                    ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

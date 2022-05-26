@@ -9,29 +9,21 @@ import 'package:pointsf/widgets/export_widgets.dart';
 
 import 'package:brasil_fields/brasil_fields.dart';
 
-class CustomerRegistration extends StatefulWidget {
-  const CustomerRegistration({Key? key}) : super(key: key);
+class CustomerDataEditing extends StatefulWidget {
+  const CustomerDataEditing({Key? key}) : super(key: key);
 
   @override
-  State<CustomerRegistration> createState() => _CustomerRegistrationState();
+  State<CustomerDataEditing> createState() => _CustomerDataEditingState();
 }
 
-class _CustomerRegistrationState extends State<CustomerRegistration> {
+class _CustomerDataEditingState extends State<CustomerDataEditing> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AuthService auth = AuthService();
+
+  final _controllerName = TextEditingController();
+  final _controllerTelefone = TextEditingController();
 
   bool isLoading = false;
-
-  String nome = '';
-
-  String telefone = '';
-
-  String email = '';
-
-  String senha = '';
-
-  String cpf = '';
-
-  String confirmarSenha = '';
 
   TextEditingController senhaController = TextEditingController();
 
@@ -42,14 +34,14 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
       formKey.currentState!.save();
 
       CustomerModel model = CustomerModel(
-        nome: nome,
+        nome: _controllerName.text,
         uid: null,
-        telefone: telefone,
-        cpf: cpf,
-        admin: false,
+        telefone: _controllerTelefone.text,
+        cpf: null,
+        admin: null,
       );
 
-      AuthService().register(email, senha, model, context);
+      auth.updateUser(model, context);
     }
   }
 
@@ -58,24 +50,19 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
-        title: "Cadastro",
+        title: "Alterar Dados",
       ),
       body: Form(
         key: formKey,
         child: ListView(
           children: <Widget>[
             CustomTextField(
-              onSaved: (value) => nome = value!.trim(),
+              controller: _controllerName,
               labelText: 'Nome',
               validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
-              onSaved: (value) => email = value!.trim(),
-              labelText: 'E-mail',
-              validator: (value) => UserValidator.validarEmail(value!),
-            ),
-            CustomTextField(
-              onSaved: (value) => telefone = value!,
+              controller: _controllerTelefone,
               labelText: 'Telefone',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarTelefone(value!),
@@ -84,28 +71,6 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
                 TelefoneInputFormatter(),
               ],
             ),
-            CustomTextField(
-              onSaved: (value) => cpf = value!,
-              labelText: 'CPF',
-              inputType: TextInputType.number,
-              validator: (value) => UserValidator.validarCPF(value!),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                CpfInputFormatter()
-              ],
-            ),
-            CustomTextField(
-              onSaved: (value) => senha = value!,
-              labelText: 'Senha',
-              controller: senhaController,
-              validator: (value) => UserValidator.validarSenha(value!),
-            ),
-            CustomTextField(
-              onSaved: (value) => confirmarSenha = value!,
-              labelText: 'Confirmar senha',
-              validator: (value) => UserValidator.validarConfirmarSenha(
-                  value!, senhaController.text),
-            ),
             (isLoading)
                 ? const Center(
                     child: CircularProgressIndicator(
@@ -113,7 +78,7 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
                     ),
                   )
                 : CustomTextButton(
-                    buttonText: 'Cadastrar',
+                    buttonText: 'Atualizar',
                     onPressed: () => save(context),
                   ),
           ],

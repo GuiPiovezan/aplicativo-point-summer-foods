@@ -42,7 +42,6 @@ dependencies:
   modal_bottom_sheet: 2.0.1
   flutter_native_splash: 2.2.1
   
-
 flutter_native_splash:
   color: "#4A2C52"
   image: "assets/images/logo-sem-fundo.png"

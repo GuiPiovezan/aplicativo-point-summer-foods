@@ -125,6 +125,26 @@ class CartService extends ChangeNotifier {
         .doc(auth.getUid())
         .collection("carrinho")
         .doc(itemUid)
+        .collection("adicionais")
+        .get()
+        .then((value) {
+      for (var i = 0; i < value.docs.length; i++) {
+        firestore
+            .collection("usuarios")
+            .doc(auth.getUid())
+            .collection("carrinho")
+            .doc(itemUid)
+            .collection("adicionais")
+            .doc(value.docs[i]["uid"])
+            .delete();
+      }
+    });
+
+    firestore
+        .collection("usuarios")
+        .doc(auth.getUid())
+        .collection("carrinho")
+        .doc(itemUid)
         .delete();
   }
 }

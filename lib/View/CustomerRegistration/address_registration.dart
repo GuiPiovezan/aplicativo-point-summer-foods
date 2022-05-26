@@ -31,6 +31,8 @@ class _AddressRegistration extends State<AddressRegistration> {
   bool enableName = false;
   String cepSearched = "";
 
+  bool isLoading = false;
+
   void save(BuildContext context) async {
     if (cepSearched == controller.cep!.text) {
       AddressModel model = AddressModel(
@@ -48,36 +50,39 @@ class _AddressRegistration extends State<AddressRegistration> {
   }
 
   searchCEP() async {
+    setState(() => isLoading = true);
     cepSearched = controller.cep!.text;
     var cepService = CepService();
-
     try {
       await cepService.setCEP(cepSearched);
       CepModel result = cepService.getCEP();
       controller.setValue(result);
+
+      setState(() {
+        controller.city ?? "";
+        enableNumber = true;
+        enableName = true;
+        controller.city!.text != "" ? enableCity = false : enableCity = true;
+        controller.complement!.text != ""
+            ? enableComplement = false
+            : enableComplement = true;
+        controller.district!.text != ""
+            ? enableDistrict = false
+            : enableDistrict = true;
+        controller.street!.text != ""
+            ? enableStreet = false
+            : enableStreet = true;
+        isLoading = false;
+      });
+      
     } on CepException catch (e) {
+      setState(() => isLoading = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.message),
         ),
       );
     }
-
-    setState(() {
-      controller.city ?? "";
-      enableNumber = true;
-      enableName = true;
-      controller.city!.text != "" ? enableCity = false : enableCity = true;
-      controller.complement!.text != ""
-          ? enableComplement = false
-          : enableComplement = true;
-      controller.district!.text != ""
-          ? enableDistrict = false
-          : enableDistrict = true;
-      controller.street!.text != ""
-          ? enableStreet = false
-          : enableStreet = true;
-    });
   }
 
   @override
@@ -110,15 +115,21 @@ class _AddressRegistration extends State<AddressRegistration> {
                 const SizedBox(
                   width: 15,
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-                  child: CustomTextButton(
-                    buttonText: "Buscar",
-                    onPressed: searchCEP,
-                    width: 100,
-                    heigth: 70,
-                  ),
-                ),
+                (isLoading)
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Color.fromARGB(255, 74, 44, 82),
+                        ),
+                      )
+                    : Container(
+                        margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
+                        child: CustomTextButton(
+                          buttonText: "Buscar",
+                          onPressed: searchCEP,
+                          width: 100,
+                          heigth: 70,
+                        ),
+                      ),
               ],
             ),
             CustomTextField(

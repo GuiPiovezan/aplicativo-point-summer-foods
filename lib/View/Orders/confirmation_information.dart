@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/Services/AddressService/address_service.dart';
 import 'package:pointsf/models/address_model.dart';
+import 'package:pointsf/widgets/CardPayment/card_payment.dart';
 
 import '../../widgets/AppBar/custom_appbar.dart';
 
@@ -19,6 +20,9 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(),
@@ -72,6 +76,19 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                 ),
               );
             },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const <Widget>[
+              CardPayment(
+                textButton: 'Dinheiro',
+                icon: Icons.attach_money,
+              ),
+              CardPayment(
+                textButton: 'Cartão',
+                icon: Icons.credit_card,
+              ),
+            ],
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/View/export_all_view.dart';
 import 'package:pointsf/widgets/AppBar/custom_appbar.dart';
 
 class UserAccount extends StatefulWidget {
@@ -110,8 +111,9 @@ class _UserAccountState extends State<UserAccount> {
                   Text(
                     "user@email.com",
                     style: TextStyle(
-                        color: Color.fromARGB(255, 23, 23, 23),
-                        fontWeight: FontWeight.w500),
+                      color: Color.fromARGB(255, 23, 23, 23),
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
@@ -131,8 +133,9 @@ class _UserAccountState extends State<UserAccount> {
                   Text(
                     "(17) 99777-7997",
                     style: TextStyle(
-                        color: Color.fromARGB(255, 23, 23, 23),
-                        fontWeight: FontWeight.w500),
+                      color: Color.fromARGB(255, 23, 23, 23),
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
@@ -143,7 +146,11 @@ class _UserAccountState extends State<UserAccount> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const CustomerDataEditing()),
+                      );
+                    },
                     child: const Text(
                       "editar",
                       style: TextStyle(

@@ -30,6 +30,20 @@ class CardAddress extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            Container(
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Text(
+                model!.nome!,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+            const Divider(
+              indent: 15,
+              endIndent: 15,
+            ),
             ListTile(
               leading: const Icon(
                 Icons.house_sharp,
@@ -49,6 +63,9 @@ class CardAddress extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              onLongPress: () {
+
+              },
             )
           ],
         ),

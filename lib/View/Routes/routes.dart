@@ -49,7 +49,7 @@ class _RouteAppState extends State<RouteApp> {
         '/confirmationInformation': (context) =>
             const ConfirmationInformation(),
       },
-      initialRoute: auth.user == null ? '/' : route,
+      initialRoute: route,
       debugShowCheckedModeBanner: false,
     );
   }

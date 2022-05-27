@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:pointsf/Services/AuthService/auth_service.dart';
-
 class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final Icon? icon;
@@ -13,15 +11,32 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
     this.icon,
   }) : super(key: key);
 
-  void _logOut(context) {
-    AuthService().logout(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
       child: Container(
         child: AppBar(
+          flexibleSpace: Center(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: icon ?? Container(),
+                  ),
+                  Text(
+                    title ?? "",
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 240, 240, 240),
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           elevation: 0,
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Color.fromARGB(255, 74, 44, 82),
@@ -47,36 +62,30 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-          title: Container(
-            margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: icon ?? Container(),
-                ),
-                Text(
-                  title ?? "",
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 240, 240, 240),
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // title: Container(
+          //   color: Colors.red,
+          //   margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.end,
+          //     children: [
+          //       Container(
+          //         child: icon ?? Container(),
+          //       ),
+          //       Text(
+          //         title ?? "",
+          //         style: const TextStyle(
+          //           color: Color.fromARGB(255, 240, 240, 240),
+          //           fontSize: 15,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           actions: [
             Container(
               margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
-              child: TextButton(
-                child: const Text(
-                  "Sair",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 240, 240, 240),
-                    fontSize: 20,
-                  ),
-                ),
-                onPressed: () => _logOut(context),
+              child: Image.asset(
+                'assets/images/logo-escrita.png',
               ),
             ),
           ],

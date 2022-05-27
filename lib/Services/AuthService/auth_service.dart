@@ -18,6 +18,13 @@ class AuthService extends ChangeNotifier {
   String? userName = "Loading";
   String? userPhone = "Loading";
   String? userRoute = "";
+  CustomerModel model = CustomerModel(
+    nome: null,
+    telefone: null,
+    cpf: null,
+    uid: null,
+    admin: null,
+  );
 
   AuthService() {
     _authCheck();
@@ -134,16 +141,34 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  setRoute() async {
-    bool admin = false;
-    await firestore
-        .collection("usuarios")
-        .doc(_auth.currentUser!.uid)
-        .get()
-        .then((event) {
-      admin = event['admin'] ?? false;
+  setCustomerModel() async {
+    await firestore.collection("usuarios").doc(getUid()).get().then((event) {
+      model.nome = event['nome'];
+      model.cpf = event['cpf'];
+      model.telefone = event['telefone'];
+      model.uid = event['uid'];
     });
-    admin != true ? userRoute = '/home' : userRoute = '/adminHome';
+  }
+
+  getCustomerModel() {
+    return model;
+  }
+
+  setRoute() async {
+    await _getUser();
+    if (user == null) {
+      userRoute = "/";
+    } else {
+      bool admin = false;
+      await firestore
+          .collection("usuarios")
+          .doc(_auth.currentUser!.uid)
+          .get()
+          .then((event) {
+        admin = event['admin'] ?? false;
+      });
+      admin != true ? userRoute = '/home' : userRoute = '/adminHome';
+    }
   }
 
   getRoute() {

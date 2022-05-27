@@ -40,152 +40,182 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
     return firstLetterFirstName + firstLetterLastName;
   }
 
+  void _logOut(context) {
+    AuthService().logout(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      child: ListView(
-        children: <Widget>[
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  maxRadius: 40,
-                  minRadius: 35,
-                  child: Text(
-                    getFirtsLastLetterFullName(),
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 240, 240, 240),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: <Widget>[
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        maxRadius: 40,
+                        minRadius: 35,
+                        child: Text(
+                          getFirtsLastLetterFullName(),
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 240, 240, 240),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                auth.userName!,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Text(
+                                email.toString(),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 123, 123, 123),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                ListTile(
+                  title: const Text(
+                    "Novos pedidos",
+                    style: TextStyle(
+                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  backgroundColor: const Color.fromARGB(255, 74, 44, 82),
+                  trailing: const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    print("Novos pedidos");
+                  },
                 ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          auth.userName!,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        Text(
-                          email.toString(),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromARGB(255, 123, 123, 123),
-                          ),
-                        ),
-                      ],
+                ListTile(
+                  title: const Text(
+                    "Pedidos aceitos",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  trailing: const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    print("Pedidos aceitos");
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    "Pedidos encerrados",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    print("Pedidos encerrados");
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    "Lista de produtos",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.icecream_outlined,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ProductAdministration(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    "Cadastro de produtos",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.new_label_outlined,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ProductRegistration(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          const Divider(
-            indent: 10,
-            endIndent: 10,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
           ListTile(
-            title: const Text(
-              "Novos pedidos",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward,
-              color: Colors.black,
-            ),
-            onTap: () {
-              print("Novos pedidos");
-            },
-          ),
-          ListTile(
-            title: const Text(
-              "Pedidos aceitos",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward,
-              color: Colors.black,
-            ),
-            onTap: () {
-              print("Pedidos aceitos");
-            },
-          ),
-          ListTile(
-            title: const Text(
-              "Pedidos encerrados",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward,
-              color: Colors.black,
-            ),
-            onTap: () {
-              print("Pedidos encerrados");
-            },
-          ),
-          ListTile(
-            title: const Text(
-              "Lista de produtos",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            trailing: const Icon(
-              Icons.icecream_outlined,
-              color: Colors.black,
-            ),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ProductAdministration(),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "Deslogar ",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
                 ),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text(
-              "Cadastro de produtos",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            trailing: const Icon(
-              Icons.new_label_outlined,
-              color: Colors.black,
+                Icon(
+                  Icons.logout_outlined,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ],
             ),
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const ProductRegistration(),
-                ),
-              );
+              _logOut(context);
             },
           ),
         ],

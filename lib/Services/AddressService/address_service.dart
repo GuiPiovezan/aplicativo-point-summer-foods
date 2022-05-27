@@ -31,6 +31,7 @@ class AddressService extends ChangeNotifier {
         "numero": model.numero,
         "complemento": model.complemento,
         "bairro": model.bairro,
+        "nome": model.nome,
         "cidade": model.cidade,
         "uid": uid,
       });
@@ -38,11 +39,31 @@ class AddressService extends ChangeNotifier {
       throw Exception(e.code);
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const ListAddress(),
-      ),
-    );
+    Navigator.of(context).pop();
+  }
+
+  update(AddressModel model, BuildContext context) {
+    try {
+      firestore
+          .collection('usuarios')
+          .doc(AuthService().getUid())
+          .collection("enderecos")
+          .doc(model.uid)
+          .set({
+        "cep": model.cep,
+        "logradouro": model.logradouro,
+        "numero": model.numero,
+        "complemento": model.complemento,
+        "bairro": model.bairro,
+        "nome": model.nome,
+        "cidade": model.cidade,
+        "uid": model.uid
+      });
+    } on FirebaseException catch (e) {
+      throw Exception(e.code);
+    }
+
+    Navigator.of(context).pop();
   }
 
   getAddress() {

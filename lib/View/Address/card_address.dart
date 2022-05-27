@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:pointsf/models/address_model.dart';
 
 class CardAddress extends StatelessWidget {

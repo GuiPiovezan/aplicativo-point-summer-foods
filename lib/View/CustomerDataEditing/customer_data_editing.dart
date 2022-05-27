@@ -10,7 +10,9 @@ import 'package:pointsf/widgets/export_widgets.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 
 class CustomerDataEditing extends StatefulWidget {
-  const CustomerDataEditing({Key? key}) : super(key: key);
+  const CustomerDataEditing({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<CustomerDataEditing> createState() => _CustomerDataEditingState();
@@ -21,11 +23,42 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
   AuthService auth = AuthService();
 
   final _controllerName = TextEditingController();
+  final _controllerEmail = TextEditingController();
   final _controllerTelefone = TextEditingController();
+  final _controllerCpf = TextEditingController();
+  var oldModel = CustomerModel(
+    nome: null,
+    telefone: null,
+    cpf: null,
+    uid: null,
+    admin: null,
+  );
 
   bool isLoading = false;
 
-  TextEditingController senhaController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setInfo();
+  }
+
+  getInfo() {
+    oldModel = auth.model;
+    setState(() {
+      _controllerName.text = oldModel.nome ?? '';
+      _controllerEmail.text = auth.getUserEmail();
+      _controllerTelefone.text = oldModel.telefone ?? "";
+      _controllerCpf.text = oldModel.cpf ?? "";
+      isLoading = false;
+    });
+  }
+
+  setInfo() async {
+    setState(() => isLoading = true);
+    await auth.setCustomerModel();
+    getInfo();
+  }
 
   void save(BuildContext context) {
     if (formKey.currentState!.validate()) {
@@ -47,6 +80,13 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
 
   @override
   Widget build(BuildContext context) {
+    while (isLoading) {
+      setInfo();
+      getInfo();
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
@@ -62,6 +102,12 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
               validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
+              controller: _controllerEmail,
+              labelText: 'E-mail',
+              validator: (value) => UserValidator.validarEmail(value!),
+              enable: false,
+            ),
+            CustomTextField(
               controller: _controllerTelefone,
               labelText: 'Telefone',
               inputType: TextInputType.number,
@@ -70,6 +116,12 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
                 FilteringTextInputFormatter.digitsOnly,
                 TelefoneInputFormatter(),
               ],
+            ),
+            CustomTextField(
+              controller: _controllerCpf,
+              labelText: 'CPF',
+              validator: (value) => UserValidator.validarCPF(value!),
+              enable: false,
             ),
             (isLoading)
                 ? const Center(

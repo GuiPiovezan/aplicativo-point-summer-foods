@@ -18,6 +18,13 @@ class AuthService extends ChangeNotifier {
   String? userName = "Loading";
   String? userPhone = "Loading";
   String? userRoute = "";
+  CustomerModel model = CustomerModel(
+    nome: null,
+    telefone: null,
+    cpf: null,
+    uid: null,
+    admin: null,
+  );
 
   AuthService() {
     _authCheck();
@@ -132,6 +139,19 @@ class AuthService extends ChangeNotifier {
         (route) => false,
       );
     }
+  }
+
+  setCustomerModel() async {
+    await firestore.collection("usuarios").doc(getUid()).get().then((event) {
+      model.nome = event['nome'];
+      model.cpf = event['cpf'];
+      model.telefone = event['telefone'];
+      model.uid = event['uid'];
+    });
+  }
+
+  getCustomerModel() {
+    return model;
   }
 
   setRoute() async {

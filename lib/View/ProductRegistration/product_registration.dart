@@ -261,9 +261,8 @@ final categorySelected = TextEditingController();
 
 List<String> categories = [
   "Açai",
-  "Cupuaçu",
-  "Salgados",
-  "Porções",
+  "Salgado",
+  "Bebida"
 ];
 
 final measureSelected = TextEditingController();

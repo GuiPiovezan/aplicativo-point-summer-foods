@@ -37,10 +37,10 @@ class _ProductAdministrationState extends State<ProductAdministration> {
             category: "Açai",
           ),
           ProductAdministrationPage(
-            category: "Salgados",
+            category: "Salgado",
           ),
           ProductAdministrationPage(
-            category: "Porções",
+            category: "Bebida",
           ),
         ],
       ),
@@ -76,11 +76,11 @@ class _ProductAdministrationState extends State<ProductAdministration> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.fastfood_outlined),
-              label: "Salgado",
+              label: "Salgados",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.local_drink_rounded),
-              label: "Porçoes",
+              label: "Bebidas",
             ),
           ],
         ),

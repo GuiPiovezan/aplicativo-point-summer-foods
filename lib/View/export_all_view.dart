@@ -1,3 +1,6 @@
+//Alteração dos dados do endereço
+export 'package:pointsf/View/AddressDataEditing/address_data_editing.dart';
+
 //Cadastro de cliente
 export 'package:pointsf/View/CustomerRegistration/customer_registration.dart';
 export 'package:pointsf/View/CustomerRegistration/address_registration.dart';

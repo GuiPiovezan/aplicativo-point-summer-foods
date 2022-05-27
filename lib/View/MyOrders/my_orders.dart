@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/View/MyOrders/orders_detaileds.dart';
+import 'package:pointsf/main.dart';
 import 'package:pointsf/widgets/AppBar/custom_appbar.dart';
 
 class MyOrders extends StatelessWidget {
@@ -12,19 +14,33 @@ class MyOrders extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
+              margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 102, 19, 131),
+                  boxShadow: [
+                    BoxShadow(
+                      //  Colocar sombreamento em volta do card bottom
+                      color: Colors.grey, // cor do sombreamento
+                      spreadRadius: 3, // espeçura do circulo em volta do bottom
+                      blurRadius: 7, // a intensidade da sombra
+                    ),
+                  ],
+                  color: Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(15.0),
                   border: Border.all(
                     width: 3,
-                    color: Color.fromARGB(0, 74, 44, 82),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     style: BorderStyle.solid,
                   )),
-              width: 345,
-              height: 100,
+              width: MediaQuery.of(context).size.width,
+              height: 125,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => OrdersDetaileds(),
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)))),
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,24 +57,32 @@ class MyOrders extends StatelessWidget {
                         ),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text("Ricardo Brito Teixeira 627, PQ. das Flores")
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(Icons.check_circle_rounded),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 75, 0),
-                            child: Text("10:00"),
+                          Row(
+                            children: [
+                              Icon(Icons.check_circle_rounded),
+                              Text("10:00"),
+                            ],
                           ),
-                          Icon(Icons.restaurant),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
-                            child: Text("10:15"),
+                          Row(
+                            children: [
+                              Icon(Icons.restaurant),
+                              Text("10:15"),
+                            ],
                           ),
-                          Icon(Icons.delivery_dining),
-                          Text("10:30")
+                          Row(
+                            children: [
+                              Icon(Icons.delivery_dining),
+                              Text("10:30")
+                            ],
+                          ),
                         ],
                       )
                     ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pointsf/View/AddressDataEditing/address_data_editing.dart';
 import 'package:pointsf/models/address_model.dart';
 
 class CardAddress extends StatelessWidget {
@@ -63,7 +64,13 @@ class CardAddress extends StatelessWidget {
                 ),
               ),
               onLongPress: () {
-
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AddressDataEditing(
+                      model: model!,
+                    ),
+                  ),
+                );
               },
             )
           ],

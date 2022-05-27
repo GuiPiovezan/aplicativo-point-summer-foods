@@ -5,6 +5,7 @@ import 'package:pointsf/View/Orders/credit_payment.dart';
 import 'package:pointsf/View/Orders/money_payment.dart';
 import 'package:pointsf/models/address_model.dart';
 import 'package:pointsf/widgets/CardPayment/card_payment.dart';
+import 'package:pointsf/widgets/TextButtons/custom_text_button.dart';
 import 'package:pointsf/widgets/TextFields/custom_text_field.dart';
 
 import '../../widgets/AppBar/custom_appbar.dart';
@@ -126,8 +127,14 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                             enableDrag: true,
                             isDismissible: true,
                             context: context,
-                            builder: (context) {
-                              return Wrap(children: <Widget>[
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(24),
+                              ),
+                            ),
+                            builder: (context) => Wrap(
+                              children: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.only(
                                     bottom: MediaQuery.of(context)
@@ -137,16 +144,25 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                                   child: Form(
                                     child: Column(
                                       children: <Widget>[
+                                        const SizedBox(height: 16),
                                         CustomTextField(
                                           labelText: 'Troco',
+                                          inputType: TextInputType.number,
                                         ),
+                                        const SizedBox(height: 16),
+                                        CustomTextButton(
+                                          buttonText: "Pronto",
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        const SizedBox(height: 24),
                                       ],
                                     ),
                                   ),
                                 ),
-                              ]);
-                            },
-                            isScrollControlled: true,
+                              ],
+                            ),
                           ),
                           child: const CardPayment(
                             textButton: 'Dinheiro',

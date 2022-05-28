@@ -29,17 +29,23 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   final TextEditingController _controllerProductPrice = TextEditingController();
 
   void save(BuildContext context) {
-    ProductModel model = ProductModel(
-      categoria: dropDownCategory,
-      medida: dropDownUnitOfMeasurement,
-      nome: _controllerProductName.text,
-      status: dropDownStatus,
-      tipo: dropDownType,
-      uid: null,
-      sizes: sizes,
-    );
+    if (sizes.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("É preciso adicionar um tamanho")),
+      );
+    } else if (formKey.currentState!.validate()) {
+      ProductModel model = ProductModel(
+        categoria: dropDownCategory,
+        medida: dropDownUnitOfMeasurement,
+        nome: _controllerProductName.text,
+        status: dropDownStatus,
+        tipo: dropDownType,
+        uid: null,
+        sizes: sizes,
+      );
 
-    ProductService().registration(model, context);
+      ProductService().registration(model, context);
+    }
   }
 
   @override
@@ -82,7 +88,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  child: DropdownButton(
+                  child: DropdownButtonFormField(
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
@@ -95,7 +101,10 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       textAlign: TextAlign.center,
                     ),
                     elevation: 16,
-                    underline: Container(),
+                    validator: (value) {
+                      if (value == null) return "Selecione um";
+                      return null;
+                    },
                     onChanged: (String? typeProduct) {
                       setState(() {
                         dropDownType = typeProduct!;
@@ -125,7 +134,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  child: DropdownButton(
+                  child: DropdownButtonFormField(
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
@@ -135,7 +144,10 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     hint: const Text("Selecione o Status do Produto"),
                     isExpanded: false,
                     elevation: 16,
-                    underline: Container(),
+                    validator: (value) {
+                      if (value == null) return "Selecione um";
+                      return null;
+                    },
                     items: status.map((String status) {
                       return DropdownMenuItem(
                         value: status,
@@ -162,7 +174,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  child: DropdownButton(
+                  child: DropdownButtonFormField(
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
@@ -175,7 +187,10 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       textAlign: TextAlign.center,
                     ),
                     elevation: 16,
-                    underline: Container(),
+                    validator: (value) {
+                      if (value == null) return "Selecione um";
+                      return null;
+                    },
                     onChanged: (String? categories) {
                       setState(() {
                         dropDownCategory = categories!;
@@ -192,36 +207,33 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     }).toList(),
                   ),
                 ),
-                if (sizes.isNotEmpty) SizedBox(
-                  height: 100,
-                  child: Expanded(
-                    child: ListView.builder(
-                    itemCount: sizes.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text( 
-                            "tamanho: ${sizes[index]['size']}, Preço: ${sizes[index]['price']}",
-                          ),
-                        ],
-                      );
-                    },
-                          ),
-                  ),
-                ) else Container(),
+                if (sizes.isNotEmpty)
+                  SizedBox(
+                    height: 100,
+                    child: Expanded(
+                      child: ListView.builder(
+                        itemCount: sizes.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "tamanho: ${sizes[index]['size']}, Preço: ${sizes[index]['price']}",
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                else
+                  Container(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomTextField(
                       width: 140,
                       controller: _controllerProductSize,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Campo nome é obrigatorio!";
-                        }
-                        return null;
-                      },
                       labelText: "Tamanho",
                       placeholder: "500ml",
                     ),
@@ -229,16 +241,13 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     CustomTextField(
                       width: 140,
                       controller: _controllerProductPrice,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Campo nome é obrigatorio!";
-                        }
-                        return null;
-                      },
                       labelText: "Preço",
                       placeholder: "15,00",
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 15,
                 ),
                 CustomTextButton(
                   buttonText: "Adicionar tamanho",

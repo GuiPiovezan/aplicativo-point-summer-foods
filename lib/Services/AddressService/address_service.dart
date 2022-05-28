@@ -49,7 +49,7 @@ class AddressService extends ChangeNotifier {
           .doc(AuthService().getUid())
           .collection("enderecos")
           .doc(model.uid)
-          .set({
+          .update({
         "cep": model.cep,
         "logradouro": model.logradouro,
         "numero": model.numero,

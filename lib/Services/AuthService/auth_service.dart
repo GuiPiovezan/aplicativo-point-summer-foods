@@ -160,11 +160,7 @@ class AuthService extends ChangeNotifier {
       userRoute = "/";
     } else {
       bool admin = false;
-      await firestore
-          .collection("usuarios")
-          .doc(_auth.currentUser!.uid)
-          .get()
-          .then((event) {
+      await firestore.collection("usuarios").doc(user!.uid).get().then((event) {
         admin = event['admin'] ?? false;
       });
       admin != true ? userRoute = '/home' : userRoute = '/adminHome';
@@ -187,9 +183,11 @@ class AuthService extends ChangeNotifier {
 
   updateUser(CustomerModel model, BuildContext context) async {
     await _getUser();
-    firestore.collection('usuarios').doc(user!.uid).set({
+    firestore.collection('usuarios').doc(user!.uid).update({
       "nome": model.nome,
       "telefone": model.telefone,
     });
+
+    Navigator.of(context).pop();
   }
 }

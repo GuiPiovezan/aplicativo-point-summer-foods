@@ -24,7 +24,6 @@ class ProductService extends ChangeNotifier {
         "categoria": model.categoria,
         "medida": model.medida,
         "nome": model.nome,
-        "preco": model.preco,
         "status": model.status,
         "tipo": model.tipo,
         "uid": uid,

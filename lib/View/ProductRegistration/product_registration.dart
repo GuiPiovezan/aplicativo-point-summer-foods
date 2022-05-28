@@ -1,6 +1,4 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
@@ -35,11 +33,10 @@ class _ProductRegistrationState extends State<ProductRegistration> {
       categoria: dropDownCategory,
       medida: dropDownUnitOfMeasurement,
       nome: _controllerProductName.text,
-      // preco: _controllerProductPrice.text,
-      preco: null,
       status: dropDownStatus,
       tipo: dropDownType,
       uid: null,
+      sizes: sizes,
     );
 
     ProductService().registration(model, context);
@@ -195,58 +192,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     }).toList(),
                   ),
                 ),
-                // Container(
-                //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                //   width: 350,
-                //   height: 70,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(15.0),
-                //     border: Border.all(
-                //       width: 2,
-                //       color: const Color.fromARGB(255, 74, 44, 82),
-                //       style: BorderStyle.solid,
-                //     ),
-                //   ),
-                //   child: DropdownButton(
-                //     itemHeight: 70,
-                //     style: TextStyle(
-                //       color: Color.fromARGB(255, 74, 44, 82),
-                //     ),
-                //     borderRadius: BorderRadius.circular(20),
-                //     value: dropDownUnitOfMeasurement,
-                //     isExpanded: false,
-                //     hint: const Text("Selecione a unidade de medida"),
-                //     elevation: 16,
-                //     underline: Container(),
-                //     onChanged: (String? measure) {
-                //       setState(() {
-                //         dropDownUnitOfMeasurement = measure!;
-                //       });
-                //     },
-                //     items: measure.map((String measure) {
-                //       return DropdownMenuItem(
-                //         value: measure,
-                //         child: Text(measure),
-                //       );
-                //     }).toList(),
-                //   ),
-                // ),
-                // CustomTextField(
-                //   onSaved: (value) => productPrice = value!,
-                //   validator: (value) {
-                //     if (value!.isEmpty) return "Campo preço é obrigatorio!";
-                //     return null;
-                //   },
-                //   controller: _controllerProductPrice,
-                //   labelText: "Preço por Unidade",
-                //   placeholder: "10,00",
-                //   inputType: TextInputType.number,
-                //   inputFormatters: [
-                //     FilteringTextInputFormatter.digitsOnly,
-                //     // UtilBrasilFields.obterReal()
-                //   ],
-                // ),
                 if (sizes.isNotEmpty) SizedBox(
                   height: 100,
                   child: Expanded(
@@ -333,14 +278,6 @@ List<String> categories = [
   "Salgado",
   "Bebida",
 ];
-
-final measureSelected = TextEditingController();
-
-// List<String> measure = [
-//   "ML",
-//   "Gramas",
-//   "Unidade",
-// ];
 
 final statusSelected = TextEditingController();
 

@@ -16,7 +16,7 @@ class CartService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
   final AuthService auth = AuthService();
 
-  Map<int, Map<String, dynamic>> cartItens = Map();
+  Map<int, Map<String, dynamic>> cartItens = {};
 
   _addItemInCard(CartItem item) async {
     var uuid = const Uuid();
@@ -30,6 +30,7 @@ class CartService extends ChangeNotifier {
         .set({
       "produto": item.name,
       "preco": item.price,
+      "size": item.size,
       "quantidade": item.amount,
       "uid": uidProduct,
     });
@@ -58,14 +59,15 @@ class CartService extends ChangeNotifier {
     String product,
     Map<int, dynamic> additional,
     int amount,
+    String size,
     String price,
   ) {
-    Map<int, Map<String, dynamic>> additionalCheck = Map();
+    Map<int, Map<String, dynamic>> additionalCheck = {};
     int count = 0;
 
     for (var i = 0; i < additional.length; i++) {
       if (additional[i]["check"]) {
-        Map<String, dynamic> additionalCheckItem = Map();
+        Map<String, dynamic> additionalCheckItem = {};
         additionalCheckItem["nome"] = additional[i]["nome"];
         additionalCheckItem["preco"] = additional[i]["preco"];
         additionalCheck[count] = additionalCheckItem;
@@ -77,6 +79,7 @@ class CartService extends ChangeNotifier {
     CartItem item = CartItem(
       amount: amount,
       additional: additionalCheck,
+      size: size,
       name: product,
       price: price,
     );
@@ -96,8 +99,7 @@ class CartService extends ChangeNotifier {
     });
 
     for (var i = 0; i < cartItens.length; i++) {
-      // cartItens[i] = value.docs[i].data();
-      Map<int, Map<String, dynamic>> additionalItem = Map();
+      Map<int, Map<String, dynamic>> additionalItem = {};
 
       await firestore
           .collection("usuarios")
@@ -116,7 +118,7 @@ class CartService extends ChangeNotifier {
   }
 
   getCart() {
-    return this.cartItens;
+    return cartItens;
   }
 
   removeItemFromCard(itemUid) {

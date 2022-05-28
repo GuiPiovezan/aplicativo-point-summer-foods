@@ -7,10 +7,12 @@ import 'package:pointsf/widgets/export_widgets.dart';
 class ProductAdditionalModal extends StatefulWidget {
   final productPrimary;
   var itens;
+  var sizes;
   ProductAdditionalModal({
     key,
     required this.productPrimary,
     this.itens,
+    this.sizes,
   }) : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class ProductAdditionalModal extends StatefulWidget {
 class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
   final ProductService productSertvice = ProductService();
   int _itemAmount = 1;
+  var size;
   @override
   void initState() {
     // TODO: implement initState
@@ -28,6 +31,10 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
   }
 
   setItens() async {
+    await productSertvice.getSizeProduct(widget.productPrimary["uid"]);
+    setState(() {
+      widget.sizes = productSertvice.sizes;
+    });
     await productSertvice
         .getAdditionalByCategory(widget.productPrimary["categoria"]);
     setState(() {
@@ -49,7 +56,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
 
   @override
   Widget build(BuildContext context) {
-    while (widget.itens == null) {
+    while (widget.itens == null || widget.sizes == null) {
       setItens();
       return ListView(
         children: [
@@ -80,6 +87,29 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
               ),
             ),
           ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 240, 240, 240),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: widget.sizes.length,
+              itemBuilder: (_, index) {
+                return RadioListTile(
+                  title: Text(widget.sizes[index]["tamanho"]),
+                  value: index,
+                  groupValue: size,
+                  onChanged: (newValue) {
+                    setState(() {
+                      size = newValue;
+                    });
+                  },
+                );
+              },
+            ),
+          ),
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
@@ -105,9 +135,6 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
                       setState(() {
                         widget.itens[index]["check"] = newValue;
                       });
-                      print(
-                        "Mudou check da palavra ${widget.itens[index]["nome"]}para: $newValue",
-                      );
                     },
                   );
                 },
@@ -180,7 +207,8 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
                         widget.productPrimary["nome"],
                         widget.itens,
                         _itemAmount,
-                        widget.productPrimary["preco"],
+                        widget.sizes[size]["tamanho"],
+                        widget.sizes[size]["preco"],
                       );
                       Navigator.of(context).pop();
                     },

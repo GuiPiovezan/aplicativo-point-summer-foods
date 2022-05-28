@@ -47,11 +47,7 @@ class ProductService extends ChangeNotifier {
       throw Exception(e.code);
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const Home(),
-      ),
-    );
+    Navigator.of(context).pop();
   }
 
   getActiveProductsByCategory(category) {

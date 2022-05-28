@@ -22,7 +22,6 @@ class ProductService extends ChangeNotifier {
     try {
       firestore.collection('produtos').doc(uidProduct).set({
         "categoria": model.categoria,
-        "medida": model.medida,
         "nome": model.nome,
         "status": model.status,
         "tipo": model.tipo,

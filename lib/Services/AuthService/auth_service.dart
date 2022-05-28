@@ -185,5 +185,11 @@ class AuthService extends ChangeNotifier {
     );
   }
 
-  updateUser(CustomerModel model, BuildContext context) {}
+  updateUser(CustomerModel model, BuildContext context) async {
+    await _getUser();
+    firestore.collection('usuarios').doc(user!.uid).set({
+      "nome": model.nome,
+      "telefone": model.telefone,
+    });
+  }
 }

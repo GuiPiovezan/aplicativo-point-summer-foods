@@ -99,10 +99,12 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
               labelText: 'Senha',
               controller: senhaController,
               validator: (value) => UserValidator.validarSenha(value!),
+              obscureText: true,
             ),
             CustomTextField(
               onSaved: (value) => confirmarSenha = value!,
               labelText: 'Confirmar senha',
+              obscureText: true,
               validator: (value) => UserValidator.validarConfirmarSenha(
                   value!, senhaController.text),
             ),

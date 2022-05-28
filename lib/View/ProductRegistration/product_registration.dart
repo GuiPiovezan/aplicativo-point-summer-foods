@@ -16,6 +16,8 @@ class ProductRegistration extends StatefulWidget {
 class _ProductRegistrationState extends State<ProductRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  List<Map<String, dynamic>> sizes = [];
+
   String? dropDownUnitOfMeasurement;
   String? dropDownCategory;
   String? dropDownStatus;
@@ -25,6 +27,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   String productPrice = '';
 
   final TextEditingController _controllerProductName = TextEditingController();
+  final TextEditingController _controllerProductSize = TextEditingController();
   final TextEditingController _controllerProductPrice = TextEditingController();
 
   void save(BuildContext context) {
@@ -32,7 +35,8 @@ class _ProductRegistrationState extends State<ProductRegistration> {
       categoria: dropDownCategory,
       medida: dropDownUnitOfMeasurement,
       nome: _controllerProductName.text,
-      preco: _controllerProductPrice.text,
+      // preco: _controllerProductPrice.text,
+      preco: null,
       status: dropDownStatus,
       tipo: dropDownType,
       uid: null,
@@ -133,8 +137,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     value: dropDownStatus,
                     hint: const Text("Selecione o Status do Produto"),
                     isExpanded: false,
-                    elevation:
-                        16, // decidir para qual lado irá ser elevado o menu quando for clicado
+                    elevation: 16,
                     underline: Container(),
                     items: status.map((String status) {
                       return DropdownMenuItem(
@@ -164,7 +167,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   ),
                   child: DropdownButton(
                     itemHeight: 70,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -192,57 +195,123 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                     }).toList(),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 350,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      width: 2,
-                      color: const Color.fromARGB(255, 74, 44, 82),
-                      style: BorderStyle.solid,
-                    ),
-                  ),
-                  child: DropdownButton(
-                    itemHeight: 70,
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 74, 44, 82),
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    value: dropDownUnitOfMeasurement,
-                    isExpanded: false,
-                    hint: const Text("Selecione a unidade de medida"),
-                    elevation: 16,
-                    underline: Container(),
-                    onChanged: (String? measure) {
-                      setState(() {
-                        dropDownUnitOfMeasurement = measure!;
-                      });
-                    },
-                    items: measure.map((String measure) {
-                      return DropdownMenuItem(
-                        value: measure,
-                        child: Text(measure),
+                // Container(
+                //   margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
+                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //   width: 350,
+                //   height: 70,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(15.0),
+                //     border: Border.all(
+                //       width: 2,
+                //       color: const Color.fromARGB(255, 74, 44, 82),
+                //       style: BorderStyle.solid,
+                //     ),
+                //   ),
+                //   child: DropdownButton(
+                //     itemHeight: 70,
+                //     style: TextStyle(
+                //       color: Color.fromARGB(255, 74, 44, 82),
+                //     ),
+                //     borderRadius: BorderRadius.circular(20),
+                //     value: dropDownUnitOfMeasurement,
+                //     isExpanded: false,
+                //     hint: const Text("Selecione a unidade de medida"),
+                //     elevation: 16,
+                //     underline: Container(),
+                //     onChanged: (String? measure) {
+                //       setState(() {
+                //         dropDownUnitOfMeasurement = measure!;
+                //       });
+                //     },
+                //     items: measure.map((String measure) {
+                //       return DropdownMenuItem(
+                //         value: measure,
+                //         child: Text(measure),
+                //       );
+                //     }).toList(),
+                //   ),
+                // ),
+                // CustomTextField(
+                //   onSaved: (value) => productPrice = value!,
+                //   validator: (value) {
+                //     if (value!.isEmpty) return "Campo preço é obrigatorio!";
+                //     return null;
+                //   },
+                //   controller: _controllerProductPrice,
+                //   labelText: "Preço por Unidade",
+                //   placeholder: "10,00",
+                //   inputType: TextInputType.number,
+                //   inputFormatters: [
+                //     FilteringTextInputFormatter.digitsOnly,
+                //     // UtilBrasilFields.obterReal()
+                //   ],
+                // ),
+                if (sizes.isNotEmpty) SizedBox(
+                  height: 100,
+                  child: Expanded(
+                    child: ListView.builder(
+                    itemCount: sizes.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text( 
+                            "tamanho: ${sizes[index]['size']}, Preço: ${sizes[index]['price']}",
+                          ),
+                        ],
                       );
-                    }).toList(),
+                    },
+                          ),
                   ),
-                ),
-                CustomTextField(
-                  onSaved: (value) => productPrice = value!,
-                  validator: (value) {
-                    if (value!.isEmpty) return "Campo preço é obrigatorio!";
-                    return null;
-                  },
-                  controller: _controllerProductPrice,
-                  labelText: "Preço por Unidade",
-                  placeholder: "10,00",
-                  inputType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    // UtilBrasilFields.obterReal()
+                ) else Container(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextField(
+                      width: 140,
+                      controller: _controllerProductSize,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Campo nome é obrigatorio!";
+                        }
+                        return null;
+                      },
+                      labelText: "Tamanho",
+                      placeholder: "500ml",
+                    ),
+                    const SizedBox(width: 20),
+                    CustomTextField(
+                      width: 140,
+                      controller: _controllerProductPrice,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Campo nome é obrigatorio!";
+                        }
+                        return null;
+                      },
+                      labelText: "Preço",
+                      placeholder: "15,00",
+                    ),
                   ],
+                ),
+                CustomTextButton(
+                  buttonText: "Adicionar tamanho",
+                  width: 280,
+                  onPressed: () {
+                    Map<String, dynamic> newSize = {
+                      "size": _controllerProductSize.text,
+                      "price": _controllerProductPrice.text,
+                    };
+                    setState(() {
+                      sizes.add(newSize);
+                    });
+                    _controllerProductSize.clear();
+                    _controllerProductPrice.clear();
+                  },
+                ),
+                const SizedBox(
+                  height: 15,
                 ),
                 CustomTextButton(
                   buttonText: "Cadastrar",
@@ -262,16 +331,16 @@ final categorySelected = TextEditingController();
 List<String> categories = [
   "Açai",
   "Salgado",
-  "Bebida"
+  "Bebida",
 ];
 
 final measureSelected = TextEditingController();
 
-List<String> measure = [
-  "ML",
-  "Gramas",
-  "Unidade",
-];
+// List<String> measure = [
+//   "ML",
+//   "Gramas",
+//   "Unidade",
+// ];
 
 final statusSelected = TextEditingController();
 

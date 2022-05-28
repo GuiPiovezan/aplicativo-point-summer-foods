@@ -18,16 +18,31 @@ class ProductService extends ChangeNotifier {
 
   registration(ProductModel model, BuildContext context) {
     var uuid = const Uuid();
-    var uid = uuid.v1();
+    var uidProduct = uuid.v1();
     try {
-      firestore.collection('produtos').doc(uid).set({
+      firestore.collection('produtos').doc(uidProduct).set({
         "categoria": model.categoria,
         "medida": model.medida,
         "nome": model.nome,
         "status": model.status,
         "tipo": model.tipo,
-        "uid": uid,
+        "uid": uidProduct,
       });
+      if (model.sizes!.isNotEmpty) {
+        for (var i = 0; i < model.sizes!.length; i++) {
+          var uidSize = uuid.v1();
+          firestore
+              .collection('produtos')
+              .doc(uidProduct)
+              .collection('tamanhos')
+              .doc(uidSize)
+              .set({
+            "tamanho": model.sizes![i]['size'],
+            "preco": model.sizes![i]['price'],
+            "uid": uidSize,
+          });
+        }
+      }
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     }

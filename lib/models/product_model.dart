@@ -1,6 +1,5 @@
 class ProductModel {
   String? categoria;
-  String? medida;
   String? nome;
   String? status;
   String? tipo;
@@ -9,7 +8,6 @@ class ProductModel {
 
   ProductModel({
     required this.categoria,
-    required this.medida,
     required this.nome,
     required this.status,
     required this.tipo,
@@ -19,7 +17,6 @@ class ProductModel {
 
   ProductModel.fromMap(Map<String, dynamic> map) {
     categoria = map['categoria'];
-    medida = map['medida'];
     nome = map['nome'];
     status = map['status'];
     tipo = map['tipo'];

@@ -3,14 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:pointsf/Services/ProductService/product_service.dart';
+import 'package:pointsf/View/ProductDataEditing/product_data_editing.dart';
+import 'package:pointsf/models/product_model.dart';
 
-class ProductAdministrationPage extends StatelessWidget {
+class ProductAdministrationPage extends StatefulWidget {
   final String category;
 
   const ProductAdministrationPage({
     Key? key,
     required this.category,
   }) : super(key: key);
+
+  @override
+  State<ProductAdministrationPage> createState() =>
+      _ProductAdministrationPageState();
+}
+
+class _ProductAdministrationPageState extends State<ProductAdministrationPage> {
+  ProductService productService = ProductService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +30,8 @@ class ProductAdministrationPage extends StatelessWidget {
         children: [
           Flexible(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: ProductService().getAllProductsByCategory(category),
+              stream:
+                  ProductService().getAllProductsByCategory(widget.category),
               builder: (_, snapshot) {
                 if (!snapshot.hasData) return const CircularProgressIndicator();
                 return ListView.builder(
@@ -50,7 +61,23 @@ class ProductAdministrationPage extends StatelessWidget {
                             fontSize: 20,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProductDataEditing(
+                                model: ProductModel(
+                                  categoria: snapshot.data!.docs[index]
+                                      ["categoria"],
+                                  nome: snapshot.data!.docs[index]["nome"],
+                                  status: snapshot.data!.docs[index]["status"],
+                                  tipo: snapshot.data!.docs[index]["tipo"],
+                                  uid: snapshot.data!.docs[index]["uid"],
+                                  sizes: null,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     );
                   },

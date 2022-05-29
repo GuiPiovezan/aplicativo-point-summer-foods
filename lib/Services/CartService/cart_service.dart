@@ -19,8 +19,8 @@ class CartService extends ChangeNotifier {
   Map<int, Map<String, dynamic>> cartItens = {};
 
   _addItemInCard(CartItem item) async {
-    var uuid = const Uuid();
-    var uidProduct = uuid.v1();
+    var uuidForProduct = const Uuid();
+    var uidProduct = uuidForProduct.v1();
 
     await firestore
         .collection('usuarios')
@@ -37,7 +37,8 @@ class CartService extends ChangeNotifier {
 
     if (item.additional!.isNotEmpty) {
       for (var i = 0; i < item.additional!.length; i++) {
-        var uidAdditional = uuid.v1();
+        var uuidForAdditional = const Uuid();
+        var uidAdditional = uuidForAdditional.v1();
 
         await firestore
             .collection("usuarios")

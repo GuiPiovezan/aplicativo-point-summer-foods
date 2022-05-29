@@ -16,7 +16,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
 
   List<Map<String, dynamic>> sizes = [];
 
-  String? dropDownUnitOfMeasurement;
   String? dropDownCategory;
   String? dropDownStatus;
   String? dropDownType;
@@ -36,7 +35,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
     } else if (formKey.currentState!.validate()) {
       ProductModel model = ProductModel(
         categoria: dropDownCategory,
-        medida: dropDownUnitOfMeasurement,
         nome: _controllerProductName.text,
         status: dropDownStatus,
         tipo: dropDownType,

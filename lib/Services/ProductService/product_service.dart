@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:pointsf/models/product_model.dart';
-import 'package:pointsf/View/export_all_view.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -71,6 +70,7 @@ class ProductService extends ChangeNotifier {
         sizes[i]!["check"] = false;
       }
     });
+    return null;
   }
 
   getAdditionalByCategory(category) async {
@@ -101,5 +101,51 @@ class ProductService extends ChangeNotifier {
         .collection('produtos')
         .where("categoria", isEqualTo: category)
         .snapshots();
+  }
+
+  update(ProductModel model, BuildContext context) async {
+    try {
+      await firestore.collection('produtos').doc(model.uid).update({
+        "categoria": model.categoria,
+        "nome": model.nome,
+        "status": model.status,
+        "tipo": model.tipo,
+      });
+      await firestore
+          .collection("produtos")
+          .doc(model.uid)
+          .collection("tamanhos")
+          .get()
+          .then((value) async {
+        for (var i = 0; i < value.docs.length; i++) {
+          await firestore
+              .collection("produtos")
+              .doc(model.uid)
+              .collection("tamanhos")
+              .doc(value.docs[i]["uid"])
+              .delete();
+        }
+      });
+      if (model.sizes!.isNotEmpty) {
+        for (var i = 0; i < model.sizes!.length; i++) {
+          var uuidForSize = const Uuid();
+          var uidSize = uuidForSize.v1();
+          await firestore
+              .collection('produtos')
+              .doc(model.uid)
+              .collection('tamanhos')
+              .doc(uidSize)
+              .set({
+            "tamanho": model.sizes![i]['tamanho'],
+            "preco": model.sizes![i]['preco'],
+            "uid": uidSize,
+          });
+        }
+      }
+    } on FirebaseException catch (e) {
+      throw Exception(e.code);
+    }
+
+    Navigator.of(context).pop();
   }
 }

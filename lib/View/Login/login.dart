@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => CustomerRegistration(),
+                          builder: (context) => const CustomerRegistration(),
                         ),
                       );
                     },
@@ -118,7 +118,10 @@ class _LoginState extends State<Login> {
                     ),
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
         ),

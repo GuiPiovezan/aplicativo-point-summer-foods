@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/CartService/cart_service.dart';
-import 'package:pointsf/View/Orders/confirmation_information.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartPage extends StatefulWidget {

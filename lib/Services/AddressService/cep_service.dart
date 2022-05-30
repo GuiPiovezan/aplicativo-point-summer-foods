@@ -32,10 +32,9 @@ class CepService extends ChangeNotifier {
 
       response = await http.get(url);
 
-      if (response.statusCode.toString() != "200")
+      if (response.statusCode.toString() != "200") {
         return throw response.statusCode.toString();
-
-      print('Resposta:' + response.body);
+      }
 
       Map<String, dynamic> resultingData = await json.decode(response.body);
 

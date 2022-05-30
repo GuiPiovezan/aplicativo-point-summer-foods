@@ -38,7 +38,6 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setInfo();
   }
@@ -133,6 +132,9 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
                     buttonText: 'Atualizar',
                     onPressed: () => save(context),
                   ),
+            const SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),

@@ -118,6 +118,9 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
                     buttonText: 'Cadastrar',
                     onPressed: () => save(context),
                   ),
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),

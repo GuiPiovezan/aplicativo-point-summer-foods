@@ -30,7 +30,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   void save(BuildContext context) {
     if (sizes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("É preciso adicionar um tamanho")),
+        const SnackBar(content: Text("É preciso adicionar um tamanho")),
       );
     } else if (formKey.currentState!.validate()) {
       ProductModel model = ProductModel(
@@ -268,6 +268,9 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                 CustomTextButton(
                   buttonText: "Cadastrar",
                   onPressed: () => save(context),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),

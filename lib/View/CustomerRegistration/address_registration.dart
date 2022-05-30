@@ -211,7 +211,7 @@ class _AddressRegistration extends State<AddressRegistration> {
                 onPressed: () => save(context),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
           ],

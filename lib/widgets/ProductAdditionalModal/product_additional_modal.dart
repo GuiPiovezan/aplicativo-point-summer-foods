@@ -25,7 +25,6 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
   var size;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setItens();
   }

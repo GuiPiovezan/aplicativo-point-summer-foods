@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/Orders/confirmation_information.dart';
 
 import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/View/Routes/routes.dart';

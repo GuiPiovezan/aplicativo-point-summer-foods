@@ -4,6 +4,7 @@ import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
+// ignore: must_be_immutable
 class ProductDataEditing extends StatefulWidget {
   ProductModel model;
   ProductDataEditing({
@@ -33,8 +34,8 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
   final TextEditingController _controllerProductSize = TextEditingController();
   final TextEditingController _controllerProductPrice = TextEditingController();
 
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       dropDownCategory = widget.model.categoria!;
@@ -58,7 +59,7 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
   void save(BuildContext context) {
     if (sizes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("É preciso adicionar um tamanho")),
+        const SnackBar(content: Text("É preciso adicionar um tamanho")),
       );
     } else if (formKey.currentState!.validate()) {
       ProductModel model = ProductModel(
@@ -296,6 +297,9 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                 CustomTextButton(
                   buttonText: "Cadastrar",
                   onPressed: () => save(context),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),

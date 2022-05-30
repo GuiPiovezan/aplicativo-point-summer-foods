@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/View/Orders/confirmation_information.dart';
 
 import 'package:pointsf/View/export_all_view.dart';
 
@@ -45,6 +46,8 @@ class _RouteAppState extends State<RouteApp> {
         '/': (context) => const Login(),
         '/home': (context) => const Home(),
         '/adminHome': (context) => const AdminHome(),
+        '/confirmationInformation': (context) =>
+            const ConfirmationInformation(),
       },
       initialRoute: route,
       debugShowCheckedModeBanner: false,

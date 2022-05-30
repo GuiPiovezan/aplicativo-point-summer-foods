@@ -85,8 +85,8 @@ class _CartPageState extends State<CartPage> {
               CustomTextButton(
                 buttonText: "Finalizar",
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ConfirmationInformation()));
+                  Navigator.of(context).pushNamed('/confirmationInformation',
+                      arguments: {'items': widget.cartItens});
                 },
               ),
               const SizedBox(

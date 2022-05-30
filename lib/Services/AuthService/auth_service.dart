@@ -173,12 +173,8 @@ class AuthService extends ChangeNotifier {
 
   logout(BuildContext context) async {
     await _auth.signOut();
-    _getUser();
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const Login(),
-      ),
-    );
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
   updateUser(CustomerModel model, BuildContext context) async {

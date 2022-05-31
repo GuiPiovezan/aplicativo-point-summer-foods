@@ -84,8 +84,18 @@ class _CartPageState extends State<CartPage> {
               CustomTextButton(
                 buttonText: "Finalizar",
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/confirmationInformation',
-                      arguments: {'items': widget.cartItens});
+                  if (widget.cartItens[0] != null) {
+                    Navigator.of(context).pushNamed(
+                      '/confirmationInformation',
+                      arguments: {'items': widget.cartItens},
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("O carrinho está vazio"),
+                      ),
+                    );
+                  }
                 },
               ),
               const SizedBox(

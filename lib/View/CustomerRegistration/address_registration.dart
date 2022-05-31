@@ -32,20 +32,39 @@ class _AddressRegistration extends State<AddressRegistration> {
   String cepSearched = "";
 
   bool isLoading = false;
+  bool registerIsLoading = false;
 
   void save(BuildContext context) async {
-    if (cepSearched == controller.cep!.text) {
-      AddressModel model = AddressModel(
-        bairro: controller.district!.text,
-        cep: controller.cep!.text,
-        cidade: controller.city!.text,
-        complemento: controller.complement!.text,
-        logradouro: controller.street!.text,
-        nome: controller.name!.text,
-        numero: controller.number!.text,
-        uid: null,
+    if (cepSearched.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("É necessário buscar por um CEP primeiro"),
+        ),
       );
-      AddressService().registration(model, context);
+    } else if (cepSearched == controller.cep!.text) {
+      if (formKey.currentState!.validate()) {
+        try {
+          setState(() => registerIsLoading = true);
+          AddressModel model = AddressModel(
+            bairro: controller.district!.text,
+            cep: controller.cep!.text,
+            cidade: controller.city!.text,
+            complemento: controller.complement!.text,
+            logradouro: controller.street!.text,
+            nome: controller.name!.text,
+            numero: controller.number!.text,
+            uid: null,
+          );
+          AddressService().registration(model, context);
+        } on AddressException catch (e) {
+          setState(() => registerIsLoading = false);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(e.message)),
+          );
+        }
+      }
+    } else {
+      setState(() => registerIsLoading = false);
     }
   }
 
@@ -92,129 +111,132 @@ class _AddressRegistration extends State<AddressRegistration> {
         title: "Endereço",
       ),
       body: Center(
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CustomTextField(
-                  controller: controller.cep,
-                  labelText: "CEP",
-                  placeholder: "Ex 15200000",
-                  width: 200,
-                  inputType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CepInputFormatter(),
-                  ],
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                (isLoading)
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                          color: Color.fromARGB(255, 74, 44, 82),
-                        ),
-                      )
-                    : Container(
-                        margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
-                        child: CustomTextButton(
+        child: Form(
+          key: formKey,
+          child: ListView(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CustomTextField(
+                    margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    controller: controller.cep,
+                    labelText: "CEP",
+                    placeholder: "Ex 15200000",
+                    width: MediaQuery.of(context).size.width / 2,
+                    inputType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CepInputFormatter(),
+                    ],
+                  ),
+                  (isLoading)
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: Color.fromARGB(255, 74, 44, 82),
+                          ),
+                        )
+                      : CustomTextButton(
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           buttonText: "Buscar",
                           onPressed: searchCEP,
-                          width: 100,
+                          width: MediaQuery.of(context).size.width / 4,
                           heigth: 70,
                         ),
-                      ),
-              ],
-            ),
-            CustomTextField(
-              controller: controller.name,
-              labelText: 'Nome do endereço',
-              placeholder: 'Ex. Trabalho',
-              enable: enableName,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Campo nome é obrigatorio!";
-                }
-                return null;
-              },
-            ),
-            CustomTextField(
-              controller: controller.street,
-              labelText: 'Logradouro',
-              placeholder: 'Rua José Pereira',
-              enable: enableStreet,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Campo nome é obrigatorio!";
-                }
-                return null;
-              },
-            ),
-            CustomTextField(
-              controller: controller.number,
-              labelText: 'Numero',
-              placeholder: '547',
-              inputType: TextInputType.number,
-              enable: enableNumber,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Campo nome é obrigatorio!";
-                }
-                return null;
-              },
-            ),
-            CustomTextField(
-              controller: controller.complement,
-              labelText: 'Complemento',
-              placeholder: 'Apartamento 13',
-              enable: enableComplement,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Campo nome é obrigatorio!";
-                }
-                return null;
-              },
-            ),
-            CustomTextField(
-              controller: controller.district,
-              labelText: 'Bairro',
-              placeholder: 'Jardim das Flores',
-              enable: enableDistrict,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Campo nome é obrigatorio!";
-                }
-                return null;
-              },
-            ),
-            CustomTextField(
-              controller: controller.city,
-              labelText: 'Cidade',
-              placeholder: 'São José do Rio Preto',
-              enable: enableCity,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Campo nome é obrigatorio!";
-                }
-                return null;
-              },
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-              child: CustomTextButton(
-                buttonText: "Cadastrar",
-                onPressed: () => save(context),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-          ],
+              CustomTextField(
+                controller: controller.name,
+                labelText: 'Nome do endereço',
+                placeholder: 'Ex. Trabalho',
+                enable: enableName,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "De um nome para o endereço";
+                  }
+                  return null;
+                },
+              ),
+              CustomTextField(
+                controller: controller.street,
+                labelText: 'Logradouro',
+                placeholder: 'Rua José Pereira',
+                enable: enableStreet,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Digite seu logradouro";
+                  }
+                  return null;
+                },
+              ),
+              CustomTextField(
+                controller: controller.number,
+                labelText: 'Numero',
+                placeholder: '547',
+                inputType: TextInputType.number,
+                enable: enableNumber,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Digite o número da sua casa";
+                  }
+                  return null;
+                },
+              ),
+              CustomTextField(
+                controller: controller.complement,
+                labelText: 'Complemento',
+                placeholder: 'Apartamento 13',
+                enable: enableComplement,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Digite um complemento";
+                  }
+                  return null;
+                },
+              ),
+              CustomTextField(
+                controller: controller.district,
+                labelText: 'Bairro',
+                placeholder: 'Jardim das Flores',
+                enable: enableDistrict,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Digite o bairro onde reside";
+                  }
+                  return null;
+                },
+              ),
+              CustomTextField(
+                controller: controller.city,
+                labelText: 'Cidade',
+                placeholder: 'São José do Rio Preto',
+                enable: enableCity,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Digite sua cidade";
+                  }
+                  return null;
+                },
+              ),
+              (registerIsLoading)
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                    )
+                  : CustomTextButton(
+                    buttonText: "Cadastrar",
+                    onPressed: () => save(context),
+                  ),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/customer_model.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/Services/ControlerService/customer_controler.dart';
 import 'package:pointsf/Services/Validators/user_validator.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
@@ -19,37 +20,41 @@ class CustomerRegistration extends StatefulWidget {
 class _CustomerRegistrationState extends State<CustomerRegistration> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  CustomerControllerService controller = CustomerControllerService();
+
+  AuthService auth = AuthService();
+
   bool isLoading = false;
 
-  String nome = '';
 
-  String telefone = '';
-
-  String email = '';
-
-  String senha = '';
-
-  String cpf = '';
-
-  String confirmarSenha = '';
-
-  TextEditingController senhaController = TextEditingController();
-
-  void save(BuildContext context) {
+  void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       setState(() => isLoading = true);
 
       formKey.currentState!.save();
+      try {
+        CustomerModel model = CustomerModel(
+          nome: controller.name!.text,
+          uid: null,
+          telefone: controller.cellphone!.text,
+          cpf: controller.cpf!.text,
+          admin: false,
+        );
 
-      CustomerModel model = CustomerModel(
-        nome: nome,
-        uid: null,
-        telefone: telefone,
-        cpf: cpf,
-        admin: false,
-      );
-
-      AuthService().register(email, senha, model, context);
+        await auth.register(
+          controller.email!.text,
+          controller.password!.text,
+          model,
+          context,
+        );
+      } on AuthException catch (e) {
+        setState(() => isLoading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.message)),
+        );
+      }
+    } else {
+      setState(() => isLoading = false);
     }
   }
 
@@ -65,17 +70,18 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
         child: ListView(
           children: <Widget>[
             CustomTextField(
-              onSaved: (value) => nome = value!.trim(),
+              controller: controller.name,
               labelText: 'Nome',
               validator: (value) => UserValidator.validarNome(value!),
             ),
             CustomTextField(
-              onSaved: (value) => email = value!.trim(),
+              controller: controller.email,
+              inputType: TextInputType.emailAddress,
               labelText: 'E-mail',
               validator: (value) => UserValidator.validarEmail(value!),
             ),
             CustomTextField(
-              onSaved: (value) => telefone = value!,
+              controller: controller.cellphone,
               labelText: 'Telefone',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarTelefone(value!),
@@ -85,7 +91,7 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
               ],
             ),
             CustomTextField(
-              onSaved: (value) => cpf = value!,
+              controller: controller.cpf,
               labelText: 'CPF',
               inputType: TextInputType.number,
               validator: (value) => UserValidator.validarCPF(value!),
@@ -95,18 +101,17 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
               ],
             ),
             CustomTextField(
-              onSaved: (value) => senha = value!,
+              controller: controller.password,
               labelText: 'Senha',
-              controller: senhaController,
               validator: (value) => UserValidator.validarSenha(value!),
               obscureText: true,
             ),
             CustomTextField(
-              onSaved: (value) => confirmarSenha = value!,
+              controller: controller.confirmPassword,
               labelText: 'Confirmar senha',
               obscureText: true,
               validator: (value) => UserValidator.validarConfirmarSenha(
-                  value!, senhaController.text),
+                  value!, controller.password!.text),
             ),
             (isLoading)
                 ? const Center(

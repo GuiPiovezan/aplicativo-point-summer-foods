@@ -33,6 +33,8 @@ class _LoginState extends State<Login> {
           SnackBar(content: Text(e.message)),
         );
       }
+    } else {
+      setState(() => loading = false);
     }
   }
 

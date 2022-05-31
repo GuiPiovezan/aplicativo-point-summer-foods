@@ -11,12 +11,13 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? inputType;
   final bool? enable;
   final bool obscureText;
-  FormFieldSetter<String>? onSaved;
-  FormFieldValidator<String>? validator;
-  List<TextInputFormatter>? inputFormatters;
-  EdgeInsets? margin;
+  final FormFieldSetter<String>? onSaved;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final EdgeInsets? margin;
+  final Widget? prefix;
 
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     this.controller,
     this.labelText,
@@ -30,6 +31,7 @@ class CustomTextField extends StatelessWidget {
     this.inputFormatters,
     this.obscureText = false,
     this.margin,
+    this.prefix,
   }) : super(key: key);
 
   @override
@@ -63,6 +65,7 @@ class CustomTextField extends StatelessWidget {
                   color: Color.fromARGB(255, 74, 44, 82),
                 ),
                 hintText: placeholder ?? '',
+                prefix: prefix,
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color.fromARGB(255, 74, 44, 82),

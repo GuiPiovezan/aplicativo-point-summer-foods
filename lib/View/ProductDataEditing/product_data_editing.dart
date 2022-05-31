@@ -90,6 +90,9 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(
+                  height: 15,
+                ),
                 CustomTextField(
                   onSaved: (value) => productName = value!,
                   validator: (value) {
@@ -100,22 +103,54 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                   },
                   controller: _controllerProductName,
                   labelText: "Nome do Produto",
-                  placeholder: "Nutella",
+                  placeholder: "Creme de avelã",
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 350,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      width: 2,
-                      color: const Color.fromARGB(255, 74, 44, 82),
-                      style: BorderStyle.solid,
-                    ),
-                  ),
+                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
+                  width: MediaQuery.of(context).size.width,
                   child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      floatingLabelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelText: "Selecione o tipo de produto",
+                      hintText: "Selecione o tipo de produto",
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 240, 0, 0),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
@@ -123,10 +158,6 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownType,
                     isExpanded: false,
-                    hint: const Text(
-                      "Selecione o tipo de produto",
-                      textAlign: TextAlign.center,
-                    ),
                     elevation: 16,
                     validator: (value) {
                       if (value == null) return "Selecione um";
@@ -149,26 +180,58 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 350,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      width: 2,
-                      color: const Color.fromARGB(255, 74, 44, 82),
-                      style: BorderStyle.solid,
-                    ),
-                  ),
+                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
+                  width: MediaQuery.of(context).size.width,
                   child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      floatingLabelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelText: "Selecione o Status do Produto",
+                      hintText: "Selecione o Status do Produto",
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 240, 0, 0),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
                     ),
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownStatus,
-                    hint: const Text("Selecione o Status do Produto"),
+                    // hint: const Text("Selecione o Status do Produto"),
                     isExpanded: false,
                     elevation: 16,
                     validator: (value) {
@@ -189,19 +252,51 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  width: 350,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    border: Border.all(
-                      width: 2,
-                      color: const Color.fromARGB(255, 74, 44, 82),
-                      style: BorderStyle.solid,
-                    ),
-                  ),
+                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
+                  width: MediaQuery.of(context).size.width,
                   child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      floatingLabelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelText: "Selecione a categoria do produto",
+                      hintText: "Selecione a categoria do produto",
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 240, 0, 0),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
@@ -209,10 +304,6 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                     borderRadius: BorderRadius.circular(20),
                     value: dropDownCategory,
                     isExpanded: false,
-                    hint: const Text(
-                      "Selecione a categoria do produto",
-                      textAlign: TextAlign.center,
-                    ),
                     elevation: 16,
                     validator: (value) {
                       if (value == null) return "Selecione um";
@@ -235,46 +326,77 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                   ),
                 ),
                 if (sizes.isNotEmpty)
-                  SizedBox(
-                    height: 100,
-                    child: Expanded(
-                      child: ListView.builder(
-                        itemCount: sizes.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "tamanho: ${sizes[index]['tamanho']}, Preço: ${sizes[index]['preco']}",
-                              ),
-                            ],
-                          );
-                        },
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 180,
+                    margin: const EdgeInsets.fromLTRB(15, 0, 15, 12),
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        labelText: "Tamanhos",
+                        labelStyle: const TextStyle(
+                          color: Color.fromARGB(255, 74, 44, 82),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 74, 44, 82),
+                            style: BorderStyle.solid,
+                          ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: sizes.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: Text(
+                                    "tamanho: ${sizes[index]['tamanho']}, Preço: ${sizes[index]['preco']}",
+                                  ),
+                                  trailing: IconButton(
+                                    icon: const Icon(
+                                      Icons.remove_circle_outline,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        sizes.removeAt(index);
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                else
-                  Container(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextField(
-                      width: 140,
-                      controller: _controllerProductSize,
-                      labelText: "Tamanho",
-                      placeholder: "500ml",
-                    ),
-                    const SizedBox(width: 20),
-                    CustomTextField(
-                      width: 140,
-                      controller: _controllerProductPrice,
-                      labelText: "Preço",
-                      placeholder: "15,00",
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
+                  ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomTextField(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        width: MediaQuery.of(context).size.width / 2 - 30,
+                        controller: _controllerProductSize,
+                        labelText: "Tamanho",
+                        placeholder: "500ml",
+                      ),
+                      // const SizedBox(width: 20),
+                      CustomTextField(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        width: MediaQuery.of(context).size.width / 2 - 30,
+                        controller: _controllerProductPrice,
+                        labelText: "Preço",
+                        placeholder: "15,00",
+                      ),
+                    ],
+                  ),
                 ),
                 CustomTextButton(
                   buttonText: "Adicionar tamanho",

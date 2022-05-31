@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
     return Center(
       child: Container(
         margin: EdgeInsets.only(
-          bottom: (validator != null ? 5 : 0),
+          bottom: (validator != null ? 7 : 0),
         ),
         child: Container(
           margin: margin ?? const EdgeInsets.fromLTRB(15, 5, 15, 0),

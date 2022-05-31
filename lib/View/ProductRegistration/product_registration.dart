@@ -1,11 +1,15 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class ProductRegistration extends StatefulWidget {
-  const ProductRegistration({Key? key}) : super(key: key);
+  const ProductRegistration({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProductRegistration> createState() => _ProductRegistrationState();
@@ -360,6 +364,17 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       ),
                       // const SizedBox(width: 20),
                       CustomTextField(
+                        prefix: const Text(
+                          "R\$ ",
+                          style: TextStyle(
+                            color: Color.fromARGB(200, 0, 0, 0),
+                          ),
+                        ),
+                        inputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          CentavosInputFormatter(),
+                        ],
                         margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         width: MediaQuery.of(context).size.width / 2 - 30,
                         controller: _controllerProductPrice,

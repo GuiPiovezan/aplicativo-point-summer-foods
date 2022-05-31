@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter/services.dart';
+import 'package:brasil_fields/brasil_fields.dart';
+
 import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
-// ignore: must_be_immutable
 class ProductDataEditing extends StatefulWidget {
-  ProductModel model;
-  ProductDataEditing({
+  final ProductModel model;
+  const ProductDataEditing({
     Key? key,
     required this.model,
   }) : super(key: key);
@@ -389,6 +391,17 @@ class _ProductDataEditingState extends State<ProductDataEditing> {
                       ),
                       // const SizedBox(width: 20),
                       CustomTextField(
+                        prefix: const Text(
+                          "R\$ ",
+                          style: TextStyle(
+                            color: Color.fromARGB(200, 0, 0, 0),
+                          ),
+                        ),
+                        inputType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          CentavosInputFormatter(),
+                        ],
                         margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         width: MediaQuery.of(context).size.width / 2 - 30,
                         controller: _controllerProductPrice,

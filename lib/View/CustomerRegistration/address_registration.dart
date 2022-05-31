@@ -62,9 +62,9 @@ class _AddressRegistration extends State<AddressRegistration> {
             SnackBar(content: Text(e.message)),
           );
         }
+      } else {
+        setState(() => registerIsLoading = false);
       }
-    } else {
-      setState(() => registerIsLoading = false);
     }
   }
 
@@ -229,9 +229,9 @@ class _AddressRegistration extends State<AddressRegistration> {
                       ),
                     )
                   : CustomTextButton(
-                    buttonText: "Cadastrar",
-                    onPressed: () => save(context),
-                  ),
+                      buttonText: "Cadastrar",
+                      onPressed: () => save(context),
+                    ),
               const SizedBox(
                 height: 30,
               ),

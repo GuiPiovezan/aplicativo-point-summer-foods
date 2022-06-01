@@ -30,12 +30,13 @@ class ProductPage extends StatelessWidget {
                   itemBuilder: (_, index) {
                     return Container(
                       margin: const EdgeInsets.fromLTRB(15, 15, 15, 10),
-                      height: 57,
+                      width: MediaQuery.of(context).size.width,
+                      height: 70,
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(50, 10, 10, 10),
+                            color: Color.fromARGB(25, 10, 10, 10),
                             spreadRadius: 5,
                             blurRadius: 7,
                             offset: Offset(0, 3),

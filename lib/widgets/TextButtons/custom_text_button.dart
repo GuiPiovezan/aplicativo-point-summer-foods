@@ -5,6 +5,7 @@ class CustomTextButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double? width;
   final double? heigth;
+  final EdgeInsets? margin;
 
   const CustomTextButton({
     Key? key,
@@ -12,6 +13,7 @@ class CustomTextButton extends StatelessWidget {
     required this.onPressed,
     this.width,
     this.heigth,
+    this.margin,
   }) : super(key: key);
 
   @override
@@ -20,13 +22,14 @@ class CustomTextButton extends StatelessWidget {
       child: Container(
         height: heigth != null ? double?.parse(heigth.toString()) : 52,
         width: width != null ? double?.parse(width.toString()) : 300,
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+        margin: margin ?? const EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: TextButton(
           onPressed: onPressed,
           child: Text(
             buttonText,
             style: const TextStyle(
               color: Colors.white,
+              fontSize: 16.0,
             ),
           ),
           style: TextButton.styleFrom(

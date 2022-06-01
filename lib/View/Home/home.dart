@@ -39,10 +39,10 @@ class _HomeState extends State<Home> {
             category: "Açai",
           ),
           ProductPage(
-            category: "Salgados",
+            category: "Salgado",
           ),
           ProductPage(
-            category: "Porções",
+            category: "Bebida",
           ),
         ],
       ),
@@ -92,11 +92,11 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.fastfood_outlined),
-              label: "Salgado",
+              label: "Salgados",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.local_drink_rounded),
-              label: "Porçoes",
+              label: "Bebidas",
             ),
           ],
         ),

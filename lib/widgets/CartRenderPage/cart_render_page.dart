@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/CartService/cart_service.dart';
-import 'package:pointsf/View/Orders/confirmation_information.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartPage extends StatefulWidget {
@@ -85,8 +84,18 @@ class _CartPageState extends State<CartPage> {
               CustomTextButton(
                 buttonText: "Finalizar",
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ConfirmationInformation()));
+                  if (widget.cartItens[0] != null) {
+                    Navigator.of(context).pushNamed(
+                      '/confirmationInformation',
+                      arguments: {'items': widget.cartItens},
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("O carrinho está vazio"),
+                      ),
+                    );
+                  }
                 },
               ),
               const SizedBox(

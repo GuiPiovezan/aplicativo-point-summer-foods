@@ -48,7 +48,7 @@ class CartItemCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Text(
-                          cartItens["produto"],
+                          cartItens["produto"] +", "+ cartItens['size'],
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ControllerException implements Exception {
+class ControllerAddressException implements Exception {
   String message;
-  ControllerException(this.message);
+  ControllerAddressException(this.message);
 }
 
 class AddressControllerService extends TextEditingController {

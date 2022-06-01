@@ -18,12 +18,8 @@ class _ProductAdministrationState extends State<ProductAdministration> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       drawer: const CustomDrawerAdmin(),
-      appBar: const CustomAppBarHome(
-        icon: Icon(
-          Icons.screen_search_desktop_sharp,
-          color: Color.fromARGB(255, 240, 240, 240),
-        ),
-        title: " Cardapio",
+      appBar: const CustomAppBar(
+        title: "Produtos",
       ),
       body: PageView(
         onPageChanged: (int page) {
@@ -37,10 +33,10 @@ class _ProductAdministrationState extends State<ProductAdministration> {
             category: "Açai",
           ),
           ProductAdministrationPage(
-            category: "Salgados",
+            category: "Salgado",
           ),
           ProductAdministrationPage(
-            category: "Porções",
+            category: "Bebida",
           ),
         ],
       ),
@@ -76,11 +72,11 @@ class _ProductAdministrationState extends State<ProductAdministration> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.fastfood_outlined),
-              label: "Salgado",
+              label: "Salgados",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.local_drink_rounded),
-              label: "Porçoes",
+              label: "Bebidas",
             ),
           ],
         ),

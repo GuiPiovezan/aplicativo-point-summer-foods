@@ -1,22 +1,27 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 
 import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
-class ProductRegistration extends StatefulWidget {
-  const ProductRegistration({
+class ProductDataEditing extends StatefulWidget {
+  final ProductModel model;
+  const ProductDataEditing({
     Key? key,
+    required this.model,
   }) : super(key: key);
 
   @override
-  State<ProductRegistration> createState() => _ProductRegistrationState();
+  State<ProductDataEditing> createState() => _ProductDataEditingState();
 }
 
-class _ProductRegistrationState extends State<ProductRegistration> {
+class _ProductDataEditingState extends State<ProductDataEditing> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  ProductService productSertvice = ProductService();
 
   List<Map<String, dynamic>> sizes = [];
 
@@ -31,6 +36,28 @@ class _ProductRegistrationState extends State<ProductRegistration> {
   final TextEditingController _controllerProductSize = TextEditingController();
   final TextEditingController _controllerProductPrice = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      dropDownCategory = widget.model.categoria!;
+      _controllerProductName.text = widget.model.nome!;
+      dropDownStatus = widget.model.status!;
+      dropDownType = widget.model.tipo!;
+    });
+    setItens();
+  }
+
+  setItens() async {
+    await productSertvice.getSizeProduct(widget.model.uid);
+    setState(() {
+      var x = productSertvice.sizes;
+      for (var i = 0; i < x.length; i++) {
+        sizes.add(x[i]!);
+      }
+    });
+  }
+
   void save(BuildContext context) {
     if (sizes.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -42,11 +69,11 @@ class _ProductRegistrationState extends State<ProductRegistration> {
         nome: _controllerProductName.text,
         status: dropDownStatus,
         tipo: dropDownType,
-        uid: null,
+        uid: widget.model.uid,
         sizes: sizes,
       );
 
-      ProductService().registration(model, context);
+      ProductService().update(model, context);
     }
   }
 
@@ -55,7 +82,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
-        title: "Novo Produto",
+        title: "Cadastro de Produtos",
       ),
       body: Form(
         key: formKey,
@@ -328,7 +355,7 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                               itemBuilder: (context, index) {
                                 return ListTile(
                                   title: Text(
-                                    "tamanho: ${sizes[index]['size']}, Preço: ${sizes[index]['price']}",
+                                    "tamanho: ${sizes[index]['tamanho']}, Preço: ${sizes[index]['preco']}",
                                   ),
                                   trailing: IconButton(
                                     icon: const Icon(
@@ -389,8 +416,8 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   width: 280,
                   onPressed: () {
                     Map<String, dynamic> newSize = {
-                      "size": _controllerProductSize.text,
-                      "price": _controllerProductPrice.text,
+                      "tamanho": _controllerProductSize.text,
+                      "preco": _controllerProductPrice.text,
                     };
                     setState(() {
                       sizes.add(newSize);

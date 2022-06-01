@@ -33,6 +33,8 @@ class _LoginState extends State<Login> {
           SnackBar(content: Text(e.message)),
         );
       }
+    } else {
+      setState(() => loading = false);
     }
   }
 
@@ -71,7 +73,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
               CustomTextField(
                 labelText: "Email",
@@ -108,7 +110,7 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => CustomerRegistration(),
+                          builder: (context) => const CustomerRegistration(),
                         ),
                       );
                     },
@@ -118,7 +120,10 @@ class _LoginState extends State<Login> {
                     ),
                   )
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
         ),

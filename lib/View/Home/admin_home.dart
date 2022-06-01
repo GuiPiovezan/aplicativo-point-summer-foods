@@ -15,7 +15,7 @@ class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawerAdmin(),
+      drawer: const CustomDrawerAdmin(),
       appBar: const CustomAppBarHome(
         title: "Administrativo",
       ),

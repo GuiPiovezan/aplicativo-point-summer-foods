@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:pointsf/models/address_model.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
-import 'package:pointsf/View/export_all_view.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -31,6 +30,7 @@ class AddressService extends ChangeNotifier {
         "numero": model.numero,
         "complemento": model.complemento,
         "bairro": model.bairro,
+        "nome": model.nome,
         "cidade": model.cidade,
         "uid": uid,
       });
@@ -38,11 +38,31 @@ class AddressService extends ChangeNotifier {
       throw Exception(e.code);
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const ListAddress(),
-      ),
-    );
+    Navigator.of(context).pop();
+  }
+
+  update(AddressModel model, BuildContext context) {
+    try {
+      firestore
+          .collection('usuarios')
+          .doc(AuthService().getUid())
+          .collection("enderecos")
+          .doc(model.uid)
+          .update({
+        "cep": model.cep,
+        "logradouro": model.logradouro,
+        "numero": model.numero,
+        "complemento": model.complemento,
+        "bairro": model.bairro,
+        "nome": model.nome,
+        "cidade": model.cidade,
+        "uid": model.uid
+      });
+    } on FirebaseException catch (e) {
+      throw Exception(e.code);
+    }
+
+    Navigator.of(context).pop();
   }
 
   getAddress() {

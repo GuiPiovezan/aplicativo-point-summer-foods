@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:pointsf/models/product_model.dart';
-import 'package:pointsf/View/export_all_view.dart';
 
 import 'package:uuid/uuid.dart';
 
@@ -14,30 +13,40 @@ class ProductException implements Exception {
 
 class ProductService extends ChangeNotifier {
   final firestore = FirebaseFirestore.instance;
-  Map<int, Map<String, dynamic>> itens = Map();
+  Map<int, Map<String, dynamic>> itens = {};
+  Map<int, Map<String, dynamic>> sizes = {};
 
   registration(ProductModel model, BuildContext context) {
     var uuid = const Uuid();
-    var uid = uuid.v1();
+    var uidProduct = uuid.v1();
     try {
-      firestore.collection('produtos').doc(uid).set({
+      firestore.collection('produtos').doc(uidProduct).set({
         "categoria": model.categoria,
-        "medida": model.medida,
         "nome": model.nome,
-        "preco": model.preco,
         "status": model.status,
         "tipo": model.tipo,
-        "uid": uid,
+        "uid": uidProduct,
       });
+      if (model.sizes!.isNotEmpty) {
+        for (var i = 0; i < model.sizes!.length; i++) {
+          var uidSize = uuid.v1();
+          firestore
+              .collection('produtos')
+              .doc(uidProduct)
+              .collection('tamanhos')
+              .doc(uidSize)
+              .set({
+            "tamanho": model.sizes![i]['size'],
+            "preco": model.sizes![i]['price'],
+            "uid": uidSize,
+          });
+        }
+      }
     } on FirebaseException catch (e) {
       throw Exception(e.code);
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const Home(),
-      ),
-    );
+    Navigator.of(context).pop();
   }
 
   getActiveProductsByCategory(category) {
@@ -47,6 +56,21 @@ class ProductService extends ChangeNotifier {
         .where("status", isEqualTo: "Ativo")
         .where("tipo", isEqualTo: "Primario")
         .snapshots();
+  }
+
+  getSizeProduct(uid) async {
+    await firestore
+        .collection('produtos')
+        .doc(uid)
+        .collection("tamanhos")
+        .get()
+        .then((value) {
+      for (var i = 0; i < value.docs.length; i++) {
+        sizes[i] = value.docs[i].data();
+        sizes[i]!["check"] = false;
+      }
+    });
+    return null;
   }
 
   getAdditionalByCategory(category) async {
@@ -60,6 +84,14 @@ class ProductService extends ChangeNotifier {
       for (var i = 0; i < value.docs.length; i++) {
         itens[i] = value.docs[i].data();
         itens[i]!["check"] = false;
+        firestore
+            .collection("produtos")
+            .doc(value.docs[i]["uid"])
+            .collection("tamanhos")
+            .get()
+            .then((value) {
+          itens[i]!["preco"] = value.docs[0]["preco"];
+        });
       }
     });
   }
@@ -69,5 +101,51 @@ class ProductService extends ChangeNotifier {
         .collection('produtos')
         .where("categoria", isEqualTo: category)
         .snapshots();
+  }
+
+  update(ProductModel model, BuildContext context) async {
+    try {
+      await firestore.collection('produtos').doc(model.uid).update({
+        "categoria": model.categoria,
+        "nome": model.nome,
+        "status": model.status,
+        "tipo": model.tipo,
+      });
+      await firestore
+          .collection("produtos")
+          .doc(model.uid)
+          .collection("tamanhos")
+          .get()
+          .then((value) async {
+        for (var i = 0; i < value.docs.length; i++) {
+          await firestore
+              .collection("produtos")
+              .doc(model.uid)
+              .collection("tamanhos")
+              .doc(value.docs[i]["uid"])
+              .delete();
+        }
+      });
+      if (model.sizes!.isNotEmpty) {
+        for (var i = 0; i < model.sizes!.length; i++) {
+          var uuidForSize = const Uuid();
+          var uidSize = uuidForSize.v1();
+          await firestore
+              .collection('produtos')
+              .doc(model.uid)
+              .collection('tamanhos')
+              .doc(uidSize)
+              .set({
+            "tamanho": model.sizes![i]['tamanho'],
+            "preco": model.sizes![i]['preco'],
+            "uid": uidSize,
+          });
+        }
+      }
+    } on FirebaseException catch (e) {
+      throw Exception(e.code);
+    }
+
+    Navigator.of(context).pop();
   }
 }

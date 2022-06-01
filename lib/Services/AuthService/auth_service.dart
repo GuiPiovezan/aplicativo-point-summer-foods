@@ -18,6 +18,13 @@ class AuthService extends ChangeNotifier {
   String? userName = "Loading";
   String? userPhone = "Loading";
   String? userRoute = "";
+  CustomerModel model = CustomerModel(
+    nome: null,
+    telefone: null,
+    cpf: null,
+    uid: null,
+    admin: null,
+  );
 
   AuthService() {
     _authCheck();
@@ -134,17 +141,26 @@ class AuthService extends ChangeNotifier {
     }
   }
 
+  setCustomerModel() async {
+    await firestore.collection("usuarios").doc(getUid()).get().then((event) {
+      model.nome = event['nome'];
+      model.cpf = event['cpf'];
+      model.telefone = event['telefone'];
+      model.uid = event['uid'];
+    });
+  }
+
+  getCustomerModel() {
+    return model;
+  }
+
   setRoute() async {
     await _getUser();
     if (user == null) {
       userRoute = "/";
     } else {
       bool admin = false;
-      await firestore
-          .collection("usuarios")
-          .doc(_auth.currentUser!.uid)
-          .get()
-          .then((event) {
+      await firestore.collection("usuarios").doc(user!.uid).get().then((event) {
         admin = event['admin'] ?? false;
       });
       admin != true ? userRoute = '/home' : userRoute = '/adminHome';
@@ -157,13 +173,17 @@ class AuthService extends ChangeNotifier {
 
   logout(BuildContext context) async {
     await _auth.signOut();
-    _getUser();
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const Login(),
-      ),
-    );
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
-  updateUser(CustomerModel model, BuildContext context) {}
+  updateUser(CustomerModel model, BuildContext context) async {
+    await _getUser();
+    firestore.collection('usuarios').doc(user!.uid).update({
+      "nome": model.nome,
+      "telefone": model.telefone,
+    });
+
+    Navigator.of(context).pop();
+  }
 }

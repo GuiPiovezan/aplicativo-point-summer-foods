@@ -71,11 +71,37 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: CartList(
-                    cartItens: widget.cartItens,
-                  ),
-                ),
+                widget.cartItens[0] == null
+                    ? Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const <Widget>[
+                              Icon(
+                                Icons.remove_shopping_cart_outlined,
+                                size: 100,
+                                color: Color.fromARGB(150, 0, 0, 0),
+                              ),
+                              Text(
+                                "Seu carrinho está vazio!",
+                                style: TextStyle(
+                                  color: Color.fromARGB(150, 0, 0, 0),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        child: CartList(
+                          cartItens: widget.cartItens,
+                        ),
+                      ),
               ],
             ),
           ),

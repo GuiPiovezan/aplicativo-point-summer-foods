@@ -1,10 +1,20 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
-class InformationValueOrder extends StatelessWidget {
-  const InformationValueOrder({
+// ignore: must_be_immutable
+class InformationValueOrder extends StatefulWidget {
+  double? valueTotal;
+
+  InformationValueOrder({
     Key? key,
+    this.valueTotal,
   }) : super(key: key);
 
+  @override
+  State<InformationValueOrder> createState() => _InformationValueOrderState();
+}
+
+class _InformationValueOrderState extends State<InformationValueOrder> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,16 +23,16 @@ class InformationValueOrder extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
+            children: <Widget>[
+              const Text(
                 'Sub. Total',
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
               ),
               Text(
-                'R\$15,00',
-                style: TextStyle(
+                UtilBrasilFields.obterReal(widget.valueTotal!),
+                style: const TextStyle(
                   fontSize: 20.0,
                 ),
               ),
@@ -30,7 +40,7 @@ class InformationValueOrder extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: const <Widget>[
               Text(
                 'Taxa de entrega',
                 style: TextStyle(
@@ -38,7 +48,7 @@ class InformationValueOrder extends StatelessWidget {
                 ),
               ),
               Text(
-                'R\$4,50',
+                'R\$1,50',
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
@@ -47,8 +57,8 @@ class InformationValueOrder extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
+            children: <Widget>[
+              const Text(
                 'Total',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -56,8 +66,9 @@ class InformationValueOrder extends StatelessWidget {
                 ),
               ),
               Text(
-                'R\$19,50',
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                UtilBrasilFields.obterReal((widget.valueTotal! + 1.50)),
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),

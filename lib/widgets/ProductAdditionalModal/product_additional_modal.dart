@@ -23,6 +23,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
   final ProductService productSertvice = ProductService();
   int _itemAmount = 1;
   var size;
+  bool sizeError = false;
   @override
   void initState() {
     super.initState();
@@ -86,6 +87,20 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
               ),
             ),
           ),
+          sizeError
+              ? Container(
+                  margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(240, 240, 100, 100),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child: const Center(
+                    child: Text("Selecione um tamanho"),
+                  ),
+                )
+              : Container(),
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
             decoration: const BoxDecoration(
@@ -202,14 +217,18 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
                   child: CustomTextButton(
                     buttonText: "Adicionar",
                     onPressed: () {
-                      CartService().setCartItem(
-                        widget.productPrimary["nome"],
-                        widget.itens,
-                        _itemAmount,
-                        widget.sizes[size]["tamanho"],
-                        widget.sizes[size]["preco"],
-                      );
-                      Navigator.of(context).pop();
+                      if (size != null) {
+                        CartService().setCartItem(
+                          widget.productPrimary["nome"],
+                          widget.itens,
+                          _itemAmount,
+                          widget.sizes[size]["tamanho"],
+                          widget.sizes[size]["preco"],
+                        );
+                        Navigator.of(context).pop();
+                      } else {
+                        setState(() => sizeError = true);
+                      }
                     },
                   ),
                 ),

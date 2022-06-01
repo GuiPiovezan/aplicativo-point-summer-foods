@@ -4,11 +4,9 @@ import 'package:pointsf/Services/CartService/cart_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartPage extends StatefulWidget {
-  var cartItens;
 
-  CartPage({
+  const CartPage({
     Key? key,
-    this.cartItens,
   }) : super(key: key);
 
   @override
@@ -16,6 +14,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  Map<int, Map<String, dynamic>>? cartItens;
   CartService cartService = CartService();
   @override
   void initState() {
@@ -26,13 +25,13 @@ class _CartPageState extends State<CartPage> {
   Future<void> setCart() async {
     await cartService.setCart();
     setState(() {
-      widget.cartItens = cartService.cartItens;
+      cartItens = cartService.cartItens;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    while (widget.cartItens == null) {
+    while (cartItens == null) {
       setCart();
       return ListView(
         children: [
@@ -71,11 +70,37 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: CartList(
-                    cartItens: widget.cartItens,
-                  ),
-                ),
+                cartItens![0] == null
+                    ? Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const <Widget>[
+                              Icon(
+                                Icons.remove_shopping_cart_outlined,
+                                size: 100,
+                                color: Color.fromARGB(150, 0, 0, 0),
+                              ),
+                              Text(
+                                "Seu carrinho está vazio!",
+                                style: TextStyle(
+                                  color: Color.fromARGB(150, 0, 0, 0),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        child: CartList(
+                          cartItens: cartItens!,
+                        ),
+                      ),
               ],
             ),
           ),
@@ -84,10 +109,10 @@ class _CartPageState extends State<CartPage> {
               CustomTextButton(
                 buttonText: "Finalizar",
                 onPressed: () {
-                  if (widget.cartItens[0] != null) {
+                  if (cartItens![0] != null) {
                     Navigator.of(context).pushNamed(
                       '/confirmationInformation',
-                      arguments: {'items': widget.cartItens},
+                      arguments: {'items': cartItens},
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(

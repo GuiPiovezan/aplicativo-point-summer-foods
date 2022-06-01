@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/Services/CartService/cart_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartList extends StatelessWidget {
-  var cartItens;
+  final Map<int, Map<String, dynamic>> cartItens;
 
-  CartList({
+  const CartList({
     Key? key,
     required this.cartItens,
   }) : super(key: key);
-
-  CartService cartService = CartService();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,7 @@ class CartList extends StatelessWidget {
         itemCount: cartItens.length,
         itemBuilder: (_, index) {
           return CartItemCard(
-            cartItens: cartItens[index],
+            cartItens: cartItens[index]!,
             index: index,
           );
         },

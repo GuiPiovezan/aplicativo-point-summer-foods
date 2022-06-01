@@ -578,8 +578,6 @@ double calculteValueTotal(Map<dynamic, dynamic> itens) {
 double _calculateValueTotalOrder(dynamic itens) {
   double valueTotalOrder = 0;
 
-  print(itens);
-
   if (itens.isNotEmpty) {
     int amount;
 

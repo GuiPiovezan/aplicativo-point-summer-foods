@@ -15,10 +15,10 @@ class CustomerControllerService extends TextEditingController {
   TextEditingController? confirmPassword;
 
   CustomerControllerService() {
-    _CustomerControllerService();
+    _customerControllerService();
   }
 
-  _CustomerControllerService() {
+  _customerControllerService() {
     name = TextEditingController();
     email = TextEditingController();
     cellphone = TextEditingController();

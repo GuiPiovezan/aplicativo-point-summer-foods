@@ -36,7 +36,7 @@ class MyOrderModal extends StatelessWidget {
             Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 5),
               child: Card(
-                  child: order.toString().contains("pedidoConcluido")
+                  child: order["pedidoConcluido"] != null
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -45,7 +45,7 @@ class MyOrderModal extends StatelessWidget {
                                 "Pedido concluido as ${DateFormat("HH:mm").format(order["pedidoConcluido"].toDate())}")
                           ],
                         )
-                      : order.toString().contains("pedidoAceito")
+                      : order["pedidoAceito"] != null
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -84,7 +84,12 @@ class MyOrderModal extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("SubTotal"),
+                  const Text(
+                    "SubTotal",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   Text("R\$: ${order["valorTotalProdutos"]}")
                 ],
               ),
@@ -94,7 +99,12 @@ class MyOrderModal extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Taxa de Entrega"),
+                  const Text(
+                    "Taxa de Entrega",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   Text("R\$ ${order["taxaEntrega"]}")
                 ],
               ),
@@ -104,7 +114,12 @@ class MyOrderModal extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Total"),
+                  const Text(
+                    "Total",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   Text(
                     "R\$ ${order["valorTotalProdutos"] + order["taxaEntrega"]}",
                   ),
@@ -123,7 +138,14 @@ class MyOrderModal extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Pagamento: ${order["tipoPagamento"]}"),
+                  Text(
+                    "Pagamento no ${order["tipoPagamento"]}",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      //fontFamily: ,
+                    ),
+                  ),
                   order["troco"] != null
                       ? Text("R\$ ${order["troco"]}")
                       : Row(
@@ -145,21 +167,31 @@ class MyOrderModal extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Row(
-              children: const [
-                SizedBox(
-                  width: 30,
-                ),
-                Text("Endereço:"),
-              ],
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 5, 20, 0),
+              child: Row(
+                children: const [
+                  /*SizedBox(
+                    width: 30,
+                  ),*/
+                  Icon(Icons.house_rounded, size: 24),
+                  Text(
+                    "Endereço:",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(20, 5, 20, 10),
+              margin: EdgeInsets.fromLTRB(5, 0, 20, 10),
               child: ListTile(
-                leading: const Icon(
+                /*leading: const Icon(
                   Icons.house_sharp,
                   size: 32.0,
-                ),
+                ),*/
                 title: Text(
                   "${order["endereco"]}, ${order["numero"]}",
                 ),

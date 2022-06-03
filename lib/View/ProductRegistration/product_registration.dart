@@ -91,8 +91,8 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                       labelStyle: const TextStyle(
                         color: Color.fromARGB(255, 74, 44, 82),
                       ),
-                      labelText: "Selecione o tipo de produto",
-                      hintText: "Selecione o tipo de produto",
+                      labelText: "Selecione o Tipo do Produto",
+                      hintText: "Selecione o Tipo do produto",
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,

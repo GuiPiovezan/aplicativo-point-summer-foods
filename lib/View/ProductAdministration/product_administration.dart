@@ -17,7 +17,6 @@ class _ProductAdministrationState extends State<ProductAdministration> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      drawer: const CustomDrawerAdmin(),
       appBar: const CustomAppBar(
         title: "Produtos",
       ),

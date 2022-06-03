@@ -73,7 +73,6 @@ class _ConfigState extends State<Config> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      drawer: const CustomDrawerAdmin(),
       appBar: const CustomAppBar(
         title: "Configurações",
       ),

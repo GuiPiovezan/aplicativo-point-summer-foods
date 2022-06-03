@@ -29,7 +29,7 @@ class OrderPage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (_, index) {
-                    return CardMyOrder(order: snapshot.data?.docs[index]);
+                    return CardOrder(order: snapshot.data?.docs[index]);
                   },
                 );
               },

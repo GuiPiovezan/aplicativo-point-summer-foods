@@ -21,6 +21,7 @@ export 'MyOrder/my_order_modal.dart';
 
 // Widget da pagina de pedidos
 export 'OrderPage/card_order.dart';
+export 'OrderPage/order_modal.dart';
 export 'OrderPage/order_page.dart';
 
 // Widget pesonalizado para listagem de adicionais

@@ -41,9 +41,9 @@ class CardOrder extends StatelessWidget {
               child: TextButton(
                 onPressed: () => showBarModalBottomSheet(
                   context: context,
-                  builder: (context) => MyOrderModal(
+                  builder: (context) => OrderModal(
                     order: order,
-                  ),
+                  ), 
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +51,7 @@ class CardOrder extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "id - ${order["uid"]}",
@@ -64,82 +64,91 @@ class CardOrder extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              DateFormat("dd/MM/yy")
+                                  .format(order["data"].toDate()),
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            ),
+                            Text(
+                              "R\$ ${order["valorTotalProdutos"]}",
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            DateFormat("dd/MM/yy")
-                                .format(order["data"].toDate()),
+                            "${order["endereco"]}, ${order["numero"]}, ${order["bairro"]}",
                             style: const TextStyle(
                               color: Color.fromARGB(255, 0, 0, 0),
                             ),
-                          ),
-                          Text(
-                            "R\$ ${order["valorTotalProdutos"]}",
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
+                          )
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${order["endereco"]}, ${order["numero"]}, ${order["bairro"]}",
-                          style: const TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: const [
+                              Icon(
+                                Icons.check_circle_rounded,
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                              Text(
+                                "10:00",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: const [
-                            Icon(
-                              Icons.check_circle_rounded,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            Text(
-                              "10:00",
-                              style: TextStyle(
+                          Row(
+                            children: const [
+                              Icon(
+                                Icons.restaurant,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Icon(
-                              Icons.restaurant,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            Text(
-                              "10:15",
-                              style: TextStyle(
+                              Text(
+                                "10:15",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: const [
+                              Icon(
+                                Icons.delivery_dining,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Icon(
-                              Icons.delivery_dining,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                            Text(
-                              "10:30",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+                              Text(
+                                "10:30",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),

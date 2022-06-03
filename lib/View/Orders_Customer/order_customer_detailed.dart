@@ -201,8 +201,50 @@ class _OrderCustomerState extends State<OrderCustomerDetailed> {
                     indent: 20,
                   ),
                   Container(
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: DropdownButtonFormField(
-                      //hint: ,
+                      decoration: InputDecoration(
+                        floatingLabelStyle: const TextStyle(
+                          color: Color.fromARGB(255, 74, 44, 82),
+                        ),
+                        labelStyle: const TextStyle(
+                          color: Color.fromARGB(255, 74, 44, 82),
+                        ),
+                        labelText: "Selecione o Status do pedido",
+                        hintText: "Selecione o Status do pedido",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 74, 44, 82),
+                            style: BorderStyle.solid,
+                          ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 240, 0, 0),
+                            style: BorderStyle.solid,
+                          ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 74, 44, 82),
+                            style: BorderStyle.solid,
+                          ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 2,
+                            color: Color.fromARGB(255, 74, 44, 82),
+                            style: BorderStyle.solid,
+                          ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
                       onChanged: (String? orderStatus) {
                         setState(() {
                           dropDownOrderStatus = orderStatus!;
@@ -225,9 +267,22 @@ class _OrderCustomerState extends State<OrderCustomerDetailed> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Pronto"),
-                            Text("Altere o Status"),
+                            Text(
+                              "Pronto",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              "Altere o Status",
+                              style: TextStyle(
+                                fontSize: 16,
+                                //fontWeight: ,
+                              ),
+                            ),
                           ],
                         ),
                         CustomTextButton(
@@ -245,9 +300,21 @@ class _OrderCustomerState extends State<OrderCustomerDetailed> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Entregue"),
-                            Text("Altere o Status"),
+                            Text(
+                              "Entregue",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              "Altere o Status",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
                           ],
                         ),
                         CustomTextButton(

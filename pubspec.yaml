@@ -41,6 +41,7 @@ dependencies:
   uuid: 3.0.6
   modal_bottom_sheet: 2.0.1
   flutter_native_splash: 2.2.1
+  intl: ^0.17.0
   
 flutter_native_splash:
   color: "#4A2C52"

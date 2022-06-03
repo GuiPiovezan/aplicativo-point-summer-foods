@@ -2,13 +2,6 @@
 export 'AppBar/custom_appbar_home.dart';
 export 'AppBar/custom_appbar.dart';
 
-// Widget do card de pedido
-export 'MyOrder/card_my_order.dart';
-export 'MyOrder/my_order_list.dart';
-export 'MyOrder/render_additional_order.dart';
-export 'MyOrder/render_itens_modal.dart';
-export 'MyOrder/my_order_modal.dart';
-
 // Widget da pagina de rendenização do carrinho
 export 'CartRenderPage/cart_item_card.dart';
 export 'CartRenderPage/cart_list.dart';
@@ -18,6 +11,17 @@ export 'CartRenderPage/render_additional.dart';
 // Widget personalizados baseado no Drawer
 export 'Drawer/custom_drawer_admin.dart';
 export 'Drawer/custom_drawer.dart';
+
+// Widget do card de pedido
+export 'MyOrder/card_my_order.dart';
+export 'MyOrder/my_order_list.dart';
+export 'MyOrder/render_additional_order.dart';
+export 'MyOrder/render_itens_modal.dart';
+export 'MyOrder/my_order_modal.dart';
+
+// Widget da pagina de pedidos
+export 'OrderPage/card_order.dart';
+export 'OrderPage/order_page.dart';
 
 // Widget pesonalizado para listagem de adicionais
 export 'ProductAdditionalModal/product_additional_modal.dart';

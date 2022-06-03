@@ -42,40 +42,9 @@ class CardMyOrder extends StatelessWidget {
                 onPressed: () => showBarModalBottomSheet(
                   context: context,
                   builder: (context) => MyOrderModal(
-                    // order: OrderModel(
-                    //   id: order["id"],
-                    //   userName: order["userName"],
-                    //   userEmail: order["userEmail"],
-                    //   userPhone: order["userPhone"],
-                    //   address: order["address"],
-                    //   valueTotal: order["valueTotal"],
-                    //   valueDelivery: order["valueDelivery"],
-                    //   dateOrder: order["dateOrder"],
-                    //   typePayment: order.toString().contains("pagamento") ? order["typePayment"] : "",
-                    //   cardFlag: order.toString().contains("bandeira") ? order["cardFlag"] : "",
-                    //   cardPayment: order["cardPayment"],
-                    //   moneyChange: order["moneyChange"],
-                    //   itens: null,
-                    // ),
                     order: order,
                   ),
                 ),
-                //order: OrderModel(
-                //   id: order["id"],
-                //   userName: order["userName"],
-                //   userEmail: order["userEmail"],
-                //   userPhone: order["userPhone"],
-                //   address: order["address"],
-                //   valueTotal: order["valueTotal"],
-                //   valueDelivery: order["valueDelivery"],
-                //   dateOrder: order["dateOrder"],
-                //   typePayment: order.toString().contains("pagamento") ? order["typePayment"] : "",
-                //   cardFlag: order.toString().contains("bandeira") ? order["cardFlag"] : "",
-                //   cardPayment: order["cardPayment"],
-                //   moneyChange: order["moneyChange"],
-                //   itens: null,
-                // ),
-                // onPressed: () => print(order["uid"]),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -96,7 +65,7 @@ class CardMyOrder extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -118,7 +87,7 @@ class CardMyOrder extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -132,7 +101,7 @@ class CardMyOrder extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

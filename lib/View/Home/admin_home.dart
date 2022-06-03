@@ -16,7 +16,10 @@ class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const CustomDrawerAdmin(),
+      drawer: CustomDrawerAdmin(
+        indexNavigatorBar: indexNavigatorBar,
+        pageController: _pageController,
+      ),
       appBar: const CustomAppBarHome(
         title: "Administrativo",
       ),
@@ -39,7 +42,6 @@ class _AdminHomeState extends State<AdminHome> {
           ),
         ],
       ),
-
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
         decoration: const BoxDecoration(

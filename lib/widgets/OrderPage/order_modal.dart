@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pointsf/Services/OrderService/order_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class OrderModal extends StatelessWidget {
   final order;
-  const OrderModal({
+  OrderModal({
     Key? key,
     required this.order,
   }) : super(key: key);
+  final OrderService orderService = OrderService();
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +142,7 @@ class OrderModal extends StatelessWidget {
                 children: [
                   Text(
                     "Pagamento no ${order["tipoPagamento"]}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       //fontFamily: ,
@@ -168,7 +170,7 @@ class OrderModal extends StatelessWidget {
               height: 5,
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(20, 5, 20, 10),
+              margin: const EdgeInsets.fromLTRB(20, 5, 20, 10),
               child: ListTile(
                 leading: const Icon(
                   Icons.house_sharp,
@@ -190,12 +192,16 @@ class OrderModal extends StatelessWidget {
                       children: [
                         CustomTextButton(
                           buttonText: "Recusar",
-                          onPressed: () {},
+                          onPressed: () {
+                            orderService.rejectOrder(order["uid"], context);
+                          },
                           width: MediaQuery.of(context).size.width / 3,
                         ),
                         CustomTextButton(
                           buttonText: "Aceitar",
-                          onPressed: () {},
+                          onPressed: () {
+                            orderService.acceptOrder(order["uid"], context);
+                          },
                           width: MediaQuery.of(context).size.width / 3,
                         )
                       ],
@@ -223,7 +229,9 @@ class OrderModal extends StatelessWidget {
                               ],
                             ),
                             CustomTextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                orderService.finishOrder(order["uid"], context);
+                              },
                               buttonText: "OK",
                               heigth: 50,
                               width: 80,
@@ -231,7 +239,7 @@ class OrderModal extends StatelessWidget {
                           ],
                         )
                       : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: const [
                             Text(
                               "Pedido encerrado",

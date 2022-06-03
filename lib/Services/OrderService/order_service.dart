@@ -130,7 +130,7 @@ class OrderService {
         .snapshots();
   }
 
-  setMyOrdersItens(uid) async {
+  setMyOrdersItens(String uid) async {
     await firestore
         .collection('pedidos')
         .doc(uid)
@@ -169,5 +169,30 @@ class OrderService {
         .collection('pedidos')
         .where("status", isEqualTo: status)
         .snapshots();
+  }
+
+  acceptOrder(String uid, BuildContext context) async {
+    await firestore.collection("pedidos").doc(uid).update({
+      "status": "aceito",
+      "pedidoAceito": DateTime.now(),
+    });
+    Navigator.of(context).pop();
+  }
+
+  rejectOrder(String uid, BuildContext context) async {
+    await firestore.collection("pedidos").doc(uid).update({
+      "status": "recusado",
+      "pedidoAceito": DateTime.now(),
+      "pedidoConcluido": DateTime.now(),
+    });
+    Navigator.of(context).pop();
+  }
+
+  finishOrder(String uid, BuildContext context) async {
+    await firestore.collection("pedidos").doc(uid).update({
+      "status": "entregue",
+      "pedidoConcluido": DateTime.now(),
+    });
+    Navigator.of(context).pop();
   }
 }

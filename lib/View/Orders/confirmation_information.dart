@@ -446,17 +446,3 @@ double calculteValueTotal(Map<dynamic, dynamic> itens) {
 
   return valueTotal;
 }
-
-Map<int, Map<String, dynamic>> handleArguments(Map<dynamic, dynamic> itens) {
-  Map<int, Map<String, dynamic>> newMap = {};
-
-  if (itens.isNotEmpty) {
-    for (var i = 0; i < itens['items'].length; i++) {
-      print(newMap[i] = itens['items'][i]);
-    }
-
-    return newMap;
-  }
-
-  return newMap;
-}

@@ -53,21 +53,23 @@ class _RenderItensModalState extends State<RenderItensModal> {
         children: [
           Expanded(
             child: ListView.builder(
-            padding: const EdgeInsets.fromLTRB(20, 0, 15, 10),
+              padding: const EdgeInsets.fromLTRB(20, 0, 15, 10),
               itemCount: orderItens!.length,
               itemBuilder: (_, index) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${orderItens![index]!["quantidade"].toString()}x, ${orderItens![index]!["produto"].toString()}, ${orderItens![index]!["tamanho"].toString()}, R\$ ${orderItens![index]!["preco"].toString()}",
+                      "${orderItens![index]!["quantidade"].toString()}x ${orderItens![index]!["produto"].toString()} de ${orderItens![index]!["tamanho"].toString()} por R\$ ${orderItens![index]!["preco"].toString()}",
                       style: const TextStyle(
-                        fontSize: 16,
-                      ),
+                          fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                    RenderAdditionalOrder(
-                        orderItensAdditional:
-                            orderItens![index]!["adicionais"])
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: RenderAdditionalOrder(
+                          orderItensAdditional:
+                              orderItens![index]!["adicionais"]),
+                    )
                   ],
                 );
               },

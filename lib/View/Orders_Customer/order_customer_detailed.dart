@@ -202,6 +202,7 @@ class _OrderCustomerState extends State<OrderCustomerDetailed> {
                   ),
                   Container(
                     child: DropdownButtonFormField(
+                      //hint: ,
                       onChanged: (String? orderStatus) {
                         setState(() {
                           dropDownOrderStatus = orderStatus!;
@@ -218,33 +219,45 @@ class _OrderCustomerState extends State<OrderCustomerDetailed> {
                       }).toList(),
                     ),
                   ),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text("Pronto"),
-                          Text("Altere o Status"),
-                        ],
-                      ),
-                      CustomTextButton(
-                        onPressed: () {},
-                        buttonText: "Press",
-                      ),
-                    ],
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text("Pronto"),
+                            Text("Altere o Status"),
+                          ],
+                        ),
+                        CustomTextButton(
+                          onPressed: () {},
+                          buttonText: "Press",
+                          heigth: 50,
+                          width: 80,
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text("Entregue"),
-                          Text("Altere o Status"),
-                        ],
-                      ),
-                      CustomTextButton(
-                        onPressed: () {},
-                        buttonText: "Press",
-                      ),
-                    ],
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text("Entregue"),
+                            Text("Altere o Status"),
+                          ],
+                        ),
+                        CustomTextButton(
+                          onPressed: () {},
+                          buttonText: "Press",
+                          heigth: 50,
+                          width: 80,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ))

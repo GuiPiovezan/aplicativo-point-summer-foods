@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/View/Orders_Customer/card_order_customer.dart';
 import 'package:pointsf/View/ProductAdministration/product_administration.dart';
 
 import 'package:pointsf/View/export_all_view.dart';
@@ -120,7 +121,11 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    print("Novos pedidos");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CardOrderCustomer(),
+                      ),
+                    );
                   },
                 ),
                 ListTile(

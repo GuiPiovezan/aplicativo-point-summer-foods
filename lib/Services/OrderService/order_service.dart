@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/Services/CartService/cart_service.dart';
-import 'package:pointsf/View/MyOrders/my_orders.dart';
+import 'package:pointsf/View/MyOrders/my_order.dart';
 import 'package:pointsf/models/enums/type_payment.dart';
 import 'package:pointsf/models/order_model.dart';
 import 'package:uuid/uuid.dart';

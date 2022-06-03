@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/AuthService/auth_service.dart';
-import 'package:pointsf/View/MyOrders/list_my_orders.dart';
 
 import 'package:pointsf/View/export_all_view.dart';
 
@@ -141,7 +140,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ListMyOrders(),
+                        builder: (context) => MyOrders(),
                       ),
                     );
                   },

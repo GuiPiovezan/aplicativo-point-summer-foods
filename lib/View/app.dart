@@ -12,9 +12,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CardOrderCustomer(// const MaterialApp
-        /*home: RouteApp(),
-      debugShowCheckedModeBanner: false,*/
-        );
+    return const MaterialApp(
+      // const MaterialApp
+      home: RouteApp(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }

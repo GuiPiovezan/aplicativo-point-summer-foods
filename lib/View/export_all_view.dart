@@ -18,7 +18,7 @@ export 'package:pointsf/View/ProductRegistration/product_registration.dart';
 export 'package:pointsf/View/Login/login.dart';
 
 //Meus Pedidos
-export 'package:pointsf/View/MyOrders/my_orders.dart';
+export 'package:pointsf/View/MyOrders/card_my_order.dart';
 
 //Pagina principal
 export 'package:pointsf/View/Home/home.dart';

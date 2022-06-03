@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:pointsf/main.dart';
 import 'package:pointsf/models/address_model.dart';
 
-class OrdersDetaileds extends StatelessWidget {
+class MyOrdersDetaileds extends StatelessWidget {
   /* final AddressModel? model;
 
   const OrdersDetaileds({

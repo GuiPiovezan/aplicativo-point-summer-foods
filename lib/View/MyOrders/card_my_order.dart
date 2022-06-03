@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/MyOrders/orders_detaileds.dart';
+import 'package:pointsf/View/MyOrders/my_orders_detaileds.dart';
 import 'package:pointsf/main.dart';
 import 'package:pointsf/widgets/AppBar/custom_appbar.dart';
 
-class MyOrders extends StatelessWidget {
+class CardMyOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class MyOrders extends StatelessWidget {
               child: TextButton(
                 onPressed: () => showModalBottomSheet(
                     context: context,
-                    builder: (context) => OrdersDetaileds(),
+                    builder: (context) => MyOrdersDetaileds(),
                     isScrollControlled: true,
                     shape: RoundedRectangleBorder(
                         borderRadius:

@@ -1,14 +1,16 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pointsf/Services/AddressService/address_service.dart';
-import 'package:pointsf/View/Orders/credit_payment.dart';
-import 'package:pointsf/View/Orders/money_payment.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/Services/OrderService/order_service.dart';
+import 'package:pointsf/Services/Validators/order_validator.dart';
 import 'package:pointsf/models/address_model.dart';
-import 'package:pointsf/widgets/CardPayment/card_payment.dart';
-import 'package:pointsf/widgets/TextButtons/custom_text_button.dart';
-import 'package:pointsf/widgets/TextFields/custom_text_field.dart';
-
-import '../../widgets/AppBar/custom_appbar.dart';
+import 'package:pointsf/models/enums/type_payment.dart';
+import 'package:pointsf/models/order_model.dart';
+import 'package:pointsf/widgets/RadioButton/radio_button.dart';
+import 'package:pointsf/widgets/export_widgets.dart';
 import 'information_value_order.dart';
 
 class ConfirmationInformation extends StatefulWidget {
@@ -22,20 +24,50 @@ class ConfirmationInformation extends StatefulWidget {
 class _ConfirmationInformationState extends State<ConfirmationInformation> {
   AddressModel? addressSelected;
   List<AddressModel> addressList = [];
+  final GlobalKey<FormState> formMainKey = GlobalKey<FormState>();
+  TextEditingController moneyController = TextEditingController();
+  double? valueTotal = 0;
+  double? valueDelivery = 1.50;
+  TypePayment _typePayment = TypePayment.money;
+
+  Map<dynamic, dynamic>? arguments;
+
+  String? cardFlagSelected;
+  String? cardPaymentSelected;
+
+  final AuthService auth = AuthService();
+  String? userName;
+  String? userEmail;
+  String? userPhone;
+
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    auth;
+    userEmail = auth.getUserEmail();
+  }
+
+  onChangeRadioButton(TypePayment value) => setState(() {
+        _typePayment = value;
+      });
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+    arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
 
+    double valueTotal = calculteValueTotal(arguments!);
+
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: 'Pagamento',
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Form(
+        key: formMainKey,
+        child: ListView(
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 24.0, 8.0, 24.0),
@@ -52,13 +84,35 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                   ],
                 ),
                 width: MediaQuery.of(context).size.width,
-                child: const InformationValueOrder(),
+                child: InformationValueOrder(valueTotal: valueTotal),
               ),
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: AuthService().getInformationUser(),
+              builder: (_, snapshot) {
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
+
+                if (snapshot.hasError) {
+                  return const Text("Erro ao carregar os dados");
+                }
+
+                userName = snapshot.data!.docs[0]['nome'];
+                userPhone = snapshot.data!.docs[0]['telefone'];
+
+                return Container();
+              },
             ),
             StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
               stream: AddressService().getAddress(),
               builder: (_, snapshot) {
-                if (!snapshot.hasData) return const CircularProgressIndicator();
+                if (!snapshot.hasData) {
+                  return const CircularProgressIndicator();
+                }
 
                 if (snapshot.hasError) {
                   return const Text("Erro ao carregar os dados");
@@ -70,8 +124,52 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                   }
                 }
 
-                return Center(
-                  child: DropdownButton(
+                return Container(
+                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
+                  width: MediaQuery.of(context).size.width,
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      floatingLabelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelStyle: const TextStyle(
+                        color: Color.fromARGB(255, 74, 44, 82),
+                      ),
+                      labelText: "Selecione o endereço de entrega",
+                      hintText: "Selecione o endereço de entrega",
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 240, 0, 0),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color.fromARGB(255, 74, 44, 82),
+                          style: BorderStyle.solid,
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     itemHeight: 70,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 74, 44, 82),
@@ -100,101 +198,251 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                         ),
                       );
                     }).toList(),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'O endereço de entrega é obrigatório';
+                      }
+
+                      return null;
+                    },
                   ),
                 );
               },
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 36.0, 8.0, 36.0),
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      "Selecione a forma de pagamento",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+              child: Center(
+                child: Text(
+                  "Selecione a forma de pagamento",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Material(
-                        child: InkWell(
-                          onTap: () => showModalBottomSheet(
-                            enableDrag: true,
-                            isDismissible: true,
-                            context: context,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(24),
-                              ),
-                            ),
-                            builder: (context) => Wrap(
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom,
-                                  ),
-                                  child: Form(
-                                    child: Column(
-                                      children: <Widget>[
-                                        const SizedBox(height: 16),
-                                        CustomTextField(
-                                          labelText: 'Troco',
-                                          inputType: TextInputType.number,
-                                        ),
-                                        const SizedBox(height: 16),
-                                        CustomTextButton(
-                                          buttonText: "Pronto",
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        const SizedBox(height: 24),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          child: const CardPayment(
-                            textButton: 'Dinheiro',
-                            icon: Icons.attach_money,
-                          ),
-                        ),
-                      ),
-                      Material(
-                        child: InkWell(
-                          onTap: () => showModalBottomSheet(
-                            context: context,
-                            builder: (context) => CreditPayment(),
-                            isScrollControlled: true,
-                          ),
-                          child: const CardPayment(
-                            textButton: 'Cartão',
-                            icon: Icons.credit_card,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                RadioButton(
+                  textRadioButton: 'Dinheiro',
+                  groupValue: _typePayment,
+                  value: TypePayment.money,
+                  onChanged: (value) => onChangeRadioButton(value),
+                ),
+                RadioButton(
+                  textRadioButton: 'Cartão',
+                  groupValue: _typePayment,
+                  value: TypePayment.cardCredit,
+                  onChanged: (value) => onChangeRadioButton(value),
+                ),
+              ],
+            ),
+            if (_typePayment == TypePayment.money)
+              Center(
+                child: CustomTextField(
+                  controller: moneyController,
+                  labelText: 'Troco',
+                  inputType: TextInputType.number,
+                  prefix: const Text("R\$"),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CentavosInputFormatter(),
+                  ],
+                  validator: (value) =>
+                      OrderValidator.validarTroco(value!, valueTotal),
+                  onSaved: (_) {
+                    cardFlagSelected = '';
+                    cardPaymentSelected = '';
+                  },
+                ),
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: <Widget>[
+                    DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          floatingLabelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 74, 44, 82),
+                          ),
+                          labelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 74, 44, 82),
+                          ),
+                          labelText: "Selecione a bandeira do cartão",
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 74, 44, 82),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 240, 0, 0),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 74, 44, 82),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 74, 44, 82),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'A bandeira do cartão é obrigatório';
+                          }
+                          return null;
+                        },
+                        items: typeCardPayment.map((String item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            cardFlagSelected = value;
+                            moneyController.clear();
+                          });
+                        }),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          floatingLabelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 74, 44, 82),
+                          ),
+                          labelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 74, 44, 82),
+                          ),
+                          labelText: "Selecione a forma de pagamento",
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 74, 44, 82),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 240, 0, 0),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 74, 44, 82),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(255, 74, 44, 82),
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Forma de pagamento é obrigatório';
+                          }
+                          return null;
+                        },
+                        items: typePayment.map((String item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            cardPaymentSelected = value;
+                          });
+                        }),
+                  ],
+                ),
+              ),
+            CustomTextButton(
+              buttonText: 'Finalizar Pedido',
+              onPressed: () {
+                if (formMainKey.currentState!.validate()) {
+                  formMainKey.currentState!.save();
+
+                  setState(() {
+                    isLoading = true;
+                  });
+
+                  OrderModel model = OrderModel(
+                      address: addressSelected,
+                      dateOrder: DateTime.now(),
+                      userEmail: userEmail,
+                      userName: userName,
+                      userPhone: userPhone,
+                      valueTotal: valueTotal,
+                      valueDelivery: valueDelivery,
+                      typePayment: _typePayment,
+                      moneyChange: moneyController.text,
+                      cardFlag: cardFlagSelected,
+                      cardPayment: cardPaymentSelected,
+                      itens: arguments!['items']);
+
+                  //print(handleArguments(arguments!));
+
+                  OrderService().save(model, context);
+                }
+              },
             )
           ],
         ),
       ),
     );
   }
+}
+
+List<String> typeCardPayment = ["Visa", "MasterCard"];
+List<String> typePayment = ["Crédito", "Débito"];
+
+double calculteValueTotal(Map<dynamic, dynamic> itens) {
+  OrderService service = OrderService();
+
+  double valueTotal = 0;
+
+  var totalItens = itens['items'];
+
+  valueTotal = service.calculateValueTotalOrder(totalItens);
+
+  return valueTotal;
 }

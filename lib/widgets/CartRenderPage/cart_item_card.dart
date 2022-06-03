@@ -5,8 +5,9 @@ import 'package:pointsf/View/Cart/cart.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class CartItemCard extends StatelessWidget {
-  var cartItens;
-  int index;
+  final Map<String, dynamic> cartItens;
+  final int index;
+  final CartService cartService = CartService();
 
   CartItemCard({
     Key? key,
@@ -14,7 +15,6 @@ class CartItemCard extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-  CartService cartService = CartService();
 
   @override
   Widget build(BuildContext context) {

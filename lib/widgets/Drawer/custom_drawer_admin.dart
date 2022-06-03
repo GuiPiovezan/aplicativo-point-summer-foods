@@ -203,6 +203,30 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Text(
+                  "Configurações ",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+                Icon(
+                  Icons.settings_sharp,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const Config(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
                   "Deslogar ",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),

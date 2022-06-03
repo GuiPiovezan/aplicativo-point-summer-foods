@@ -186,4 +186,11 @@ class AuthService extends ChangeNotifier {
 
     Navigator.of(context).pop();
   }
+
+  getInformationUser() {
+    return firestore
+        .collection("usuarios")
+        .where("uid", isEqualTo: _auth.currentUser!.uid)
+        .snapshots();
+  }
 }

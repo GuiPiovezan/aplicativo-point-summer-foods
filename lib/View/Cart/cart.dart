@@ -14,9 +14,9 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      appBar: const CustomAppBar(
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 240, 240, 240),
+      appBar: CustomAppBar(
         title: "Carrinho",
       ),
       body: CartPage(),

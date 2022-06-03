@@ -142,12 +142,48 @@ class CartService extends ChangeNotifier {
             .delete();
       }
     });
-
     firestore
         .collection("usuarios")
         .doc(auth.getUid())
         .collection("carrinho")
         .doc(itemUid)
         .delete();
+  }
+
+  removeAllItemFromCard() async {
+    firestore
+        .collection("usuarios")
+        .doc(auth.getUid())
+        .collection("carrinho")
+        .get()
+        .then((produto) async {
+      for (var i = 0; i < produto.docs.length; i++) {
+        await firestore
+            .collection("usuarios")
+            .doc(auth.getUid())
+            .collection("carrinho")
+            .doc(produto.docs[i]["uid"])
+            .collection("adicionais")
+            .get()
+            .then((adicional) async {
+          for (var j = 0; j < adicional.docs.length; j++) {
+            await firestore
+                .collection("usuarios")
+                .doc(auth.getUid())
+                .collection("carrinho")
+                .doc(produto.docs[i]["uid"])
+                .collection("adicionais")
+                .doc(adicional.docs[j]["uid"])
+                .delete();
+          }
+        });
+        await firestore
+            .collection("usuarios")
+            .doc(auth.getUid())
+            .collection("carrinho")
+            .doc(produto.docs[i]["uid"])
+            .delete();
+      }
+    });
   }
 }

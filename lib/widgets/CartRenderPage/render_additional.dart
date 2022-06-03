@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:pointsf/Services/CartService/cart_service.dart';
 
 class RenderAdditional extends StatelessWidget {
-  var cartItensAdditional;
+  final CartService cartService = CartService();
+  final Map<int, dynamic> cartItensAdditional;
 
   RenderAdditional({
     Key? key,
     required this.cartItensAdditional,
   }) : super(key: key);
 
-  CartService cartService = CartService();
 
   @override
   Widget build(BuildContext context) {

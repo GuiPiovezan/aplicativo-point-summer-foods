@@ -36,7 +36,7 @@ class MyOrderModal extends StatelessWidget {
             Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 5),
               child: Card(
-                  child: order.toString().contains("pedidoConcluido")
+                  child: order["pedidoConcluido"] != null
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -45,7 +45,7 @@ class MyOrderModal extends StatelessWidget {
                                 "Pedido concluido as ${DateFormat("HH:mm").format(order["pedidoConcluido"].toDate())}")
                           ],
                         )
-                      : order.toString().contains("pedidoAceito")
+                      : order["pedidoAceito"] != null
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -406,20 +406,19 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                   });
 
                   OrderModel model = OrderModel(
-                      address: addressSelected,
-                      dateOrder: DateTime.now(),
-                      userEmail: userEmail,
-                      userName: userName,
-                      userPhone: userPhone,
-                      valueTotal: valueTotal,
-                      valueDelivery: valueDelivery,
-                      typePayment: _typePayment,
-                      moneyChange: moneyController.text,
-                      cardFlag: cardFlagSelected,
-                      cardPayment: cardPaymentSelected,
-                      itens: arguments!['items']);
-
-                  //print(handleArguments(arguments!));
+                    address: addressSelected,
+                    dateOrder: DateTime.now(),
+                    userEmail: userEmail,
+                    userName: userName,
+                    userPhone: userPhone,
+                    valueTotal: valueTotal,
+                    valueDelivery: valueDelivery,
+                    typePayment: _typePayment,
+                    moneyChange: moneyController.text,
+                    cardFlag: cardFlagSelected,
+                    cardPayment: cardPaymentSelected,
+                    itens: arguments!['items'],
+                  );
 
                   OrderService().save(model, context);
                 }

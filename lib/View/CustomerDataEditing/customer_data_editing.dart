@@ -66,7 +66,7 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
       formKey.currentState!.save();
 
       CustomerModel model = CustomerModel(
-        nome: _controllerName.text,
+        nome: _controllerName.text.trim(),
         uid: null,
         telefone: _controllerTelefone.text,
         cpf: null,

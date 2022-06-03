@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pointsf/Services/CartService/cart_service.dart';
 import 'package:pointsf/models/enums/type_payment.dart';
 import 'package:pointsf/models/order_model.dart';
 import 'package:uuid/uuid.dart';
@@ -98,6 +99,7 @@ class OrderService {
           );
         }
       }
+      CartService().removeAllItemFromCard();
     } on FirebaseException catch (ex) {
       throw Exception(ex.message);
     }

@@ -214,7 +214,7 @@ class OrderModal extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 Text(
-                                  "Entreguar",
+                                  "Entregar",
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,

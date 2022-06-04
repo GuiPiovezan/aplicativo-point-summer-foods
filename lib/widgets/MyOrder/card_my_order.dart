@@ -106,42 +106,49 @@ class CardMyOrder extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.check_circle_rounded,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                               Text(
-                                "10:00",
-                                style: TextStyle(
+                                DateFormat("HH:mm")
+                                    .format(order["data"].toDate()),
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               ),
                             ],
                           ),
                           Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.restaurant,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                               Text(
-                                "10:15",
-                                style: TextStyle(
+                                order["pedidoAceito"] != null
+                                    ? DateFormat("HH:mm")
+                                        .format(order["pedidoAceito"].toDate())
+                                    : "xx:xx",
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               ),
                             ],
                           ),
                           Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.delivery_dining,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                               Text(
-                                "10:30",
-                                style: TextStyle(
+                                order["pedidoConcluido"] != null
+                                    ? DateFormat("HH:mm").format(
+                                        order["pedidoConcluido"].toDate())
+                                    : "xx:xx",
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                 ),
                               )

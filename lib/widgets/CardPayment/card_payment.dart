@@ -4,8 +4,11 @@ class CardPayment extends StatelessWidget {
   final String textButton;
   final IconData icon;
 
-  const CardPayment({Key? key, required this.textButton, required this.icon})
-      : super(key: key);
+  const CardPayment({
+    Key? key,
+    required this.textButton,
+    required this.icon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/Services/AuthService/auth_service.dart';
-import 'package:pointsf/View/Orders/confirmation_information.dart';
 
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/View/export_all_view.dart';
 
 class RouteApp extends StatefulWidget {
@@ -12,7 +11,6 @@ class RouteApp extends StatefulWidget {
 }
 
 class _RouteAppState extends State<RouteApp> {
-  // final auth = FirebaseAuth.instance;
   AuthService auth = AuthService();
   bool isLoading = true;
   String? route;

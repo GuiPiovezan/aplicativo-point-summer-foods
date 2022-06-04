@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/View/AddressDataEditing/address_data_editing.dart';
+
 import 'package:pointsf/models/address_model.dart';
+import 'package:pointsf/View/AddressDataEditing/address_data_editing.dart';
 
 class CardAddress extends StatelessWidget {
   final AddressModel? model;

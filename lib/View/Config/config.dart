@@ -1,10 +1,12 @@
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pointsf/Services/ConfigService/config_service.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:pointsf/Services/ConfigService/config_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
 
 class Config extends StatefulWidget {
   const Config({Key? key}) : super(key: key);

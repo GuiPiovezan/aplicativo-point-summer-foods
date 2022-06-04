@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/Services/AuthService/auth_service.dart';
-import 'package:pointsf/View/ProductAdministration/product_administration.dart';
 
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/View/export_all_view.dart';
 
 class CustomDrawerAdmin extends StatefulWidget {

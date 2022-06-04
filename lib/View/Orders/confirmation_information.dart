@@ -1,17 +1,21 @@
-import 'package:brasil_fields/brasil_fields.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:pointsf/models/address_model.dart';
+import 'package:pointsf/models/enums/type_payment.dart';
+import 'package:pointsf/models/order_model.dart';
 import 'package:pointsf/Services/AddressService/address_service.dart';
 import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/Services/OrderService/order_service.dart';
 import 'package:pointsf/Services/Validators/order_validator.dart';
-import 'package:pointsf/models/address_model.dart';
-import 'package:pointsf/models/enums/type_payment.dart';
-import 'package:pointsf/models/order_model.dart';
 import 'package:pointsf/widgets/RadioButton/radio_button.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
+
 import 'information_value_order.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
 
 class ConfirmationInformation extends StatefulWidget {
   const ConfirmationInformation({Key? key}) : super(key: key);

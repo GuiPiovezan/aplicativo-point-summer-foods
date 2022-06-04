@@ -23,6 +23,12 @@ export 'package:pointsf/View/Login/login.dart';
 //Meus Pedidos
 export 'package:pointsf/View/MyOrders/my_order.dart';
 
+//Pedidos
+export 'package:pointsf/View/Orders/confirmation_information.dart';
+
+//Lista de produtos na administração
+export 'package:pointsf/View/ProductAdministration/product_administration.dart';
+
 //Pagina principal
 export 'package:pointsf/View/Home/home.dart';
 export 'package:pointsf/View/Home/admin_home.dart';

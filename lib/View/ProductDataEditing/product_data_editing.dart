@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
-import 'package:brasil_fields/brasil_fields.dart';
 
 import 'package:pointsf/models/product_model.dart';
 import 'package:pointsf/Services/ProductService/product_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
 
 class ProductDataEditing extends StatefulWidget {
   final ProductModel model;

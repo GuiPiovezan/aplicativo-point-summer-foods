@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:pointsf/widgets/export_widgets.dart';
+
+import 'package:intl/intl.dart';
 
 class MyOrderModal extends StatelessWidget {
   final order;

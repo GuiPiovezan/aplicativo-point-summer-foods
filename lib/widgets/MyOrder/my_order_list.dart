@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pointsf/Services/OrderService/order_service.dart';
 
+import 'package:pointsf/Services/OrderService/order_service.dart';
 import 'package:pointsf/widgets/export_widgets.dart';
 
 class MyOrderList extends StatelessWidget {

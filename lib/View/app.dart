@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/View/Routes/routes.dart';
 
 class App extends StatelessWidget {
-  final auth = AuthService();
-  App({
+  const App({
     Key? key,
   }) : super(key: key);
 

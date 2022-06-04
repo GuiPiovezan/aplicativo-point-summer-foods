@@ -41,6 +41,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: PreferredSize(
         child: AppBar(

@@ -18,6 +18,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       drawer: const CustomDrawer(),
       appBar: const CustomAppBarHome(
@@ -65,8 +67,8 @@ class _HomeState extends State<Home> {
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 74, 44, 82),
           borderRadius: BorderRadius.only(
-            topLeft: Radius.elliptical(500, 50),
-            topRight: Radius.elliptical(500, 50),
+            topLeft: Radius.elliptical(500, 30),
+            topRight: Radius.elliptical(500, 30),
           ),
         ),
         child: BottomNavigationBar(
@@ -82,7 +84,7 @@ class _HomeState extends State<Home> {
           elevation: 0,
           backgroundColor: const Color.fromARGB(0, 0, 0, 0),
           showSelectedLabels: true,
-          showUnselectedLabels: false,
+          showUnselectedLabels: true,
           fixedColor: Colors.green,
           unselectedItemColor: Colors.white,
           items: const <BottomNavigationBarItem>[

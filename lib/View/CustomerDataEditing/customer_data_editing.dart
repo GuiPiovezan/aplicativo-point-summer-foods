@@ -87,6 +87,7 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
       );
     }
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Alterar Dados",

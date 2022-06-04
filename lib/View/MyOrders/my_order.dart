@@ -7,6 +7,7 @@ class MyOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
       appBar: CustomAppBar(
         title: "Meus Pedidos",

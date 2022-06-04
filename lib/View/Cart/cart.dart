@@ -15,6 +15,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Color.fromARGB(255, 240, 240, 240),
       appBar: CustomAppBar(
         title: "Carrinho",

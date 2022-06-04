@@ -61,6 +61,7 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
     double valueTotal = calculteValueTotal(arguments!);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: 'Pagamento',

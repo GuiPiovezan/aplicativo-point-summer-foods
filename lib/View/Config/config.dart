@@ -72,6 +72,7 @@ class _ConfigState extends State<Config> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Configurações",

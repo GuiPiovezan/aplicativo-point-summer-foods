@@ -15,6 +15,9 @@ export 'CartRenderPage/render_additional.dart';
 export 'Drawer/custom_drawer_admin.dart';
 export 'Drawer/custom_drawer.dart';
 
+// Widget personalizado baseado no Dropdown
+export 'Dropdown/custom_dropdown_button.dart';
+
 // Widget do card de pedido
 export 'MyOrder/card_my_order.dart';
 export 'MyOrder/my_order_list.dart';

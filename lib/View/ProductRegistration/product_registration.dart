@@ -82,225 +82,62 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                   labelText: "Nome do Produto",
                   placeholder: "Creme de avelã",
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      floatingLabelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
+                CustomDropdownButton(
+                  labelText: "Selecione o Tipo do Produto",
+                  hintText: "Selecione o Tipo do produto",
+                  value: dropDownType,
+                  onChanged: (Object? typeProduct) {
+                    setState(() {
+                      dropDownType = typeProduct!.toString();
+                    });
+                    throw "";
+                  },
+                  items: typeProduct.map((String categories) {
+                    return DropdownMenuItem(
+                      value: categories,
+                      child: Text(
+                        categories,
+                        textAlign: TextAlign.center,
                       ),
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
-                      ),
-                      labelText: "Selecione o Tipo do Produto",
-                      hintText: "Selecione o Tipo do produto",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 240, 0, 0),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    itemHeight: 70,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 74, 44, 82),
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    value: dropDownType,
-                    isExpanded: false,
-                    elevation: 16,
-                    validator: (value) {
-                      if (value == null) return "Selecione um";
-                      return null;
-                    },
-                    onChanged: (String? typeProduct) {
-                      setState(() {
-                        dropDownType = typeProduct!;
-                      });
-                    },
-                    items: typeProduct.map((String categories) {
-                      return DropdownMenuItem(
-                        value: categories,
-                        child: Text(
-                          categories,
-                          textAlign: TextAlign.center,
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                    );
+                  }).toList(),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      floatingLabelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
-                      ),
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
-                      ),
-                      labelText: "Selecione o Status do Produto",
-                      hintText: "Selecione o Status do Produto",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 240, 0, 0),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    itemHeight: 70,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 74, 44, 82),
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    value: dropDownStatus,
-                    // hint: const Text("Selecione o Status do Produto"),
-                    isExpanded: false,
-                    elevation: 16,
-                    validator: (value) {
-                      if (value == null) return "Selecione um";
-                      return null;
-                    },
-                    items: status.map((String status) {
-                      return DropdownMenuItem(
-                        value: status,
-                        child: Text(status),
-                      );
-                    }).toList(),
-                    onChanged: (String? status) {
-                      setState(() {
-                        dropDownStatus = status!;
-                      });
-                    },
-                  ),
+                CustomDropdownButton(
+                  labelText: "Selecione o Status do Produto",
+                  hintText: "Selecione o Status do Produto",
+                  value: dropDownStatus,
+                  onChanged: (Object? status) {
+                    setState(() {
+                      dropDownStatus = status!.toString();
+                    });
+                    throw "";
+                  },
+                  items: status.map((String status) {
+                    return DropdownMenuItem(
+                      value: status,
+                      child: Text(status),
+                    );
+                  }).toList(),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      floatingLabelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
+                CustomDropdownButton(
+                  labelText: "Selecione a categoria do produto",
+                  hintText: "Selecione a categoria do produto",
+                  value: dropDownCategory,
+                  onChanged: (Object? categories) {
+                    setState(() {
+                      dropDownCategory = categories!.toString();
+                    });
+                    throw "";
+                  },
+                  items: categories.map((String categories) {
+                    return DropdownMenuItem(
+                      value: categories,
+                      child: Text(
+                        categories,
+                        textAlign: TextAlign.center,
                       ),
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
-                      ),
-                      labelText: "Selecione a categoria do produto",
-                      hintText: "Selecione a categoria do produto",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 240, 0, 0),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    itemHeight: 70,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 74, 44, 82),
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    value: dropDownCategory,
-                    isExpanded: false,
-                    elevation: 16,
-                    validator: (value) {
-                      if (value == null) return "Selecione um";
-                      return null;
-                    },
-                    onChanged: (String? categories) {
-                      setState(() {
-                        dropDownCategory = categories!;
-                      });
-                    },
-                    items: categories.map((String categories) {
-                      return DropdownMenuItem(
-                        value: categories,
-                        child: Text(
-                          categories,
-                          textAlign: TextAlign.center,
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                    );
+                  }).toList(),
                 ),
                 if (sizes.isNotEmpty)
                   Container(
@@ -364,7 +201,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
                         labelText: "Tamanho",
                         placeholder: "500ml",
                       ),
-                      // const SizedBox(width: 20),
                       CustomTextField(
                         prefix: const Text(
                           "R\$ ",
@@ -434,7 +270,6 @@ class _ProductRegistrationState extends State<ProductRegistration> {
     "Inativo",
   ];
 
-// dropDawnTipo
   final typeSelected = TextEditingController();
 
   List<String> typeProduct = [

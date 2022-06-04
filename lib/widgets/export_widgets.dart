@@ -2,6 +2,9 @@
 export 'AppBar/custom_appbar_home.dart';
 export 'AppBar/custom_appbar.dart';
 
+// Widget do card de pagamento
+export 'CardPayment/card_payment.dart';
+
 // Widget da pagina de rendenização do carrinho
 export 'CartRenderPage/cart_item_card.dart';
 export 'CartRenderPage/cart_list.dart';
@@ -32,6 +35,9 @@ export 'ProductAdministrarionPage/product_administratrion_page.dart';
 
 // Widgets personalizado para a listagem de produtos
 export 'ProductPage/product_page.dart';
+
+// Widget personalizado baseado no radioButton
+export 'RadioButton/radio_button.dart';
 
 // Widgets personalizados baseados no TextButtom
 export 'TextButtons/custom_text_button_yellow.dart';

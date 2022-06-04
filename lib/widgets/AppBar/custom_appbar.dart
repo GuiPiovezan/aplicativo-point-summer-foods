@@ -72,8 +72,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 74, 44, 82),
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(500, 70),
-            bottomRight: Radius.elliptical(500, 70),
+            bottomLeft: Radius.elliptical(500, 40),
+            bottomRight: Radius.elliptical(500, 40),
           ),
         ),
       ),

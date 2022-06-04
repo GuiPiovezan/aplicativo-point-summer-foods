@@ -15,7 +15,6 @@ class CartItemCard extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +47,11 @@ class CartItemCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Text(
-                          cartItens["produto"] +", "+ cartItens['size'],
+                          cartItens["produto"] +
+                              ", " +
+                              cartItens['size'] +
+                              " - " +
+                              cartItens['preco'],
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,

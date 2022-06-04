@@ -418,27 +418,27 @@ class _ProductRegistrationState extends State<ProductRegistration> {
       ),
     );
   }
-}
 
-final categorySelected = TextEditingController();
+  final categorySelected = TextEditingController();
 
-List<String> categories = [
-  "Açai",
-  "Salgado",
-  "Bebida",
-];
+  List<String> categories = [
+    "Açai",
+    "Salgado",
+    "Bebida",
+  ];
 
-final statusSelected = TextEditingController();
+  final statusSelected = TextEditingController();
 
-List<String> status = [
-  "Ativo",
-  "Inativo",
-];
+  List<String> status = [
+    "Ativo",
+    "Inativo",
+  ];
 
 // dropDawnTipo
-final typeSelected = TextEditingController();
+  final typeSelected = TextEditingController();
 
-List<String> typeProduct = [
-  "Primario",
-  "Adicional",
-];
+  List<String> typeProduct = [
+    "Primario",
+    "Adicional",
+  ];
+}

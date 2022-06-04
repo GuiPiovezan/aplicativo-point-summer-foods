@@ -67,7 +67,7 @@ class CardOrder extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -89,7 +89,7 @@ class CardOrder extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -103,7 +103,7 @@ class CardOrder extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

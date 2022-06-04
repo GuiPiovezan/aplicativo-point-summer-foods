@@ -65,7 +65,7 @@ class _RenderItensModalState extends State<RenderItensModal> {
                           fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: RenderAdditionalOrder(
                           orderItensAdditional:
                               orderItens![index]!["adicionais"]),

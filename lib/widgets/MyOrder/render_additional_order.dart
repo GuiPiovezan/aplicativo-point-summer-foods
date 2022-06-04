@@ -15,32 +15,30 @@ class RenderAdditionalOrder extends StatelessWidget {
       shrinkWrap: true,
       itemCount: orderItensAdditional.length,
       itemBuilder: (_, index) {
-        return Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "${orderItensAdditional[index]["adicional"]}",
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    " R\$ ${orderItensAdditional[index]["preco"]}",
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Text(
+                  "${orderItensAdditional[index]["adicional"]}",
+                  style: const TextStyle(
+                    fontSize: 12,
                   ),
-                ],
-              )
-            ],
-          ),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  " R\$ ${orderItensAdditional[index]["preco"]}",
+                  style: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            )
+          ],
         );
       },
     );

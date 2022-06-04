@@ -80,11 +80,11 @@ class ProductService extends ChangeNotifier {
         .where("status", isEqualTo: "Ativo")
         .where("tipo", isEqualTo: "Adicional")
         .get()
-        .then((value) {
+        .then((value) async{
       for (var i = 0; i < value.docs.length; i++) {
         itens[i] = value.docs[i].data();
         itens[i]!["check"] = false;
-        firestore
+        await firestore
             .collection("produtos")
             .doc(value.docs[i]["uid"])
             .collection("tamanhos")

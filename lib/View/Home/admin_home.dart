@@ -79,7 +79,7 @@ class _AdminHomeState extends State<AdminHome> {
               label: "Aceitos",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.airplane_ticket_outlined),
+              icon: Icon(Icons.delivery_dining_outlined),
               label: "Entregues",
             ),
           ],

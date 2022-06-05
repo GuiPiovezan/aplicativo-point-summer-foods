@@ -110,7 +110,7 @@ class CardMyOrder extends StatelessWidget {
                           Row(
                             children: [
                               const Icon(
-                                Icons.check_circle_rounded,
+                                Icons.bookmark_add_outlined,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                               Text(
@@ -125,7 +125,7 @@ class CardMyOrder extends StatelessWidget {
                           Row(
                             children: [
                               const Icon(
-                                Icons.restaurant,
+                                Icons.verified_outlined,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                               Text(
@@ -142,7 +142,7 @@ class CardMyOrder extends StatelessWidget {
                           Row(
                             children: [
                               const Icon(
-                                Icons.delivery_dining,
+                                Icons.delivery_dining_outlined,
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),
                               Text(

@@ -72,7 +72,7 @@ class CartItemCard extends StatelessWidget {
             width: 40,
             margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
             child: IconButton(
-              icon: const Icon(Icons.remove_circle_outline),
+              icon: const Icon(Icons.delete),
               onPressed: () {
                 cartService.removeItemFromCard(cartItens["uid"]);
                 cartItens.remove(index);

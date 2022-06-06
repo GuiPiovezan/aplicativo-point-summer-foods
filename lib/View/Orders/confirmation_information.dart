@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pointsf/View/CustomerRegistration/address_registration.dart';
 
 import 'package:pointsf/models/address_model.dart';
 import 'package:pointsf/models/enums/type_payment.dart';
@@ -128,89 +129,109 @@ class _ConfirmationInformationState extends State<ConfirmationInformation> {
                     addressList.add(AddressModel.fromMap(element.data()));
                   }
                 }
-
-                return Container(
-                  margin: const EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  width: MediaQuery.of(context).size.width,
-                  child: DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      floatingLabelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
-                      ),
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 74, 44, 82),
-                      ),
-                      labelText: "Selecione o endereço de entrega",
-                      hintText: "Selecione o endereço de entrega",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 240, 0, 0),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color.fromARGB(255, 74, 44, 82),
-                          style: BorderStyle.solid,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    itemHeight: 70,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 74, 44, 82),
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    value: addressSelected,
-                    hint: const Text(
-                      "Selecione o endereço de entrega",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
-                    ),
-                    elevation: 16,
-                    onChanged: (AddressModel? value) {
-                      setState(() {
-                        addressSelected = value!;
-                      });
-                    },
-                    items: addressList.map((AddressModel item) {
-                      return DropdownMenuItem(
-                        value: item,
-                        child: Text(
-                          '${item.logradouro!}, ${item.numero!}',
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            floatingLabelStyle: const TextStyle(
+                              color: Color.fromARGB(255, 74, 44, 82),
+                            ),
+                            labelStyle: const TextStyle(
+                              color: Color.fromARGB(255, 74, 44, 82),
+                            ),
+                            labelText: "Selecione o endereço de entrega",
+                            hintText: "Selecione o endereço de entrega",
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color.fromARGB(255, 74, 44, 82),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color.fromARGB(255, 240, 0, 0),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color.fromARGB(255, 74, 44, 82),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color.fromARGB(255, 74, 44, 82),
+                                style: BorderStyle.solid,
+                              ),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                          itemHeight: 70,
                           style: const TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
-                        ),
-                      );
-                    }).toList(),
-                    validator: (value) {
-                      if (value == null) {
-                        return 'O endereço de entrega é obrigatório';
-                      }
+                            color: Color.fromARGB(255, 74, 44, 82),
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          value: addressSelected,
+                          hint: const Text(
+                            "Selecione o endereço de entrega",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                          ),
+                          elevation: 16,
+                          onChanged: (AddressModel? value) {
+                            setState(() {
+                              addressSelected = value!;
+                            });
+                          },
+                          items: addressList.map((AddressModel item) {
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                '${item.logradouro!}, ${item.numero!}',
+                                style: const TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                          validator: (value) {
+                            if (value == null) {
+                              return 'O endereço de entrega é obrigatório';
+                            }
 
-                      return null;
-                    },
-                  ),
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      child: const Text('Cadastrar endereço',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 74, 44, 82),
+                            fontSize: 16.0,
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => const AddressRegistration()),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 );
               },
             ),

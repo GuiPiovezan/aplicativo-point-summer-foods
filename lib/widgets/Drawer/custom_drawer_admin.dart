@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pointsf/Services/AuthService/auth_service.dart';
-import 'package:pointsf/View/ProductAdministration/product_administration.dart';
 
+import 'package:pointsf/Services/AuthService/auth_service.dart';
 import 'package:pointsf/View/export_all_view.dart';
 
 class CustomDrawerAdmin extends StatefulWidget {
-  const CustomDrawerAdmin({Key? key}) : super(key: key);
+  int indexNavigatorBar;
+  PageController pageController;
+  CustomDrawerAdmin({
+    Key? key,
+    required this.indexNavigatorBar,
+    required this.pageController,
+  }) : super(key: key);
 
   @override
   State<CustomDrawerAdmin> createState() => _CustomDrawerAdminState();
@@ -120,7 +125,13 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    print("Novos pedidos");
+                    setState(() {
+                      widget.indexNavigatorBar = 0;
+                    });
+                    widget.pageController.jumpToPage(
+                      0,
+                    );
+                    Navigator.of(context).pop();
                   },
                 ),
                 ListTile(
@@ -136,7 +147,13 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    print("Pedidos aceitos");
+                    setState(() {
+                      widget.indexNavigatorBar = 1;
+                    });
+                    widget.pageController.jumpToPage(
+                      1,
+                    );
+                    Navigator.of(context).pop();
                   },
                 ),
                 ListTile(
@@ -152,7 +169,13 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
                     color: Colors.black,
                   ),
                   onTap: () {
-                    print("Pedidos encerrados");
+                    setState(() {
+                      widget.indexNavigatorBar = 2;
+                    });
+                    widget.pageController.jumpToPage(
+                      2,
+                    );
+                    Navigator.of(context).pop();
                   },
                 ),
                 ListTile(

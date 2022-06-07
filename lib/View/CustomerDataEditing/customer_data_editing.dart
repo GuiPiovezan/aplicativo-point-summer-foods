@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/customer_model.dart';
@@ -66,7 +65,7 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
       formKey.currentState!.save();
 
       CustomerModel model = CustomerModel(
-        nome: _controllerName.text,
+        nome: _controllerName.text.trim(),
         uid: null,
         telefone: _controllerTelefone.text,
         cpf: null,
@@ -87,6 +86,7 @@ class _CustomerDataEditingState extends State<CustomerDataEditing> {
       );
     }
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Alterar Dados",

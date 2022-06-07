@@ -2,6 +2,9 @@
 export 'AppBar/custom_appbar_home.dart';
 export 'AppBar/custom_appbar.dart';
 
+// Widget do card de pagamento
+export 'CardPayment/card_payment.dart';
+
 // Widget da pagina de rendenização do carrinho
 export 'CartRenderPage/cart_item_card.dart';
 export 'CartRenderPage/cart_list.dart';
@@ -12,6 +15,21 @@ export 'CartRenderPage/render_additional.dart';
 export 'Drawer/custom_drawer_admin.dart';
 export 'Drawer/custom_drawer.dart';
 
+// Widget personalizado baseado no Dropdown
+export 'Dropdown/custom_dropdown_button.dart';
+
+// Widget do card de pedido
+export 'MyOrder/card_my_order.dart';
+export 'MyOrder/my_order_list.dart';
+export 'MyOrder/render_additional_order.dart';
+export 'MyOrder/render_itens_modal.dart';
+export 'MyOrder/my_order_modal.dart';
+
+// Widget da pagina de pedidos
+export 'OrderPage/card_order.dart';
+export 'OrderPage/order_modal.dart';
+export 'OrderPage/order_page.dart';
+
 // Widget pesonalizado para listagem de adicionais
 export 'ProductAdditionalModal/product_additional_modal.dart';
 
@@ -20,6 +38,9 @@ export 'ProductAdministrarionPage/product_administratrion_page.dart';
 
 // Widgets personalizado para a listagem de produtos
 export 'ProductPage/product_page.dart';
+
+// Widget personalizado baseado no radioButton
+export 'RadioButton/radio_button.dart';
 
 // Widgets personalizados baseados no TextButtom
 export 'TextButtons/custom_text_button_yellow.dart';

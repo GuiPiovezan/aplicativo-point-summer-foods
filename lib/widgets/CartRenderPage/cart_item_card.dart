@@ -15,7 +15,6 @@ class CartItemCard extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +47,11 @@ class CartItemCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Text(
-                          cartItens["produto"] +", "+ cartItens['size'],
+                          cartItens["produto"] +
+                              ", " +
+                              cartItens['size'] +
+                              " - " +
+                              cartItens['preco'],
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -69,7 +72,7 @@ class CartItemCard extends StatelessWidget {
             width: 40,
             margin: const EdgeInsets.fromLTRB(0, 0, 15, 0),
             child: IconButton(
-              icon: const Icon(Icons.remove_circle_outline),
+              icon: const Icon(Icons.delete),
               onPressed: () {
                 cartService.removeItemFromCard(cartItens["uid"]);
                 cartItens.remove(index);

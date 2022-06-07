@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:pointsf/models/config_model.dart';
 
-
 class ConfigException implements Exception {
   String message;
   ConfigException(this.message);

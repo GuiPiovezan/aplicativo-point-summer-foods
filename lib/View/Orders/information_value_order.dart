@@ -1,5 +1,6 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+
+import 'package:brasil_fields/brasil_fields.dart';
 
 // ignore: must_be_immutable
 class InformationValueOrder extends StatefulWidget {

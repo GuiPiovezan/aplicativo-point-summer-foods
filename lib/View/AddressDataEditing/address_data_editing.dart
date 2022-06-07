@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/address_model.dart';
@@ -119,6 +118,7 @@ class _AddressDataEditing extends State<AddressDataEditing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Editar endereço",

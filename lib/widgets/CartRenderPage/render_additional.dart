@@ -11,7 +11,6 @@ class RenderAdditional extends StatelessWidget {
     required this.cartItensAdditional,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +25,9 @@ class RenderAdditional extends StatelessWidget {
         itemCount: cartItensAdditional.length,
         itemBuilder: (_, index) {
           return Text(
-            cartItensAdditional[index]["adicional"],
+            cartItensAdditional[index]["adicional"] +
+                " - " +
+                cartItensAdditional[index]["preco"],
             style: const TextStyle(
               fontSize: 18,
             ),

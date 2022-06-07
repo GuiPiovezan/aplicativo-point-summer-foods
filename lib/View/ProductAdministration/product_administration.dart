@@ -16,8 +16,9 @@ class _ProductAdministrationState extends State<ProductAdministration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-      drawer: const CustomDrawerAdmin(),
       appBar: const CustomAppBar(
         title: "Produtos",
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/services.dart';
 
 import 'package:pointsf/models/customer_model.dart';
@@ -26,7 +25,6 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
 
   bool isLoading = false;
 
-
   void save(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       setState(() => isLoading = true);
@@ -34,7 +32,7 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
       formKey.currentState!.save();
       try {
         CustomerModel model = CustomerModel(
-          nome: controller.name!.text,
+          nome: controller.name!.text.trim(),
           uid: null,
           telefone: controller.cellphone!.text,
           cpf: controller.cpf!.text,
@@ -42,8 +40,8 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
         );
 
         await auth.register(
-          controller.email!.text,
-          controller.password!.text,
+          controller.email!.text.trim(),
+          controller.password!.text.trim(),
           model,
           context,
         );
@@ -61,6 +59,7 @@ class _CustomerRegistrationState extends State<CustomerRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       appBar: const CustomAppBar(
         title: "Cadastro",

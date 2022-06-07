@@ -62,25 +62,6 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-          // title: Container(
-          //   color: Colors.red,
-          //   margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.end,
-          //     children: [
-          //       Container(
-          //         child: icon ?? Container(),
-          //       ),
-          //       Text(
-          //         title ?? "",
-          //         style: const TextStyle(
-          //           color: Color.fromARGB(255, 240, 240, 240),
-          //           fontSize: 15,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           actions: [
             Container(
               margin: const EdgeInsets.fromLTRB(0, 10, 10, 0),
@@ -96,8 +77,8 @@ class CustomAppBarHome extends StatelessWidget implements PreferredSizeWidget {
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 74, 44, 82),
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.elliptical(500, 70),
-            bottomRight: Radius.elliptical(500, 70),
+            bottomLeft: Radius.elliptical(500, 40),
+            bottomRight: Radius.elliptical(500, 40),
           ),
         ),
       ),

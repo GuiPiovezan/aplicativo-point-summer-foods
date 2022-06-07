@@ -56,7 +56,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
 
   @override
   Widget build(BuildContext context) {
-    while (widget.itens == null || widget.sizes == null) {
+    if (widget.itens == null || widget.sizes == null) {
       setItens();
       return ListView(
         children: [
@@ -112,7 +112,7 @@ class _ProductAdditionalModalState extends State<ProductAdditionalModal> {
               itemCount: widget.sizes.length,
               itemBuilder: (_, index) {
                 return RadioListTile(
-                  title: Text(widget.sizes[index]["tamanho"]),
+                  title: Text(widget.sizes[index]["tamanho"] +" - R\$:"+ widget.sizes[index]["preco"] ?? ""),
                   value: index,
                   groupValue: size,
                   onChanged: (newValue) {

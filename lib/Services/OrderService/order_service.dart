@@ -1,11 +1,19 @@
+import 'package:flutter/material.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:pointsf/models/enums/type_payment.dart';
 import 'package:pointsf/models/order_model.dart';
+import 'package:pointsf/Services/AuthService/auth_service.dart';
+import 'package:pointsf/Services/CartService/cart_service.dart';
+import 'package:pointsf/View/export_all_view.dart';
+
 import 'package:uuid/uuid.dart';
 
 class OrderService {
   final firestore = FirebaseFirestore.instance;
+  final auth = AuthService();
+  Map<int, Map<String, dynamic>> orderItens = {};
 
   double calculateValueTotalOrder(dynamic itens) {
     double valueTotalOrder = 0;
@@ -42,7 +50,8 @@ class OrderService {
 
     try {
       await firestore.collection('pedidos').doc(uuidOrder).set({
-        "id": uuidOrder,
+        "uid": uuidOrder,
+        "uidUsuario": auth.getUid(),
         "usuario": model.userName,
         "email": model.userEmail,
         "telefone": model.userPhone,
@@ -55,6 +64,9 @@ class OrderService {
         "valorTotalProdutos": model.valueTotal,
         "taxaEntrega": model.valueDelivery,
         "data": model.dateOrder,
+        "pedidoAceito": model.dateOrderAccepted,
+        "pedidoConcluido": model.dateOrderSent,
+        "status": "enviado",
         "tipoPagamento":
             model.typePayment == TypePayment.money ? 'Dinheiro' : 'Cartão',
         "troco": model.typePayment == TypePayment.money ? model.moneyChange : 0,
@@ -78,6 +90,7 @@ class OrderService {
             "quantidade": model.itens![i]!["quantidade"].toString(),
             "tamanho": model.itens![i]!["size"],
             "produto": model.itens![i]!["produto"],
+            "uid": uuidItems,
           },
         );
 
@@ -94,12 +107,94 @@ class OrderService {
             {
               "preco": model.itens![i]!["adicionais"][j]["preco"],
               "adicional": model.itens![i]!["adicionais"][j]["adicional"],
+              "uid": uuidAdicional,
             },
           );
         }
       }
+      CartService().removeAllItemFromCard();
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const MyOrders(),
+        ),
+      );
     } on FirebaseException catch (ex) {
       throw Exception(ex.message);
     }
+  }
+
+  getMyOrders() {
+    return firestore
+        .collection('pedidos')
+        .where("uidUsuario", isEqualTo: auth.getUid())
+        .snapshots();
+  }
+
+  setMyOrdersItens(String uid) async {
+    await firestore
+        .collection('pedidos')
+        .doc(uid)
+        .collection("items")
+        .get()
+        .then((value) {
+      for (var i = 0; i < value.docs.length; i++) {
+        orderItens[i] = value.docs[i].data();
+      }
+    });
+    for (var i = 0; i < orderItens.length; i++) {
+      Map<int, Map<String, dynamic>> additionalItem = {};
+
+      await firestore
+          .collection("pedidos")
+          .doc(uid)
+          .collection("items")
+          .doc(orderItens[i]!["uid"])
+          .collection("adicionais")
+          .get()
+          .then((value) {
+        for (var x = 0; x < value.docs.length; x++) {
+          additionalItem[x] = value.docs[x].data();
+        }
+        orderItens[i]!["adicionais"] = additionalItem;
+      });
+    }
+  }
+
+  getOrderItens() {
+    return orderItens;
+  }
+
+  getOrders(status) {
+    return firestore
+        .collection('pedidos')
+        .where("status", isEqualTo: status)
+        .snapshots();
+  }
+
+  acceptOrder(String uid, BuildContext context) async {
+    await firestore.collection("pedidos").doc(uid).update({
+      "status": "aceito",
+      "pedidoAceito": DateTime.now(),
+    });
+    Navigator.of(context).pop();
+  }
+
+  rejectOrder(String uid, BuildContext context) async {
+    await firestore.collection("pedidos").doc(uid).update({
+      "status": "recusado",
+      "pedidoAceito": DateTime.now(),
+      "pedidoConcluido": DateTime.now(),
+    });
+    Navigator.of(context).pop();
+  }
+
+  finishOrder(String uid, BuildContext context) async {
+    await firestore.collection("pedidos").doc(uid).update({
+      "status": "entregue",
+      "pedidoConcluido": DateTime.now(),
+    });
+    Navigator.of(context).pop();
   }
 }

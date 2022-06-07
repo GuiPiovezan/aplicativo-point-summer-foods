@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/AuthService/auth_service.dart';
-
 import 'package:pointsf/View/export_all_view.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -140,7 +139,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => MyOrders(),
+                        builder: (context) => const MyOrders(),
                       ),
                     );
                   },

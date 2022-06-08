@@ -93,10 +93,13 @@ class CardOrder extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            "${order["endereco"]}, ${order["numero"]}, ${order["bairro"]}",
-                            style: const TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.3,
+                            child: Text(
+                              "${order["endereco"]}, ${order["numero"]}, ${order["bairro"]}",
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           )
                         ],

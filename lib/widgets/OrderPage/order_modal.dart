@@ -38,6 +38,14 @@ class OrderModal extends StatelessWidget {
               ),
             ),
             Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Text("${order["usuario"]}"),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Text("${order["telefone"]}"),
+            ),
+            Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 5),
               child: Card(
                   child: order["pedidoConcluido"] != null

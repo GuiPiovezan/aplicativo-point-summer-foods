@@ -59,10 +59,20 @@ class _RenderItensModalState extends State<RenderItensModal> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "${orderItens![index]!["quantidade"].toString()}x ${orderItens![index]!["produto"].toString()} de ${orderItens![index]!["tamanho"].toString()} por R\$ ${orderItens![index]!["preco"].toString()}",
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w500),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${orderItens![index]!["quantidade"].toString()}x ${orderItens![index]!["produto"].toString()} de ${orderItens![index]!["tamanho"].toString()}",
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "R\$ ${orderItens![index]!["preco"].toString()}",
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),

@@ -171,6 +171,7 @@ class OrderService {
     return firestore
         .collection('pedidos')
         .where("status", isEqualTo: status)
+        .orderBy("data", descending: true)
         .snapshots();
   }
 

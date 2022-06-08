@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/OrderService/order_service.dart';
@@ -102,7 +103,11 @@ class OrderModal extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text("R\$: ${order["valorTotalProdutos"]}")
+                  Text(
+                    UtilBrasilFields.obterReal(
+                      order["valorTotalProdutos"],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -117,7 +122,11 @@ class OrderModal extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text("R\$ ${order["taxaEntrega"]}")
+                  Text(
+                    UtilBrasilFields.obterReal(
+                      order["taxaEntrega"],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -133,7 +142,9 @@ class OrderModal extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "R\$ ${order["valorTotalProdutos"] + order["taxaEntrega"]}",
+                    UtilBrasilFields.obterReal(
+                      order["valorTotalProdutos"] + order["taxaEntrega"],
+                    ),
                   ),
                 ],
               ),

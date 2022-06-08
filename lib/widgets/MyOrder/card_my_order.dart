@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/widgets/export_widgets.dart';
@@ -79,7 +80,9 @@ class CardMyOrder extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "R\$ ${order["valorTotalProdutos"]}",
+                              UtilBrasilFields.obterReal(
+                                order["valorTotalProdutos"] + order["taxaEntrega"],
+                              ),
                               style: const TextStyle(
                                 color: Color.fromARGB(255, 0, 0, 0),
                               ),

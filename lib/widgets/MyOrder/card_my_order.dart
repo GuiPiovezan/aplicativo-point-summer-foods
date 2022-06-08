@@ -111,51 +111,156 @@ class CardMyOrder extends StatelessWidget {
                             children: [
                               const Icon(
                                 Icons.bookmark_add_outlined,
-                                color: Color.fromARGB(255, 0, 0, 0),
+                                color: Color.fromARGB(255, 0, 100, 0),
                               ),
                               Text(
                                 DateFormat("HH:mm")
                                     .format(order["data"].toDate()),
                                 style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  color: Color.fromARGB(255, 0, 100, 0),
                                 ),
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.verified_outlined,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                              Text(
-                                order["pedidoAceito"] != null
-                                    ? DateFormat("HH:mm")
-                                        .format(order["pedidoAceito"].toDate())
-                                    : "xx:xx",
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ],
+                          const SizedBox(
+                            width: 5,
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.delivery_dining_outlined,
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                              Text(
-                                order["pedidoConcluido"] != null
-                                    ? DateFormat("HH:mm").format(
-                                        order["pedidoConcluido"].toDate())
-                                    : "xx:xx",
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0),
+                          order["pedidoAceito"] != null
+                              ? const Expanded(
+                                  child: LinearProgressIndicator(
+                                    color: Color.fromARGB(255, 74, 44, 82),
+                                    backgroundColor:
+                                        Color.fromARGB(100, 74, 44, 82),
+                                    value: 1,
+                                  ),
+                                )
+                              : const Expanded(
+                                  child: LinearProgressIndicator(
+                                    color: Color.fromARGB(255, 74, 44, 82),
+                                    backgroundColor:
+                                        Color.fromARGB(100, 74, 44, 82),
+                                  ),
                                 ),
-                              )
-                            ],
+                          const SizedBox(
+                            width: 5,
                           ),
+                          order["pedidoAceito"] != null
+                              ? Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.verified_outlined,
+                                      color: Color.fromARGB(255, 0, 100, 0),
+                                    ),
+                                    Text(
+                                      order["pedidoAceito"] != null
+                                          ? DateFormat("HH:mm").format(
+                                              order["pedidoAceito"].toDate())
+                                          : "xx:xx",
+                                      style: const TextStyle(
+                                        color: Color.fromARGB(255, 0, 100, 0),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.verified_outlined,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                    Text(
+                                      order["pedidoAceito"] != null
+                                          ? DateFormat("HH:mm").format(
+                                              order["pedidoAceito"].toDate())
+                                          : "xx:xx",
+                                      style: const TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          order["pedidoAceito"] != null
+                              ? order["pedidoConcluido"] != null
+                                  ? const Expanded(
+                                      child: LinearProgressIndicator(
+                                        color: Color.fromARGB(255, 74, 44, 82),
+                                        backgroundColor:
+                                            Color.fromARGB(100, 74, 44, 82),
+                                        value: 1,
+                                      ),
+                                    )
+                                  : const Expanded(
+                                      child: LinearProgressIndicator(
+                                        color: Color.fromARGB(255, 74, 44, 82),
+                                        backgroundColor:
+                                            Color.fromARGB(100, 74, 44, 82),
+                                      ),
+                                    )
+                              : Expanded(
+                                  child: Container(),
+                                ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          order["pedidoAceito"] != null
+                              ? order["pedidoConcluido"] != null
+                                  ? Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.delivery_dining_outlined,
+                                          color: Color.fromARGB(255, 0, 100, 0),
+                                        ),
+                                        Text(
+                                          order["pedidoConcluido"] != null
+                                              ? DateFormat("HH:mm").format(
+                                                  order["pedidoConcluido"]
+                                                      .toDate())
+                                              : "xx:xx",
+                                          style: const TextStyle(
+                                            color:
+                                                Color.fromARGB(255, 0, 100, 0),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.delivery_dining_outlined,
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                        ),
+                                        Text(
+                                          order["pedidoConcluido"] != null
+                                              ? DateFormat("HH:mm").format(
+                                                  order["pedidoConcluido"]
+                                                      .toDate())
+                                              : "xx:xx",
+                                          style: const TextStyle(
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                              : Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.delivery_dining_outlined,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                    Text(
+                                      order["pedidoConcluido"] != null
+                                          ? DateFormat("HH:mm").format(
+                                              order["pedidoConcluido"].toDate())
+                                          : "xx:xx",
+                                      style: const TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    )
+                                  ],
+                                ),
                         ],
                       ),
                     )

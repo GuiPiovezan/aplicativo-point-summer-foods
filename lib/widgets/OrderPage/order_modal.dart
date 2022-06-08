@@ -158,7 +158,7 @@ class OrderModal extends StatelessWidget {
                       //fontFamily: ,
                     ),
                   ),
-                  order["troco"] != null
+                  order["tipoPagamento"] == "Dinheiro"
                       ? Text("R\$ ${order["troco"]}")
                       : Row(
                           children: [

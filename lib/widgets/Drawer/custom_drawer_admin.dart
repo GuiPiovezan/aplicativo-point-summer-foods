@@ -180,6 +180,26 @@ class _CustomDrawerAdminState extends State<CustomDrawerAdmin> {
                 ),
                 ListTile(
                   title: const Text(
+                    "Pedidos recusados",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.close,
+                    color: Colors.black,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RejectedOrders(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text(
                     "Lista de produtos",
                     style: TextStyle(
                       color: Colors.black,

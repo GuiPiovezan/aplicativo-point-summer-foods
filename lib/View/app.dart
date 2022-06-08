@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:pointsf/View/Routes/routes.dart';
 
 class App extends StatelessWidget {

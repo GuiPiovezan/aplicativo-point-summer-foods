@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/widgets/export_widgets.dart';
@@ -94,7 +95,11 @@ class MyOrderModal extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text("R\$: ${order["valorTotalProdutos"]}")
+                Text(
+                  UtilBrasilFields.obterReal(
+                    order["valorTotalProdutos"],
+                  ),
+                ),
               ],
             ),
           ),
@@ -109,7 +114,11 @@ class MyOrderModal extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text("R\$ ${order["taxaEntrega"]}")
+                Text(
+                  UtilBrasilFields.obterReal(
+                    order["taxaEntrega"],
+                  ),
+                ),
               ],
             ),
           ),
@@ -125,7 +134,9 @@ class MyOrderModal extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "R\$ ${order["valorTotalProdutos"] + order["taxaEntrega"]}",
+                  UtilBrasilFields.obterReal(
+                    order["valorTotalProdutos"] + order["taxaEntrega"],
+                  ),
                 ),
               ],
             ),
@@ -150,7 +161,7 @@ class MyOrderModal extends StatelessWidget {
                     //fontFamily: ,
                   ),
                 ),
-                order["troco"] != null
+                order["tipoPagamento"] == "Dinheiro"
                     ? Text("R\$ ${order["troco"]}")
                     : Row(
                         children: [

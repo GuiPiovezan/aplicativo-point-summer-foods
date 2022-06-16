@@ -129,6 +129,7 @@ class OrderService {
     return firestore
         .collection('pedidos')
         .where("uidUsuario", isEqualTo: auth.getUid())
+        .orderBy("data", descending: true)
         .snapshots();
   }
 
@@ -170,6 +171,7 @@ class OrderService {
     return firestore
         .collection('pedidos')
         .where("status", isEqualTo: status)
+        .orderBy("data", descending: true)
         .snapshots();
   }
 

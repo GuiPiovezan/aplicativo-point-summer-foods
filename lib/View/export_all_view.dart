@@ -40,5 +40,8 @@ export 'package:pointsf/View/ProductDataEditing/product_data_editing.dart';
 //Cadastro de Produto
 export 'package:pointsf/View/ProductRegistration/product_registration.dart';
 
+//Pedidos rejeitados
+export 'package:pointsf/View/RejectedOrders/rejected_orders.dart';
+
 //Conta do usuario
 export 'UserAccount/user_account.dart';

@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pointsf/Services/OrderService/order_service.dart';
@@ -36,6 +37,14 @@ class OrderModal extends StatelessWidget {
                   Text(DateFormat("dd/MM/yy").format(order["data"].toDate())),
                 ],
               ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Text("${order["usuario"]}"),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Text("${order["telefone"]}"),
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 5),
@@ -94,7 +103,11 @@ class OrderModal extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text("R\$: ${order["valorTotalProdutos"]}")
+                  Text(
+                    UtilBrasilFields.obterReal(
+                      order["valorTotalProdutos"],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -109,7 +122,11 @@ class OrderModal extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text("R\$ ${order["taxaEntrega"]}")
+                  Text(
+                    UtilBrasilFields.obterReal(
+                      order["taxaEntrega"],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -125,7 +142,9 @@ class OrderModal extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "R\$ ${order["valorTotalProdutos"] + order["taxaEntrega"]}",
+                    UtilBrasilFields.obterReal(
+                      order["valorTotalProdutos"] + order["taxaEntrega"],
+                    ),
                   ),
                 ],
               ),
@@ -150,7 +169,7 @@ class OrderModal extends StatelessWidget {
                       //fontFamily: ,
                     ),
                   ),
-                  order["troco"] != null
+                  order["tipoPagamento"] == "Dinheiro"
                       ? Text("R\$ ${order["troco"]}")
                       : Row(
                           children: [
